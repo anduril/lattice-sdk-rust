@@ -1,0 +1,16 @@
+[package]
+name = "anduril-sdk"
+version = "1.0.0"
+edition = "2021"
+
+[dependencies]
+bytes = "1.7.1"
+prost = "0.13.1"
+pbjson = "0.7"
+pbjson-types = "0.7"
+serde = "1.0.204"
+tonic = { version = "0.12.1", features = ["gzip"] }
+
+[lib]
+crate-type = ["lib"]
+path = "src/mod.rs"
