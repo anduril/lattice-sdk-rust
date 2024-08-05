@@ -7,7 +7,7 @@ version = "0.1.0"
 edition = "2021"
 
 [dependencies]
-anduril-sdk = { git = "https://github.com/anduril/anduril-rust", branch = "main" }
+anduril-sdk = { git = "https://github.com/anduril/anduril-rust" }
 ```
 
 ```bash
