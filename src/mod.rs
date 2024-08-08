@@ -1,31 +1,10 @@
 // @generated
 pub mod anduril {
-    pub mod auth {
-        // @@protoc_insertion_point(attribute:anduril.auth.v2)
-        pub mod v2 {
-            include!("anduril.auth.v2.rs");
-            // @@protoc_insertion_point(anduril.auth.v2)
-        }
-    }
     pub mod blobs {
         // @@protoc_insertion_point(attribute:anduril.blobs.v1)
         pub mod v1 {
             include!("anduril.blobs.v1.rs");
             // @@protoc_insertion_point(anduril.blobs.v1)
-        }
-    }
-    pub mod communicationsmanager {
-        // @@protoc_insertion_point(attribute:anduril.communicationsmanager.v1)
-        pub mod v1 {
-            include!("anduril.communicationsmanager.v1.rs");
-            // @@protoc_insertion_point(anduril.communicationsmanager.v1)
-        }
-    }
-    pub mod entityhistory {
-        // @@protoc_insertion_point(attribute:anduril.entityhistory.v1)
-        pub mod v1 {
-            include!("anduril.entityhistory.v1.rs");
-            // @@protoc_insertion_point(anduril.entityhistory.v1)
         }
     }
     pub mod entitymanager {

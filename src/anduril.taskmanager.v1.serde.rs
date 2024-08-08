@@ -201,6 +201,207 @@ impl<'de> serde::Deserialize<'de> for Allocation {
         deserializer.deserialize_struct("anduril.taskmanager.v1.Allocation", FIELDS, GeneratedVisitor)
     }
 }
+impl serde::Serialize for CancelRequest {
+    #[allow(deprecated)]
+    fn serialize<S>(&self, serializer: S) -> std::result::Result<S::Ok, S::Error>
+    where
+        S: serde::Serializer,
+    {
+        use serde::ser::SerializeStruct;
+        let mut len = 0;
+        if !self.task_id.is_empty() {
+            len += 1;
+        }
+        if self.assignee.is_some() {
+            len += 1;
+        }
+        let mut struct_ser = serializer.serialize_struct("anduril.taskmanager.v1.CancelRequest", len)?;
+        if !self.task_id.is_empty() {
+            struct_ser.serialize_field("taskId", &self.task_id)?;
+        }
+        if let Some(v) = self.assignee.as_ref() {
+            struct_ser.serialize_field("assignee", v)?;
+        }
+        struct_ser.end()
+    }
+}
+impl<'de> serde::Deserialize<'de> for CancelRequest {
+    #[allow(deprecated)]
+    fn deserialize<D>(deserializer: D) -> std::result::Result<Self, D::Error>
+    where
+        D: serde::Deserializer<'de>,
+    {
+        const FIELDS: &[&str] = &[
+            "task_id",
+            "taskId",
+            "assignee",
+        ];
+
+        #[allow(clippy::enum_variant_names)]
+        enum GeneratedField {
+            TaskId,
+            Assignee,
+        }
+        impl<'de> serde::Deserialize<'de> for GeneratedField {
+            fn deserialize<D>(deserializer: D) -> std::result::Result<GeneratedField, D::Error>
+            where
+                D: serde::Deserializer<'de>,
+            {
+                struct GeneratedVisitor;
+
+                impl<'de> serde::de::Visitor<'de> for GeneratedVisitor {
+                    type Value = GeneratedField;
+
+                    fn expecting(&self, formatter: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
+                        write!(formatter, "expected one of: {:?}", &FIELDS)
+                    }
+
+                    #[allow(unused_variables)]
+                    fn visit_str<E>(self, value: &str) -> std::result::Result<GeneratedField, E>
+                    where
+                        E: serde::de::Error,
+                    {
+                        match value {
+                            "taskId" | "task_id" => Ok(GeneratedField::TaskId),
+                            "assignee" => Ok(GeneratedField::Assignee),
+                            _ => Err(serde::de::Error::unknown_field(value, FIELDS)),
+                        }
+                    }
+                }
+                deserializer.deserialize_identifier(GeneratedVisitor)
+            }
+        }
+        struct GeneratedVisitor;
+        impl<'de> serde::de::Visitor<'de> for GeneratedVisitor {
+            type Value = CancelRequest;
+
+            fn expecting(&self, formatter: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
+                formatter.write_str("struct anduril.taskmanager.v1.CancelRequest")
+            }
+
+            fn visit_map<V>(self, mut map_: V) -> std::result::Result<CancelRequest, V::Error>
+                where
+                    V: serde::de::MapAccess<'de>,
+            {
+                let mut task_id__ = None;
+                let mut assignee__ = None;
+                while let Some(k) = map_.next_key()? {
+                    match k {
+                        GeneratedField::TaskId => {
+                            if task_id__.is_some() {
+                                return Err(serde::de::Error::duplicate_field("taskId"));
+                            }
+                            task_id__ = Some(map_.next_value()?);
+                        }
+                        GeneratedField::Assignee => {
+                            if assignee__.is_some() {
+                                return Err(serde::de::Error::duplicate_field("assignee"));
+                            }
+                            assignee__ = map_.next_value()?;
+                        }
+                    }
+                }
+                Ok(CancelRequest {
+                    task_id: task_id__.unwrap_or_default(),
+                    assignee: assignee__,
+                })
+            }
+        }
+        deserializer.deserialize_struct("anduril.taskmanager.v1.CancelRequest", FIELDS, GeneratedVisitor)
+    }
+}
+impl serde::Serialize for CompleteRequest {
+    #[allow(deprecated)]
+    fn serialize<S>(&self, serializer: S) -> std::result::Result<S::Ok, S::Error>
+    where
+        S: serde::Serializer,
+    {
+        use serde::ser::SerializeStruct;
+        let mut len = 0;
+        if !self.task_id.is_empty() {
+            len += 1;
+        }
+        let mut struct_ser = serializer.serialize_struct("anduril.taskmanager.v1.CompleteRequest", len)?;
+        if !self.task_id.is_empty() {
+            struct_ser.serialize_field("taskId", &self.task_id)?;
+        }
+        struct_ser.end()
+    }
+}
+impl<'de> serde::Deserialize<'de> for CompleteRequest {
+    #[allow(deprecated)]
+    fn deserialize<D>(deserializer: D) -> std::result::Result<Self, D::Error>
+    where
+        D: serde::Deserializer<'de>,
+    {
+        const FIELDS: &[&str] = &[
+            "task_id",
+            "taskId",
+        ];
+
+        #[allow(clippy::enum_variant_names)]
+        enum GeneratedField {
+            TaskId,
+        }
+        impl<'de> serde::Deserialize<'de> for GeneratedField {
+            fn deserialize<D>(deserializer: D) -> std::result::Result<GeneratedField, D::Error>
+            where
+                D: serde::Deserializer<'de>,
+            {
+                struct GeneratedVisitor;
+
+                impl<'de> serde::de::Visitor<'de> for GeneratedVisitor {
+                    type Value = GeneratedField;
+
+                    fn expecting(&self, formatter: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
+                        write!(formatter, "expected one of: {:?}", &FIELDS)
+                    }
+
+                    #[allow(unused_variables)]
+                    fn visit_str<E>(self, value: &str) -> std::result::Result<GeneratedField, E>
+                    where
+                        E: serde::de::Error,
+                    {
+                        match value {
+                            "taskId" | "task_id" => Ok(GeneratedField::TaskId),
+                            _ => Err(serde::de::Error::unknown_field(value, FIELDS)),
+                        }
+                    }
+                }
+                deserializer.deserialize_identifier(GeneratedVisitor)
+            }
+        }
+        struct GeneratedVisitor;
+        impl<'de> serde::de::Visitor<'de> for GeneratedVisitor {
+            type Value = CompleteRequest;
+
+            fn expecting(&self, formatter: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
+                formatter.write_str("struct anduril.taskmanager.v1.CompleteRequest")
+            }
+
+            fn visit_map<V>(self, mut map_: V) -> std::result::Result<CompleteRequest, V::Error>
+                where
+                    V: serde::de::MapAccess<'de>,
+            {
+                let mut task_id__ = None;
+                while let Some(k) = map_.next_key()? {
+                    match k {
+                        GeneratedField::TaskId => {
+                            if task_id__.is_some() {
+                                return Err(serde::de::Error::duplicate_field("taskId"));
+                            }
+                            task_id__ = Some(map_.next_value()?);
+                        }
+                    }
+                }
+                Ok(CompleteRequest {
+                    task_id: task_id__.unwrap_or_default(),
+                })
+            }
+        }
+        deserializer.deserialize_struct("anduril.taskmanager.v1.CompleteRequest", FIELDS, GeneratedVisitor)
+    }
+}
 impl serde::Serialize for CreateTaskRequest {
     #[allow(deprecated)]
     fn serialize<S>(&self, serializer: S) -> std::result::Result<S::Ok, S::Error>
@@ -597,6 +798,98 @@ impl<'de> serde::Deserialize<'de> for DefinitionUpdate {
         deserializer.deserialize_struct("anduril.taskmanager.v1.DefinitionUpdate", FIELDS, GeneratedVisitor)
     }
 }
+impl serde::Serialize for EntityIds {
+    #[allow(deprecated)]
+    fn serialize<S>(&self, serializer: S) -> std::result::Result<S::Ok, S::Error>
+    where
+        S: serde::Serializer,
+    {
+        use serde::ser::SerializeStruct;
+        let mut len = 0;
+        if !self.entity_ids.is_empty() {
+            len += 1;
+        }
+        let mut struct_ser = serializer.serialize_struct("anduril.taskmanager.v1.EntityIds", len)?;
+        if !self.entity_ids.is_empty() {
+            struct_ser.serialize_field("entityIds", &self.entity_ids)?;
+        }
+        struct_ser.end()
+    }
+}
+impl<'de> serde::Deserialize<'de> for EntityIds {
+    #[allow(deprecated)]
+    fn deserialize<D>(deserializer: D) -> std::result::Result<Self, D::Error>
+    where
+        D: serde::Deserializer<'de>,
+    {
+        const FIELDS: &[&str] = &[
+            "entity_ids",
+            "entityIds",
+        ];
+
+        #[allow(clippy::enum_variant_names)]
+        enum GeneratedField {
+            EntityIds,
+        }
+        impl<'de> serde::Deserialize<'de> for GeneratedField {
+            fn deserialize<D>(deserializer: D) -> std::result::Result<GeneratedField, D::Error>
+            where
+                D: serde::Deserializer<'de>,
+            {
+                struct GeneratedVisitor;
+
+                impl<'de> serde::de::Visitor<'de> for GeneratedVisitor {
+                    type Value = GeneratedField;
+
+                    fn expecting(&self, formatter: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
+                        write!(formatter, "expected one of: {:?}", &FIELDS)
+                    }
+
+                    #[allow(unused_variables)]
+                    fn visit_str<E>(self, value: &str) -> std::result::Result<GeneratedField, E>
+                    where
+                        E: serde::de::Error,
+                    {
+                        match value {
+                            "entityIds" | "entity_ids" => Ok(GeneratedField::EntityIds),
+                            _ => Err(serde::de::Error::unknown_field(value, FIELDS)),
+                        }
+                    }
+                }
+                deserializer.deserialize_identifier(GeneratedVisitor)
+            }
+        }
+        struct GeneratedVisitor;
+        impl<'de> serde::de::Visitor<'de> for GeneratedVisitor {
+            type Value = EntityIds;
+
+            fn expecting(&self, formatter: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
+                formatter.write_str("struct anduril.taskmanager.v1.EntityIds")
+            }
+
+            fn visit_map<V>(self, mut map_: V) -> std::result::Result<EntityIds, V::Error>
+                where
+                    V: serde::de::MapAccess<'de>,
+            {
+                let mut entity_ids__ = None;
+                while let Some(k) = map_.next_key()? {
+                    match k {
+                        GeneratedField::EntityIds => {
+                            if entity_ids__.is_some() {
+                                return Err(serde::de::Error::duplicate_field("entityIds"));
+                            }
+                            entity_ids__ = Some(map_.next_value()?);
+                        }
+                    }
+                }
+                Ok(EntityIds {
+                    entity_ids: entity_ids__.unwrap_or_default(),
+                })
+            }
+        }
+        deserializer.deserialize_struct("anduril.taskmanager.v1.EntityIds", FIELDS, GeneratedVisitor)
+    }
+}
 impl serde::Serialize for ErrorCode {
     #[allow(deprecated)]
     fn serialize<S>(&self, serializer: S) -> std::result::Result<S::Ok, S::Error>
@@ -752,6 +1045,97 @@ impl<'de> serde::Deserialize<'de> for EventType {
             }
         }
         deserializer.deserialize_any(GeneratedVisitor)
+    }
+}
+impl serde::Serialize for ExecuteRequest {
+    #[allow(deprecated)]
+    fn serialize<S>(&self, serializer: S) -> std::result::Result<S::Ok, S::Error>
+    where
+        S: serde::Serializer,
+    {
+        use serde::ser::SerializeStruct;
+        let mut len = 0;
+        if self.task.is_some() {
+            len += 1;
+        }
+        let mut struct_ser = serializer.serialize_struct("anduril.taskmanager.v1.ExecuteRequest", len)?;
+        if let Some(v) = self.task.as_ref() {
+            struct_ser.serialize_field("task", v)?;
+        }
+        struct_ser.end()
+    }
+}
+impl<'de> serde::Deserialize<'de> for ExecuteRequest {
+    #[allow(deprecated)]
+    fn deserialize<D>(deserializer: D) -> std::result::Result<Self, D::Error>
+    where
+        D: serde::Deserializer<'de>,
+    {
+        const FIELDS: &[&str] = &[
+            "task",
+        ];
+
+        #[allow(clippy::enum_variant_names)]
+        enum GeneratedField {
+            Task,
+        }
+        impl<'de> serde::Deserialize<'de> for GeneratedField {
+            fn deserialize<D>(deserializer: D) -> std::result::Result<GeneratedField, D::Error>
+            where
+                D: serde::Deserializer<'de>,
+            {
+                struct GeneratedVisitor;
+
+                impl<'de> serde::de::Visitor<'de> for GeneratedVisitor {
+                    type Value = GeneratedField;
+
+                    fn expecting(&self, formatter: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
+                        write!(formatter, "expected one of: {:?}", &FIELDS)
+                    }
+
+                    #[allow(unused_variables)]
+                    fn visit_str<E>(self, value: &str) -> std::result::Result<GeneratedField, E>
+                    where
+                        E: serde::de::Error,
+                    {
+                        match value {
+                            "task" => Ok(GeneratedField::Task),
+                            _ => Err(serde::de::Error::unknown_field(value, FIELDS)),
+                        }
+                    }
+                }
+                deserializer.deserialize_identifier(GeneratedVisitor)
+            }
+        }
+        struct GeneratedVisitor;
+        impl<'de> serde::de::Visitor<'de> for GeneratedVisitor {
+            type Value = ExecuteRequest;
+
+            fn expecting(&self, formatter: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
+                formatter.write_str("struct anduril.taskmanager.v1.ExecuteRequest")
+            }
+
+            fn visit_map<V>(self, mut map_: V) -> std::result::Result<ExecuteRequest, V::Error>
+                where
+                    V: serde::de::MapAccess<'de>,
+            {
+                let mut task__ = None;
+                while let Some(k) = map_.next_key()? {
+                    match k {
+                        GeneratedField::Task => {
+                            if task__.is_some() {
+                                return Err(serde::de::Error::duplicate_field("task"));
+                            }
+                            task__ = map_.next_value()?;
+                        }
+                    }
+                }
+                Ok(ExecuteRequest {
+                    task: task__,
+                })
+            }
+        }
+        deserializer.deserialize_struct("anduril.taskmanager.v1.ExecuteRequest", FIELDS, GeneratedVisitor)
     }
 }
 impl serde::Serialize for GetTaskRequest {
@@ -1066,6 +1450,228 @@ impl<'de> serde::Deserialize<'de> for Heartbeat {
             }
         }
         deserializer.deserialize_struct("anduril.taskmanager.v1.Heartbeat", FIELDS, GeneratedVisitor)
+    }
+}
+impl serde::Serialize for ListenAsAgentRequest {
+    #[allow(deprecated)]
+    fn serialize<S>(&self, serializer: S) -> std::result::Result<S::Ok, S::Error>
+    where
+        S: serde::Serializer,
+    {
+        use serde::ser::SerializeStruct;
+        let mut len = 0;
+        if self.agent_selector.is_some() {
+            len += 1;
+        }
+        let mut struct_ser = serializer.serialize_struct("anduril.taskmanager.v1.ListenAsAgentRequest", len)?;
+        if let Some(v) = self.agent_selector.as_ref() {
+            match v {
+                listen_as_agent_request::AgentSelector::EntityIds(v) => {
+                    struct_ser.serialize_field("entityIds", v)?;
+                }
+            }
+        }
+        struct_ser.end()
+    }
+}
+impl<'de> serde::Deserialize<'de> for ListenAsAgentRequest {
+    #[allow(deprecated)]
+    fn deserialize<D>(deserializer: D) -> std::result::Result<Self, D::Error>
+    where
+        D: serde::Deserializer<'de>,
+    {
+        const FIELDS: &[&str] = &[
+            "entity_ids",
+            "entityIds",
+        ];
+
+        #[allow(clippy::enum_variant_names)]
+        enum GeneratedField {
+            EntityIds,
+        }
+        impl<'de> serde::Deserialize<'de> for GeneratedField {
+            fn deserialize<D>(deserializer: D) -> std::result::Result<GeneratedField, D::Error>
+            where
+                D: serde::Deserializer<'de>,
+            {
+                struct GeneratedVisitor;
+
+                impl<'de> serde::de::Visitor<'de> for GeneratedVisitor {
+                    type Value = GeneratedField;
+
+                    fn expecting(&self, formatter: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
+                        write!(formatter, "expected one of: {:?}", &FIELDS)
+                    }
+
+                    #[allow(unused_variables)]
+                    fn visit_str<E>(self, value: &str) -> std::result::Result<GeneratedField, E>
+                    where
+                        E: serde::de::Error,
+                    {
+                        match value {
+                            "entityIds" | "entity_ids" => Ok(GeneratedField::EntityIds),
+                            _ => Err(serde::de::Error::unknown_field(value, FIELDS)),
+                        }
+                    }
+                }
+                deserializer.deserialize_identifier(GeneratedVisitor)
+            }
+        }
+        struct GeneratedVisitor;
+        impl<'de> serde::de::Visitor<'de> for GeneratedVisitor {
+            type Value = ListenAsAgentRequest;
+
+            fn expecting(&self, formatter: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
+                formatter.write_str("struct anduril.taskmanager.v1.ListenAsAgentRequest")
+            }
+
+            fn visit_map<V>(self, mut map_: V) -> std::result::Result<ListenAsAgentRequest, V::Error>
+                where
+                    V: serde::de::MapAccess<'de>,
+            {
+                let mut agent_selector__ = None;
+                while let Some(k) = map_.next_key()? {
+                    match k {
+                        GeneratedField::EntityIds => {
+                            if agent_selector__.is_some() {
+                                return Err(serde::de::Error::duplicate_field("entityIds"));
+                            }
+                            agent_selector__ = map_.next_value::<::std::option::Option<_>>()?.map(listen_as_agent_request::AgentSelector::EntityIds)
+;
+                        }
+                    }
+                }
+                Ok(ListenAsAgentRequest {
+                    agent_selector: agent_selector__,
+                })
+            }
+        }
+        deserializer.deserialize_struct("anduril.taskmanager.v1.ListenAsAgentRequest", FIELDS, GeneratedVisitor)
+    }
+}
+impl serde::Serialize for ListenAsAgentResponse {
+    #[allow(deprecated)]
+    fn serialize<S>(&self, serializer: S) -> std::result::Result<S::Ok, S::Error>
+    where
+        S: serde::Serializer,
+    {
+        use serde::ser::SerializeStruct;
+        let mut len = 0;
+        if self.request.is_some() {
+            len += 1;
+        }
+        let mut struct_ser = serializer.serialize_struct("anduril.taskmanager.v1.ListenAsAgentResponse", len)?;
+        if let Some(v) = self.request.as_ref() {
+            match v {
+                listen_as_agent_response::Request::ExecuteRequest(v) => {
+                    struct_ser.serialize_field("executeRequest", v)?;
+                }
+                listen_as_agent_response::Request::CancelRequest(v) => {
+                    struct_ser.serialize_field("cancelRequest", v)?;
+                }
+                listen_as_agent_response::Request::CompleteRequest(v) => {
+                    struct_ser.serialize_field("completeRequest", v)?;
+                }
+            }
+        }
+        struct_ser.end()
+    }
+}
+impl<'de> serde::Deserialize<'de> for ListenAsAgentResponse {
+    #[allow(deprecated)]
+    fn deserialize<D>(deserializer: D) -> std::result::Result<Self, D::Error>
+    where
+        D: serde::Deserializer<'de>,
+    {
+        const FIELDS: &[&str] = &[
+            "execute_request",
+            "executeRequest",
+            "cancel_request",
+            "cancelRequest",
+            "complete_request",
+            "completeRequest",
+        ];
+
+        #[allow(clippy::enum_variant_names)]
+        enum GeneratedField {
+            ExecuteRequest,
+            CancelRequest,
+            CompleteRequest,
+        }
+        impl<'de> serde::Deserialize<'de> for GeneratedField {
+            fn deserialize<D>(deserializer: D) -> std::result::Result<GeneratedField, D::Error>
+            where
+                D: serde::Deserializer<'de>,
+            {
+                struct GeneratedVisitor;
+
+                impl<'de> serde::de::Visitor<'de> for GeneratedVisitor {
+                    type Value = GeneratedField;
+
+                    fn expecting(&self, formatter: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
+                        write!(formatter, "expected one of: {:?}", &FIELDS)
+                    }
+
+                    #[allow(unused_variables)]
+                    fn visit_str<E>(self, value: &str) -> std::result::Result<GeneratedField, E>
+                    where
+                        E: serde::de::Error,
+                    {
+                        match value {
+                            "executeRequest" | "execute_request" => Ok(GeneratedField::ExecuteRequest),
+                            "cancelRequest" | "cancel_request" => Ok(GeneratedField::CancelRequest),
+                            "completeRequest" | "complete_request" => Ok(GeneratedField::CompleteRequest),
+                            _ => Err(serde::de::Error::unknown_field(value, FIELDS)),
+                        }
+                    }
+                }
+                deserializer.deserialize_identifier(GeneratedVisitor)
+            }
+        }
+        struct GeneratedVisitor;
+        impl<'de> serde::de::Visitor<'de> for GeneratedVisitor {
+            type Value = ListenAsAgentResponse;
+
+            fn expecting(&self, formatter: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
+                formatter.write_str("struct anduril.taskmanager.v1.ListenAsAgentResponse")
+            }
+
+            fn visit_map<V>(self, mut map_: V) -> std::result::Result<ListenAsAgentResponse, V::Error>
+                where
+                    V: serde::de::MapAccess<'de>,
+            {
+                let mut request__ = None;
+                while let Some(k) = map_.next_key()? {
+                    match k {
+                        GeneratedField::ExecuteRequest => {
+                            if request__.is_some() {
+                                return Err(serde::de::Error::duplicate_field("executeRequest"));
+                            }
+                            request__ = map_.next_value::<::std::option::Option<_>>()?.map(listen_as_agent_response::Request::ExecuteRequest)
+;
+                        }
+                        GeneratedField::CancelRequest => {
+                            if request__.is_some() {
+                                return Err(serde::de::Error::duplicate_field("cancelRequest"));
+                            }
+                            request__ = map_.next_value::<::std::option::Option<_>>()?.map(listen_as_agent_response::Request::CancelRequest)
+;
+                        }
+                        GeneratedField::CompleteRequest => {
+                            if request__.is_some() {
+                                return Err(serde::de::Error::duplicate_field("completeRequest"));
+                            }
+                            request__ = map_.next_value::<::std::option::Option<_>>()?.map(listen_as_agent_response::Request::CompleteRequest)
+;
+                        }
+                    }
+                }
+                Ok(ListenAsAgentResponse {
+                    request: request__,
+                })
+            }
+        }
+        deserializer.deserialize_struct("anduril.taskmanager.v1.ListenAsAgentResponse", FIELDS, GeneratedVisitor)
     }
 }
 impl serde::Serialize for Owner {
@@ -1883,6 +2489,9 @@ impl serde::Serialize for StreamTasksRequest {
         if self.heartbeat_period_millis != 0 {
             len += 1;
         }
+        if self.exclude_preexisting_tasks {
+            len += 1;
+        }
         let mut struct_ser = serializer.serialize_struct("anduril.taskmanager.v1.StreamTasksRequest", len)?;
         if let Some(v) = self.rate_limit.as_ref() {
             struct_ser.serialize_field("rateLimit", v)?;
@@ -1896,6 +2505,9 @@ impl serde::Serialize for StreamTasksRequest {
         }
         if self.heartbeat_period_millis != 0 {
             struct_ser.serialize_field("heartbeatPeriodMillis", &self.heartbeat_period_millis)?;
+        }
+        if self.exclude_preexisting_tasks {
+            struct_ser.serialize_field("excludePreexistingTasks", &self.exclude_preexisting_tasks)?;
         }
         struct_ser.end()
     }
@@ -1912,6 +2524,8 @@ impl<'de> serde::Deserialize<'de> for StreamTasksRequest {
             "views",
             "heartbeat_period_millis",
             "heartbeatPeriodMillis",
+            "exclude_preexisting_tasks",
+            "excludePreexistingTasks",
         ];
 
         #[allow(clippy::enum_variant_names)]
@@ -1919,6 +2533,7 @@ impl<'de> serde::Deserialize<'de> for StreamTasksRequest {
             RateLimit,
             Views,
             HeartbeatPeriodMillis,
+            ExcludePreexistingTasks,
         }
         impl<'de> serde::Deserialize<'de> for GeneratedField {
             fn deserialize<D>(deserializer: D) -> std::result::Result<GeneratedField, D::Error>
@@ -1943,6 +2558,7 @@ impl<'de> serde::Deserialize<'de> for StreamTasksRequest {
                             "rateLimit" | "rate_limit" => Ok(GeneratedField::RateLimit),
                             "views" => Ok(GeneratedField::Views),
                             "heartbeatPeriodMillis" | "heartbeat_period_millis" => Ok(GeneratedField::HeartbeatPeriodMillis),
+                            "excludePreexistingTasks" | "exclude_preexisting_tasks" => Ok(GeneratedField::ExcludePreexistingTasks),
                             _ => Err(serde::de::Error::unknown_field(value, FIELDS)),
                         }
                     }
@@ -1965,6 +2581,7 @@ impl<'de> serde::Deserialize<'de> for StreamTasksRequest {
                 let mut rate_limit__ = None;
                 let mut views__ = None;
                 let mut heartbeat_period_millis__ = None;
+                let mut exclude_preexisting_tasks__ = None;
                 while let Some(k) = map_.next_key()? {
                     match k {
                         GeneratedField::RateLimit => {
@@ -1987,12 +2604,19 @@ impl<'de> serde::Deserialize<'de> for StreamTasksRequest {
                                 Some(map_.next_value::<::pbjson::private::NumberDeserialize<_>>()?.0)
                             ;
                         }
+                        GeneratedField::ExcludePreexistingTasks => {
+                            if exclude_preexisting_tasks__.is_some() {
+                                return Err(serde::de::Error::duplicate_field("excludePreexistingTasks"));
+                            }
+                            exclude_preexisting_tasks__ = Some(map_.next_value()?);
+                        }
                     }
                 }
                 Ok(StreamTasksRequest {
                     rate_limit: rate_limit__,
                     views: views__.unwrap_or_default(),
                     heartbeat_period_millis: heartbeat_period_millis__.unwrap_or_default(),
+                    exclude_preexisting_tasks: exclude_preexisting_tasks__.unwrap_or_default(),
                 })
             }
         }
