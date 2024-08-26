@@ -3337,6 +3337,9 @@ impl serde::Serialize for TaskError {
         if !self.message.is_empty() {
             len += 1;
         }
+        if self.error_details.is_some() {
+            len += 1;
+        }
         let mut struct_ser = serializer.serialize_struct("anduril.taskmanager.v1.TaskError", len)?;
         if self.code != 0 {
             let v = ErrorCode::try_from(self.code)
@@ -3345,6 +3348,9 @@ impl serde::Serialize for TaskError {
         }
         if !self.message.is_empty() {
             struct_ser.serialize_field("message", &self.message)?;
+        }
+        if let Some(v) = self.error_details.as_ref() {
+            struct_ser.serialize_field("errorDetails", v)?;
         }
         struct_ser.end()
     }
@@ -3358,12 +3364,15 @@ impl<'de> serde::Deserialize<'de> for TaskError {
         const FIELDS: &[&str] = &[
             "code",
             "message",
+            "error_details",
+            "errorDetails",
         ];
 
         #[allow(clippy::enum_variant_names)]
         enum GeneratedField {
             Code,
             Message,
+            ErrorDetails,
         }
         impl<'de> serde::Deserialize<'de> for GeneratedField {
             fn deserialize<D>(deserializer: D) -> std::result::Result<GeneratedField, D::Error>
@@ -3387,6 +3396,7 @@ impl<'de> serde::Deserialize<'de> for TaskError {
                         match value {
                             "code" => Ok(GeneratedField::Code),
                             "message" => Ok(GeneratedField::Message),
+                            "errorDetails" | "error_details" => Ok(GeneratedField::ErrorDetails),
                             _ => Err(serde::de::Error::unknown_field(value, FIELDS)),
                         }
                     }
@@ -3408,6 +3418,7 @@ impl<'de> serde::Deserialize<'de> for TaskError {
             {
                 let mut code__ = None;
                 let mut message__ = None;
+                let mut error_details__ = None;
                 while let Some(k) = map_.next_key()? {
                     match k {
                         GeneratedField::Code => {
@@ -3422,11 +3433,18 @@ impl<'de> serde::Deserialize<'de> for TaskError {
                             }
                             message__ = Some(map_.next_value()?);
                         }
+                        GeneratedField::ErrorDetails => {
+                            if error_details__.is_some() {
+                                return Err(serde::de::Error::duplicate_field("errorDetails"));
+                            }
+                            error_details__ = map_.next_value()?;
+                        }
                     }
                 }
                 Ok(TaskError {
                     code: code__.unwrap_or_default(),
                     message: message__.unwrap_or_default(),
+                    error_details: error_details__,
                 })
             }
         }
