@@ -724,6 +724,77 @@ impl<'de> serde::Deserialize<'de> for Enu {
         deserializer.deserialize_struct("anduril.r#type.ENU", FIELDS, GeneratedVisitor)
     }
 }
+impl serde::Serialize for EciReferenceFrame {
+    #[allow(deprecated)]
+    fn serialize<S>(&self, serializer: S) -> std::result::Result<S::Ok, S::Error>
+    where
+        S: serde::Serializer,
+    {
+        let variant = match self {
+            Self::Invalid => "ECI_REFERENCE_FRAME_INVALID",
+            Self::Teme => "ECI_REFERENCE_FRAME_TEME",
+        };
+        serializer.serialize_str(variant)
+    }
+}
+impl<'de> serde::Deserialize<'de> for EciReferenceFrame {
+    #[allow(deprecated)]
+    fn deserialize<D>(deserializer: D) -> std::result::Result<Self, D::Error>
+    where
+        D: serde::Deserializer<'de>,
+    {
+        const FIELDS: &[&str] = &[
+            "ECI_REFERENCE_FRAME_INVALID",
+            "ECI_REFERENCE_FRAME_TEME",
+        ];
+
+        struct GeneratedVisitor;
+
+        impl<'de> serde::de::Visitor<'de> for GeneratedVisitor {
+            type Value = EciReferenceFrame;
+
+            fn expecting(&self, formatter: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
+                write!(formatter, "expected one of: {:?}", &FIELDS)
+            }
+
+            fn visit_i64<E>(self, v: i64) -> std::result::Result<Self::Value, E>
+            where
+                E: serde::de::Error,
+            {
+                i32::try_from(v)
+                    .ok()
+                    .and_then(|x| x.try_into().ok())
+                    .ok_or_else(|| {
+                        serde::de::Error::invalid_value(serde::de::Unexpected::Signed(v), &self)
+                    })
+            }
+
+            fn visit_u64<E>(self, v: u64) -> std::result::Result<Self::Value, E>
+            where
+                E: serde::de::Error,
+            {
+                i32::try_from(v)
+                    .ok()
+                    .and_then(|x| x.try_into().ok())
+                    .ok_or_else(|| {
+                        serde::de::Error::invalid_value(serde::de::Unexpected::Unsigned(v), &self)
+                    })
+            }
+
+            fn visit_str<E>(self, value: &str) -> std::result::Result<Self::Value, E>
+            where
+                E: serde::de::Error,
+            {
+                match value {
+                    "ECI_REFERENCE_FRAME_INVALID" => Ok(EciReferenceFrame::Invalid),
+                    "ECI_REFERENCE_FRAME_TEME" => Ok(EciReferenceFrame::Teme),
+                    _ => Err(serde::de::Error::unknown_variant(value, FIELDS)),
+                }
+            }
+        }
+        deserializer.deserialize_any(GeneratedVisitor)
+    }
+}
 impl serde::Serialize for Grid {
     #[allow(deprecated)]
     fn serialize<S>(&self, serializer: S) -> std::result::Result<S::Ok, S::Error>
@@ -1346,6 +1417,631 @@ impl<'de> serde::Deserialize<'de> for LlaPolygon {
             }
         }
         deserializer.deserialize_struct("anduril.r#type.LLAPolygon", FIELDS, GeneratedVisitor)
+    }
+}
+impl serde::Serialize for MeanElementTheory {
+    #[allow(deprecated)]
+    fn serialize<S>(&self, serializer: S) -> std::result::Result<S::Ok, S::Error>
+    where
+        S: serde::Serializer,
+    {
+        let variant = match self {
+            Self::Invalid => "MEAN_ELEMENT_THEORY_INVALID",
+            Self::Sgp4 => "MEAN_ELEMENT_THEORY_SGP4",
+        };
+        serializer.serialize_str(variant)
+    }
+}
+impl<'de> serde::Deserialize<'de> for MeanElementTheory {
+    #[allow(deprecated)]
+    fn deserialize<D>(deserializer: D) -> std::result::Result<Self, D::Error>
+    where
+        D: serde::Deserializer<'de>,
+    {
+        const FIELDS: &[&str] = &[
+            "MEAN_ELEMENT_THEORY_INVALID",
+            "MEAN_ELEMENT_THEORY_SGP4",
+        ];
+
+        struct GeneratedVisitor;
+
+        impl<'de> serde::de::Visitor<'de> for GeneratedVisitor {
+            type Value = MeanElementTheory;
+
+            fn expecting(&self, formatter: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
+                write!(formatter, "expected one of: {:?}", &FIELDS)
+            }
+
+            fn visit_i64<E>(self, v: i64) -> std::result::Result<Self::Value, E>
+            where
+                E: serde::de::Error,
+            {
+                i32::try_from(v)
+                    .ok()
+                    .and_then(|x| x.try_into().ok())
+                    .ok_or_else(|| {
+                        serde::de::Error::invalid_value(serde::de::Unexpected::Signed(v), &self)
+                    })
+            }
+
+            fn visit_u64<E>(self, v: u64) -> std::result::Result<Self::Value, E>
+            where
+                E: serde::de::Error,
+            {
+                i32::try_from(v)
+                    .ok()
+                    .and_then(|x| x.try_into().ok())
+                    .ok_or_else(|| {
+                        serde::de::Error::invalid_value(serde::de::Unexpected::Unsigned(v), &self)
+                    })
+            }
+
+            fn visit_str<E>(self, value: &str) -> std::result::Result<Self::Value, E>
+            where
+                E: serde::de::Error,
+            {
+                match value {
+                    "MEAN_ELEMENT_THEORY_INVALID" => Ok(MeanElementTheory::Invalid),
+                    "MEAN_ELEMENT_THEORY_SGP4" => Ok(MeanElementTheory::Sgp4),
+                    _ => Err(serde::de::Error::unknown_variant(value, FIELDS)),
+                }
+            }
+        }
+        deserializer.deserialize_any(GeneratedVisitor)
+    }
+}
+impl serde::Serialize for MeanKeplerianElements {
+    #[allow(deprecated)]
+    fn serialize<S>(&self, serializer: S) -> std::result::Result<S::Ok, S::Error>
+    where
+        S: serde::Serializer,
+    {
+        use serde::ser::SerializeStruct;
+        let mut len = 0;
+        if self.epoch.is_some() {
+            len += 1;
+        }
+        if self.eccentricity != 0. {
+            len += 1;
+        }
+        if self.inclination_deg != 0. {
+            len += 1;
+        }
+        if self.ra_of_asc_node_deg != 0. {
+            len += 1;
+        }
+        if self.arg_of_pericenter_deg != 0. {
+            len += 1;
+        }
+        if self.mean_anomaly_deg != 0. {
+            len += 1;
+        }
+        if self.gm.is_some() {
+            len += 1;
+        }
+        if self.line2_field8.is_some() {
+            len += 1;
+        }
+        let mut struct_ser = serializer.serialize_struct("anduril.r#type.MeanKeplerianElements", len)?;
+        if let Some(v) = self.epoch.as_ref() {
+            struct_ser.serialize_field("epoch", v)?;
+        }
+        if self.eccentricity != 0. {
+            struct_ser.serialize_field("eccentricity", &self.eccentricity)?;
+        }
+        if self.inclination_deg != 0. {
+            struct_ser.serialize_field("inclinationDeg", &self.inclination_deg)?;
+        }
+        if self.ra_of_asc_node_deg != 0. {
+            struct_ser.serialize_field("raOfAscNodeDeg", &self.ra_of_asc_node_deg)?;
+        }
+        if self.arg_of_pericenter_deg != 0. {
+            struct_ser.serialize_field("argOfPericenterDeg", &self.arg_of_pericenter_deg)?;
+        }
+        if self.mean_anomaly_deg != 0. {
+            struct_ser.serialize_field("meanAnomalyDeg", &self.mean_anomaly_deg)?;
+        }
+        if let Some(v) = self.gm.as_ref() {
+            struct_ser.serialize_field("gm", v)?;
+        }
+        if let Some(v) = self.line2_field8.as_ref() {
+            match v {
+                mean_keplerian_elements::Line2Field8::SemiMajorAxisKm(v) => {
+                    struct_ser.serialize_field("semiMajorAxisKm", v)?;
+                }
+                mean_keplerian_elements::Line2Field8::MeanMotion(v) => {
+                    struct_ser.serialize_field("meanMotion", v)?;
+                }
+            }
+        }
+        struct_ser.end()
+    }
+}
+impl<'de> serde::Deserialize<'de> for MeanKeplerianElements {
+    #[allow(deprecated)]
+    fn deserialize<D>(deserializer: D) -> std::result::Result<Self, D::Error>
+    where
+        D: serde::Deserializer<'de>,
+    {
+        const FIELDS: &[&str] = &[
+            "epoch",
+            "eccentricity",
+            "inclination_deg",
+            "inclinationDeg",
+            "ra_of_asc_node_deg",
+            "raOfAscNodeDeg",
+            "arg_of_pericenter_deg",
+            "argOfPericenterDeg",
+            "mean_anomaly_deg",
+            "meanAnomalyDeg",
+            "gm",
+            "semi_major_axis_km",
+            "semiMajorAxisKm",
+            "mean_motion",
+            "meanMotion",
+        ];
+
+        #[allow(clippy::enum_variant_names)]
+        enum GeneratedField {
+            Epoch,
+            Eccentricity,
+            InclinationDeg,
+            RaOfAscNodeDeg,
+            ArgOfPericenterDeg,
+            MeanAnomalyDeg,
+            Gm,
+            SemiMajorAxisKm,
+            MeanMotion,
+        }
+        impl<'de> serde::Deserialize<'de> for GeneratedField {
+            fn deserialize<D>(deserializer: D) -> std::result::Result<GeneratedField, D::Error>
+            where
+                D: serde::Deserializer<'de>,
+            {
+                struct GeneratedVisitor;
+
+                impl<'de> serde::de::Visitor<'de> for GeneratedVisitor {
+                    type Value = GeneratedField;
+
+                    fn expecting(&self, formatter: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
+                        write!(formatter, "expected one of: {:?}", &FIELDS)
+                    }
+
+                    #[allow(unused_variables)]
+                    fn visit_str<E>(self, value: &str) -> std::result::Result<GeneratedField, E>
+                    where
+                        E: serde::de::Error,
+                    {
+                        match value {
+                            "epoch" => Ok(GeneratedField::Epoch),
+                            "eccentricity" => Ok(GeneratedField::Eccentricity),
+                            "inclinationDeg" | "inclination_deg" => Ok(GeneratedField::InclinationDeg),
+                            "raOfAscNodeDeg" | "ra_of_asc_node_deg" => Ok(GeneratedField::RaOfAscNodeDeg),
+                            "argOfPericenterDeg" | "arg_of_pericenter_deg" => Ok(GeneratedField::ArgOfPericenterDeg),
+                            "meanAnomalyDeg" | "mean_anomaly_deg" => Ok(GeneratedField::MeanAnomalyDeg),
+                            "gm" => Ok(GeneratedField::Gm),
+                            "semiMajorAxisKm" | "semi_major_axis_km" => Ok(GeneratedField::SemiMajorAxisKm),
+                            "meanMotion" | "mean_motion" => Ok(GeneratedField::MeanMotion),
+                            _ => Err(serde::de::Error::unknown_field(value, FIELDS)),
+                        }
+                    }
+                }
+                deserializer.deserialize_identifier(GeneratedVisitor)
+            }
+        }
+        struct GeneratedVisitor;
+        impl<'de> serde::de::Visitor<'de> for GeneratedVisitor {
+            type Value = MeanKeplerianElements;
+
+            fn expecting(&self, formatter: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
+                formatter.write_str("struct anduril.r#type.MeanKeplerianElements")
+            }
+
+            fn visit_map<V>(self, mut map_: V) -> std::result::Result<MeanKeplerianElements, V::Error>
+                where
+                    V: serde::de::MapAccess<'de>,
+            {
+                let mut epoch__ = None;
+                let mut eccentricity__ = None;
+                let mut inclination_deg__ = None;
+                let mut ra_of_asc_node_deg__ = None;
+                let mut arg_of_pericenter_deg__ = None;
+                let mut mean_anomaly_deg__ = None;
+                let mut gm__ = None;
+                let mut line2_field8__ = None;
+                while let Some(k) = map_.next_key()? {
+                    match k {
+                        GeneratedField::Epoch => {
+                            if epoch__.is_some() {
+                                return Err(serde::de::Error::duplicate_field("epoch"));
+                            }
+                            epoch__ = map_.next_value()?;
+                        }
+                        GeneratedField::Eccentricity => {
+                            if eccentricity__.is_some() {
+                                return Err(serde::de::Error::duplicate_field("eccentricity"));
+                            }
+                            eccentricity__ = 
+                                Some(map_.next_value::<::pbjson::private::NumberDeserialize<_>>()?.0)
+                            ;
+                        }
+                        GeneratedField::InclinationDeg => {
+                            if inclination_deg__.is_some() {
+                                return Err(serde::de::Error::duplicate_field("inclinationDeg"));
+                            }
+                            inclination_deg__ = 
+                                Some(map_.next_value::<::pbjson::private::NumberDeserialize<_>>()?.0)
+                            ;
+                        }
+                        GeneratedField::RaOfAscNodeDeg => {
+                            if ra_of_asc_node_deg__.is_some() {
+                                return Err(serde::de::Error::duplicate_field("raOfAscNodeDeg"));
+                            }
+                            ra_of_asc_node_deg__ = 
+                                Some(map_.next_value::<::pbjson::private::NumberDeserialize<_>>()?.0)
+                            ;
+                        }
+                        GeneratedField::ArgOfPericenterDeg => {
+                            if arg_of_pericenter_deg__.is_some() {
+                                return Err(serde::de::Error::duplicate_field("argOfPericenterDeg"));
+                            }
+                            arg_of_pericenter_deg__ = 
+                                Some(map_.next_value::<::pbjson::private::NumberDeserialize<_>>()?.0)
+                            ;
+                        }
+                        GeneratedField::MeanAnomalyDeg => {
+                            if mean_anomaly_deg__.is_some() {
+                                return Err(serde::de::Error::duplicate_field("meanAnomalyDeg"));
+                            }
+                            mean_anomaly_deg__ = 
+                                Some(map_.next_value::<::pbjson::private::NumberDeserialize<_>>()?.0)
+                            ;
+                        }
+                        GeneratedField::Gm => {
+                            if gm__.is_some() {
+                                return Err(serde::de::Error::duplicate_field("gm"));
+                            }
+                            gm__ = map_.next_value()?;
+                        }
+                        GeneratedField::SemiMajorAxisKm => {
+                            if line2_field8__.is_some() {
+                                return Err(serde::de::Error::duplicate_field("semiMajorAxisKm"));
+                            }
+                            line2_field8__ = map_.next_value::<::std::option::Option<::pbjson::private::NumberDeserialize<_>>>()?.map(|x| mean_keplerian_elements::Line2Field8::SemiMajorAxisKm(x.0));
+                        }
+                        GeneratedField::MeanMotion => {
+                            if line2_field8__.is_some() {
+                                return Err(serde::de::Error::duplicate_field("meanMotion"));
+                            }
+                            line2_field8__ = map_.next_value::<::std::option::Option<::pbjson::private::NumberDeserialize<_>>>()?.map(|x| mean_keplerian_elements::Line2Field8::MeanMotion(x.0));
+                        }
+                    }
+                }
+                Ok(MeanKeplerianElements {
+                    epoch: epoch__,
+                    eccentricity: eccentricity__.unwrap_or_default(),
+                    inclination_deg: inclination_deg__.unwrap_or_default(),
+                    ra_of_asc_node_deg: ra_of_asc_node_deg__.unwrap_or_default(),
+                    arg_of_pericenter_deg: arg_of_pericenter_deg__.unwrap_or_default(),
+                    mean_anomaly_deg: mean_anomaly_deg__.unwrap_or_default(),
+                    gm: gm__,
+                    line2_field8: line2_field8__,
+                })
+            }
+        }
+        deserializer.deserialize_struct("anduril.r#type.MeanKeplerianElements", FIELDS, GeneratedVisitor)
+    }
+}
+impl serde::Serialize for OrbitMeanElements {
+    #[allow(deprecated)]
+    fn serialize<S>(&self, serializer: S) -> std::result::Result<S::Ok, S::Error>
+    where
+        S: serde::Serializer,
+    {
+        use serde::ser::SerializeStruct;
+        let mut len = 0;
+        if self.metadata.is_some() {
+            len += 1;
+        }
+        if self.mean_keplerian_elements.is_some() {
+            len += 1;
+        }
+        if self.tle_parameters.is_some() {
+            len += 1;
+        }
+        let mut struct_ser = serializer.serialize_struct("anduril.r#type.OrbitMeanElements", len)?;
+        if let Some(v) = self.metadata.as_ref() {
+            struct_ser.serialize_field("metadata", v)?;
+        }
+        if let Some(v) = self.mean_keplerian_elements.as_ref() {
+            struct_ser.serialize_field("meanKeplerianElements", v)?;
+        }
+        if let Some(v) = self.tle_parameters.as_ref() {
+            struct_ser.serialize_field("tleParameters", v)?;
+        }
+        struct_ser.end()
+    }
+}
+impl<'de> serde::Deserialize<'de> for OrbitMeanElements {
+    #[allow(deprecated)]
+    fn deserialize<D>(deserializer: D) -> std::result::Result<Self, D::Error>
+    where
+        D: serde::Deserializer<'de>,
+    {
+        const FIELDS: &[&str] = &[
+            "metadata",
+            "mean_keplerian_elements",
+            "meanKeplerianElements",
+            "tle_parameters",
+            "tleParameters",
+        ];
+
+        #[allow(clippy::enum_variant_names)]
+        enum GeneratedField {
+            Metadata,
+            MeanKeplerianElements,
+            TleParameters,
+        }
+        impl<'de> serde::Deserialize<'de> for GeneratedField {
+            fn deserialize<D>(deserializer: D) -> std::result::Result<GeneratedField, D::Error>
+            where
+                D: serde::Deserializer<'de>,
+            {
+                struct GeneratedVisitor;
+
+                impl<'de> serde::de::Visitor<'de> for GeneratedVisitor {
+                    type Value = GeneratedField;
+
+                    fn expecting(&self, formatter: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
+                        write!(formatter, "expected one of: {:?}", &FIELDS)
+                    }
+
+                    #[allow(unused_variables)]
+                    fn visit_str<E>(self, value: &str) -> std::result::Result<GeneratedField, E>
+                    where
+                        E: serde::de::Error,
+                    {
+                        match value {
+                            "metadata" => Ok(GeneratedField::Metadata),
+                            "meanKeplerianElements" | "mean_keplerian_elements" => Ok(GeneratedField::MeanKeplerianElements),
+                            "tleParameters" | "tle_parameters" => Ok(GeneratedField::TleParameters),
+                            _ => Err(serde::de::Error::unknown_field(value, FIELDS)),
+                        }
+                    }
+                }
+                deserializer.deserialize_identifier(GeneratedVisitor)
+            }
+        }
+        struct GeneratedVisitor;
+        impl<'de> serde::de::Visitor<'de> for GeneratedVisitor {
+            type Value = OrbitMeanElements;
+
+            fn expecting(&self, formatter: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
+                formatter.write_str("struct anduril.r#type.OrbitMeanElements")
+            }
+
+            fn visit_map<V>(self, mut map_: V) -> std::result::Result<OrbitMeanElements, V::Error>
+                where
+                    V: serde::de::MapAccess<'de>,
+            {
+                let mut metadata__ = None;
+                let mut mean_keplerian_elements__ = None;
+                let mut tle_parameters__ = None;
+                while let Some(k) = map_.next_key()? {
+                    match k {
+                        GeneratedField::Metadata => {
+                            if metadata__.is_some() {
+                                return Err(serde::de::Error::duplicate_field("metadata"));
+                            }
+                            metadata__ = map_.next_value()?;
+                        }
+                        GeneratedField::MeanKeplerianElements => {
+                            if mean_keplerian_elements__.is_some() {
+                                return Err(serde::de::Error::duplicate_field("meanKeplerianElements"));
+                            }
+                            mean_keplerian_elements__ = map_.next_value()?;
+                        }
+                        GeneratedField::TleParameters => {
+                            if tle_parameters__.is_some() {
+                                return Err(serde::de::Error::duplicate_field("tleParameters"));
+                            }
+                            tle_parameters__ = map_.next_value()?;
+                        }
+                    }
+                }
+                Ok(OrbitMeanElements {
+                    metadata: metadata__,
+                    mean_keplerian_elements: mean_keplerian_elements__,
+                    tle_parameters: tle_parameters__,
+                })
+            }
+        }
+        deserializer.deserialize_struct("anduril.r#type.OrbitMeanElements", FIELDS, GeneratedVisitor)
+    }
+}
+impl serde::Serialize for OrbitMeanElementsMetadata {
+    #[allow(deprecated)]
+    fn serialize<S>(&self, serializer: S) -> std::result::Result<S::Ok, S::Error>
+    where
+        S: serde::Serializer,
+    {
+        use serde::ser::SerializeStruct;
+        let mut len = 0;
+        if self.creation_date.is_some() {
+            len += 1;
+        }
+        if self.originator.is_some() {
+            len += 1;
+        }
+        if self.message_id.is_some() {
+            len += 1;
+        }
+        if self.ref_frame != 0 {
+            len += 1;
+        }
+        if self.ref_frame_epoch.is_some() {
+            len += 1;
+        }
+        if self.mean_element_theory != 0 {
+            len += 1;
+        }
+        let mut struct_ser = serializer.serialize_struct("anduril.r#type.OrbitMeanElementsMetadata", len)?;
+        if let Some(v) = self.creation_date.as_ref() {
+            struct_ser.serialize_field("creationDate", v)?;
+        }
+        if let Some(v) = self.originator.as_ref() {
+            struct_ser.serialize_field("originator", v)?;
+        }
+        if let Some(v) = self.message_id.as_ref() {
+            struct_ser.serialize_field("messageId", v)?;
+        }
+        if self.ref_frame != 0 {
+            let v = EciReferenceFrame::try_from(self.ref_frame)
+                .map_err(|_| serde::ser::Error::custom(format!("Invalid variant {}", self.ref_frame)))?;
+            struct_ser.serialize_field("refFrame", &v)?;
+        }
+        if let Some(v) = self.ref_frame_epoch.as_ref() {
+            struct_ser.serialize_field("refFrameEpoch", v)?;
+        }
+        if self.mean_element_theory != 0 {
+            let v = MeanElementTheory::try_from(self.mean_element_theory)
+                .map_err(|_| serde::ser::Error::custom(format!("Invalid variant {}", self.mean_element_theory)))?;
+            struct_ser.serialize_field("meanElementTheory", &v)?;
+        }
+        struct_ser.end()
+    }
+}
+impl<'de> serde::Deserialize<'de> for OrbitMeanElementsMetadata {
+    #[allow(deprecated)]
+    fn deserialize<D>(deserializer: D) -> std::result::Result<Self, D::Error>
+    where
+        D: serde::Deserializer<'de>,
+    {
+        const FIELDS: &[&str] = &[
+            "creation_date",
+            "creationDate",
+            "originator",
+            "message_id",
+            "messageId",
+            "ref_frame",
+            "refFrame",
+            "ref_frame_epoch",
+            "refFrameEpoch",
+            "mean_element_theory",
+            "meanElementTheory",
+        ];
+
+        #[allow(clippy::enum_variant_names)]
+        enum GeneratedField {
+            CreationDate,
+            Originator,
+            MessageId,
+            RefFrame,
+            RefFrameEpoch,
+            MeanElementTheory,
+        }
+        impl<'de> serde::Deserialize<'de> for GeneratedField {
+            fn deserialize<D>(deserializer: D) -> std::result::Result<GeneratedField, D::Error>
+            where
+                D: serde::Deserializer<'de>,
+            {
+                struct GeneratedVisitor;
+
+                impl<'de> serde::de::Visitor<'de> for GeneratedVisitor {
+                    type Value = GeneratedField;
+
+                    fn expecting(&self, formatter: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
+                        write!(formatter, "expected one of: {:?}", &FIELDS)
+                    }
+
+                    #[allow(unused_variables)]
+                    fn visit_str<E>(self, value: &str) -> std::result::Result<GeneratedField, E>
+                    where
+                        E: serde::de::Error,
+                    {
+                        match value {
+                            "creationDate" | "creation_date" => Ok(GeneratedField::CreationDate),
+                            "originator" => Ok(GeneratedField::Originator),
+                            "messageId" | "message_id" => Ok(GeneratedField::MessageId),
+                            "refFrame" | "ref_frame" => Ok(GeneratedField::RefFrame),
+                            "refFrameEpoch" | "ref_frame_epoch" => Ok(GeneratedField::RefFrameEpoch),
+                            "meanElementTheory" | "mean_element_theory" => Ok(GeneratedField::MeanElementTheory),
+                            _ => Err(serde::de::Error::unknown_field(value, FIELDS)),
+                        }
+                    }
+                }
+                deserializer.deserialize_identifier(GeneratedVisitor)
+            }
+        }
+        struct GeneratedVisitor;
+        impl<'de> serde::de::Visitor<'de> for GeneratedVisitor {
+            type Value = OrbitMeanElementsMetadata;
+
+            fn expecting(&self, formatter: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
+                formatter.write_str("struct anduril.r#type.OrbitMeanElementsMetadata")
+            }
+
+            fn visit_map<V>(self, mut map_: V) -> std::result::Result<OrbitMeanElementsMetadata, V::Error>
+                where
+                    V: serde::de::MapAccess<'de>,
+            {
+                let mut creation_date__ = None;
+                let mut originator__ = None;
+                let mut message_id__ = None;
+                let mut ref_frame__ = None;
+                let mut ref_frame_epoch__ = None;
+                let mut mean_element_theory__ = None;
+                while let Some(k) = map_.next_key()? {
+                    match k {
+                        GeneratedField::CreationDate => {
+                            if creation_date__.is_some() {
+                                return Err(serde::de::Error::duplicate_field("creationDate"));
+                            }
+                            creation_date__ = map_.next_value()?;
+                        }
+                        GeneratedField::Originator => {
+                            if originator__.is_some() {
+                                return Err(serde::de::Error::duplicate_field("originator"));
+                            }
+                            originator__ = map_.next_value()?;
+                        }
+                        GeneratedField::MessageId => {
+                            if message_id__.is_some() {
+                                return Err(serde::de::Error::duplicate_field("messageId"));
+                            }
+                            message_id__ = map_.next_value()?;
+                        }
+                        GeneratedField::RefFrame => {
+                            if ref_frame__.is_some() {
+                                return Err(serde::de::Error::duplicate_field("refFrame"));
+                            }
+                            ref_frame__ = Some(map_.next_value::<EciReferenceFrame>()? as i32);
+                        }
+                        GeneratedField::RefFrameEpoch => {
+                            if ref_frame_epoch__.is_some() {
+                                return Err(serde::de::Error::duplicate_field("refFrameEpoch"));
+                            }
+                            ref_frame_epoch__ = map_.next_value()?;
+                        }
+                        GeneratedField::MeanElementTheory => {
+                            if mean_element_theory__.is_some() {
+                                return Err(serde::de::Error::duplicate_field("meanElementTheory"));
+                            }
+                            mean_element_theory__ = Some(map_.next_value::<MeanElementTheory>()? as i32);
+                        }
+                    }
+                }
+                Ok(OrbitMeanElementsMetadata {
+                    creation_date: creation_date__,
+                    originator: originator__,
+                    message_id: message_id__,
+                    ref_frame: ref_frame__.unwrap_or_default(),
+                    ref_frame_epoch: ref_frame_epoch__,
+                    mean_element_theory: mean_element_theory__.unwrap_or_default(),
+                })
+            }
+        }
+        deserializer.deserialize_struct("anduril.r#type.OrbitMeanElementsMetadata", FIELDS, GeneratedVisitor)
     }
 }
 impl serde::Serialize for Pose {
@@ -2539,6 +3235,255 @@ impl<'de> serde::Deserialize<'de> for ThetaPhi {
             }
         }
         deserializer.deserialize_struct("anduril.r#type.ThetaPhi", FIELDS, GeneratedVisitor)
+    }
+}
+impl serde::Serialize for TleParameters {
+    #[allow(deprecated)]
+    fn serialize<S>(&self, serializer: S) -> std::result::Result<S::Ok, S::Error>
+    where
+        S: serde::Serializer,
+    {
+        use serde::ser::SerializeStruct;
+        let mut len = 0;
+        if self.ephemeris_type.is_some() {
+            len += 1;
+        }
+        if self.classification_type.is_some() {
+            len += 1;
+        }
+        if self.norad_cat_id.is_some() {
+            len += 1;
+        }
+        if self.element_set_no.is_some() {
+            len += 1;
+        }
+        if self.rev_at_epoch.is_some() {
+            len += 1;
+        }
+        if self.mean_motion_dot.is_some() {
+            len += 1;
+        }
+        if self.line1_field11.is_some() {
+            len += 1;
+        }
+        if self.line1_field10.is_some() {
+            len += 1;
+        }
+        let mut struct_ser = serializer.serialize_struct("anduril.r#type.TleParameters", len)?;
+        if let Some(v) = self.ephemeris_type.as_ref() {
+            struct_ser.serialize_field("ephemerisType", v)?;
+        }
+        if let Some(v) = self.classification_type.as_ref() {
+            struct_ser.serialize_field("classificationType", v)?;
+        }
+        if let Some(v) = self.norad_cat_id.as_ref() {
+            struct_ser.serialize_field("noradCatId", v)?;
+        }
+        if let Some(v) = self.element_set_no.as_ref() {
+            struct_ser.serialize_field("elementSetNo", v)?;
+        }
+        if let Some(v) = self.rev_at_epoch.as_ref() {
+            struct_ser.serialize_field("revAtEpoch", v)?;
+        }
+        if let Some(v) = self.mean_motion_dot.as_ref() {
+            struct_ser.serialize_field("meanMotionDot", v)?;
+        }
+        if let Some(v) = self.line1_field11.as_ref() {
+            match v {
+                tle_parameters::Line1Field11::Bstar(v) => {
+                    struct_ser.serialize_field("bstar", v)?;
+                }
+                tle_parameters::Line1Field11::Bterm(v) => {
+                    struct_ser.serialize_field("bterm", v)?;
+                }
+            }
+        }
+        if let Some(v) = self.line1_field10.as_ref() {
+            match v {
+                tle_parameters::Line1Field10::MeanMotionDdot(v) => {
+                    struct_ser.serialize_field("meanMotionDdot", v)?;
+                }
+                tle_parameters::Line1Field10::Agom(v) => {
+                    struct_ser.serialize_field("agom", v)?;
+                }
+            }
+        }
+        struct_ser.end()
+    }
+}
+impl<'de> serde::Deserialize<'de> for TleParameters {
+    #[allow(deprecated)]
+    fn deserialize<D>(deserializer: D) -> std::result::Result<Self, D::Error>
+    where
+        D: serde::Deserializer<'de>,
+    {
+        const FIELDS: &[&str] = &[
+            "ephemeris_type",
+            "ephemerisType",
+            "classification_type",
+            "classificationType",
+            "norad_cat_id",
+            "noradCatId",
+            "element_set_no",
+            "elementSetNo",
+            "rev_at_epoch",
+            "revAtEpoch",
+            "mean_motion_dot",
+            "meanMotionDot",
+            "bstar",
+            "bterm",
+            "mean_motion_ddot",
+            "meanMotionDdot",
+            "agom",
+        ];
+
+        #[allow(clippy::enum_variant_names)]
+        enum GeneratedField {
+            EphemerisType,
+            ClassificationType,
+            NoradCatId,
+            ElementSetNo,
+            RevAtEpoch,
+            MeanMotionDot,
+            Bstar,
+            Bterm,
+            MeanMotionDdot,
+            Agom,
+        }
+        impl<'de> serde::Deserialize<'de> for GeneratedField {
+            fn deserialize<D>(deserializer: D) -> std::result::Result<GeneratedField, D::Error>
+            where
+                D: serde::Deserializer<'de>,
+            {
+                struct GeneratedVisitor;
+
+                impl<'de> serde::de::Visitor<'de> for GeneratedVisitor {
+                    type Value = GeneratedField;
+
+                    fn expecting(&self, formatter: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
+                        write!(formatter, "expected one of: {:?}", &FIELDS)
+                    }
+
+                    #[allow(unused_variables)]
+                    fn visit_str<E>(self, value: &str) -> std::result::Result<GeneratedField, E>
+                    where
+                        E: serde::de::Error,
+                    {
+                        match value {
+                            "ephemerisType" | "ephemeris_type" => Ok(GeneratedField::EphemerisType),
+                            "classificationType" | "classification_type" => Ok(GeneratedField::ClassificationType),
+                            "noradCatId" | "norad_cat_id" => Ok(GeneratedField::NoradCatId),
+                            "elementSetNo" | "element_set_no" => Ok(GeneratedField::ElementSetNo),
+                            "revAtEpoch" | "rev_at_epoch" => Ok(GeneratedField::RevAtEpoch),
+                            "meanMotionDot" | "mean_motion_dot" => Ok(GeneratedField::MeanMotionDot),
+                            "bstar" => Ok(GeneratedField::Bstar),
+                            "bterm" => Ok(GeneratedField::Bterm),
+                            "meanMotionDdot" | "mean_motion_ddot" => Ok(GeneratedField::MeanMotionDdot),
+                            "agom" => Ok(GeneratedField::Agom),
+                            _ => Err(serde::de::Error::unknown_field(value, FIELDS)),
+                        }
+                    }
+                }
+                deserializer.deserialize_identifier(GeneratedVisitor)
+            }
+        }
+        struct GeneratedVisitor;
+        impl<'de> serde::de::Visitor<'de> for GeneratedVisitor {
+            type Value = TleParameters;
+
+            fn expecting(&self, formatter: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
+                formatter.write_str("struct anduril.r#type.TleParameters")
+            }
+
+            fn visit_map<V>(self, mut map_: V) -> std::result::Result<TleParameters, V::Error>
+                where
+                    V: serde::de::MapAccess<'de>,
+            {
+                let mut ephemeris_type__ = None;
+                let mut classification_type__ = None;
+                let mut norad_cat_id__ = None;
+                let mut element_set_no__ = None;
+                let mut rev_at_epoch__ = None;
+                let mut mean_motion_dot__ = None;
+                let mut line1_field11__ = None;
+                let mut line1_field10__ = None;
+                while let Some(k) = map_.next_key()? {
+                    match k {
+                        GeneratedField::EphemerisType => {
+                            if ephemeris_type__.is_some() {
+                                return Err(serde::de::Error::duplicate_field("ephemerisType"));
+                            }
+                            ephemeris_type__ = map_.next_value()?;
+                        }
+                        GeneratedField::ClassificationType => {
+                            if classification_type__.is_some() {
+                                return Err(serde::de::Error::duplicate_field("classificationType"));
+                            }
+                            classification_type__ = map_.next_value()?;
+                        }
+                        GeneratedField::NoradCatId => {
+                            if norad_cat_id__.is_some() {
+                                return Err(serde::de::Error::duplicate_field("noradCatId"));
+                            }
+                            norad_cat_id__ = map_.next_value()?;
+                        }
+                        GeneratedField::ElementSetNo => {
+                            if element_set_no__.is_some() {
+                                return Err(serde::de::Error::duplicate_field("elementSetNo"));
+                            }
+                            element_set_no__ = map_.next_value()?;
+                        }
+                        GeneratedField::RevAtEpoch => {
+                            if rev_at_epoch__.is_some() {
+                                return Err(serde::de::Error::duplicate_field("revAtEpoch"));
+                            }
+                            rev_at_epoch__ = map_.next_value()?;
+                        }
+                        GeneratedField::MeanMotionDot => {
+                            if mean_motion_dot__.is_some() {
+                                return Err(serde::de::Error::duplicate_field("meanMotionDot"));
+                            }
+                            mean_motion_dot__ = map_.next_value()?;
+                        }
+                        GeneratedField::Bstar => {
+                            if line1_field11__.is_some() {
+                                return Err(serde::de::Error::duplicate_field("bstar"));
+                            }
+                            line1_field11__ = map_.next_value::<::std::option::Option<::pbjson::private::NumberDeserialize<_>>>()?.map(|x| tle_parameters::Line1Field11::Bstar(x.0));
+                        }
+                        GeneratedField::Bterm => {
+                            if line1_field11__.is_some() {
+                                return Err(serde::de::Error::duplicate_field("bterm"));
+                            }
+                            line1_field11__ = map_.next_value::<::std::option::Option<::pbjson::private::NumberDeserialize<_>>>()?.map(|x| tle_parameters::Line1Field11::Bterm(x.0));
+                        }
+                        GeneratedField::MeanMotionDdot => {
+                            if line1_field10__.is_some() {
+                                return Err(serde::de::Error::duplicate_field("meanMotionDdot"));
+                            }
+                            line1_field10__ = map_.next_value::<::std::option::Option<::pbjson::private::NumberDeserialize<_>>>()?.map(|x| tle_parameters::Line1Field10::MeanMotionDdot(x.0));
+                        }
+                        GeneratedField::Agom => {
+                            if line1_field10__.is_some() {
+                                return Err(serde::de::Error::duplicate_field("agom"));
+                            }
+                            line1_field10__ = map_.next_value::<::std::option::Option<::pbjson::private::NumberDeserialize<_>>>()?.map(|x| tle_parameters::Line1Field10::Agom(x.0));
+                        }
+                    }
+                }
+                Ok(TleParameters {
+                    ephemeris_type: ephemeris_type__,
+                    classification_type: classification_type__,
+                    norad_cat_id: norad_cat_id__,
+                    element_set_no: element_set_no__,
+                    rev_at_epoch: rev_at_epoch__,
+                    mean_motion_dot: mean_motion_dot__,
+                    line1_field11: line1_field11__,
+                    line1_field10: line1_field10__,
+                })
+            }
+        }
+        deserializer.deserialize_struct("anduril.r#type.TleParameters", FIELDS, GeneratedVisitor)
     }
 }
 impl serde::Serialize for Uint64Range {
