@@ -4192,9 +4192,6 @@ impl serde::Serialize for Entity {
         if self.visual_details.is_some() {
             len += 1;
         }
-        if self.prototype_extensions.is_some() {
-            len += 1;
-        }
         if self.dimensions.is_some() {
             len += 1;
         }
@@ -4319,9 +4316,6 @@ impl serde::Serialize for Entity {
         if let Some(v) = self.visual_details.as_ref() {
             struct_ser.serialize_field("visualDetails", v)?;
         }
-        if let Some(v) = self.prototype_extensions.as_ref() {
-            struct_ser.serialize_field("prototypeExtensions", v)?;
-        }
         if let Some(v) = self.dimensions.as_ref() {
             struct_ser.serialize_field("dimensions", v)?;
         }
@@ -4405,8 +4399,6 @@ impl<'de> serde::Deserialize<'de> for Entity {
             "relationships",
             "visual_details",
             "visualDetails",
-            "prototype_extensions",
-            "prototypeExtensions",
             "dimensions",
             "route_details",
             "routeDetails",
@@ -4455,7 +4447,6 @@ impl<'de> serde::Deserialize<'de> for Entity {
             Media,
             Relationships,
             VisualDetails,
-            PrototypeExtensions,
             Dimensions,
             RouteDetails,
             Schedules,
@@ -4518,7 +4509,6 @@ impl<'de> serde::Deserialize<'de> for Entity {
                             "media" => Ok(GeneratedField::Media),
                             "relationships" => Ok(GeneratedField::Relationships),
                             "visualDetails" | "visual_details" => Ok(GeneratedField::VisualDetails),
-                            "prototypeExtensions" | "prototype_extensions" => Ok(GeneratedField::PrototypeExtensions),
                             "dimensions" => Ok(GeneratedField::Dimensions),
                             "routeDetails" | "route_details" => Ok(GeneratedField::RouteDetails),
                             "schedules" => Ok(GeneratedField::Schedules),
@@ -4579,7 +4569,6 @@ impl<'de> serde::Deserialize<'de> for Entity {
                 let mut media__ = None;
                 let mut relationships__ = None;
                 let mut visual_details__ = None;
-                let mut prototype_extensions__ = None;
                 let mut dimensions__ = None;
                 let mut route_details__ = None;
                 let mut schedules__ = None;
@@ -4788,12 +4777,6 @@ impl<'de> serde::Deserialize<'de> for Entity {
                             }
                             visual_details__ = map_.next_value()?;
                         }
-                        GeneratedField::PrototypeExtensions => {
-                            if prototype_extensions__.is_some() {
-                                return Err(serde::de::Error::duplicate_field("prototypeExtensions"));
-                            }
-                            prototype_extensions__ = map_.next_value()?;
-                        }
                         GeneratedField::Dimensions => {
                             if dimensions__.is_some() {
                                 return Err(serde::de::Error::duplicate_field("dimensions"));
@@ -4878,7 +4861,6 @@ impl<'de> serde::Deserialize<'de> for Entity {
                     media: media__,
                     relationships: relationships__,
                     visual_details: visual_details__,
-                    prototype_extensions: prototype_extensions__,
                     dimensions: dimensions__,
                     route_details: route_details__,
                     schedules: schedules__,
@@ -15667,99 +15649,6 @@ impl<'de> serde::Deserialize<'de> for ProjectedFrustum {
             }
         }
         deserializer.deserialize_struct("anduril.entitymanager.v1.ProjectedFrustum", FIELDS, GeneratedVisitor)
-    }
-}
-impl serde::Serialize for PrototypeExtensions {
-    #[allow(deprecated)]
-    fn serialize<S>(&self, serializer: S) -> std::result::Result<S::Ok, S::Error>
-    where
-        S: serde::Serializer,
-    {
-        use serde::ser::SerializeStruct;
-        let mut len = 0;
-        if !self.extensions.is_empty() {
-            len += 1;
-        }
-        let mut struct_ser = serializer.serialize_struct("anduril.entitymanager.v1.PrototypeExtensions", len)?;
-        if !self.extensions.is_empty() {
-            struct_ser.serialize_field("extensions", &self.extensions)?;
-        }
-        struct_ser.end()
-    }
-}
-impl<'de> serde::Deserialize<'de> for PrototypeExtensions {
-    #[allow(deprecated)]
-    fn deserialize<D>(deserializer: D) -> std::result::Result<Self, D::Error>
-    where
-        D: serde::Deserializer<'de>,
-    {
-        const FIELDS: &[&str] = &[
-            "extensions",
-        ];
-
-        #[allow(clippy::enum_variant_names)]
-        enum GeneratedField {
-            Extensions,
-        }
-        impl<'de> serde::Deserialize<'de> for GeneratedField {
-            fn deserialize<D>(deserializer: D) -> std::result::Result<GeneratedField, D::Error>
-            where
-                D: serde::Deserializer<'de>,
-            {
-                struct GeneratedVisitor;
-
-                impl<'de> serde::de::Visitor<'de> for GeneratedVisitor {
-                    type Value = GeneratedField;
-
-                    fn expecting(&self, formatter: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
-                        write!(formatter, "expected one of: {:?}", &FIELDS)
-                    }
-
-                    #[allow(unused_variables)]
-                    fn visit_str<E>(self, value: &str) -> std::result::Result<GeneratedField, E>
-                    where
-                        E: serde::de::Error,
-                    {
-                        match value {
-                            "extensions" => Ok(GeneratedField::Extensions),
-                            _ => Err(serde::de::Error::unknown_field(value, FIELDS)),
-                        }
-                    }
-                }
-                deserializer.deserialize_identifier(GeneratedVisitor)
-            }
-        }
-        struct GeneratedVisitor;
-        impl<'de> serde::de::Visitor<'de> for GeneratedVisitor {
-            type Value = PrototypeExtensions;
-
-            fn expecting(&self, formatter: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
-                formatter.write_str("struct anduril.entitymanager.v1.PrototypeExtensions")
-            }
-
-            fn visit_map<V>(self, mut map_: V) -> std::result::Result<PrototypeExtensions, V::Error>
-                where
-                    V: serde::de::MapAccess<'de>,
-            {
-                let mut extensions__ = None;
-                while let Some(k) = map_.next_key()? {
-                    match k {
-                        GeneratedField::Extensions => {
-                            if extensions__.is_some() {
-                                return Err(serde::de::Error::duplicate_field("extensions"));
-                            }
-                            extensions__ = Some(
-                                map_.next_value::<std::collections::HashMap<_, _>>()?
-                            );
-                        }
-                    }
-                }
-                Ok(PrototypeExtensions {
-                    extensions: extensions__.unwrap_or_default(),
-                })
-            }
-        }
-        deserializer.deserialize_struct("anduril.entitymanager.v1.PrototypeExtensions", FIELDS, GeneratedVisitor)
     }
 }
 impl serde::Serialize for Provenance {
