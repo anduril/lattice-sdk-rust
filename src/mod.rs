@@ -34,6 +34,24 @@ pub mod anduril {
         }
     }
     pub mod tasks {
+        pub mod ad {
+            pub mod desertguardian {
+                pub mod common {
+                    // @@protoc_insertion_point(attribute:anduril.tasks.ad.desertguardian.common.v1)
+                    pub mod v1 {
+                        include!("anduril.tasks.ad.desertguardian.common.v1.rs");
+                        // @@protoc_insertion_point(anduril.tasks.ad.desertguardian.common.v1)
+                    }
+                }
+                pub mod rf {
+                    // @@protoc_insertion_point(attribute:anduril.tasks.ad.desertguardian.rf.v1)
+                    pub mod v1 {
+                        include!("anduril.tasks.ad.desertguardian.rf.v1.rs");
+                        // @@protoc_insertion_point(anduril.tasks.ad.desertguardian.rf.v1)
+                    }
+                }
+            }
+        }
         pub mod jadc2 {
             pub mod thirdparty {
                 // @@protoc_insertion_point(attribute:anduril.tasks.jadc2.thirdparty.v1)
