@@ -84,11 +84,11 @@ pub mod entity_manager_api_client {
             self.inner = self.inner.max_encoding_message_size(limit);
             self
         }
-        pub async fn get_entity(
+        pub async fn publish_entity(
             &mut self,
-            request: impl tonic::IntoRequest<super::GetEntityRequest>,
+            request: impl tonic::IntoRequest<super::PublishEntityRequest>,
         ) -> std::result::Result<
-            tonic::Response<super::GetEntityResponse>,
+            tonic::Response<super::PublishEntityResponse>,
             tonic::Status,
         > {
             self.inner
@@ -102,76 +102,14 @@ pub mod entity_manager_api_client {
                 })?;
             let codec = tonic::codec::ProstCodec::default();
             let path = http::uri::PathAndQuery::from_static(
-                "/anduril.entitymanager.v1.EntityManagerAPI/GetEntity",
+                "/anduril.entitymanager.v1.EntityManagerAPI/PublishEntity",
             );
             let mut req = request.into_request();
             req.extensions_mut()
                 .insert(
                     GrpcMethod::new(
                         "anduril.entitymanager.v1.EntityManagerAPI",
-                        "GetEntity",
-                    ),
-                );
-            self.inner.unary(req, path, codec).await
-        }
-        pub async fn stream_entity_components(
-            &mut self,
-            request: impl tonic::IntoRequest<super::StreamEntityComponentsRequest>,
-        ) -> std::result::Result<
-            tonic::Response<
-                tonic::codec::Streaming<super::StreamEntityComponentsResponse>,
-            >,
-            tonic::Status,
-        > {
-            self.inner
-                .ready()
-                .await
-                .map_err(|e| {
-                    tonic::Status::new(
-                        tonic::Code::Unknown,
-                        format!("Service was not ready: {}", e.into()),
-                    )
-                })?;
-            let codec = tonic::codec::ProstCodec::default();
-            let path = http::uri::PathAndQuery::from_static(
-                "/anduril.entitymanager.v1.EntityManagerAPI/StreamEntityComponents",
-            );
-            let mut req = request.into_request();
-            req.extensions_mut()
-                .insert(
-                    GrpcMethod::new(
-                        "anduril.entitymanager.v1.EntityManagerAPI",
-                        "StreamEntityComponents",
-                    ),
-                );
-            self.inner.server_streaming(req, path, codec).await
-        }
-        pub async fn put_entity(
-            &mut self,
-            request: impl tonic::IntoRequest<super::PutEntityRequest>,
-        ) -> std::result::Result<
-            tonic::Response<super::PutEntityResponse>,
-            tonic::Status,
-        > {
-            self.inner
-                .ready()
-                .await
-                .map_err(|e| {
-                    tonic::Status::new(
-                        tonic::Code::Unknown,
-                        format!("Service was not ready: {}", e.into()),
-                    )
-                })?;
-            let codec = tonic::codec::ProstCodec::default();
-            let path = http::uri::PathAndQuery::from_static(
-                "/anduril.entitymanager.v1.EntityManagerAPI/PutEntity",
-            );
-            let mut req = request.into_request();
-            req.extensions_mut()
-                .insert(
-                    GrpcMethod::new(
-                        "anduril.entitymanager.v1.EntityManagerAPI",
-                        "PutEntity",
+                        "PublishEntity",
                     ),
                 );
             self.inner.unary(req, path, codec).await
@@ -207,6 +145,36 @@ pub mod entity_manager_api_client {
                     ),
                 );
             self.inner.client_streaming(req, path, codec).await
+        }
+        pub async fn get_entity(
+            &mut self,
+            request: impl tonic::IntoRequest<super::GetEntityRequest>,
+        ) -> std::result::Result<
+            tonic::Response<super::GetEntityResponse>,
+            tonic::Status,
+        > {
+            self.inner
+                .ready()
+                .await
+                .map_err(|e| {
+                    tonic::Status::new(
+                        tonic::Code::Unknown,
+                        format!("Service was not ready: {}", e.into()),
+                    )
+                })?;
+            let codec = tonic::codec::ProstCodec::default();
+            let path = http::uri::PathAndQuery::from_static(
+                "/anduril.entitymanager.v1.EntityManagerAPI/GetEntity",
+            );
+            let mut req = request.into_request();
+            req.extensions_mut()
+                .insert(
+                    GrpcMethod::new(
+                        "anduril.entitymanager.v1.EntityManagerAPI",
+                        "GetEntity",
+                    ),
+                );
+            self.inner.unary(req, path, codec).await
         }
         pub async fn override_entity(
             &mut self,
@@ -268,11 +236,13 @@ pub mod entity_manager_api_client {
                 );
             self.inner.unary(req, path, codec).await
         }
-        pub async fn delete_entity(
+        pub async fn stream_entity_components(
             &mut self,
-            request: impl tonic::IntoRequest<super::DeleteEntityRequest>,
+            request: impl tonic::IntoRequest<super::StreamEntityComponentsRequest>,
         ) -> std::result::Result<
-            tonic::Response<super::DeleteEntityResponse>,
+            tonic::Response<
+                tonic::codec::Streaming<super::StreamEntityComponentsResponse>,
+            >,
             tonic::Status,
         > {
             self.inner
@@ -286,77 +256,17 @@ pub mod entity_manager_api_client {
                 })?;
             let codec = tonic::codec::ProstCodec::default();
             let path = http::uri::PathAndQuery::from_static(
-                "/anduril.entitymanager.v1.EntityManagerAPI/DeleteEntity",
+                "/anduril.entitymanager.v1.EntityManagerAPI/StreamEntityComponents",
             );
             let mut req = request.into_request();
             req.extensions_mut()
                 .insert(
                     GrpcMethod::new(
                         "anduril.entitymanager.v1.EntityManagerAPI",
-                        "DeleteEntity",
+                        "StreamEntityComponents",
                     ),
                 );
-            self.inner.unary(req, path, codec).await
-        }
-        pub async fn relate_entity(
-            &mut self,
-            request: impl tonic::IntoRequest<super::RelateEntityRequest>,
-        ) -> std::result::Result<
-            tonic::Response<super::RelateEntityResponse>,
-            tonic::Status,
-        > {
-            self.inner
-                .ready()
-                .await
-                .map_err(|e| {
-                    tonic::Status::new(
-                        tonic::Code::Unknown,
-                        format!("Service was not ready: {}", e.into()),
-                    )
-                })?;
-            let codec = tonic::codec::ProstCodec::default();
-            let path = http::uri::PathAndQuery::from_static(
-                "/anduril.entitymanager.v1.EntityManagerAPI/RelateEntity",
-            );
-            let mut req = request.into_request();
-            req.extensions_mut()
-                .insert(
-                    GrpcMethod::new(
-                        "anduril.entitymanager.v1.EntityManagerAPI",
-                        "RelateEntity",
-                    ),
-                );
-            self.inner.unary(req, path, codec).await
-        }
-        pub async fn unrelate_entity(
-            &mut self,
-            request: impl tonic::IntoRequest<super::UnrelateEntityRequest>,
-        ) -> std::result::Result<
-            tonic::Response<super::UnrelateEntityResponse>,
-            tonic::Status,
-        > {
-            self.inner
-                .ready()
-                .await
-                .map_err(|e| {
-                    tonic::Status::new(
-                        tonic::Code::Unknown,
-                        format!("Service was not ready: {}", e.into()),
-                    )
-                })?;
-            let codec = tonic::codec::ProstCodec::default();
-            let path = http::uri::PathAndQuery::from_static(
-                "/anduril.entitymanager.v1.EntityManagerAPI/UnrelateEntity",
-            );
-            let mut req = request.into_request();
-            req.extensions_mut()
-                .insert(
-                    GrpcMethod::new(
-                        "anduril.entitymanager.v1.EntityManagerAPI",
-                        "UnrelateEntity",
-                    ),
-                );
-            self.inner.unary(req, path, codec).await
+            self.inner.server_streaming(req, path, codec).await
         }
     }
 }
@@ -367,34 +277,11 @@ pub mod entity_manager_api_server {
     /// Generated trait containing gRPC methods that should be implemented for use with EntityManagerApiServer.
     #[async_trait]
     pub trait EntityManagerApi: Send + Sync + 'static {
-        async fn get_entity(
+        async fn publish_entity(
             &self,
-            request: tonic::Request<super::GetEntityRequest>,
+            request: tonic::Request<super::PublishEntityRequest>,
         ) -> std::result::Result<
-            tonic::Response<super::GetEntityResponse>,
-            tonic::Status,
-        >;
-        /// Server streaming response type for the StreamEntityComponents method.
-        type StreamEntityComponentsStream: tonic::codegen::tokio_stream::Stream<
-                Item = std::result::Result<
-                    super::StreamEntityComponentsResponse,
-                    tonic::Status,
-                >,
-            >
-            + Send
-            + 'static;
-        async fn stream_entity_components(
-            &self,
-            request: tonic::Request<super::StreamEntityComponentsRequest>,
-        ) -> std::result::Result<
-            tonic::Response<Self::StreamEntityComponentsStream>,
-            tonic::Status,
-        >;
-        async fn put_entity(
-            &self,
-            request: tonic::Request<super::PutEntityRequest>,
-        ) -> std::result::Result<
-            tonic::Response<super::PutEntityResponse>,
+            tonic::Response<super::PublishEntityResponse>,
             tonic::Status,
         >;
         async fn publish_entities(
@@ -402,6 +289,13 @@ pub mod entity_manager_api_server {
             request: tonic::Request<tonic::Streaming<super::PublishEntitiesRequest>>,
         ) -> std::result::Result<
             tonic::Response<super::PublishEntitiesResponse>,
+            tonic::Status,
+        >;
+        async fn get_entity(
+            &self,
+            request: tonic::Request<super::GetEntityRequest>,
+        ) -> std::result::Result<
+            tonic::Response<super::GetEntityResponse>,
             tonic::Status,
         >;
         async fn override_entity(
@@ -418,25 +312,20 @@ pub mod entity_manager_api_server {
             tonic::Response<super::RemoveEntityOverrideResponse>,
             tonic::Status,
         >;
-        async fn delete_entity(
+        /// Server streaming response type for the StreamEntityComponents method.
+        type StreamEntityComponentsStream: tonic::codegen::tokio_stream::Stream<
+                Item = std::result::Result<
+                    super::StreamEntityComponentsResponse,
+                    tonic::Status,
+                >,
+            >
+            + Send
+            + 'static;
+        async fn stream_entity_components(
             &self,
-            request: tonic::Request<super::DeleteEntityRequest>,
+            request: tonic::Request<super::StreamEntityComponentsRequest>,
         ) -> std::result::Result<
-            tonic::Response<super::DeleteEntityResponse>,
-            tonic::Status,
-        >;
-        async fn relate_entity(
-            &self,
-            request: tonic::Request<super::RelateEntityRequest>,
-        ) -> std::result::Result<
-            tonic::Response<super::RelateEntityResponse>,
-            tonic::Status,
-        >;
-        async fn unrelate_entity(
-            &self,
-            request: tonic::Request<super::UnrelateEntityRequest>,
-        ) -> std::result::Result<
-            tonic::Response<super::UnrelateEntityResponse>,
+            tonic::Response<Self::StreamEntityComponentsStream>,
             tonic::Status,
         >;
     }
@@ -519,76 +408,25 @@ pub mod entity_manager_api_server {
         fn call(&mut self, req: http::Request<B>) -> Self::Future {
             let inner = self.inner.clone();
             match req.uri().path() {
-                "/anduril.entitymanager.v1.EntityManagerAPI/GetEntity" => {
+                "/anduril.entitymanager.v1.EntityManagerAPI/PublishEntity" => {
                     #[allow(non_camel_case_types)]
-                    struct GetEntitySvc<T: EntityManagerApi>(pub Arc<T>);
+                    struct PublishEntitySvc<T: EntityManagerApi>(pub Arc<T>);
                     impl<
                         T: EntityManagerApi,
-                    > tonic::server::UnaryService<super::GetEntityRequest>
-                    for GetEntitySvc<T> {
-                        type Response = super::GetEntityResponse;
+                    > tonic::server::UnaryService<super::PublishEntityRequest>
+                    for PublishEntitySvc<T> {
+                        type Response = super::PublishEntityResponse;
                         type Future = BoxFuture<
                             tonic::Response<Self::Response>,
                             tonic::Status,
                         >;
                         fn call(
                             &mut self,
-                            request: tonic::Request<super::GetEntityRequest>,
+                            request: tonic::Request<super::PublishEntityRequest>,
                         ) -> Self::Future {
                             let inner = Arc::clone(&self.0);
                             let fut = async move {
-                                <T as EntityManagerApi>::get_entity(&inner, request).await
-                            };
-                            Box::pin(fut)
-                        }
-                    }
-                    let accept_compression_encodings = self.accept_compression_encodings;
-                    let send_compression_encodings = self.send_compression_encodings;
-                    let max_decoding_message_size = self.max_decoding_message_size;
-                    let max_encoding_message_size = self.max_encoding_message_size;
-                    let inner = self.inner.clone();
-                    let fut = async move {
-                        let inner = inner.0;
-                        let method = GetEntitySvc(inner);
-                        let codec = tonic::codec::ProstCodec::default();
-                        let mut grpc = tonic::server::Grpc::new(codec)
-                            .apply_compression_config(
-                                accept_compression_encodings,
-                                send_compression_encodings,
-                            )
-                            .apply_max_message_size_config(
-                                max_decoding_message_size,
-                                max_encoding_message_size,
-                            );
-                        let res = grpc.unary(method, req).await;
-                        Ok(res)
-                    };
-                    Box::pin(fut)
-                }
-                "/anduril.entitymanager.v1.EntityManagerAPI/StreamEntityComponents" => {
-                    #[allow(non_camel_case_types)]
-                    struct StreamEntityComponentsSvc<T: EntityManagerApi>(pub Arc<T>);
-                    impl<
-                        T: EntityManagerApi,
-                    > tonic::server::ServerStreamingService<
-                        super::StreamEntityComponentsRequest,
-                    > for StreamEntityComponentsSvc<T> {
-                        type Response = super::StreamEntityComponentsResponse;
-                        type ResponseStream = T::StreamEntityComponentsStream;
-                        type Future = BoxFuture<
-                            tonic::Response<Self::ResponseStream>,
-                            tonic::Status,
-                        >;
-                        fn call(
-                            &mut self,
-                            request: tonic::Request<super::StreamEntityComponentsRequest>,
-                        ) -> Self::Future {
-                            let inner = Arc::clone(&self.0);
-                            let fut = async move {
-                                <T as EntityManagerApi>::stream_entity_components(
-                                        &inner,
-                                        request,
-                                    )
+                                <T as EntityManagerApi>::publish_entity(&inner, request)
                                     .await
                             };
                             Box::pin(fut)
@@ -601,53 +439,7 @@ pub mod entity_manager_api_server {
                     let inner = self.inner.clone();
                     let fut = async move {
                         let inner = inner.0;
-                        let method = StreamEntityComponentsSvc(inner);
-                        let codec = tonic::codec::ProstCodec::default();
-                        let mut grpc = tonic::server::Grpc::new(codec)
-                            .apply_compression_config(
-                                accept_compression_encodings,
-                                send_compression_encodings,
-                            )
-                            .apply_max_message_size_config(
-                                max_decoding_message_size,
-                                max_encoding_message_size,
-                            );
-                        let res = grpc.server_streaming(method, req).await;
-                        Ok(res)
-                    };
-                    Box::pin(fut)
-                }
-                "/anduril.entitymanager.v1.EntityManagerAPI/PutEntity" => {
-                    #[allow(non_camel_case_types)]
-                    struct PutEntitySvc<T: EntityManagerApi>(pub Arc<T>);
-                    impl<
-                        T: EntityManagerApi,
-                    > tonic::server::UnaryService<super::PutEntityRequest>
-                    for PutEntitySvc<T> {
-                        type Response = super::PutEntityResponse;
-                        type Future = BoxFuture<
-                            tonic::Response<Self::Response>,
-                            tonic::Status,
-                        >;
-                        fn call(
-                            &mut self,
-                            request: tonic::Request<super::PutEntityRequest>,
-                        ) -> Self::Future {
-                            let inner = Arc::clone(&self.0);
-                            let fut = async move {
-                                <T as EntityManagerApi>::put_entity(&inner, request).await
-                            };
-                            Box::pin(fut)
-                        }
-                    }
-                    let accept_compression_encodings = self.accept_compression_encodings;
-                    let send_compression_encodings = self.send_compression_encodings;
-                    let max_decoding_message_size = self.max_decoding_message_size;
-                    let max_encoding_message_size = self.max_encoding_message_size;
-                    let inner = self.inner.clone();
-                    let fut = async move {
-                        let inner = inner.0;
-                        let method = PutEntitySvc(inner);
+                        let method = PublishEntitySvc(inner);
                         let codec = tonic::codec::ProstCodec::default();
                         let mut grpc = tonic::server::Grpc::new(codec)
                             .apply_compression_config(
@@ -709,6 +501,52 @@ pub mod entity_manager_api_server {
                                 max_encoding_message_size,
                             );
                         let res = grpc.client_streaming(method, req).await;
+                        Ok(res)
+                    };
+                    Box::pin(fut)
+                }
+                "/anduril.entitymanager.v1.EntityManagerAPI/GetEntity" => {
+                    #[allow(non_camel_case_types)]
+                    struct GetEntitySvc<T: EntityManagerApi>(pub Arc<T>);
+                    impl<
+                        T: EntityManagerApi,
+                    > tonic::server::UnaryService<super::GetEntityRequest>
+                    for GetEntitySvc<T> {
+                        type Response = super::GetEntityResponse;
+                        type Future = BoxFuture<
+                            tonic::Response<Self::Response>,
+                            tonic::Status,
+                        >;
+                        fn call(
+                            &mut self,
+                            request: tonic::Request<super::GetEntityRequest>,
+                        ) -> Self::Future {
+                            let inner = Arc::clone(&self.0);
+                            let fut = async move {
+                                <T as EntityManagerApi>::get_entity(&inner, request).await
+                            };
+                            Box::pin(fut)
+                        }
+                    }
+                    let accept_compression_encodings = self.accept_compression_encodings;
+                    let send_compression_encodings = self.send_compression_encodings;
+                    let max_decoding_message_size = self.max_decoding_message_size;
+                    let max_encoding_message_size = self.max_encoding_message_size;
+                    let inner = self.inner.clone();
+                    let fut = async move {
+                        let inner = inner.0;
+                        let method = GetEntitySvc(inner);
+                        let codec = tonic::codec::ProstCodec::default();
+                        let mut grpc = tonic::server::Grpc::new(codec)
+                            .apply_compression_config(
+                                accept_compression_encodings,
+                                send_compression_encodings,
+                            )
+                            .apply_max_message_size_config(
+                                max_decoding_message_size,
+                                max_encoding_message_size,
+                            );
+                        let res = grpc.unary(method, req).await;
                         Ok(res)
                     };
                     Box::pin(fut)
@@ -810,25 +648,30 @@ pub mod entity_manager_api_server {
                     };
                     Box::pin(fut)
                 }
-                "/anduril.entitymanager.v1.EntityManagerAPI/DeleteEntity" => {
+                "/anduril.entitymanager.v1.EntityManagerAPI/StreamEntityComponents" => {
                     #[allow(non_camel_case_types)]
-                    struct DeleteEntitySvc<T: EntityManagerApi>(pub Arc<T>);
+                    struct StreamEntityComponentsSvc<T: EntityManagerApi>(pub Arc<T>);
                     impl<
                         T: EntityManagerApi,
-                    > tonic::server::UnaryService<super::DeleteEntityRequest>
-                    for DeleteEntitySvc<T> {
-                        type Response = super::DeleteEntityResponse;
+                    > tonic::server::ServerStreamingService<
+                        super::StreamEntityComponentsRequest,
+                    > for StreamEntityComponentsSvc<T> {
+                        type Response = super::StreamEntityComponentsResponse;
+                        type ResponseStream = T::StreamEntityComponentsStream;
                         type Future = BoxFuture<
-                            tonic::Response<Self::Response>,
+                            tonic::Response<Self::ResponseStream>,
                             tonic::Status,
                         >;
                         fn call(
                             &mut self,
-                            request: tonic::Request<super::DeleteEntityRequest>,
+                            request: tonic::Request<super::StreamEntityComponentsRequest>,
                         ) -> Self::Future {
                             let inner = Arc::clone(&self.0);
                             let fut = async move {
-                                <T as EntityManagerApi>::delete_entity(&inner, request)
+                                <T as EntityManagerApi>::stream_entity_components(
+                                        &inner,
+                                        request,
+                                    )
                                     .await
                             };
                             Box::pin(fut)
@@ -841,7 +684,7 @@ pub mod entity_manager_api_server {
                     let inner = self.inner.clone();
                     let fut = async move {
                         let inner = inner.0;
-                        let method = DeleteEntitySvc(inner);
+                        let method = StreamEntityComponentsSvc(inner);
                         let codec = tonic::codec::ProstCodec::default();
                         let mut grpc = tonic::server::Grpc::new(codec)
                             .apply_compression_config(
@@ -852,101 +695,7 @@ pub mod entity_manager_api_server {
                                 max_decoding_message_size,
                                 max_encoding_message_size,
                             );
-                        let res = grpc.unary(method, req).await;
-                        Ok(res)
-                    };
-                    Box::pin(fut)
-                }
-                "/anduril.entitymanager.v1.EntityManagerAPI/RelateEntity" => {
-                    #[allow(non_camel_case_types)]
-                    struct RelateEntitySvc<T: EntityManagerApi>(pub Arc<T>);
-                    impl<
-                        T: EntityManagerApi,
-                    > tonic::server::UnaryService<super::RelateEntityRequest>
-                    for RelateEntitySvc<T> {
-                        type Response = super::RelateEntityResponse;
-                        type Future = BoxFuture<
-                            tonic::Response<Self::Response>,
-                            tonic::Status,
-                        >;
-                        fn call(
-                            &mut self,
-                            request: tonic::Request<super::RelateEntityRequest>,
-                        ) -> Self::Future {
-                            let inner = Arc::clone(&self.0);
-                            let fut = async move {
-                                <T as EntityManagerApi>::relate_entity(&inner, request)
-                                    .await
-                            };
-                            Box::pin(fut)
-                        }
-                    }
-                    let accept_compression_encodings = self.accept_compression_encodings;
-                    let send_compression_encodings = self.send_compression_encodings;
-                    let max_decoding_message_size = self.max_decoding_message_size;
-                    let max_encoding_message_size = self.max_encoding_message_size;
-                    let inner = self.inner.clone();
-                    let fut = async move {
-                        let inner = inner.0;
-                        let method = RelateEntitySvc(inner);
-                        let codec = tonic::codec::ProstCodec::default();
-                        let mut grpc = tonic::server::Grpc::new(codec)
-                            .apply_compression_config(
-                                accept_compression_encodings,
-                                send_compression_encodings,
-                            )
-                            .apply_max_message_size_config(
-                                max_decoding_message_size,
-                                max_encoding_message_size,
-                            );
-                        let res = grpc.unary(method, req).await;
-                        Ok(res)
-                    };
-                    Box::pin(fut)
-                }
-                "/anduril.entitymanager.v1.EntityManagerAPI/UnrelateEntity" => {
-                    #[allow(non_camel_case_types)]
-                    struct UnrelateEntitySvc<T: EntityManagerApi>(pub Arc<T>);
-                    impl<
-                        T: EntityManagerApi,
-                    > tonic::server::UnaryService<super::UnrelateEntityRequest>
-                    for UnrelateEntitySvc<T> {
-                        type Response = super::UnrelateEntityResponse;
-                        type Future = BoxFuture<
-                            tonic::Response<Self::Response>,
-                            tonic::Status,
-                        >;
-                        fn call(
-                            &mut self,
-                            request: tonic::Request<super::UnrelateEntityRequest>,
-                        ) -> Self::Future {
-                            let inner = Arc::clone(&self.0);
-                            let fut = async move {
-                                <T as EntityManagerApi>::unrelate_entity(&inner, request)
-                                    .await
-                            };
-                            Box::pin(fut)
-                        }
-                    }
-                    let accept_compression_encodings = self.accept_compression_encodings;
-                    let send_compression_encodings = self.send_compression_encodings;
-                    let max_decoding_message_size = self.max_decoding_message_size;
-                    let max_encoding_message_size = self.max_encoding_message_size;
-                    let inner = self.inner.clone();
-                    let fut = async move {
-                        let inner = inner.0;
-                        let method = UnrelateEntitySvc(inner);
-                        let codec = tonic::codec::ProstCodec::default();
-                        let mut grpc = tonic::server::Grpc::new(codec)
-                            .apply_compression_config(
-                                accept_compression_encodings,
-                                send_compression_encodings,
-                            )
-                            .apply_max_message_size_config(
-                                max_decoding_message_size,
-                                max_encoding_message_size,
-                            );
-                        let res = grpc.unary(method, req).await;
+                        let res = grpc.server_streaming(method, req).await;
                         Ok(res)
                     };
                     Box::pin(fut)

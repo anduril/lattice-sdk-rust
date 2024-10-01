@@ -1924,6 +1924,579 @@ impl<'de> serde::Deserialize<'de> for Principal {
         deserializer.deserialize_struct("anduril.taskmanager.v1.Principal", FIELDS, GeneratedVisitor)
     }
 }
+impl serde::Serialize for QueryTasksRequest {
+    #[allow(deprecated)]
+    fn serialize<S>(&self, serializer: S) -> std::result::Result<S::Ok, S::Error>
+    where
+        S: serde::Serializer,
+    {
+        use serde::ser::SerializeStruct;
+        let mut len = 0;
+        if !self.parent_task_id.is_empty() {
+            len += 1;
+        }
+        if !self.page_token.is_empty() {
+            len += 1;
+        }
+        if self.status_filter.is_some() {
+            len += 1;
+        }
+        if self.update_time_range.is_some() {
+            len += 1;
+        }
+        if self.view != 0 {
+            len += 1;
+        }
+        let mut struct_ser = serializer.serialize_struct("anduril.taskmanager.v1.QueryTasksRequest", len)?;
+        if !self.parent_task_id.is_empty() {
+            struct_ser.serialize_field("parentTaskId", &self.parent_task_id)?;
+        }
+        if !self.page_token.is_empty() {
+            struct_ser.serialize_field("pageToken", &self.page_token)?;
+        }
+        if let Some(v) = self.status_filter.as_ref() {
+            struct_ser.serialize_field("statusFilter", v)?;
+        }
+        if let Some(v) = self.update_time_range.as_ref() {
+            struct_ser.serialize_field("updateTimeRange", v)?;
+        }
+        if self.view != 0 {
+            let v = TaskView::try_from(self.view)
+                .map_err(|_| serde::ser::Error::custom(format!("Invalid variant {}", self.view)))?;
+            struct_ser.serialize_field("view", &v)?;
+        }
+        struct_ser.end()
+    }
+}
+impl<'de> serde::Deserialize<'de> for QueryTasksRequest {
+    #[allow(deprecated)]
+    fn deserialize<D>(deserializer: D) -> std::result::Result<Self, D::Error>
+    where
+        D: serde::Deserializer<'de>,
+    {
+        const FIELDS: &[&str] = &[
+            "parent_task_id",
+            "parentTaskId",
+            "page_token",
+            "pageToken",
+            "status_filter",
+            "statusFilter",
+            "update_time_range",
+            "updateTimeRange",
+            "view",
+        ];
+
+        #[allow(clippy::enum_variant_names)]
+        enum GeneratedField {
+            ParentTaskId,
+            PageToken,
+            StatusFilter,
+            UpdateTimeRange,
+            View,
+        }
+        impl<'de> serde::Deserialize<'de> for GeneratedField {
+            fn deserialize<D>(deserializer: D) -> std::result::Result<GeneratedField, D::Error>
+            where
+                D: serde::Deserializer<'de>,
+            {
+                struct GeneratedVisitor;
+
+                impl<'de> serde::de::Visitor<'de> for GeneratedVisitor {
+                    type Value = GeneratedField;
+
+                    fn expecting(&self, formatter: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
+                        write!(formatter, "expected one of: {:?}", &FIELDS)
+                    }
+
+                    #[allow(unused_variables)]
+                    fn visit_str<E>(self, value: &str) -> std::result::Result<GeneratedField, E>
+                    where
+                        E: serde::de::Error,
+                    {
+                        match value {
+                            "parentTaskId" | "parent_task_id" => Ok(GeneratedField::ParentTaskId),
+                            "pageToken" | "page_token" => Ok(GeneratedField::PageToken),
+                            "statusFilter" | "status_filter" => Ok(GeneratedField::StatusFilter),
+                            "updateTimeRange" | "update_time_range" => Ok(GeneratedField::UpdateTimeRange),
+                            "view" => Ok(GeneratedField::View),
+                            _ => Err(serde::de::Error::unknown_field(value, FIELDS)),
+                        }
+                    }
+                }
+                deserializer.deserialize_identifier(GeneratedVisitor)
+            }
+        }
+        struct GeneratedVisitor;
+        impl<'de> serde::de::Visitor<'de> for GeneratedVisitor {
+            type Value = QueryTasksRequest;
+
+            fn expecting(&self, formatter: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
+                formatter.write_str("struct anduril.taskmanager.v1.QueryTasksRequest")
+            }
+
+            fn visit_map<V>(self, mut map_: V) -> std::result::Result<QueryTasksRequest, V::Error>
+                where
+                    V: serde::de::MapAccess<'de>,
+            {
+                let mut parent_task_id__ = None;
+                let mut page_token__ = None;
+                let mut status_filter__ = None;
+                let mut update_time_range__ = None;
+                let mut view__ = None;
+                while let Some(k) = map_.next_key()? {
+                    match k {
+                        GeneratedField::ParentTaskId => {
+                            if parent_task_id__.is_some() {
+                                return Err(serde::de::Error::duplicate_field("parentTaskId"));
+                            }
+                            parent_task_id__ = Some(map_.next_value()?);
+                        }
+                        GeneratedField::PageToken => {
+                            if page_token__.is_some() {
+                                return Err(serde::de::Error::duplicate_field("pageToken"));
+                            }
+                            page_token__ = Some(map_.next_value()?);
+                        }
+                        GeneratedField::StatusFilter => {
+                            if status_filter__.is_some() {
+                                return Err(serde::de::Error::duplicate_field("statusFilter"));
+                            }
+                            status_filter__ = map_.next_value()?;
+                        }
+                        GeneratedField::UpdateTimeRange => {
+                            if update_time_range__.is_some() {
+                                return Err(serde::de::Error::duplicate_field("updateTimeRange"));
+                            }
+                            update_time_range__ = map_.next_value()?;
+                        }
+                        GeneratedField::View => {
+                            if view__.is_some() {
+                                return Err(serde::de::Error::duplicate_field("view"));
+                            }
+                            view__ = Some(map_.next_value::<TaskView>()? as i32);
+                        }
+                    }
+                }
+                Ok(QueryTasksRequest {
+                    parent_task_id: parent_task_id__.unwrap_or_default(),
+                    page_token: page_token__.unwrap_or_default(),
+                    status_filter: status_filter__,
+                    update_time_range: update_time_range__,
+                    view: view__.unwrap_or_default(),
+                })
+            }
+        }
+        deserializer.deserialize_struct("anduril.taskmanager.v1.QueryTasksRequest", FIELDS, GeneratedVisitor)
+    }
+}
+impl serde::Serialize for query_tasks_request::FilterType {
+    #[allow(deprecated)]
+    fn serialize<S>(&self, serializer: S) -> std::result::Result<S::Ok, S::Error>
+    where
+        S: serde::Serializer,
+    {
+        let variant = match self {
+            Self::Invalid => "FILTER_TYPE_INVALID",
+            Self::Inclusive => "FILTER_TYPE_INCLUSIVE",
+            Self::Exclusive => "FILTER_TYPE_EXCLUSIVE",
+        };
+        serializer.serialize_str(variant)
+    }
+}
+impl<'de> serde::Deserialize<'de> for query_tasks_request::FilterType {
+    #[allow(deprecated)]
+    fn deserialize<D>(deserializer: D) -> std::result::Result<Self, D::Error>
+    where
+        D: serde::Deserializer<'de>,
+    {
+        const FIELDS: &[&str] = &[
+            "FILTER_TYPE_INVALID",
+            "FILTER_TYPE_INCLUSIVE",
+            "FILTER_TYPE_EXCLUSIVE",
+        ];
+
+        struct GeneratedVisitor;
+
+        impl<'de> serde::de::Visitor<'de> for GeneratedVisitor {
+            type Value = query_tasks_request::FilterType;
+
+            fn expecting(&self, formatter: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
+                write!(formatter, "expected one of: {:?}", &FIELDS)
+            }
+
+            fn visit_i64<E>(self, v: i64) -> std::result::Result<Self::Value, E>
+            where
+                E: serde::de::Error,
+            {
+                i32::try_from(v)
+                    .ok()
+                    .and_then(|x| x.try_into().ok())
+                    .ok_or_else(|| {
+                        serde::de::Error::invalid_value(serde::de::Unexpected::Signed(v), &self)
+                    })
+            }
+
+            fn visit_u64<E>(self, v: u64) -> std::result::Result<Self::Value, E>
+            where
+                E: serde::de::Error,
+            {
+                i32::try_from(v)
+                    .ok()
+                    .and_then(|x| x.try_into().ok())
+                    .ok_or_else(|| {
+                        serde::de::Error::invalid_value(serde::de::Unexpected::Unsigned(v), &self)
+                    })
+            }
+
+            fn visit_str<E>(self, value: &str) -> std::result::Result<Self::Value, E>
+            where
+                E: serde::de::Error,
+            {
+                match value {
+                    "FILTER_TYPE_INVALID" => Ok(query_tasks_request::FilterType::Invalid),
+                    "FILTER_TYPE_INCLUSIVE" => Ok(query_tasks_request::FilterType::Inclusive),
+                    "FILTER_TYPE_EXCLUSIVE" => Ok(query_tasks_request::FilterType::Exclusive),
+                    _ => Err(serde::de::Error::unknown_variant(value, FIELDS)),
+                }
+            }
+        }
+        deserializer.deserialize_any(GeneratedVisitor)
+    }
+}
+impl serde::Serialize for query_tasks_request::StatusFilter {
+    #[allow(deprecated)]
+    fn serialize<S>(&self, serializer: S) -> std::result::Result<S::Ok, S::Error>
+    where
+        S: serde::Serializer,
+    {
+        use serde::ser::SerializeStruct;
+        let mut len = 0;
+        if !self.status.is_empty() {
+            len += 1;
+        }
+        if self.filter_type != 0 {
+            len += 1;
+        }
+        let mut struct_ser = serializer.serialize_struct("anduril.taskmanager.v1.QueryTasksRequest.StatusFilter", len)?;
+        if !self.status.is_empty() {
+            let v = self.status.iter().cloned().map(|v| {
+                Status::try_from(v)
+                    .map_err(|_| serde::ser::Error::custom(format!("Invalid variant {}", v)))
+                }).collect::<Result<Vec<_>, _>>()?;
+            struct_ser.serialize_field("status", &v)?;
+        }
+        if self.filter_type != 0 {
+            let v = query_tasks_request::FilterType::try_from(self.filter_type)
+                .map_err(|_| serde::ser::Error::custom(format!("Invalid variant {}", self.filter_type)))?;
+            struct_ser.serialize_field("filterType", &v)?;
+        }
+        struct_ser.end()
+    }
+}
+impl<'de> serde::Deserialize<'de> for query_tasks_request::StatusFilter {
+    #[allow(deprecated)]
+    fn deserialize<D>(deserializer: D) -> std::result::Result<Self, D::Error>
+    where
+        D: serde::Deserializer<'de>,
+    {
+        const FIELDS: &[&str] = &[
+            "status",
+            "filter_type",
+            "filterType",
+        ];
+
+        #[allow(clippy::enum_variant_names)]
+        enum GeneratedField {
+            Status,
+            FilterType,
+        }
+        impl<'de> serde::Deserialize<'de> for GeneratedField {
+            fn deserialize<D>(deserializer: D) -> std::result::Result<GeneratedField, D::Error>
+            where
+                D: serde::Deserializer<'de>,
+            {
+                struct GeneratedVisitor;
+
+                impl<'de> serde::de::Visitor<'de> for GeneratedVisitor {
+                    type Value = GeneratedField;
+
+                    fn expecting(&self, formatter: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
+                        write!(formatter, "expected one of: {:?}", &FIELDS)
+                    }
+
+                    #[allow(unused_variables)]
+                    fn visit_str<E>(self, value: &str) -> std::result::Result<GeneratedField, E>
+                    where
+                        E: serde::de::Error,
+                    {
+                        match value {
+                            "status" => Ok(GeneratedField::Status),
+                            "filterType" | "filter_type" => Ok(GeneratedField::FilterType),
+                            _ => Err(serde::de::Error::unknown_field(value, FIELDS)),
+                        }
+                    }
+                }
+                deserializer.deserialize_identifier(GeneratedVisitor)
+            }
+        }
+        struct GeneratedVisitor;
+        impl<'de> serde::de::Visitor<'de> for GeneratedVisitor {
+            type Value = query_tasks_request::StatusFilter;
+
+            fn expecting(&self, formatter: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
+                formatter.write_str("struct anduril.taskmanager.v1.QueryTasksRequest.StatusFilter")
+            }
+
+            fn visit_map<V>(self, mut map_: V) -> std::result::Result<query_tasks_request::StatusFilter, V::Error>
+                where
+                    V: serde::de::MapAccess<'de>,
+            {
+                let mut status__ = None;
+                let mut filter_type__ = None;
+                while let Some(k) = map_.next_key()? {
+                    match k {
+                        GeneratedField::Status => {
+                            if status__.is_some() {
+                                return Err(serde::de::Error::duplicate_field("status"));
+                            }
+                            status__ = Some(map_.next_value::<Vec<Status>>()?.into_iter().map(|x| x as i32).collect());
+                        }
+                        GeneratedField::FilterType => {
+                            if filter_type__.is_some() {
+                                return Err(serde::de::Error::duplicate_field("filterType"));
+                            }
+                            filter_type__ = Some(map_.next_value::<query_tasks_request::FilterType>()? as i32);
+                        }
+                    }
+                }
+                Ok(query_tasks_request::StatusFilter {
+                    status: status__.unwrap_or_default(),
+                    filter_type: filter_type__.unwrap_or_default(),
+                })
+            }
+        }
+        deserializer.deserialize_struct("anduril.taskmanager.v1.QueryTasksRequest.StatusFilter", FIELDS, GeneratedVisitor)
+    }
+}
+impl serde::Serialize for query_tasks_request::TimeRange {
+    #[allow(deprecated)]
+    fn serialize<S>(&self, serializer: S) -> std::result::Result<S::Ok, S::Error>
+    where
+        S: serde::Serializer,
+    {
+        use serde::ser::SerializeStruct;
+        let mut len = 0;
+        if self.update_start_time.is_some() {
+            len += 1;
+        }
+        if self.update_end_time.is_some() {
+            len += 1;
+        }
+        let mut struct_ser = serializer.serialize_struct("anduril.taskmanager.v1.QueryTasksRequest.TimeRange", len)?;
+        if let Some(v) = self.update_start_time.as_ref() {
+            struct_ser.serialize_field("updateStartTime", v)?;
+        }
+        if let Some(v) = self.update_end_time.as_ref() {
+            struct_ser.serialize_field("updateEndTime", v)?;
+        }
+        struct_ser.end()
+    }
+}
+impl<'de> serde::Deserialize<'de> for query_tasks_request::TimeRange {
+    #[allow(deprecated)]
+    fn deserialize<D>(deserializer: D) -> std::result::Result<Self, D::Error>
+    where
+        D: serde::Deserializer<'de>,
+    {
+        const FIELDS: &[&str] = &[
+            "update_start_time",
+            "updateStartTime",
+            "update_end_time",
+            "updateEndTime",
+        ];
+
+        #[allow(clippy::enum_variant_names)]
+        enum GeneratedField {
+            UpdateStartTime,
+            UpdateEndTime,
+        }
+        impl<'de> serde::Deserialize<'de> for GeneratedField {
+            fn deserialize<D>(deserializer: D) -> std::result::Result<GeneratedField, D::Error>
+            where
+                D: serde::Deserializer<'de>,
+            {
+                struct GeneratedVisitor;
+
+                impl<'de> serde::de::Visitor<'de> for GeneratedVisitor {
+                    type Value = GeneratedField;
+
+                    fn expecting(&self, formatter: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
+                        write!(formatter, "expected one of: {:?}", &FIELDS)
+                    }
+
+                    #[allow(unused_variables)]
+                    fn visit_str<E>(self, value: &str) -> std::result::Result<GeneratedField, E>
+                    where
+                        E: serde::de::Error,
+                    {
+                        match value {
+                            "updateStartTime" | "update_start_time" => Ok(GeneratedField::UpdateStartTime),
+                            "updateEndTime" | "update_end_time" => Ok(GeneratedField::UpdateEndTime),
+                            _ => Err(serde::de::Error::unknown_field(value, FIELDS)),
+                        }
+                    }
+                }
+                deserializer.deserialize_identifier(GeneratedVisitor)
+            }
+        }
+        struct GeneratedVisitor;
+        impl<'de> serde::de::Visitor<'de> for GeneratedVisitor {
+            type Value = query_tasks_request::TimeRange;
+
+            fn expecting(&self, formatter: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
+                formatter.write_str("struct anduril.taskmanager.v1.QueryTasksRequest.TimeRange")
+            }
+
+            fn visit_map<V>(self, mut map_: V) -> std::result::Result<query_tasks_request::TimeRange, V::Error>
+                where
+                    V: serde::de::MapAccess<'de>,
+            {
+                let mut update_start_time__ = None;
+                let mut update_end_time__ = None;
+                while let Some(k) = map_.next_key()? {
+                    match k {
+                        GeneratedField::UpdateStartTime => {
+                            if update_start_time__.is_some() {
+                                return Err(serde::de::Error::duplicate_field("updateStartTime"));
+                            }
+                            update_start_time__ = map_.next_value()?;
+                        }
+                        GeneratedField::UpdateEndTime => {
+                            if update_end_time__.is_some() {
+                                return Err(serde::de::Error::duplicate_field("updateEndTime"));
+                            }
+                            update_end_time__ = map_.next_value()?;
+                        }
+                    }
+                }
+                Ok(query_tasks_request::TimeRange {
+                    update_start_time: update_start_time__,
+                    update_end_time: update_end_time__,
+                })
+            }
+        }
+        deserializer.deserialize_struct("anduril.taskmanager.v1.QueryTasksRequest.TimeRange", FIELDS, GeneratedVisitor)
+    }
+}
+impl serde::Serialize for QueryTasksResponse {
+    #[allow(deprecated)]
+    fn serialize<S>(&self, serializer: S) -> std::result::Result<S::Ok, S::Error>
+    where
+        S: serde::Serializer,
+    {
+        use serde::ser::SerializeStruct;
+        let mut len = 0;
+        if !self.tasks.is_empty() {
+            len += 1;
+        }
+        if !self.page_token.is_empty() {
+            len += 1;
+        }
+        let mut struct_ser = serializer.serialize_struct("anduril.taskmanager.v1.QueryTasksResponse", len)?;
+        if !self.tasks.is_empty() {
+            struct_ser.serialize_field("tasks", &self.tasks)?;
+        }
+        if !self.page_token.is_empty() {
+            struct_ser.serialize_field("pageToken", &self.page_token)?;
+        }
+        struct_ser.end()
+    }
+}
+impl<'de> serde::Deserialize<'de> for QueryTasksResponse {
+    #[allow(deprecated)]
+    fn deserialize<D>(deserializer: D) -> std::result::Result<Self, D::Error>
+    where
+        D: serde::Deserializer<'de>,
+    {
+        const FIELDS: &[&str] = &[
+            "tasks",
+            "page_token",
+            "pageToken",
+        ];
+
+        #[allow(clippy::enum_variant_names)]
+        enum GeneratedField {
+            Tasks,
+            PageToken,
+        }
+        impl<'de> serde::Deserialize<'de> for GeneratedField {
+            fn deserialize<D>(deserializer: D) -> std::result::Result<GeneratedField, D::Error>
+            where
+                D: serde::Deserializer<'de>,
+            {
+                struct GeneratedVisitor;
+
+                impl<'de> serde::de::Visitor<'de> for GeneratedVisitor {
+                    type Value = GeneratedField;
+
+                    fn expecting(&self, formatter: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
+                        write!(formatter, "expected one of: {:?}", &FIELDS)
+                    }
+
+                    #[allow(unused_variables)]
+                    fn visit_str<E>(self, value: &str) -> std::result::Result<GeneratedField, E>
+                    where
+                        E: serde::de::Error,
+                    {
+                        match value {
+                            "tasks" => Ok(GeneratedField::Tasks),
+                            "pageToken" | "page_token" => Ok(GeneratedField::PageToken),
+                            _ => Err(serde::de::Error::unknown_field(value, FIELDS)),
+                        }
+                    }
+                }
+                deserializer.deserialize_identifier(GeneratedVisitor)
+            }
+        }
+        struct GeneratedVisitor;
+        impl<'de> serde::de::Visitor<'de> for GeneratedVisitor {
+            type Value = QueryTasksResponse;
+
+            fn expecting(&self, formatter: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
+                formatter.write_str("struct anduril.taskmanager.v1.QueryTasksResponse")
+            }
+
+            fn visit_map<V>(self, mut map_: V) -> std::result::Result<QueryTasksResponse, V::Error>
+                where
+                    V: serde::de::MapAccess<'de>,
+            {
+                let mut tasks__ = None;
+                let mut page_token__ = None;
+                while let Some(k) = map_.next_key()? {
+                    match k {
+                        GeneratedField::Tasks => {
+                            if tasks__.is_some() {
+                                return Err(serde::de::Error::duplicate_field("tasks"));
+                            }
+                            tasks__ = Some(map_.next_value()?);
+                        }
+                        GeneratedField::PageToken => {
+                            if page_token__.is_some() {
+                                return Err(serde::de::Error::duplicate_field("pageToken"));
+                            }
+                            page_token__ = Some(map_.next_value()?);
+                        }
+                    }
+                }
+                Ok(QueryTasksResponse {
+                    tasks: tasks__.unwrap_or_default(),
+                    page_token: page_token__.unwrap_or_default(),
+                })
+            }
+        }
+        deserializer.deserialize_struct("anduril.taskmanager.v1.QueryTasksResponse", FIELDS, GeneratedVisitor)
+    }
+}
 impl serde::Serialize for RateLimit {
     #[allow(deprecated)]
     fn serialize<S>(&self, serializer: S) -> std::result::Result<S::Ok, S::Error>
@@ -2470,266 +3043,6 @@ impl<'de> serde::Deserialize<'de> for StatusUpdate {
             }
         }
         deserializer.deserialize_struct("anduril.taskmanager.v1.StatusUpdate", FIELDS, GeneratedVisitor)
-    }
-}
-impl serde::Serialize for StreamTasksRequest {
-    #[allow(deprecated)]
-    fn serialize<S>(&self, serializer: S) -> std::result::Result<S::Ok, S::Error>
-    where
-        S: serde::Serializer,
-    {
-        use serde::ser::SerializeStruct;
-        let mut len = 0;
-        if self.rate_limit.is_some() {
-            len += 1;
-        }
-        if !self.views.is_empty() {
-            len += 1;
-        }
-        if self.heartbeat_period_millis != 0 {
-            len += 1;
-        }
-        if self.exclude_preexisting_tasks {
-            len += 1;
-        }
-        let mut struct_ser = serializer.serialize_struct("anduril.taskmanager.v1.StreamTasksRequest", len)?;
-        if let Some(v) = self.rate_limit.as_ref() {
-            struct_ser.serialize_field("rateLimit", v)?;
-        }
-        if !self.views.is_empty() {
-            let v = self.views.iter().cloned().map(|v| {
-                TaskView::try_from(v)
-                    .map_err(|_| serde::ser::Error::custom(format!("Invalid variant {}", v)))
-                }).collect::<Result<Vec<_>, _>>()?;
-            struct_ser.serialize_field("views", &v)?;
-        }
-        if self.heartbeat_period_millis != 0 {
-            struct_ser.serialize_field("heartbeatPeriodMillis", &self.heartbeat_period_millis)?;
-        }
-        if self.exclude_preexisting_tasks {
-            struct_ser.serialize_field("excludePreexistingTasks", &self.exclude_preexisting_tasks)?;
-        }
-        struct_ser.end()
-    }
-}
-impl<'de> serde::Deserialize<'de> for StreamTasksRequest {
-    #[allow(deprecated)]
-    fn deserialize<D>(deserializer: D) -> std::result::Result<Self, D::Error>
-    where
-        D: serde::Deserializer<'de>,
-    {
-        const FIELDS: &[&str] = &[
-            "rate_limit",
-            "rateLimit",
-            "views",
-            "heartbeat_period_millis",
-            "heartbeatPeriodMillis",
-            "exclude_preexisting_tasks",
-            "excludePreexistingTasks",
-        ];
-
-        #[allow(clippy::enum_variant_names)]
-        enum GeneratedField {
-            RateLimit,
-            Views,
-            HeartbeatPeriodMillis,
-            ExcludePreexistingTasks,
-        }
-        impl<'de> serde::Deserialize<'de> for GeneratedField {
-            fn deserialize<D>(deserializer: D) -> std::result::Result<GeneratedField, D::Error>
-            where
-                D: serde::Deserializer<'de>,
-            {
-                struct GeneratedVisitor;
-
-                impl<'de> serde::de::Visitor<'de> for GeneratedVisitor {
-                    type Value = GeneratedField;
-
-                    fn expecting(&self, formatter: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
-                        write!(formatter, "expected one of: {:?}", &FIELDS)
-                    }
-
-                    #[allow(unused_variables)]
-                    fn visit_str<E>(self, value: &str) -> std::result::Result<GeneratedField, E>
-                    where
-                        E: serde::de::Error,
-                    {
-                        match value {
-                            "rateLimit" | "rate_limit" => Ok(GeneratedField::RateLimit),
-                            "views" => Ok(GeneratedField::Views),
-                            "heartbeatPeriodMillis" | "heartbeat_period_millis" => Ok(GeneratedField::HeartbeatPeriodMillis),
-                            "excludePreexistingTasks" | "exclude_preexisting_tasks" => Ok(GeneratedField::ExcludePreexistingTasks),
-                            _ => Err(serde::de::Error::unknown_field(value, FIELDS)),
-                        }
-                    }
-                }
-                deserializer.deserialize_identifier(GeneratedVisitor)
-            }
-        }
-        struct GeneratedVisitor;
-        impl<'de> serde::de::Visitor<'de> for GeneratedVisitor {
-            type Value = StreamTasksRequest;
-
-            fn expecting(&self, formatter: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
-                formatter.write_str("struct anduril.taskmanager.v1.StreamTasksRequest")
-            }
-
-            fn visit_map<V>(self, mut map_: V) -> std::result::Result<StreamTasksRequest, V::Error>
-                where
-                    V: serde::de::MapAccess<'de>,
-            {
-                let mut rate_limit__ = None;
-                let mut views__ = None;
-                let mut heartbeat_period_millis__ = None;
-                let mut exclude_preexisting_tasks__ = None;
-                while let Some(k) = map_.next_key()? {
-                    match k {
-                        GeneratedField::RateLimit => {
-                            if rate_limit__.is_some() {
-                                return Err(serde::de::Error::duplicate_field("rateLimit"));
-                            }
-                            rate_limit__ = map_.next_value()?;
-                        }
-                        GeneratedField::Views => {
-                            if views__.is_some() {
-                                return Err(serde::de::Error::duplicate_field("views"));
-                            }
-                            views__ = Some(map_.next_value::<Vec<TaskView>>()?.into_iter().map(|x| x as i32).collect());
-                        }
-                        GeneratedField::HeartbeatPeriodMillis => {
-                            if heartbeat_period_millis__.is_some() {
-                                return Err(serde::de::Error::duplicate_field("heartbeatPeriodMillis"));
-                            }
-                            heartbeat_period_millis__ = 
-                                Some(map_.next_value::<::pbjson::private::NumberDeserialize<_>>()?.0)
-                            ;
-                        }
-                        GeneratedField::ExcludePreexistingTasks => {
-                            if exclude_preexisting_tasks__.is_some() {
-                                return Err(serde::de::Error::duplicate_field("excludePreexistingTasks"));
-                            }
-                            exclude_preexisting_tasks__ = Some(map_.next_value()?);
-                        }
-                    }
-                }
-                Ok(StreamTasksRequest {
-                    rate_limit: rate_limit__,
-                    views: views__.unwrap_or_default(),
-                    heartbeat_period_millis: heartbeat_period_millis__.unwrap_or_default(),
-                    exclude_preexisting_tasks: exclude_preexisting_tasks__.unwrap_or_default(),
-                })
-            }
-        }
-        deserializer.deserialize_struct("anduril.taskmanager.v1.StreamTasksRequest", FIELDS, GeneratedVisitor)
-    }
-}
-impl serde::Serialize for StreamTasksResponse {
-    #[allow(deprecated)]
-    fn serialize<S>(&self, serializer: S) -> std::result::Result<S::Ok, S::Error>
-    where
-        S: serde::Serializer,
-    {
-        use serde::ser::SerializeStruct;
-        let mut len = 0;
-        if self.task_event.is_some() {
-            len += 1;
-        }
-        if self.heartbeat.is_some() {
-            len += 1;
-        }
-        let mut struct_ser = serializer.serialize_struct("anduril.taskmanager.v1.StreamTasksResponse", len)?;
-        if let Some(v) = self.task_event.as_ref() {
-            struct_ser.serialize_field("taskEvent", v)?;
-        }
-        if let Some(v) = self.heartbeat.as_ref() {
-            struct_ser.serialize_field("heartbeat", v)?;
-        }
-        struct_ser.end()
-    }
-}
-impl<'de> serde::Deserialize<'de> for StreamTasksResponse {
-    #[allow(deprecated)]
-    fn deserialize<D>(deserializer: D) -> std::result::Result<Self, D::Error>
-    where
-        D: serde::Deserializer<'de>,
-    {
-        const FIELDS: &[&str] = &[
-            "task_event",
-            "taskEvent",
-            "heartbeat",
-        ];
-
-        #[allow(clippy::enum_variant_names)]
-        enum GeneratedField {
-            TaskEvent,
-            Heartbeat,
-        }
-        impl<'de> serde::Deserialize<'de> for GeneratedField {
-            fn deserialize<D>(deserializer: D) -> std::result::Result<GeneratedField, D::Error>
-            where
-                D: serde::Deserializer<'de>,
-            {
-                struct GeneratedVisitor;
-
-                impl<'de> serde::de::Visitor<'de> for GeneratedVisitor {
-                    type Value = GeneratedField;
-
-                    fn expecting(&self, formatter: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
-                        write!(formatter, "expected one of: {:?}", &FIELDS)
-                    }
-
-                    #[allow(unused_variables)]
-                    fn visit_str<E>(self, value: &str) -> std::result::Result<GeneratedField, E>
-                    where
-                        E: serde::de::Error,
-                    {
-                        match value {
-                            "taskEvent" | "task_event" => Ok(GeneratedField::TaskEvent),
-                            "heartbeat" => Ok(GeneratedField::Heartbeat),
-                            _ => Err(serde::de::Error::unknown_field(value, FIELDS)),
-                        }
-                    }
-                }
-                deserializer.deserialize_identifier(GeneratedVisitor)
-            }
-        }
-        struct GeneratedVisitor;
-        impl<'de> serde::de::Visitor<'de> for GeneratedVisitor {
-            type Value = StreamTasksResponse;
-
-            fn expecting(&self, formatter: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
-                formatter.write_str("struct anduril.taskmanager.v1.StreamTasksResponse")
-            }
-
-            fn visit_map<V>(self, mut map_: V) -> std::result::Result<StreamTasksResponse, V::Error>
-                where
-                    V: serde::de::MapAccess<'de>,
-            {
-                let mut task_event__ = None;
-                let mut heartbeat__ = None;
-                while let Some(k) = map_.next_key()? {
-                    match k {
-                        GeneratedField::TaskEvent => {
-                            if task_event__.is_some() {
-                                return Err(serde::de::Error::duplicate_field("taskEvent"));
-                            }
-                            task_event__ = map_.next_value()?;
-                        }
-                        GeneratedField::Heartbeat => {
-                            if heartbeat__.is_some() {
-                                return Err(serde::de::Error::duplicate_field("heartbeat"));
-                            }
-                            heartbeat__ = map_.next_value()?;
-                        }
-                    }
-                }
-                Ok(StreamTasksResponse {
-                    task_event: task_event__,
-                    heartbeat: heartbeat__,
-                })
-            }
-        }
-        deserializer.deserialize_struct("anduril.taskmanager.v1.StreamTasksResponse", FIELDS, GeneratedVisitor)
     }
 }
 impl serde::Serialize for System {
@@ -4292,206 +4605,6 @@ impl<'de> serde::Deserialize<'de> for UpdateStatusResponse {
             }
         }
         deserializer.deserialize_struct("anduril.taskmanager.v1.UpdateStatusResponse", FIELDS, GeneratedVisitor)
-    }
-}
-impl serde::Serialize for UpdateTaskRequest {
-    #[allow(deprecated)]
-    fn serialize<S>(&self, serializer: S) -> std::result::Result<S::Ok, S::Error>
-    where
-        S: serde::Serializer,
-    {
-        use serde::ser::SerializeStruct;
-        let mut len = 0;
-        if self.task.is_some() {
-            len += 1;
-        }
-        if self.is_executed_elsewhere {
-            len += 1;
-        }
-        let mut struct_ser = serializer.serialize_struct("anduril.taskmanager.v1.UpdateTaskRequest", len)?;
-        if let Some(v) = self.task.as_ref() {
-            struct_ser.serialize_field("task", v)?;
-        }
-        if self.is_executed_elsewhere {
-            struct_ser.serialize_field("isExecutedElsewhere", &self.is_executed_elsewhere)?;
-        }
-        struct_ser.end()
-    }
-}
-impl<'de> serde::Deserialize<'de> for UpdateTaskRequest {
-    #[allow(deprecated)]
-    fn deserialize<D>(deserializer: D) -> std::result::Result<Self, D::Error>
-    where
-        D: serde::Deserializer<'de>,
-    {
-        const FIELDS: &[&str] = &[
-            "task",
-            "is_executed_elsewhere",
-            "isExecutedElsewhere",
-        ];
-
-        #[allow(clippy::enum_variant_names)]
-        enum GeneratedField {
-            Task,
-            IsExecutedElsewhere,
-        }
-        impl<'de> serde::Deserialize<'de> for GeneratedField {
-            fn deserialize<D>(deserializer: D) -> std::result::Result<GeneratedField, D::Error>
-            where
-                D: serde::Deserializer<'de>,
-            {
-                struct GeneratedVisitor;
-
-                impl<'de> serde::de::Visitor<'de> for GeneratedVisitor {
-                    type Value = GeneratedField;
-
-                    fn expecting(&self, formatter: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
-                        write!(formatter, "expected one of: {:?}", &FIELDS)
-                    }
-
-                    #[allow(unused_variables)]
-                    fn visit_str<E>(self, value: &str) -> std::result::Result<GeneratedField, E>
-                    where
-                        E: serde::de::Error,
-                    {
-                        match value {
-                            "task" => Ok(GeneratedField::Task),
-                            "isExecutedElsewhere" | "is_executed_elsewhere" => Ok(GeneratedField::IsExecutedElsewhere),
-                            _ => Err(serde::de::Error::unknown_field(value, FIELDS)),
-                        }
-                    }
-                }
-                deserializer.deserialize_identifier(GeneratedVisitor)
-            }
-        }
-        struct GeneratedVisitor;
-        impl<'de> serde::de::Visitor<'de> for GeneratedVisitor {
-            type Value = UpdateTaskRequest;
-
-            fn expecting(&self, formatter: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
-                formatter.write_str("struct anduril.taskmanager.v1.UpdateTaskRequest")
-            }
-
-            fn visit_map<V>(self, mut map_: V) -> std::result::Result<UpdateTaskRequest, V::Error>
-                where
-                    V: serde::de::MapAccess<'de>,
-            {
-                let mut task__ = None;
-                let mut is_executed_elsewhere__ = None;
-                while let Some(k) = map_.next_key()? {
-                    match k {
-                        GeneratedField::Task => {
-                            if task__.is_some() {
-                                return Err(serde::de::Error::duplicate_field("task"));
-                            }
-                            task__ = map_.next_value()?;
-                        }
-                        GeneratedField::IsExecutedElsewhere => {
-                            if is_executed_elsewhere__.is_some() {
-                                return Err(serde::de::Error::duplicate_field("isExecutedElsewhere"));
-                            }
-                            is_executed_elsewhere__ = Some(map_.next_value()?);
-                        }
-                    }
-                }
-                Ok(UpdateTaskRequest {
-                    task: task__,
-                    is_executed_elsewhere: is_executed_elsewhere__.unwrap_or_default(),
-                })
-            }
-        }
-        deserializer.deserialize_struct("anduril.taskmanager.v1.UpdateTaskRequest", FIELDS, GeneratedVisitor)
-    }
-}
-impl serde::Serialize for UpdateTaskResponse {
-    #[allow(deprecated)]
-    fn serialize<S>(&self, serializer: S) -> std::result::Result<S::Ok, S::Error>
-    where
-        S: serde::Serializer,
-    {
-        use serde::ser::SerializeStruct;
-        let mut len = 0;
-        if self.task.is_some() {
-            len += 1;
-        }
-        let mut struct_ser = serializer.serialize_struct("anduril.taskmanager.v1.UpdateTaskResponse", len)?;
-        if let Some(v) = self.task.as_ref() {
-            struct_ser.serialize_field("task", v)?;
-        }
-        struct_ser.end()
-    }
-}
-impl<'de> serde::Deserialize<'de> for UpdateTaskResponse {
-    #[allow(deprecated)]
-    fn deserialize<D>(deserializer: D) -> std::result::Result<Self, D::Error>
-    where
-        D: serde::Deserializer<'de>,
-    {
-        const FIELDS: &[&str] = &[
-            "task",
-        ];
-
-        #[allow(clippy::enum_variant_names)]
-        enum GeneratedField {
-            Task,
-        }
-        impl<'de> serde::Deserialize<'de> for GeneratedField {
-            fn deserialize<D>(deserializer: D) -> std::result::Result<GeneratedField, D::Error>
-            where
-                D: serde::Deserializer<'de>,
-            {
-                struct GeneratedVisitor;
-
-                impl<'de> serde::de::Visitor<'de> for GeneratedVisitor {
-                    type Value = GeneratedField;
-
-                    fn expecting(&self, formatter: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
-                        write!(formatter, "expected one of: {:?}", &FIELDS)
-                    }
-
-                    #[allow(unused_variables)]
-                    fn visit_str<E>(self, value: &str) -> std::result::Result<GeneratedField, E>
-                    where
-                        E: serde::de::Error,
-                    {
-                        match value {
-                            "task" => Ok(GeneratedField::Task),
-                            _ => Err(serde::de::Error::unknown_field(value, FIELDS)),
-                        }
-                    }
-                }
-                deserializer.deserialize_identifier(GeneratedVisitor)
-            }
-        }
-        struct GeneratedVisitor;
-        impl<'de> serde::de::Visitor<'de> for GeneratedVisitor {
-            type Value = UpdateTaskResponse;
-
-            fn expecting(&self, formatter: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
-                formatter.write_str("struct anduril.taskmanager.v1.UpdateTaskResponse")
-            }
-
-            fn visit_map<V>(self, mut map_: V) -> std::result::Result<UpdateTaskResponse, V::Error>
-                where
-                    V: serde::de::MapAccess<'de>,
-            {
-                let mut task__ = None;
-                while let Some(k) = map_.next_key()? {
-                    match k {
-                        GeneratedField::Task => {
-                            if task__.is_some() {
-                                return Err(serde::de::Error::duplicate_field("task"));
-                            }
-                            task__ = map_.next_value()?;
-                        }
-                    }
-                }
-                Ok(UpdateTaskResponse {
-                    task: task__,
-                })
-            }
-        }
-        deserializer.deserialize_struct("anduril.taskmanager.v1.UpdateTaskResponse", FIELDS, GeneratedVisitor)
     }
 }
 impl serde::Serialize for User {

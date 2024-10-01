@@ -1,12 +1,5 @@
 // @generated
 pub mod anduril {
-    pub mod blobs {
-        // @@protoc_insertion_point(attribute:anduril.blobs.v1)
-        pub mod v1 {
-            include!("anduril.blobs.v1.rs");
-            // @@protoc_insertion_point(anduril.blobs.v1)
-        }
-    }
     pub mod entitymanager {
         // @@protoc_insertion_point(attribute:anduril.entitymanager.v1)
         pub mod v1 {

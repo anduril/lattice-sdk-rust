@@ -141,11 +141,11 @@ pub mod task_manager_api_client {
                 );
             self.inner.unary(req, path, codec).await
         }
-        pub async fn update_task(
+        pub async fn query_tasks(
             &mut self,
-            request: impl tonic::IntoRequest<super::UpdateTaskRequest>,
+            request: impl tonic::IntoRequest<super::QueryTasksRequest>,
         ) -> std::result::Result<
-            tonic::Response<super::UpdateTaskResponse>,
+            tonic::Response<super::QueryTasksResponse>,
             tonic::Status,
         > {
             self.inner
@@ -159,14 +159,14 @@ pub mod task_manager_api_client {
                 })?;
             let codec = tonic::codec::ProstCodec::default();
             let path = http::uri::PathAndQuery::from_static(
-                "/anduril.taskmanager.v1.TaskManagerAPI/UpdateTask",
+                "/anduril.taskmanager.v1.TaskManagerAPI/QueryTasks",
             );
             let mut req = request.into_request();
             req.extensions_mut()
                 .insert(
                     GrpcMethod::new(
                         "anduril.taskmanager.v1.TaskManagerAPI",
-                        "UpdateTask",
+                        "QueryTasks",
                     ),
                 );
             self.inner.unary(req, path, codec).await
@@ -200,36 +200,6 @@ pub mod task_manager_api_client {
                     ),
                 );
             self.inner.unary(req, path, codec).await
-        }
-        pub async fn stream_tasks(
-            &mut self,
-            request: impl tonic::IntoRequest<super::StreamTasksRequest>,
-        ) -> std::result::Result<
-            tonic::Response<tonic::codec::Streaming<super::StreamTasksResponse>>,
-            tonic::Status,
-        > {
-            self.inner
-                .ready()
-                .await
-                .map_err(|e| {
-                    tonic::Status::new(
-                        tonic::Code::Unknown,
-                        format!("Service was not ready: {}", e.into()),
-                    )
-                })?;
-            let codec = tonic::codec::ProstCodec::default();
-            let path = http::uri::PathAndQuery::from_static(
-                "/anduril.taskmanager.v1.TaskManagerAPI/StreamTasks",
-            );
-            let mut req = request.into_request();
-            req.extensions_mut()
-                .insert(
-                    GrpcMethod::new(
-                        "anduril.taskmanager.v1.TaskManagerAPI",
-                        "StreamTasks",
-                    ),
-                );
-            self.inner.server_streaming(req, path, codec).await
         }
         pub async fn listen_as_agent(
             &mut self,
@@ -281,11 +251,11 @@ pub mod task_manager_api_server {
             &self,
             request: tonic::Request<super::GetTaskRequest>,
         ) -> std::result::Result<tonic::Response<super::GetTaskResponse>, tonic::Status>;
-        async fn update_task(
+        async fn query_tasks(
             &self,
-            request: tonic::Request<super::UpdateTaskRequest>,
+            request: tonic::Request<super::QueryTasksRequest>,
         ) -> std::result::Result<
-            tonic::Response<super::UpdateTaskResponse>,
+            tonic::Response<super::QueryTasksResponse>,
             tonic::Status,
         >;
         async fn update_status(
@@ -293,19 +263,6 @@ pub mod task_manager_api_server {
             request: tonic::Request<super::UpdateStatusRequest>,
         ) -> std::result::Result<
             tonic::Response<super::UpdateStatusResponse>,
-            tonic::Status,
-        >;
-        /// Server streaming response type for the StreamTasks method.
-        type StreamTasksStream: tonic::codegen::tokio_stream::Stream<
-                Item = std::result::Result<super::StreamTasksResponse, tonic::Status>,
-            >
-            + Send
-            + 'static;
-        async fn stream_tasks(
-            &self,
-            request: tonic::Request<super::StreamTasksRequest>,
-        ) -> std::result::Result<
-            tonic::Response<Self::StreamTasksStream>,
             tonic::Status,
         >;
         /// Server streaming response type for the ListenAsAgent method.
@@ -493,25 +450,25 @@ pub mod task_manager_api_server {
                     };
                     Box::pin(fut)
                 }
-                "/anduril.taskmanager.v1.TaskManagerAPI/UpdateTask" => {
+                "/anduril.taskmanager.v1.TaskManagerAPI/QueryTasks" => {
                     #[allow(non_camel_case_types)]
-                    struct UpdateTaskSvc<T: TaskManagerApi>(pub Arc<T>);
+                    struct QueryTasksSvc<T: TaskManagerApi>(pub Arc<T>);
                     impl<
                         T: TaskManagerApi,
-                    > tonic::server::UnaryService<super::UpdateTaskRequest>
-                    for UpdateTaskSvc<T> {
-                        type Response = super::UpdateTaskResponse;
+                    > tonic::server::UnaryService<super::QueryTasksRequest>
+                    for QueryTasksSvc<T> {
+                        type Response = super::QueryTasksResponse;
                         type Future = BoxFuture<
                             tonic::Response<Self::Response>,
                             tonic::Status,
                         >;
                         fn call(
                             &mut self,
-                            request: tonic::Request<super::UpdateTaskRequest>,
+                            request: tonic::Request<super::QueryTasksRequest>,
                         ) -> Self::Future {
                             let inner = Arc::clone(&self.0);
                             let fut = async move {
-                                <T as TaskManagerApi>::update_task(&inner, request).await
+                                <T as TaskManagerApi>::query_tasks(&inner, request).await
                             };
                             Box::pin(fut)
                         }
@@ -523,7 +480,7 @@ pub mod task_manager_api_server {
                     let inner = self.inner.clone();
                     let fut = async move {
                         let inner = inner.0;
-                        let method = UpdateTaskSvc(inner);
+                        let method = QueryTasksSvc(inner);
                         let codec = tonic::codec::ProstCodec::default();
                         let mut grpc = tonic::server::Grpc::new(codec)
                             .apply_compression_config(
@@ -581,53 +538,6 @@ pub mod task_manager_api_server {
                                 max_encoding_message_size,
                             );
                         let res = grpc.unary(method, req).await;
-                        Ok(res)
-                    };
-                    Box::pin(fut)
-                }
-                "/anduril.taskmanager.v1.TaskManagerAPI/StreamTasks" => {
-                    #[allow(non_camel_case_types)]
-                    struct StreamTasksSvc<T: TaskManagerApi>(pub Arc<T>);
-                    impl<
-                        T: TaskManagerApi,
-                    > tonic::server::ServerStreamingService<super::StreamTasksRequest>
-                    for StreamTasksSvc<T> {
-                        type Response = super::StreamTasksResponse;
-                        type ResponseStream = T::StreamTasksStream;
-                        type Future = BoxFuture<
-                            tonic::Response<Self::ResponseStream>,
-                            tonic::Status,
-                        >;
-                        fn call(
-                            &mut self,
-                            request: tonic::Request<super::StreamTasksRequest>,
-                        ) -> Self::Future {
-                            let inner = Arc::clone(&self.0);
-                            let fut = async move {
-                                <T as TaskManagerApi>::stream_tasks(&inner, request).await
-                            };
-                            Box::pin(fut)
-                        }
-                    }
-                    let accept_compression_encodings = self.accept_compression_encodings;
-                    let send_compression_encodings = self.send_compression_encodings;
-                    let max_decoding_message_size = self.max_decoding_message_size;
-                    let max_encoding_message_size = self.max_encoding_message_size;
-                    let inner = self.inner.clone();
-                    let fut = async move {
-                        let inner = inner.0;
-                        let method = StreamTasksSvc(inner);
-                        let codec = tonic::codec::ProstCodec::default();
-                        let mut grpc = tonic::server::Grpc::new(codec)
-                            .apply_compression_config(
-                                accept_compression_encodings,
-                                send_compression_encodings,
-                            )
-                            .apply_max_message_size_config(
-                                max_decoding_message_size,
-                                max_encoding_message_size,
-                            );
-                        let res = grpc.server_streaming(method, req).await;
                         Ok(res)
                     };
                     Box::pin(fut)
