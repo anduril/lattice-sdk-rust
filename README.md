@@ -48,7 +48,7 @@ use tonic::Request;
 use tonic::Status;
 
 async fn get_entity() -> Result<GetEntityResponse, Status>{
-    let token = "eyJhbGciOiJIUzI1NiJ9.eyJleHAiOjE3MjMyMjYwMjEsImlzcyI6ImFuZHVyaWwiLCJqdGkiOiI5Y2U2MTJlNi0xMGFiLTQ2ZGItYTU3My05ZDkxOGQyNzE4NjEiLCJuYmYiOjE3MjI2MjEyMTEsInN1YiI6InVzZXIvNzU1YjcwYmItOTcxYS00ZWYwLTgwOTYtMzY3NDQ4MjE3ZmJkIn0.DlsBKfA4kvUQGvmRYVE5ZymeB6M5qAsWXXXgCM_QAzo";
+    let token = "BEARER TOKEN";
     let bearer_token = format!("Bearer {}", token);
     let header_value: MetadataValue<_> = bearer_token.parse().map_err(|_| Status::internal("Invalid Bearer Token"))?;
     let tls_config = ClientTlsConfig::new().with_native_roots();
