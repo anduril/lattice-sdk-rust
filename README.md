@@ -1,6 +1,6 @@
 # Anduril SDK Rust
 
-The official [Anduril](https://www.anduril.com/) client library.
+The official [Anduril](https://www.anduril.com/) Lattice SDK for Rust.
 
 ## Requirements
 
@@ -22,7 +22,7 @@ Modify `Cargo.toml`
 
 ```
 [dependencies]
-anduril-sdk = { git = "https://github.com/anduril/anduril-rust" }
+anduril-sdk = { git = "https://github.com/anduril/lattice-sdk-rust" }
 ```
 
 ```
@@ -52,7 +52,7 @@ async fn get_entity() -> Result<GetEntityResponse, Status>{
     let bearer_token = format!("Bearer {}", token);
     let header_value: MetadataValue<_> = bearer_token.parse().map_err(|_| Status::internal("Invalid Bearer Token"))?;
     let tls_config = ClientTlsConfig::new().with_native_roots();
-    let http_endpoint = format!("https://desert-guardian.anduril.com");
+    let http_endpoint = format!("https://$YOUR_ENVIRONMENT_URL");
     let registration_channel = Channel::from_shared(http_endpoint)
       .map_err(|e| Status::invalid_argument(format!("Invalid HTTP endpoint: {}", e)))?
       .tls_config(tls_config)
@@ -87,7 +87,7 @@ async fn main() -> Result<(), Box<dyn std::error::Error>> {
 
 ## Support
 
-For support with this library please [file an issue](https://github.com/anduril/anduril-rust/issues/new) or reach out to your Anduril representative. 
+For support with this library please [file an issue](https://github.com/anduril/lattice-sdk-rust/issues/new) or reach out to your Anduril representative. 
 
 
 
