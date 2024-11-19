@@ -1,7 +1,12 @@
 [package]
-name = "lattice-sdk-rust"
+name = "anduril-lattice-sdk"
+description = "Anduril's Lattice SDK for interacting with Lattice APIs"
+homepage = "anduril.com"
+documentation = "docs.anduril.com"
+repository = "https://github.com/anduril/lattice-sdk-rust"
 version = "1.0.0"
 edition = "2021"
+license-file = "LICENSE.TXT"
 
 [dependencies]
 bytes = "1.7.1"
