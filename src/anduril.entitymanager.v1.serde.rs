@@ -1,268 +1,4 @@
 // @generated
-impl serde::Serialize for AcmDetailType {
-    #[allow(deprecated)]
-    fn serialize<S>(&self, serializer: S) -> std::result::Result<S::Ok, S::Error>
-    where
-        S: serde::Serializer,
-    {
-        let variant = match self {
-            Self::Invalid => "ACM_DETAIL_TYPE_INVALID",
-            Self::AirCorridor => "ACM_DETAIL_TYPE_AIR_CORRIDOR",
-            Self::MinimumRiskRoute => "ACM_DETAIL_TYPE_MINIMUM_RISK_ROUTE",
-            Self::TemporaryMinimumRiskRoute => "ACM_DETAIL_TYPE_TEMPORARY_MINIMUM_RISK_ROUTE",
-            Self::TransitRoute => "ACM_DETAIL_TYPE_TRANSIT_ROUTE",
-            Self::LowLevelTransitRoute => "ACM_DETAIL_TYPE_LOW_LEVEL_TRANSIT_ROUTE",
-            Self::SpecialCorridor => "ACM_DETAIL_TYPE_SPECIAL_CORRIDOR",
-            Self::StandardUseArmyAircraftFlightRoute => "ACM_DETAIL_TYPE_STANDARD_USE_ARMY_AIRCRAFT_FLIGHT_ROUTE",
-            Self::RestrictedOperationsZone => "ACM_DETAIL_TYPE_RESTRICTED_OPERATIONS_ZONE",
-            Self::AirToAirRefuelingArea => "ACM_DETAIL_TYPE_AIR_TO_AIR_REFUELING_AREA",
-            Self::AirborneCommandAndControlArea => "ACM_DETAIL_TYPE_AIRBORNE_COMMAND_AND_CONTROL_AREA",
-            Self::AirborneEarlyWarningArea => "ACM_DETAIL_TYPE_AIRBORNE_EARLY_WARNING_AREA",
-            Self::CloseAirSupportArea => "ACM_DETAIL_TYPE_CLOSE_AIR_SUPPORT_AREA",
-            Self::CombatAirPatrol => "ACM_DETAIL_TYPE_COMBAT_AIR_PATROL",
-            Self::DropZone => "ACM_DETAIL_TYPE_DROP_ZONE",
-            Self::ElectronicCombat => "ACM_DETAIL_TYPE_ELECTRONIC_COMBAT",
-            Self::LandingZone => "ACM_DETAIL_TYPE_LANDING_ZONE",
-            Self::PickupZone => "ACM_DETAIL_TYPE_PICKUP_ZONE",
-            Self::ReconnaissanceArea => "ACM_DETAIL_TYPE_RECONNAISSANCE_AREA",
-            Self::SpecialOperationsForceArea => "ACM_DETAIL_TYPE_SPECIAL_OPERATIONS_FORCE_AREA",
-            Self::SurfaceToSurfaceMissileSystem => "ACM_DETAIL_TYPE_SURFACE_TO_SURFACE_MISSILE_SYSTEM",
-            Self::SurfaceToSurfaceMunitions => "ACM_DETAIL_TYPE_SURFACE_TO_SURFACE_MUNITIONS",
-            Self::UnmannedAircraftArea => "ACM_DETAIL_TYPE_UNMANNED_AIRCRAFT_AREA",
-            Self::CoordinatingAltitude => "ACM_DETAIL_TYPE_COORDINATING_ALTITUDE",
-            Self::CoordinationLevel => "ACM_DETAIL_TYPE_COORDINATION_LEVEL",
-            Self::HighDensityAirspaceControlZone => "ACM_DETAIL_TYPE_HIGH_DENSITY_AIRSPACE_CONTROL_ZONE",
-            Self::NoFlyArea => "ACM_DETAIL_TYPE_NO_FLY_AREA",
-            Self::TransitCorridor => "ACM_DETAIL_TYPE_TRANSIT_CORRIDOR",
-            Self::ReturnToForce => "ACM_DETAIL_TYPE_RETURN_TO_FORCE",
-        };
-        serializer.serialize_str(variant)
-    }
-}
-impl<'de> serde::Deserialize<'de> for AcmDetailType {
-    #[allow(deprecated)]
-    fn deserialize<D>(deserializer: D) -> std::result::Result<Self, D::Error>
-    where
-        D: serde::Deserializer<'de>,
-    {
-        const FIELDS: &[&str] = &[
-            "ACM_DETAIL_TYPE_INVALID",
-            "ACM_DETAIL_TYPE_AIR_CORRIDOR",
-            "ACM_DETAIL_TYPE_MINIMUM_RISK_ROUTE",
-            "ACM_DETAIL_TYPE_TEMPORARY_MINIMUM_RISK_ROUTE",
-            "ACM_DETAIL_TYPE_TRANSIT_ROUTE",
-            "ACM_DETAIL_TYPE_LOW_LEVEL_TRANSIT_ROUTE",
-            "ACM_DETAIL_TYPE_SPECIAL_CORRIDOR",
-            "ACM_DETAIL_TYPE_STANDARD_USE_ARMY_AIRCRAFT_FLIGHT_ROUTE",
-            "ACM_DETAIL_TYPE_RESTRICTED_OPERATIONS_ZONE",
-            "ACM_DETAIL_TYPE_AIR_TO_AIR_REFUELING_AREA",
-            "ACM_DETAIL_TYPE_AIRBORNE_COMMAND_AND_CONTROL_AREA",
-            "ACM_DETAIL_TYPE_AIRBORNE_EARLY_WARNING_AREA",
-            "ACM_DETAIL_TYPE_CLOSE_AIR_SUPPORT_AREA",
-            "ACM_DETAIL_TYPE_COMBAT_AIR_PATROL",
-            "ACM_DETAIL_TYPE_DROP_ZONE",
-            "ACM_DETAIL_TYPE_ELECTRONIC_COMBAT",
-            "ACM_DETAIL_TYPE_LANDING_ZONE",
-            "ACM_DETAIL_TYPE_PICKUP_ZONE",
-            "ACM_DETAIL_TYPE_RECONNAISSANCE_AREA",
-            "ACM_DETAIL_TYPE_SPECIAL_OPERATIONS_FORCE_AREA",
-            "ACM_DETAIL_TYPE_SURFACE_TO_SURFACE_MISSILE_SYSTEM",
-            "ACM_DETAIL_TYPE_SURFACE_TO_SURFACE_MUNITIONS",
-            "ACM_DETAIL_TYPE_UNMANNED_AIRCRAFT_AREA",
-            "ACM_DETAIL_TYPE_COORDINATING_ALTITUDE",
-            "ACM_DETAIL_TYPE_COORDINATION_LEVEL",
-            "ACM_DETAIL_TYPE_HIGH_DENSITY_AIRSPACE_CONTROL_ZONE",
-            "ACM_DETAIL_TYPE_NO_FLY_AREA",
-            "ACM_DETAIL_TYPE_TRANSIT_CORRIDOR",
-            "ACM_DETAIL_TYPE_RETURN_TO_FORCE",
-        ];
-
-        struct GeneratedVisitor;
-
-        impl<'de> serde::de::Visitor<'de> for GeneratedVisitor {
-            type Value = AcmDetailType;
-
-            fn expecting(&self, formatter: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
-                write!(formatter, "expected one of: {:?}", &FIELDS)
-            }
-
-            fn visit_i64<E>(self, v: i64) -> std::result::Result<Self::Value, E>
-            where
-                E: serde::de::Error,
-            {
-                i32::try_from(v)
-                    .ok()
-                    .and_then(|x| x.try_into().ok())
-                    .ok_or_else(|| {
-                        serde::de::Error::invalid_value(serde::de::Unexpected::Signed(v), &self)
-                    })
-            }
-
-            fn visit_u64<E>(self, v: u64) -> std::result::Result<Self::Value, E>
-            where
-                E: serde::de::Error,
-            {
-                i32::try_from(v)
-                    .ok()
-                    .and_then(|x| x.try_into().ok())
-                    .ok_or_else(|| {
-                        serde::de::Error::invalid_value(serde::de::Unexpected::Unsigned(v), &self)
-                    })
-            }
-
-            fn visit_str<E>(self, value: &str) -> std::result::Result<Self::Value, E>
-            where
-                E: serde::de::Error,
-            {
-                match value {
-                    "ACM_DETAIL_TYPE_INVALID" => Ok(AcmDetailType::Invalid),
-                    "ACM_DETAIL_TYPE_AIR_CORRIDOR" => Ok(AcmDetailType::AirCorridor),
-                    "ACM_DETAIL_TYPE_MINIMUM_RISK_ROUTE" => Ok(AcmDetailType::MinimumRiskRoute),
-                    "ACM_DETAIL_TYPE_TEMPORARY_MINIMUM_RISK_ROUTE" => Ok(AcmDetailType::TemporaryMinimumRiskRoute),
-                    "ACM_DETAIL_TYPE_TRANSIT_ROUTE" => Ok(AcmDetailType::TransitRoute),
-                    "ACM_DETAIL_TYPE_LOW_LEVEL_TRANSIT_ROUTE" => Ok(AcmDetailType::LowLevelTransitRoute),
-                    "ACM_DETAIL_TYPE_SPECIAL_CORRIDOR" => Ok(AcmDetailType::SpecialCorridor),
-                    "ACM_DETAIL_TYPE_STANDARD_USE_ARMY_AIRCRAFT_FLIGHT_ROUTE" => Ok(AcmDetailType::StandardUseArmyAircraftFlightRoute),
-                    "ACM_DETAIL_TYPE_RESTRICTED_OPERATIONS_ZONE" => Ok(AcmDetailType::RestrictedOperationsZone),
-                    "ACM_DETAIL_TYPE_AIR_TO_AIR_REFUELING_AREA" => Ok(AcmDetailType::AirToAirRefuelingArea),
-                    "ACM_DETAIL_TYPE_AIRBORNE_COMMAND_AND_CONTROL_AREA" => Ok(AcmDetailType::AirborneCommandAndControlArea),
-                    "ACM_DETAIL_TYPE_AIRBORNE_EARLY_WARNING_AREA" => Ok(AcmDetailType::AirborneEarlyWarningArea),
-                    "ACM_DETAIL_TYPE_CLOSE_AIR_SUPPORT_AREA" => Ok(AcmDetailType::CloseAirSupportArea),
-                    "ACM_DETAIL_TYPE_COMBAT_AIR_PATROL" => Ok(AcmDetailType::CombatAirPatrol),
-                    "ACM_DETAIL_TYPE_DROP_ZONE" => Ok(AcmDetailType::DropZone),
-                    "ACM_DETAIL_TYPE_ELECTRONIC_COMBAT" => Ok(AcmDetailType::ElectronicCombat),
-                    "ACM_DETAIL_TYPE_LANDING_ZONE" => Ok(AcmDetailType::LandingZone),
-                    "ACM_DETAIL_TYPE_PICKUP_ZONE" => Ok(AcmDetailType::PickupZone),
-                    "ACM_DETAIL_TYPE_RECONNAISSANCE_AREA" => Ok(AcmDetailType::ReconnaissanceArea),
-                    "ACM_DETAIL_TYPE_SPECIAL_OPERATIONS_FORCE_AREA" => Ok(AcmDetailType::SpecialOperationsForceArea),
-                    "ACM_DETAIL_TYPE_SURFACE_TO_SURFACE_MISSILE_SYSTEM" => Ok(AcmDetailType::SurfaceToSurfaceMissileSystem),
-                    "ACM_DETAIL_TYPE_SURFACE_TO_SURFACE_MUNITIONS" => Ok(AcmDetailType::SurfaceToSurfaceMunitions),
-                    "ACM_DETAIL_TYPE_UNMANNED_AIRCRAFT_AREA" => Ok(AcmDetailType::UnmannedAircraftArea),
-                    "ACM_DETAIL_TYPE_COORDINATING_ALTITUDE" => Ok(AcmDetailType::CoordinatingAltitude),
-                    "ACM_DETAIL_TYPE_COORDINATION_LEVEL" => Ok(AcmDetailType::CoordinationLevel),
-                    "ACM_DETAIL_TYPE_HIGH_DENSITY_AIRSPACE_CONTROL_ZONE" => Ok(AcmDetailType::HighDensityAirspaceControlZone),
-                    "ACM_DETAIL_TYPE_NO_FLY_AREA" => Ok(AcmDetailType::NoFlyArea),
-                    "ACM_DETAIL_TYPE_TRANSIT_CORRIDOR" => Ok(AcmDetailType::TransitCorridor),
-                    "ACM_DETAIL_TYPE_RETURN_TO_FORCE" => Ok(AcmDetailType::ReturnToForce),
-                    _ => Err(serde::de::Error::unknown_variant(value, FIELDS)),
-                }
-            }
-        }
-        deserializer.deserialize_any(GeneratedVisitor)
-    }
-}
-impl serde::Serialize for AcmDetails {
-    #[allow(deprecated)]
-    fn serialize<S>(&self, serializer: S) -> std::result::Result<S::Ok, S::Error>
-    where
-        S: serde::Serializer,
-    {
-        use serde::ser::SerializeStruct;
-        let mut len = 0;
-        if self.acm_type != 0 {
-            len += 1;
-        }
-        if !self.acm_description.is_empty() {
-            len += 1;
-        }
-        let mut struct_ser = serializer.serialize_struct("anduril.entitymanager.v1.ACMDetails", len)?;
-        if self.acm_type != 0 {
-            let v = AcmDetailType::try_from(self.acm_type)
-                .map_err(|_| serde::ser::Error::custom(format!("Invalid variant {}", self.acm_type)))?;
-            struct_ser.serialize_field("acmType", &v)?;
-        }
-        if !self.acm_description.is_empty() {
-            struct_ser.serialize_field("acmDescription", &self.acm_description)?;
-        }
-        struct_ser.end()
-    }
-}
-impl<'de> serde::Deserialize<'de> for AcmDetails {
-    #[allow(deprecated)]
-    fn deserialize<D>(deserializer: D) -> std::result::Result<Self, D::Error>
-    where
-        D: serde::Deserializer<'de>,
-    {
-        const FIELDS: &[&str] = &[
-            "acm_type",
-            "acmType",
-            "acm_description",
-            "acmDescription",
-        ];
-
-        #[allow(clippy::enum_variant_names)]
-        enum GeneratedField {
-            AcmType,
-            AcmDescription,
-        }
-        impl<'de> serde::Deserialize<'de> for GeneratedField {
-            fn deserialize<D>(deserializer: D) -> std::result::Result<GeneratedField, D::Error>
-            where
-                D: serde::Deserializer<'de>,
-            {
-                struct GeneratedVisitor;
-
-                impl<'de> serde::de::Visitor<'de> for GeneratedVisitor {
-                    type Value = GeneratedField;
-
-                    fn expecting(&self, formatter: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
-                        write!(formatter, "expected one of: {:?}", &FIELDS)
-                    }
-
-                    #[allow(unused_variables)]
-                    fn visit_str<E>(self, value: &str) -> std::result::Result<GeneratedField, E>
-                    where
-                        E: serde::de::Error,
-                    {
-                        match value {
-                            "acmType" | "acm_type" => Ok(GeneratedField::AcmType),
-                            "acmDescription" | "acm_description" => Ok(GeneratedField::AcmDescription),
-                            _ => Err(serde::de::Error::unknown_field(value, FIELDS)),
-                        }
-                    }
-                }
-                deserializer.deserialize_identifier(GeneratedVisitor)
-            }
-        }
-        struct GeneratedVisitor;
-        impl<'de> serde::de::Visitor<'de> for GeneratedVisitor {
-            type Value = AcmDetails;
-
-            fn expecting(&self, formatter: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
-                formatter.write_str("struct anduril.entitymanager.v1.ACMDetails")
-            }
-
-            fn visit_map<V>(self, mut map_: V) -> std::result::Result<AcmDetails, V::Error>
-                where
-                    V: serde::de::MapAccess<'de>,
-            {
-                let mut acm_type__ = None;
-                let mut acm_description__ = None;
-                while let Some(k) = map_.next_key()? {
-                    match k {
-                        GeneratedField::AcmType => {
-                            if acm_type__.is_some() {
-                                return Err(serde::de::Error::duplicate_field("acmType"));
-                            }
-                            acm_type__ = Some(map_.next_value::<AcmDetailType>()? as i32);
-                        }
-                        GeneratedField::AcmDescription => {
-                            if acm_description__.is_some() {
-                                return Err(serde::de::Error::duplicate_field("acmDescription"));
-                            }
-                            acm_description__ = Some(map_.next_value()?);
-                        }
-                    }
-                }
-                Ok(AcmDetails {
-                    acm_type: acm_type__.unwrap_or_default(),
-                    acm_description: acm_description__.unwrap_or_default(),
-                })
-            }
-        }
-        deserializer.deserialize_struct("anduril.entitymanager.v1.ACMDetails", FIELDS, GeneratedVisitor)
-    }
-}
 impl serde::Serialize for Alert {
     #[allow(deprecated)]
     fn serialize<S>(&self, serializer: S) -> std::result::Result<S::Ok, S::Error>
@@ -864,9 +600,6 @@ impl serde::Serialize for AlternateId {
     {
         use serde::ser::SerializeStruct;
         let mut len = 0;
-        if !self.source.is_empty() {
-            len += 1;
-        }
         if !self.id.is_empty() {
             len += 1;
         }
@@ -874,9 +607,6 @@ impl serde::Serialize for AlternateId {
             len += 1;
         }
         let mut struct_ser = serializer.serialize_struct("anduril.entitymanager.v1.AlternateId", len)?;
-        if !self.source.is_empty() {
-            struct_ser.serialize_field("source", &self.source)?;
-        }
         if !self.id.is_empty() {
             struct_ser.serialize_field("id", &self.id)?;
         }
@@ -895,14 +625,12 @@ impl<'de> serde::Deserialize<'de> for AlternateId {
         D: serde::Deserializer<'de>,
     {
         const FIELDS: &[&str] = &[
-            "source",
             "id",
             "type",
         ];
 
         #[allow(clippy::enum_variant_names)]
         enum GeneratedField {
-            Source,
             Id,
             Type,
         }
@@ -926,7 +654,6 @@ impl<'de> serde::Deserialize<'de> for AlternateId {
                         E: serde::de::Error,
                     {
                         match value {
-                            "source" => Ok(GeneratedField::Source),
                             "id" => Ok(GeneratedField::Id),
                             "type" => Ok(GeneratedField::Type),
                             _ => Err(serde::de::Error::unknown_field(value, FIELDS)),
@@ -948,17 +675,10 @@ impl<'de> serde::Deserialize<'de> for AlternateId {
                 where
                     V: serde::de::MapAccess<'de>,
             {
-                let mut source__ = None;
                 let mut id__ = None;
                 let mut r#type__ = None;
                 while let Some(k) = map_.next_key()? {
                     match k {
-                        GeneratedField::Source => {
-                            if source__.is_some() {
-                                return Err(serde::de::Error::duplicate_field("source"));
-                            }
-                            source__ = Some(map_.next_value()?);
-                        }
                         GeneratedField::Id => {
                             if id__.is_some() {
                                 return Err(serde::de::Error::duplicate_field("id"));
@@ -974,111 +694,12 @@ impl<'de> serde::Deserialize<'de> for AlternateId {
                     }
                 }
                 Ok(AlternateId {
-                    source: source__.unwrap_or_default(),
                     id: id__.unwrap_or_default(),
                     r#type: r#type__.unwrap_or_default(),
                 })
             }
         }
         deserializer.deserialize_struct("anduril.entitymanager.v1.AlternateId", FIELDS, GeneratedVisitor)
-    }
-}
-impl serde::Serialize for AmmoRestrictionType {
-    #[allow(deprecated)]
-    fn serialize<S>(&self, serializer: S) -> std::result::Result<S::Ok, S::Error>
-    where
-        S: serde::Serializer,
-    {
-        let variant = match self {
-            Self::Invalid => "AMMO_RESTRICTION_TYPE_INVALID",
-            Self::HighExplosiveMunitions => "AMMO_RESTRICTION_TYPE_HIGH_EXPLOSIVE_MUNITIONS",
-            Self::ImprovedConventionalMunitions => "AMMO_RESTRICTION_TYPE_IMPROVED_CONVENTIONAL_MUNITIONS",
-            Self::ChemicalMunitions => "AMMO_RESTRICTION_TYPE_CHEMICAL_MUNITIONS",
-            Self::NuclearMunitions => "AMMO_RESTRICTION_TYPE_NUCLEAR_MUNITIONS",
-            Self::WhitePhosphorusMunitions => "AMMO_RESTRICTION_TYPE_WHITE_PHOSPHORUS_MUNITIONS",
-            Self::IlluminationMunitions => "AMMO_RESTRICTION_TYPE_ILLUMINATION_MUNITIONS",
-            Self::TerminalHomingMunitions => "AMMO_RESTRICTION_TYPE_TERMINAL_HOMING_MUNITIONS",
-            Self::FascamMunitions => "AMMO_RESTRICTION_TYPE_FASCAM_MUNITIONS",
-            Self::SmokeMunitions => "AMMO_RESTRICTION_TYPE_SMOKE_MUNITIONS",
-            Self::AllMunitions => "AMMO_RESTRICTION_TYPE_ALL_MUNITIONS",
-        };
-        serializer.serialize_str(variant)
-    }
-}
-impl<'de> serde::Deserialize<'de> for AmmoRestrictionType {
-    #[allow(deprecated)]
-    fn deserialize<D>(deserializer: D) -> std::result::Result<Self, D::Error>
-    where
-        D: serde::Deserializer<'de>,
-    {
-        const FIELDS: &[&str] = &[
-            "AMMO_RESTRICTION_TYPE_INVALID",
-            "AMMO_RESTRICTION_TYPE_HIGH_EXPLOSIVE_MUNITIONS",
-            "AMMO_RESTRICTION_TYPE_IMPROVED_CONVENTIONAL_MUNITIONS",
-            "AMMO_RESTRICTION_TYPE_CHEMICAL_MUNITIONS",
-            "AMMO_RESTRICTION_TYPE_NUCLEAR_MUNITIONS",
-            "AMMO_RESTRICTION_TYPE_WHITE_PHOSPHORUS_MUNITIONS",
-            "AMMO_RESTRICTION_TYPE_ILLUMINATION_MUNITIONS",
-            "AMMO_RESTRICTION_TYPE_TERMINAL_HOMING_MUNITIONS",
-            "AMMO_RESTRICTION_TYPE_FASCAM_MUNITIONS",
-            "AMMO_RESTRICTION_TYPE_SMOKE_MUNITIONS",
-            "AMMO_RESTRICTION_TYPE_ALL_MUNITIONS",
-        ];
-
-        struct GeneratedVisitor;
-
-        impl<'de> serde::de::Visitor<'de> for GeneratedVisitor {
-            type Value = AmmoRestrictionType;
-
-            fn expecting(&self, formatter: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
-                write!(formatter, "expected one of: {:?}", &FIELDS)
-            }
-
-            fn visit_i64<E>(self, v: i64) -> std::result::Result<Self::Value, E>
-            where
-                E: serde::de::Error,
-            {
-                i32::try_from(v)
-                    .ok()
-                    .and_then(|x| x.try_into().ok())
-                    .ok_or_else(|| {
-                        serde::de::Error::invalid_value(serde::de::Unexpected::Signed(v), &self)
-                    })
-            }
-
-            fn visit_u64<E>(self, v: u64) -> std::result::Result<Self::Value, E>
-            where
-                E: serde::de::Error,
-            {
-                i32::try_from(v)
-                    .ok()
-                    .and_then(|x| x.try_into().ok())
-                    .ok_or_else(|| {
-                        serde::de::Error::invalid_value(serde::de::Unexpected::Unsigned(v), &self)
-                    })
-            }
-
-            fn visit_str<E>(self, value: &str) -> std::result::Result<Self::Value, E>
-            where
-                E: serde::de::Error,
-            {
-                match value {
-                    "AMMO_RESTRICTION_TYPE_INVALID" => Ok(AmmoRestrictionType::Invalid),
-                    "AMMO_RESTRICTION_TYPE_HIGH_EXPLOSIVE_MUNITIONS" => Ok(AmmoRestrictionType::HighExplosiveMunitions),
-                    "AMMO_RESTRICTION_TYPE_IMPROVED_CONVENTIONAL_MUNITIONS" => Ok(AmmoRestrictionType::ImprovedConventionalMunitions),
-                    "AMMO_RESTRICTION_TYPE_CHEMICAL_MUNITIONS" => Ok(AmmoRestrictionType::ChemicalMunitions),
-                    "AMMO_RESTRICTION_TYPE_NUCLEAR_MUNITIONS" => Ok(AmmoRestrictionType::NuclearMunitions),
-                    "AMMO_RESTRICTION_TYPE_WHITE_PHOSPHORUS_MUNITIONS" => Ok(AmmoRestrictionType::WhitePhosphorusMunitions),
-                    "AMMO_RESTRICTION_TYPE_ILLUMINATION_MUNITIONS" => Ok(AmmoRestrictionType::IlluminationMunitions),
-                    "AMMO_RESTRICTION_TYPE_TERMINAL_HOMING_MUNITIONS" => Ok(AmmoRestrictionType::TerminalHomingMunitions),
-                    "AMMO_RESTRICTION_TYPE_FASCAM_MUNITIONS" => Ok(AmmoRestrictionType::FascamMunitions),
-                    "AMMO_RESTRICTION_TYPE_SMOKE_MUNITIONS" => Ok(AmmoRestrictionType::SmokeMunitions),
-                    "AMMO_RESTRICTION_TYPE_ALL_MUNITIONS" => Ok(AmmoRestrictionType::AllMunitions),
-                    _ => Err(serde::de::Error::unknown_variant(value, FIELDS)),
-                }
-            }
-        }
-        deserializer.deserialize_any(GeneratedVisitor)
     }
 }
 impl serde::Serialize for AndOperation {
@@ -2388,77 +2009,6 @@ impl<'de> serde::Deserialize<'de> for ComponentMessage {
         deserializer.deserialize_struct("anduril.entitymanager.v1.ComponentMessage", FIELDS, GeneratedVisitor)
     }
 }
-impl serde::Serialize for Configure {
-    #[allow(deprecated)]
-    fn serialize<S>(&self, serializer: S) -> std::result::Result<S::Ok, S::Error>
-    where
-        S: serde::Serializer,
-    {
-        use serde::ser::SerializeStruct;
-        let len = 0;
-        let struct_ser = serializer.serialize_struct("anduril.entitymanager.v1.Configure", len)?;
-        struct_ser.end()
-    }
-}
-impl<'de> serde::Deserialize<'de> for Configure {
-    #[allow(deprecated)]
-    fn deserialize<D>(deserializer: D) -> std::result::Result<Self, D::Error>
-    where
-        D: serde::Deserializer<'de>,
-    {
-        const FIELDS: &[&str] = &[
-        ];
-
-        #[allow(clippy::enum_variant_names)]
-        enum GeneratedField {
-        }
-        impl<'de> serde::Deserialize<'de> for GeneratedField {
-            fn deserialize<D>(deserializer: D) -> std::result::Result<GeneratedField, D::Error>
-            where
-                D: serde::Deserializer<'de>,
-            {
-                struct GeneratedVisitor;
-
-                impl<'de> serde::de::Visitor<'de> for GeneratedVisitor {
-                    type Value = GeneratedField;
-
-                    fn expecting(&self, formatter: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
-                        write!(formatter, "expected one of: {:?}", &FIELDS)
-                    }
-
-                    #[allow(unused_variables)]
-                    fn visit_str<E>(self, value: &str) -> std::result::Result<GeneratedField, E>
-                    where
-                        E: serde::de::Error,
-                    {
-                            Err(serde::de::Error::unknown_field(value, FIELDS))
-                    }
-                }
-                deserializer.deserialize_identifier(GeneratedVisitor)
-            }
-        }
-        struct GeneratedVisitor;
-        impl<'de> serde::de::Visitor<'de> for GeneratedVisitor {
-            type Value = Configure;
-
-            fn expecting(&self, formatter: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
-                formatter.write_str("struct anduril.entitymanager.v1.Configure")
-            }
-
-            fn visit_map<V>(self, mut map_: V) -> std::result::Result<Configure, V::Error>
-                where
-                    V: serde::de::MapAccess<'de>,
-            {
-                while map_.next_key::<GeneratedField>()?.is_some() {
-                    let _ = map_.next_value::<serde::de::IgnoredAny>()?;
-                }
-                Ok(Configure {
-                })
-            }
-        }
-        deserializer.deserialize_struct("anduril.entitymanager.v1.Configure", FIELDS, GeneratedVisitor)
-    }
-}
 impl serde::Serialize for ConnectionStatus {
     #[allow(deprecated)]
     fn serialize<S>(&self, serializer: S) -> std::result::Result<S::Ok, S::Error>
@@ -2625,185 +2175,6 @@ impl<'de> serde::Deserialize<'de> for ContactDetails {
         deserializer.deserialize_struct("anduril.entitymanager.v1.ContactDetails", FIELDS, GeneratedVisitor)
     }
 }
-impl serde::Serialize for ControlAreaDetails {
-    #[allow(deprecated)]
-    fn serialize<S>(&self, serializer: S) -> std::result::Result<S::Ok, S::Error>
-    where
-        S: serde::Serializer,
-    {
-        use serde::ser::SerializeStruct;
-        let mut len = 0;
-        if self.r#type != 0 {
-            len += 1;
-        }
-        let mut struct_ser = serializer.serialize_struct("anduril.entitymanager.v1.ControlAreaDetails", len)?;
-        if self.r#type != 0 {
-            let v = ControlAreaType::try_from(self.r#type)
-                .map_err(|_| serde::ser::Error::custom(format!("Invalid variant {}", self.r#type)))?;
-            struct_ser.serialize_field("type", &v)?;
-        }
-        struct_ser.end()
-    }
-}
-impl<'de> serde::Deserialize<'de> for ControlAreaDetails {
-    #[allow(deprecated)]
-    fn deserialize<D>(deserializer: D) -> std::result::Result<Self, D::Error>
-    where
-        D: serde::Deserializer<'de>,
-    {
-        const FIELDS: &[&str] = &[
-            "type",
-        ];
-
-        #[allow(clippy::enum_variant_names)]
-        enum GeneratedField {
-            Type,
-        }
-        impl<'de> serde::Deserialize<'de> for GeneratedField {
-            fn deserialize<D>(deserializer: D) -> std::result::Result<GeneratedField, D::Error>
-            where
-                D: serde::Deserializer<'de>,
-            {
-                struct GeneratedVisitor;
-
-                impl<'de> serde::de::Visitor<'de> for GeneratedVisitor {
-                    type Value = GeneratedField;
-
-                    fn expecting(&self, formatter: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
-                        write!(formatter, "expected one of: {:?}", &FIELDS)
-                    }
-
-                    #[allow(unused_variables)]
-                    fn visit_str<E>(self, value: &str) -> std::result::Result<GeneratedField, E>
-                    where
-                        E: serde::de::Error,
-                    {
-                        match value {
-                            "type" => Ok(GeneratedField::Type),
-                            _ => Err(serde::de::Error::unknown_field(value, FIELDS)),
-                        }
-                    }
-                }
-                deserializer.deserialize_identifier(GeneratedVisitor)
-            }
-        }
-        struct GeneratedVisitor;
-        impl<'de> serde::de::Visitor<'de> for GeneratedVisitor {
-            type Value = ControlAreaDetails;
-
-            fn expecting(&self, formatter: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
-                formatter.write_str("struct anduril.entitymanager.v1.ControlAreaDetails")
-            }
-
-            fn visit_map<V>(self, mut map_: V) -> std::result::Result<ControlAreaDetails, V::Error>
-                where
-                    V: serde::de::MapAccess<'de>,
-            {
-                let mut r#type__ = None;
-                while let Some(k) = map_.next_key()? {
-                    match k {
-                        GeneratedField::Type => {
-                            if r#type__.is_some() {
-                                return Err(serde::de::Error::duplicate_field("type"));
-                            }
-                            r#type__ = Some(map_.next_value::<ControlAreaType>()? as i32);
-                        }
-                    }
-                }
-                Ok(ControlAreaDetails {
-                    r#type: r#type__.unwrap_or_default(),
-                })
-            }
-        }
-        deserializer.deserialize_struct("anduril.entitymanager.v1.ControlAreaDetails", FIELDS, GeneratedVisitor)
-    }
-}
-impl serde::Serialize for ControlAreaType {
-    #[allow(deprecated)]
-    fn serialize<S>(&self, serializer: S) -> std::result::Result<S::Ok, S::Error>
-    where
-        S: serde::Serializer,
-    {
-        let variant = match self {
-            Self::Invalid => "CONTROL_AREA_TYPE_INVALID",
-            Self::KeepInZone => "CONTROL_AREA_TYPE_KEEP_IN_ZONE",
-            Self::KeepOutZone => "CONTROL_AREA_TYPE_KEEP_OUT_ZONE",
-            Self::DitchZone => "CONTROL_AREA_TYPE_DITCH_ZONE",
-            Self::ObservationExclusion => "CONTROL_AREA_TYPE_OBSERVATION_EXCLUSION",
-            Self::ObservationInclusion => "CONTROL_AREA_TYPE_OBSERVATION_INCLUSION",
-            Self::ObservationPriority => "CONTROL_AREA_TYPE_OBSERVATION_PRIORITY",
-        };
-        serializer.serialize_str(variant)
-    }
-}
-impl<'de> serde::Deserialize<'de> for ControlAreaType {
-    #[allow(deprecated)]
-    fn deserialize<D>(deserializer: D) -> std::result::Result<Self, D::Error>
-    where
-        D: serde::Deserializer<'de>,
-    {
-        const FIELDS: &[&str] = &[
-            "CONTROL_AREA_TYPE_INVALID",
-            "CONTROL_AREA_TYPE_KEEP_IN_ZONE",
-            "CONTROL_AREA_TYPE_KEEP_OUT_ZONE",
-            "CONTROL_AREA_TYPE_DITCH_ZONE",
-            "CONTROL_AREA_TYPE_OBSERVATION_EXCLUSION",
-            "CONTROL_AREA_TYPE_OBSERVATION_INCLUSION",
-            "CONTROL_AREA_TYPE_OBSERVATION_PRIORITY",
-        ];
-
-        struct GeneratedVisitor;
-
-        impl<'de> serde::de::Visitor<'de> for GeneratedVisitor {
-            type Value = ControlAreaType;
-
-            fn expecting(&self, formatter: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
-                write!(formatter, "expected one of: {:?}", &FIELDS)
-            }
-
-            fn visit_i64<E>(self, v: i64) -> std::result::Result<Self::Value, E>
-            where
-                E: serde::de::Error,
-            {
-                i32::try_from(v)
-                    .ok()
-                    .and_then(|x| x.try_into().ok())
-                    .ok_or_else(|| {
-                        serde::de::Error::invalid_value(serde::de::Unexpected::Signed(v), &self)
-                    })
-            }
-
-            fn visit_u64<E>(self, v: u64) -> std::result::Result<Self::Value, E>
-            where
-                E: serde::de::Error,
-            {
-                i32::try_from(v)
-                    .ok()
-                    .and_then(|x| x.try_into().ok())
-                    .ok_or_else(|| {
-                        serde::de::Error::invalid_value(serde::de::Unexpected::Unsigned(v), &self)
-                    })
-            }
-
-            fn visit_str<E>(self, value: &str) -> std::result::Result<Self::Value, E>
-            where
-                E: serde::de::Error,
-            {
-                match value {
-                    "CONTROL_AREA_TYPE_INVALID" => Ok(ControlAreaType::Invalid),
-                    "CONTROL_AREA_TYPE_KEEP_IN_ZONE" => Ok(ControlAreaType::KeepInZone),
-                    "CONTROL_AREA_TYPE_KEEP_OUT_ZONE" => Ok(ControlAreaType::KeepOutZone),
-                    "CONTROL_AREA_TYPE_DITCH_ZONE" => Ok(ControlAreaType::DitchZone),
-                    "CONTROL_AREA_TYPE_OBSERVATION_EXCLUSION" => Ok(ControlAreaType::ObservationExclusion),
-                    "CONTROL_AREA_TYPE_OBSERVATION_INCLUSION" => Ok(ControlAreaType::ObservationInclusion),
-                    "CONTROL_AREA_TYPE_OBSERVATION_PRIORITY" => Ok(ControlAreaType::ObservationPriority),
-                    _ => Err(serde::de::Error::unknown_variant(value, FIELDS)),
-                }
-            }
-        }
-        deserializer.deserialize_any(GeneratedVisitor)
-    }
-}
 impl serde::Serialize for Correlated {
     #[allow(deprecated)]
     fn serialize<S>(&self, serializer: S) -> std::result::Result<S::Ok, S::Error>
@@ -2948,6 +2319,336 @@ impl<'de> serde::Deserialize<'de> for Correlated {
             }
         }
         deserializer.deserialize_struct("anduril.entitymanager.v1.Correlated", FIELDS, GeneratedVisitor)
+    }
+}
+impl serde::Serialize for Correlation {
+    #[allow(deprecated)]
+    fn serialize<S>(&self, serializer: S) -> std::result::Result<S::Ok, S::Error>
+    where
+        S: serde::Serializer,
+    {
+        use serde::ser::SerializeStruct;
+        let mut len = 0;
+        if self.decorrelation.is_some() {
+            len += 1;
+        }
+        if self.correlation.is_some() {
+            len += 1;
+        }
+        let mut struct_ser = serializer.serialize_struct("anduril.entitymanager.v1.Correlation", len)?;
+        if let Some(v) = self.decorrelation.as_ref() {
+            struct_ser.serialize_field("decorrelation", v)?;
+        }
+        if let Some(v) = self.correlation.as_ref() {
+            match v {
+                correlation::Correlation::Primary(v) => {
+                    struct_ser.serialize_field("primary", v)?;
+                }
+                correlation::Correlation::Secondary(v) => {
+                    struct_ser.serialize_field("secondary", v)?;
+                }
+            }
+        }
+        struct_ser.end()
+    }
+}
+impl<'de> serde::Deserialize<'de> for Correlation {
+    #[allow(deprecated)]
+    fn deserialize<D>(deserializer: D) -> std::result::Result<Self, D::Error>
+    where
+        D: serde::Deserializer<'de>,
+    {
+        const FIELDS: &[&str] = &[
+            "decorrelation",
+            "primary",
+            "secondary",
+        ];
+
+        #[allow(clippy::enum_variant_names)]
+        enum GeneratedField {
+            Decorrelation,
+            Primary,
+            Secondary,
+        }
+        impl<'de> serde::Deserialize<'de> for GeneratedField {
+            fn deserialize<D>(deserializer: D) -> std::result::Result<GeneratedField, D::Error>
+            where
+                D: serde::Deserializer<'de>,
+            {
+                struct GeneratedVisitor;
+
+                impl<'de> serde::de::Visitor<'de> for GeneratedVisitor {
+                    type Value = GeneratedField;
+
+                    fn expecting(&self, formatter: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
+                        write!(formatter, "expected one of: {:?}", &FIELDS)
+                    }
+
+                    #[allow(unused_variables)]
+                    fn visit_str<E>(self, value: &str) -> std::result::Result<GeneratedField, E>
+                    where
+                        E: serde::de::Error,
+                    {
+                        match value {
+                            "decorrelation" => Ok(GeneratedField::Decorrelation),
+                            "primary" => Ok(GeneratedField::Primary),
+                            "secondary" => Ok(GeneratedField::Secondary),
+                            _ => Err(serde::de::Error::unknown_field(value, FIELDS)),
+                        }
+                    }
+                }
+                deserializer.deserialize_identifier(GeneratedVisitor)
+            }
+        }
+        struct GeneratedVisitor;
+        impl<'de> serde::de::Visitor<'de> for GeneratedVisitor {
+            type Value = Correlation;
+
+            fn expecting(&self, formatter: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
+                formatter.write_str("struct anduril.entitymanager.v1.Correlation")
+            }
+
+            fn visit_map<V>(self, mut map_: V) -> std::result::Result<Correlation, V::Error>
+                where
+                    V: serde::de::MapAccess<'de>,
+            {
+                let mut decorrelation__ = None;
+                let mut correlation__ = None;
+                while let Some(k) = map_.next_key()? {
+                    match k {
+                        GeneratedField::Decorrelation => {
+                            if decorrelation__.is_some() {
+                                return Err(serde::de::Error::duplicate_field("decorrelation"));
+                            }
+                            decorrelation__ = map_.next_value()?;
+                        }
+                        GeneratedField::Primary => {
+                            if correlation__.is_some() {
+                                return Err(serde::de::Error::duplicate_field("primary"));
+                            }
+                            correlation__ = map_.next_value::<::std::option::Option<_>>()?.map(correlation::Correlation::Primary)
+;
+                        }
+                        GeneratedField::Secondary => {
+                            if correlation__.is_some() {
+                                return Err(serde::de::Error::duplicate_field("secondary"));
+                            }
+                            correlation__ = map_.next_value::<::std::option::Option<_>>()?.map(correlation::Correlation::Secondary)
+;
+                        }
+                    }
+                }
+                Ok(Correlation {
+                    decorrelation: decorrelation__,
+                    correlation: correlation__,
+                })
+            }
+        }
+        deserializer.deserialize_struct("anduril.entitymanager.v1.Correlation", FIELDS, GeneratedVisitor)
+    }
+}
+impl serde::Serialize for CorrelationMetadata {
+    #[allow(deprecated)]
+    fn serialize<S>(&self, serializer: S) -> std::result::Result<S::Ok, S::Error>
+    where
+        S: serde::Serializer,
+    {
+        use serde::ser::SerializeStruct;
+        let mut len = 0;
+        if self.provenance.is_some() {
+            len += 1;
+        }
+        if self.replication_mode != 0 {
+            len += 1;
+        }
+        if self.r#type != 0 {
+            len += 1;
+        }
+        let mut struct_ser = serializer.serialize_struct("anduril.entitymanager.v1.CorrelationMetadata", len)?;
+        if let Some(v) = self.provenance.as_ref() {
+            struct_ser.serialize_field("provenance", v)?;
+        }
+        if self.replication_mode != 0 {
+            let v = CorrelationReplicationMode::try_from(self.replication_mode)
+                .map_err(|_| serde::ser::Error::custom(format!("Invalid variant {}", self.replication_mode)))?;
+            struct_ser.serialize_field("replicationMode", &v)?;
+        }
+        if self.r#type != 0 {
+            let v = CorrelationType::try_from(self.r#type)
+                .map_err(|_| serde::ser::Error::custom(format!("Invalid variant {}", self.r#type)))?;
+            struct_ser.serialize_field("type", &v)?;
+        }
+        struct_ser.end()
+    }
+}
+impl<'de> serde::Deserialize<'de> for CorrelationMetadata {
+    #[allow(deprecated)]
+    fn deserialize<D>(deserializer: D) -> std::result::Result<Self, D::Error>
+    where
+        D: serde::Deserializer<'de>,
+    {
+        const FIELDS: &[&str] = &[
+            "provenance",
+            "replication_mode",
+            "replicationMode",
+            "type",
+        ];
+
+        #[allow(clippy::enum_variant_names)]
+        enum GeneratedField {
+            Provenance,
+            ReplicationMode,
+            Type,
+        }
+        impl<'de> serde::Deserialize<'de> for GeneratedField {
+            fn deserialize<D>(deserializer: D) -> std::result::Result<GeneratedField, D::Error>
+            where
+                D: serde::Deserializer<'de>,
+            {
+                struct GeneratedVisitor;
+
+                impl<'de> serde::de::Visitor<'de> for GeneratedVisitor {
+                    type Value = GeneratedField;
+
+                    fn expecting(&self, formatter: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
+                        write!(formatter, "expected one of: {:?}", &FIELDS)
+                    }
+
+                    #[allow(unused_variables)]
+                    fn visit_str<E>(self, value: &str) -> std::result::Result<GeneratedField, E>
+                    where
+                        E: serde::de::Error,
+                    {
+                        match value {
+                            "provenance" => Ok(GeneratedField::Provenance),
+                            "replicationMode" | "replication_mode" => Ok(GeneratedField::ReplicationMode),
+                            "type" => Ok(GeneratedField::Type),
+                            _ => Err(serde::de::Error::unknown_field(value, FIELDS)),
+                        }
+                    }
+                }
+                deserializer.deserialize_identifier(GeneratedVisitor)
+            }
+        }
+        struct GeneratedVisitor;
+        impl<'de> serde::de::Visitor<'de> for GeneratedVisitor {
+            type Value = CorrelationMetadata;
+
+            fn expecting(&self, formatter: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
+                formatter.write_str("struct anduril.entitymanager.v1.CorrelationMetadata")
+            }
+
+            fn visit_map<V>(self, mut map_: V) -> std::result::Result<CorrelationMetadata, V::Error>
+                where
+                    V: serde::de::MapAccess<'de>,
+            {
+                let mut provenance__ = None;
+                let mut replication_mode__ = None;
+                let mut r#type__ = None;
+                while let Some(k) = map_.next_key()? {
+                    match k {
+                        GeneratedField::Provenance => {
+                            if provenance__.is_some() {
+                                return Err(serde::de::Error::duplicate_field("provenance"));
+                            }
+                            provenance__ = map_.next_value()?;
+                        }
+                        GeneratedField::ReplicationMode => {
+                            if replication_mode__.is_some() {
+                                return Err(serde::de::Error::duplicate_field("replicationMode"));
+                            }
+                            replication_mode__ = Some(map_.next_value::<CorrelationReplicationMode>()? as i32);
+                        }
+                        GeneratedField::Type => {
+                            if r#type__.is_some() {
+                                return Err(serde::de::Error::duplicate_field("type"));
+                            }
+                            r#type__ = Some(map_.next_value::<CorrelationType>()? as i32);
+                        }
+                    }
+                }
+                Ok(CorrelationMetadata {
+                    provenance: provenance__,
+                    replication_mode: replication_mode__.unwrap_or_default(),
+                    r#type: r#type__.unwrap_or_default(),
+                })
+            }
+        }
+        deserializer.deserialize_struct("anduril.entitymanager.v1.CorrelationMetadata", FIELDS, GeneratedVisitor)
+    }
+}
+impl serde::Serialize for CorrelationReplicationMode {
+    #[allow(deprecated)]
+    fn serialize<S>(&self, serializer: S) -> std::result::Result<S::Ok, S::Error>
+    where
+        S: serde::Serializer,
+    {
+        let variant = match self {
+            Self::Invalid => "CORRELATION_REPLICATION_MODE_INVALID",
+            Self::Local => "CORRELATION_REPLICATION_MODE_LOCAL",
+            Self::Global => "CORRELATION_REPLICATION_MODE_GLOBAL",
+        };
+        serializer.serialize_str(variant)
+    }
+}
+impl<'de> serde::Deserialize<'de> for CorrelationReplicationMode {
+    #[allow(deprecated)]
+    fn deserialize<D>(deserializer: D) -> std::result::Result<Self, D::Error>
+    where
+        D: serde::Deserializer<'de>,
+    {
+        const FIELDS: &[&str] = &[
+            "CORRELATION_REPLICATION_MODE_INVALID",
+            "CORRELATION_REPLICATION_MODE_LOCAL",
+            "CORRELATION_REPLICATION_MODE_GLOBAL",
+        ];
+
+        struct GeneratedVisitor;
+
+        impl<'de> serde::de::Visitor<'de> for GeneratedVisitor {
+            type Value = CorrelationReplicationMode;
+
+            fn expecting(&self, formatter: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
+                write!(formatter, "expected one of: {:?}", &FIELDS)
+            }
+
+            fn visit_i64<E>(self, v: i64) -> std::result::Result<Self::Value, E>
+            where
+                E: serde::de::Error,
+            {
+                i32::try_from(v)
+                    .ok()
+                    .and_then(|x| x.try_into().ok())
+                    .ok_or_else(|| {
+                        serde::de::Error::invalid_value(serde::de::Unexpected::Signed(v), &self)
+                    })
+            }
+
+            fn visit_u64<E>(self, v: u64) -> std::result::Result<Self::Value, E>
+            where
+                E: serde::de::Error,
+            {
+                i32::try_from(v)
+                    .ok()
+                    .and_then(|x| x.try_into().ok())
+                    .ok_or_else(|| {
+                        serde::de::Error::invalid_value(serde::de::Unexpected::Unsigned(v), &self)
+                    })
+            }
+
+            fn visit_str<E>(self, value: &str) -> std::result::Result<Self::Value, E>
+            where
+                E: serde::de::Error,
+            {
+                match value {
+                    "CORRELATION_REPLICATION_MODE_INVALID" => Ok(CorrelationReplicationMode::Invalid),
+                    "CORRELATION_REPLICATION_MODE_LOCAL" => Ok(CorrelationReplicationMode::Local),
+                    "CORRELATION_REPLICATION_MODE_GLOBAL" => Ok(CorrelationReplicationMode::Global),
+                    _ => Err(serde::de::Error::unknown_variant(value, FIELDS)),
+                }
+            }
+        }
+        deserializer.deserialize_any(GeneratedVisitor)
     }
 }
 impl serde::Serialize for CorrelationScore {
@@ -3201,6 +2902,80 @@ impl<'de> serde::Deserialize<'de> for CorrelationStatus {
         deserializer.deserialize_any(GeneratedVisitor)
     }
 }
+impl serde::Serialize for CorrelationType {
+    #[allow(deprecated)]
+    fn serialize<S>(&self, serializer: S) -> std::result::Result<S::Ok, S::Error>
+    where
+        S: serde::Serializer,
+    {
+        let variant = match self {
+            Self::Invalid => "CORRELATION_TYPE_INVALID",
+            Self::Manual => "CORRELATION_TYPE_MANUAL",
+            Self::Automated => "CORRELATION_TYPE_AUTOMATED",
+        };
+        serializer.serialize_str(variant)
+    }
+}
+impl<'de> serde::Deserialize<'de> for CorrelationType {
+    #[allow(deprecated)]
+    fn deserialize<D>(deserializer: D) -> std::result::Result<Self, D::Error>
+    where
+        D: serde::Deserializer<'de>,
+    {
+        const FIELDS: &[&str] = &[
+            "CORRELATION_TYPE_INVALID",
+            "CORRELATION_TYPE_MANUAL",
+            "CORRELATION_TYPE_AUTOMATED",
+        ];
+
+        struct GeneratedVisitor;
+
+        impl<'de> serde::de::Visitor<'de> for GeneratedVisitor {
+            type Value = CorrelationType;
+
+            fn expecting(&self, formatter: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
+                write!(formatter, "expected one of: {:?}", &FIELDS)
+            }
+
+            fn visit_i64<E>(self, v: i64) -> std::result::Result<Self::Value, E>
+            where
+                E: serde::de::Error,
+            {
+                i32::try_from(v)
+                    .ok()
+                    .and_then(|x| x.try_into().ok())
+                    .ok_or_else(|| {
+                        serde::de::Error::invalid_value(serde::de::Unexpected::Signed(v), &self)
+                    })
+            }
+
+            fn visit_u64<E>(self, v: u64) -> std::result::Result<Self::Value, E>
+            where
+                E: serde::de::Error,
+            {
+                i32::try_from(v)
+                    .ok()
+                    .and_then(|x| x.try_into().ok())
+                    .ok_or_else(|| {
+                        serde::de::Error::invalid_value(serde::de::Unexpected::Unsigned(v), &self)
+                    })
+            }
+
+            fn visit_str<E>(self, value: &str) -> std::result::Result<Self::Value, E>
+            where
+                E: serde::de::Error,
+            {
+                match value {
+                    "CORRELATION_TYPE_INVALID" => Ok(CorrelationType::Invalid),
+                    "CORRELATION_TYPE_MANUAL" => Ok(CorrelationType::Manual),
+                    "CORRELATION_TYPE_AUTOMATED" => Ok(CorrelationType::Automated),
+                    _ => Err(serde::de::Error::unknown_variant(value, FIELDS)),
+                }
+            }
+        }
+        deserializer.deserialize_any(GeneratedVisitor)
+    }
+}
 impl serde::Serialize for CronWindow {
     #[allow(deprecated)]
     fn serialize<S>(&self, serializer: S) -> std::result::Result<S::Ok, S::Error>
@@ -3442,81 +3217,313 @@ impl<'de> serde::Deserialize<'de> for DodConditionCode {
         deserializer.deserialize_any(GeneratedVisitor)
     }
 }
-impl serde::Serialize for Deletable {
+impl serde::Serialize for DecorrelatedAll {
     #[allow(deprecated)]
     fn serialize<S>(&self, serializer: S) -> std::result::Result<S::Ok, S::Error>
     where
         S: serde::Serializer,
     {
-        let variant = match self {
-            Self::Invalid => "DELETABLE_INVALID",
-            Self::True => "DELETABLE_TRUE",
-            Self::False => "DELETABLE_FALSE",
-            Self::Request => "DELETABLE_REQUEST",
-        };
-        serializer.serialize_str(variant)
+        use serde::ser::SerializeStruct;
+        let mut len = 0;
+        if self.metadata.is_some() {
+            len += 1;
+        }
+        let mut struct_ser = serializer.serialize_struct("anduril.entitymanager.v1.DecorrelatedAll", len)?;
+        if let Some(v) = self.metadata.as_ref() {
+            struct_ser.serialize_field("metadata", v)?;
+        }
+        struct_ser.end()
     }
 }
-impl<'de> serde::Deserialize<'de> for Deletable {
+impl<'de> serde::Deserialize<'de> for DecorrelatedAll {
     #[allow(deprecated)]
     fn deserialize<D>(deserializer: D) -> std::result::Result<Self, D::Error>
     where
         D: serde::Deserializer<'de>,
     {
         const FIELDS: &[&str] = &[
-            "DELETABLE_INVALID",
-            "DELETABLE_TRUE",
-            "DELETABLE_FALSE",
-            "DELETABLE_REQUEST",
+            "metadata",
         ];
 
-        struct GeneratedVisitor;
-
-        impl<'de> serde::de::Visitor<'de> for GeneratedVisitor {
-            type Value = Deletable;
-
-            fn expecting(&self, formatter: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
-                write!(formatter, "expected one of: {:?}", &FIELDS)
-            }
-
-            fn visit_i64<E>(self, v: i64) -> std::result::Result<Self::Value, E>
+        #[allow(clippy::enum_variant_names)]
+        enum GeneratedField {
+            Metadata,
+        }
+        impl<'de> serde::Deserialize<'de> for GeneratedField {
+            fn deserialize<D>(deserializer: D) -> std::result::Result<GeneratedField, D::Error>
             where
-                E: serde::de::Error,
+                D: serde::Deserializer<'de>,
             {
-                i32::try_from(v)
-                    .ok()
-                    .and_then(|x| x.try_into().ok())
-                    .ok_or_else(|| {
-                        serde::de::Error::invalid_value(serde::de::Unexpected::Signed(v), &self)
-                    })
-            }
+                struct GeneratedVisitor;
 
-            fn visit_u64<E>(self, v: u64) -> std::result::Result<Self::Value, E>
-            where
-                E: serde::de::Error,
-            {
-                i32::try_from(v)
-                    .ok()
-                    .and_then(|x| x.try_into().ok())
-                    .ok_or_else(|| {
-                        serde::de::Error::invalid_value(serde::de::Unexpected::Unsigned(v), &self)
-                    })
-            }
+                impl<'de> serde::de::Visitor<'de> for GeneratedVisitor {
+                    type Value = GeneratedField;
 
-            fn visit_str<E>(self, value: &str) -> std::result::Result<Self::Value, E>
-            where
-                E: serde::de::Error,
-            {
-                match value {
-                    "DELETABLE_INVALID" => Ok(Deletable::Invalid),
-                    "DELETABLE_TRUE" => Ok(Deletable::True),
-                    "DELETABLE_FALSE" => Ok(Deletable::False),
-                    "DELETABLE_REQUEST" => Ok(Deletable::Request),
-                    _ => Err(serde::de::Error::unknown_variant(value, FIELDS)),
+                    fn expecting(&self, formatter: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
+                        write!(formatter, "expected one of: {:?}", &FIELDS)
+                    }
+
+                    #[allow(unused_variables)]
+                    fn visit_str<E>(self, value: &str) -> std::result::Result<GeneratedField, E>
+                    where
+                        E: serde::de::Error,
+                    {
+                        match value {
+                            "metadata" => Ok(GeneratedField::Metadata),
+                            _ => Err(serde::de::Error::unknown_field(value, FIELDS)),
+                        }
+                    }
                 }
+                deserializer.deserialize_identifier(GeneratedVisitor)
             }
         }
-        deserializer.deserialize_any(GeneratedVisitor)
+        struct GeneratedVisitor;
+        impl<'de> serde::de::Visitor<'de> for GeneratedVisitor {
+            type Value = DecorrelatedAll;
+
+            fn expecting(&self, formatter: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
+                formatter.write_str("struct anduril.entitymanager.v1.DecorrelatedAll")
+            }
+
+            fn visit_map<V>(self, mut map_: V) -> std::result::Result<DecorrelatedAll, V::Error>
+                where
+                    V: serde::de::MapAccess<'de>,
+            {
+                let mut metadata__ = None;
+                while let Some(k) = map_.next_key()? {
+                    match k {
+                        GeneratedField::Metadata => {
+                            if metadata__.is_some() {
+                                return Err(serde::de::Error::duplicate_field("metadata"));
+                            }
+                            metadata__ = map_.next_value()?;
+                        }
+                    }
+                }
+                Ok(DecorrelatedAll {
+                    metadata: metadata__,
+                })
+            }
+        }
+        deserializer.deserialize_struct("anduril.entitymanager.v1.DecorrelatedAll", FIELDS, GeneratedVisitor)
+    }
+}
+impl serde::Serialize for DecorrelatedSingle {
+    #[allow(deprecated)]
+    fn serialize<S>(&self, serializer: S) -> std::result::Result<S::Ok, S::Error>
+    where
+        S: serde::Serializer,
+    {
+        use serde::ser::SerializeStruct;
+        let mut len = 0;
+        if !self.entity_id.is_empty() {
+            len += 1;
+        }
+        if self.metadata.is_some() {
+            len += 1;
+        }
+        let mut struct_ser = serializer.serialize_struct("anduril.entitymanager.v1.DecorrelatedSingle", len)?;
+        if !self.entity_id.is_empty() {
+            struct_ser.serialize_field("entityId", &self.entity_id)?;
+        }
+        if let Some(v) = self.metadata.as_ref() {
+            struct_ser.serialize_field("metadata", v)?;
+        }
+        struct_ser.end()
+    }
+}
+impl<'de> serde::Deserialize<'de> for DecorrelatedSingle {
+    #[allow(deprecated)]
+    fn deserialize<D>(deserializer: D) -> std::result::Result<Self, D::Error>
+    where
+        D: serde::Deserializer<'de>,
+    {
+        const FIELDS: &[&str] = &[
+            "entity_id",
+            "entityId",
+            "metadata",
+        ];
+
+        #[allow(clippy::enum_variant_names)]
+        enum GeneratedField {
+            EntityId,
+            Metadata,
+        }
+        impl<'de> serde::Deserialize<'de> for GeneratedField {
+            fn deserialize<D>(deserializer: D) -> std::result::Result<GeneratedField, D::Error>
+            where
+                D: serde::Deserializer<'de>,
+            {
+                struct GeneratedVisitor;
+
+                impl<'de> serde::de::Visitor<'de> for GeneratedVisitor {
+                    type Value = GeneratedField;
+
+                    fn expecting(&self, formatter: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
+                        write!(formatter, "expected one of: {:?}", &FIELDS)
+                    }
+
+                    #[allow(unused_variables)]
+                    fn visit_str<E>(self, value: &str) -> std::result::Result<GeneratedField, E>
+                    where
+                        E: serde::de::Error,
+                    {
+                        match value {
+                            "entityId" | "entity_id" => Ok(GeneratedField::EntityId),
+                            "metadata" => Ok(GeneratedField::Metadata),
+                            _ => Err(serde::de::Error::unknown_field(value, FIELDS)),
+                        }
+                    }
+                }
+                deserializer.deserialize_identifier(GeneratedVisitor)
+            }
+        }
+        struct GeneratedVisitor;
+        impl<'de> serde::de::Visitor<'de> for GeneratedVisitor {
+            type Value = DecorrelatedSingle;
+
+            fn expecting(&self, formatter: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
+                formatter.write_str("struct anduril.entitymanager.v1.DecorrelatedSingle")
+            }
+
+            fn visit_map<V>(self, mut map_: V) -> std::result::Result<DecorrelatedSingle, V::Error>
+                where
+                    V: serde::de::MapAccess<'de>,
+            {
+                let mut entity_id__ = None;
+                let mut metadata__ = None;
+                while let Some(k) = map_.next_key()? {
+                    match k {
+                        GeneratedField::EntityId => {
+                            if entity_id__.is_some() {
+                                return Err(serde::de::Error::duplicate_field("entityId"));
+                            }
+                            entity_id__ = Some(map_.next_value()?);
+                        }
+                        GeneratedField::Metadata => {
+                            if metadata__.is_some() {
+                                return Err(serde::de::Error::duplicate_field("metadata"));
+                            }
+                            metadata__ = map_.next_value()?;
+                        }
+                    }
+                }
+                Ok(DecorrelatedSingle {
+                    entity_id: entity_id__.unwrap_or_default(),
+                    metadata: metadata__,
+                })
+            }
+        }
+        deserializer.deserialize_struct("anduril.entitymanager.v1.DecorrelatedSingle", FIELDS, GeneratedVisitor)
+    }
+}
+impl serde::Serialize for Decorrelation {
+    #[allow(deprecated)]
+    fn serialize<S>(&self, serializer: S) -> std::result::Result<S::Ok, S::Error>
+    where
+        S: serde::Serializer,
+    {
+        use serde::ser::SerializeStruct;
+        let mut len = 0;
+        if self.all.is_some() {
+            len += 1;
+        }
+        if !self.decorrelated_entities.is_empty() {
+            len += 1;
+        }
+        let mut struct_ser = serializer.serialize_struct("anduril.entitymanager.v1.Decorrelation", len)?;
+        if let Some(v) = self.all.as_ref() {
+            struct_ser.serialize_field("all", v)?;
+        }
+        if !self.decorrelated_entities.is_empty() {
+            struct_ser.serialize_field("decorrelatedEntities", &self.decorrelated_entities)?;
+        }
+        struct_ser.end()
+    }
+}
+impl<'de> serde::Deserialize<'de> for Decorrelation {
+    #[allow(deprecated)]
+    fn deserialize<D>(deserializer: D) -> std::result::Result<Self, D::Error>
+    where
+        D: serde::Deserializer<'de>,
+    {
+        const FIELDS: &[&str] = &[
+            "all",
+            "decorrelated_entities",
+            "decorrelatedEntities",
+        ];
+
+        #[allow(clippy::enum_variant_names)]
+        enum GeneratedField {
+            All,
+            DecorrelatedEntities,
+        }
+        impl<'de> serde::Deserialize<'de> for GeneratedField {
+            fn deserialize<D>(deserializer: D) -> std::result::Result<GeneratedField, D::Error>
+            where
+                D: serde::Deserializer<'de>,
+            {
+                struct GeneratedVisitor;
+
+                impl<'de> serde::de::Visitor<'de> for GeneratedVisitor {
+                    type Value = GeneratedField;
+
+                    fn expecting(&self, formatter: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
+                        write!(formatter, "expected one of: {:?}", &FIELDS)
+                    }
+
+                    #[allow(unused_variables)]
+                    fn visit_str<E>(self, value: &str) -> std::result::Result<GeneratedField, E>
+                    where
+                        E: serde::de::Error,
+                    {
+                        match value {
+                            "all" => Ok(GeneratedField::All),
+                            "decorrelatedEntities" | "decorrelated_entities" => Ok(GeneratedField::DecorrelatedEntities),
+                            _ => Err(serde::de::Error::unknown_field(value, FIELDS)),
+                        }
+                    }
+                }
+                deserializer.deserialize_identifier(GeneratedVisitor)
+            }
+        }
+        struct GeneratedVisitor;
+        impl<'de> serde::de::Visitor<'de> for GeneratedVisitor {
+            type Value = Decorrelation;
+
+            fn expecting(&self, formatter: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
+                formatter.write_str("struct anduril.entitymanager.v1.Decorrelation")
+            }
+
+            fn visit_map<V>(self, mut map_: V) -> std::result::Result<Decorrelation, V::Error>
+                where
+                    V: serde::de::MapAccess<'de>,
+            {
+                let mut all__ = None;
+                let mut decorrelated_entities__ = None;
+                while let Some(k) = map_.next_key()? {
+                    match k {
+                        GeneratedField::All => {
+                            if all__.is_some() {
+                                return Err(serde::de::Error::duplicate_field("all"));
+                            }
+                            all__ = map_.next_value()?;
+                        }
+                        GeneratedField::DecorrelatedEntities => {
+                            if decorrelated_entities__.is_some() {
+                                return Err(serde::de::Error::duplicate_field("decorrelatedEntities"));
+                            }
+                            decorrelated_entities__ = Some(map_.next_value()?);
+                        }
+                    }
+                }
+                Ok(Decorrelation {
+                    all: all__,
+                    decorrelated_entities: decorrelated_entities__.unwrap_or_default(),
+                })
+            }
+        }
+        deserializer.deserialize_struct("anduril.entitymanager.v1.Decorrelation", FIELDS, GeneratedVisitor)
     }
 }
 impl serde::Serialize for Dimensions {
@@ -3736,212 +3743,6 @@ impl<'de> serde::Deserialize<'de> for DynamicStatement {
             }
         }
         deserializer.deserialize_struct("anduril.entitymanager.v1.DynamicStatement", FIELDS, GeneratedVisitor)
-    }
-}
-impl serde::Serialize for EmergencyDetails {
-    #[allow(deprecated)]
-    fn serialize<S>(&self, serializer: S) -> std::result::Result<S::Ok, S::Error>
-    where
-        S: serde::Serializer,
-    {
-        use serde::ser::SerializeStruct;
-        let mut len = 0;
-        if self.emergency_type != 0 {
-            len += 1;
-        }
-        if self.personnel_involved != 0 {
-            len += 1;
-        }
-        let mut struct_ser = serializer.serialize_struct("anduril.entitymanager.v1.EmergencyDetails", len)?;
-        if self.emergency_type != 0 {
-            let v = EmergencyType::try_from(self.emergency_type)
-                .map_err(|_| serde::ser::Error::custom(format!("Invalid variant {}", self.emergency_type)))?;
-            struct_ser.serialize_field("emergencyType", &v)?;
-        }
-        if self.personnel_involved != 0 {
-            struct_ser.serialize_field("personnelInvolved", &self.personnel_involved)?;
-        }
-        struct_ser.end()
-    }
-}
-impl<'de> serde::Deserialize<'de> for EmergencyDetails {
-    #[allow(deprecated)]
-    fn deserialize<D>(deserializer: D) -> std::result::Result<Self, D::Error>
-    where
-        D: serde::Deserializer<'de>,
-    {
-        const FIELDS: &[&str] = &[
-            "emergency_type",
-            "emergencyType",
-            "personnel_involved",
-            "personnelInvolved",
-        ];
-
-        #[allow(clippy::enum_variant_names)]
-        enum GeneratedField {
-            EmergencyType,
-            PersonnelInvolved,
-        }
-        impl<'de> serde::Deserialize<'de> for GeneratedField {
-            fn deserialize<D>(deserializer: D) -> std::result::Result<GeneratedField, D::Error>
-            where
-                D: serde::Deserializer<'de>,
-            {
-                struct GeneratedVisitor;
-
-                impl<'de> serde::de::Visitor<'de> for GeneratedVisitor {
-                    type Value = GeneratedField;
-
-                    fn expecting(&self, formatter: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
-                        write!(formatter, "expected one of: {:?}", &FIELDS)
-                    }
-
-                    #[allow(unused_variables)]
-                    fn visit_str<E>(self, value: &str) -> std::result::Result<GeneratedField, E>
-                    where
-                        E: serde::de::Error,
-                    {
-                        match value {
-                            "emergencyType" | "emergency_type" => Ok(GeneratedField::EmergencyType),
-                            "personnelInvolved" | "personnel_involved" => Ok(GeneratedField::PersonnelInvolved),
-                            _ => Err(serde::de::Error::unknown_field(value, FIELDS)),
-                        }
-                    }
-                }
-                deserializer.deserialize_identifier(GeneratedVisitor)
-            }
-        }
-        struct GeneratedVisitor;
-        impl<'de> serde::de::Visitor<'de> for GeneratedVisitor {
-            type Value = EmergencyDetails;
-
-            fn expecting(&self, formatter: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
-                formatter.write_str("struct anduril.entitymanager.v1.EmergencyDetails")
-            }
-
-            fn visit_map<V>(self, mut map_: V) -> std::result::Result<EmergencyDetails, V::Error>
-                where
-                    V: serde::de::MapAccess<'de>,
-            {
-                let mut emergency_type__ = None;
-                let mut personnel_involved__ = None;
-                while let Some(k) = map_.next_key()? {
-                    match k {
-                        GeneratedField::EmergencyType => {
-                            if emergency_type__.is_some() {
-                                return Err(serde::de::Error::duplicate_field("emergencyType"));
-                            }
-                            emergency_type__ = Some(map_.next_value::<EmergencyType>()? as i32);
-                        }
-                        GeneratedField::PersonnelInvolved => {
-                            if personnel_involved__.is_some() {
-                                return Err(serde::de::Error::duplicate_field("personnelInvolved"));
-                            }
-                            personnel_involved__ = 
-                                Some(map_.next_value::<::pbjson::private::NumberDeserialize<_>>()?.0)
-                            ;
-                        }
-                    }
-                }
-                Ok(EmergencyDetails {
-                    emergency_type: emergency_type__.unwrap_or_default(),
-                    personnel_involved: personnel_involved__.unwrap_or_default(),
-                })
-            }
-        }
-        deserializer.deserialize_struct("anduril.entitymanager.v1.EmergencyDetails", FIELDS, GeneratedVisitor)
-    }
-}
-impl serde::Serialize for EmergencyType {
-    #[allow(deprecated)]
-    fn serialize<S>(&self, serializer: S) -> std::result::Result<S::Ok, S::Error>
-    where
-        S: serde::Serializer,
-    {
-        let variant = match self {
-            Self::Invalid => "EMERGENCY_TYPE_INVALID",
-            Self::DownAircraft => "EMERGENCY_TYPE_DOWN_AIRCRAFT",
-            Self::ManInWater => "EMERGENCY_TYPE_MAN_IN_WATER",
-            Self::Ditching => "EMERGENCY_TYPE_DITCHING",
-            Self::Bailout => "EMERGENCY_TYPE_BAILOUT",
-            Self::DistressedVehicle => "EMERGENCY_TYPE_DISTRESSED_VEHICLE",
-            Self::GroundIncident => "EMERGENCY_TYPE_GROUND_INCIDENT",
-            Self::Medical => "EMERGENCY_TYPE_MEDICAL",
-            Self::IsolatedPerson => "EMERGENCY_TYPE_ISOLATED_PERSON",
-        };
-        serializer.serialize_str(variant)
-    }
-}
-impl<'de> serde::Deserialize<'de> for EmergencyType {
-    #[allow(deprecated)]
-    fn deserialize<D>(deserializer: D) -> std::result::Result<Self, D::Error>
-    where
-        D: serde::Deserializer<'de>,
-    {
-        const FIELDS: &[&str] = &[
-            "EMERGENCY_TYPE_INVALID",
-            "EMERGENCY_TYPE_DOWN_AIRCRAFT",
-            "EMERGENCY_TYPE_MAN_IN_WATER",
-            "EMERGENCY_TYPE_DITCHING",
-            "EMERGENCY_TYPE_BAILOUT",
-            "EMERGENCY_TYPE_DISTRESSED_VEHICLE",
-            "EMERGENCY_TYPE_GROUND_INCIDENT",
-            "EMERGENCY_TYPE_MEDICAL",
-            "EMERGENCY_TYPE_ISOLATED_PERSON",
-        ];
-
-        struct GeneratedVisitor;
-
-        impl<'de> serde::de::Visitor<'de> for GeneratedVisitor {
-            type Value = EmergencyType;
-
-            fn expecting(&self, formatter: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
-                write!(formatter, "expected one of: {:?}", &FIELDS)
-            }
-
-            fn visit_i64<E>(self, v: i64) -> std::result::Result<Self::Value, E>
-            where
-                E: serde::de::Error,
-            {
-                i32::try_from(v)
-                    .ok()
-                    .and_then(|x| x.try_into().ok())
-                    .ok_or_else(|| {
-                        serde::de::Error::invalid_value(serde::de::Unexpected::Signed(v), &self)
-                    })
-            }
-
-            fn visit_u64<E>(self, v: u64) -> std::result::Result<Self::Value, E>
-            where
-                E: serde::de::Error,
-            {
-                i32::try_from(v)
-                    .ok()
-                    .and_then(|x| x.try_into().ok())
-                    .ok_or_else(|| {
-                        serde::de::Error::invalid_value(serde::de::Unexpected::Unsigned(v), &self)
-                    })
-            }
-
-            fn visit_str<E>(self, value: &str) -> std::result::Result<Self::Value, E>
-            where
-                E: serde::de::Error,
-            {
-                match value {
-                    "EMERGENCY_TYPE_INVALID" => Ok(EmergencyType::Invalid),
-                    "EMERGENCY_TYPE_DOWN_AIRCRAFT" => Ok(EmergencyType::DownAircraft),
-                    "EMERGENCY_TYPE_MAN_IN_WATER" => Ok(EmergencyType::ManInWater),
-                    "EMERGENCY_TYPE_DITCHING" => Ok(EmergencyType::Ditching),
-                    "EMERGENCY_TYPE_BAILOUT" => Ok(EmergencyType::Bailout),
-                    "EMERGENCY_TYPE_DISTRESSED_VEHICLE" => Ok(EmergencyType::DistressedVehicle),
-                    "EMERGENCY_TYPE_GROUND_INCIDENT" => Ok(EmergencyType::GroundIncident),
-                    "EMERGENCY_TYPE_MEDICAL" => Ok(EmergencyType::Medical),
-                    "EMERGENCY_TYPE_ISOLATED_PERSON" => Ok(EmergencyType::IsolatedPerson),
-                    _ => Err(serde::de::Error::unknown_variant(value, FIELDS)),
-                }
-            }
-        }
-        deserializer.deserialize_any(GeneratedVisitor)
     }
 }
 impl serde::Serialize for EmitterNotation {
@@ -4181,97 +3982,6 @@ impl<'de> serde::Deserialize<'de> for Encoding {
         deserializer.deserialize_struct("anduril.entitymanager.v1.Encoding", FIELDS, GeneratedVisitor)
     }
 }
-impl serde::Serialize for Entities {
-    #[allow(deprecated)]
-    fn serialize<S>(&self, serializer: S) -> std::result::Result<S::Ok, S::Error>
-    where
-        S: serde::Serializer,
-    {
-        use serde::ser::SerializeStruct;
-        let mut len = 0;
-        if !self.entities.is_empty() {
-            len += 1;
-        }
-        let mut struct_ser = serializer.serialize_struct("anduril.entitymanager.v1.Entities", len)?;
-        if !self.entities.is_empty() {
-            struct_ser.serialize_field("entities", &self.entities)?;
-        }
-        struct_ser.end()
-    }
-}
-impl<'de> serde::Deserialize<'de> for Entities {
-    #[allow(deprecated)]
-    fn deserialize<D>(deserializer: D) -> std::result::Result<Self, D::Error>
-    where
-        D: serde::Deserializer<'de>,
-    {
-        const FIELDS: &[&str] = &[
-            "entities",
-        ];
-
-        #[allow(clippy::enum_variant_names)]
-        enum GeneratedField {
-            Entities,
-        }
-        impl<'de> serde::Deserialize<'de> for GeneratedField {
-            fn deserialize<D>(deserializer: D) -> std::result::Result<GeneratedField, D::Error>
-            where
-                D: serde::Deserializer<'de>,
-            {
-                struct GeneratedVisitor;
-
-                impl<'de> serde::de::Visitor<'de> for GeneratedVisitor {
-                    type Value = GeneratedField;
-
-                    fn expecting(&self, formatter: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
-                        write!(formatter, "expected one of: {:?}", &FIELDS)
-                    }
-
-                    #[allow(unused_variables)]
-                    fn visit_str<E>(self, value: &str) -> std::result::Result<GeneratedField, E>
-                    where
-                        E: serde::de::Error,
-                    {
-                        match value {
-                            "entities" => Ok(GeneratedField::Entities),
-                            _ => Err(serde::de::Error::unknown_field(value, FIELDS)),
-                        }
-                    }
-                }
-                deserializer.deserialize_identifier(GeneratedVisitor)
-            }
-        }
-        struct GeneratedVisitor;
-        impl<'de> serde::de::Visitor<'de> for GeneratedVisitor {
-            type Value = Entities;
-
-            fn expecting(&self, formatter: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
-                formatter.write_str("struct anduril.entitymanager.v1.Entities")
-            }
-
-            fn visit_map<V>(self, mut map_: V) -> std::result::Result<Entities, V::Error>
-                where
-                    V: serde::de::MapAccess<'de>,
-            {
-                let mut entities__ = None;
-                while let Some(k) = map_.next_key()? {
-                    match k {
-                        GeneratedField::Entities => {
-                            if entities__.is_some() {
-                                return Err(serde::de::Error::duplicate_field("entities"));
-                            }
-                            entities__ = Some(map_.next_value()?);
-                        }
-                    }
-                }
-                Ok(Entities {
-                    entities: entities__.unwrap_or_default(),
-                })
-            }
-        }
-        deserializer.deserialize_struct("anduril.entitymanager.v1.Entities", FIELDS, GeneratedVisitor)
-    }
-}
 impl serde::Serialize for Entity {
     #[allow(deprecated)]
     fn serialize<S>(&self, serializer: S) -> std::result::Result<S::Ok, S::Error>
@@ -4295,9 +4005,6 @@ impl serde::Serialize for Entity {
         if self.expiry_time.is_some() {
             len += 1;
         }
-        if self.no_expiry {
-            len += 1;
-        }
         if self.status.is_some() {
             len += 1;
         }
@@ -4305,9 +4012,6 @@ impl serde::Serialize for Entity {
             len += 1;
         }
         if self.location_uncertainty.is_some() {
-            len += 1;
-        }
-        if self.geopolygon.is_some() {
             len += 1;
         }
         if self.geo_shape.is_some() {
@@ -4322,7 +4026,7 @@ impl serde::Serialize for Entity {
         if self.tracked.is_some() {
             len += 1;
         }
-        if self.correlated.is_some() {
+        if self.correlation.is_some() {
             len += 1;
         }
         if self.mil_view.is_some() {
@@ -4349,9 +4053,6 @@ impl serde::Serialize for Entity {
         if self.indicators.is_some() {
             len += 1;
         }
-        if self.original_data.is_some() {
-            len += 1;
-        }
         if self.target_priority.is_some() {
             len += 1;
         }
@@ -4361,16 +4062,10 @@ impl serde::Serialize for Entity {
         if self.transponder_codes.is_some() {
             len += 1;
         }
-        if self.contact.is_some() {
-            len += 1;
-        }
         if self.data_classification.is_some() {
             len += 1;
         }
         if self.task_catalog.is_some() {
-            len += 1;
-        }
-        if self.media.is_some() {
             len += 1;
         }
         if self.relationships.is_some() {
@@ -4392,9 +4087,6 @@ impl serde::Serialize for Entity {
             len += 1;
         }
         if self.group_details.is_some() {
-            len += 1;
-        }
-        if self.team_status.is_some() {
             len += 1;
         }
         if self.supplies.is_some() {
@@ -4419,9 +4111,6 @@ impl serde::Serialize for Entity {
         if let Some(v) = self.expiry_time.as_ref() {
             struct_ser.serialize_field("expiryTime", v)?;
         }
-        if self.no_expiry {
-            struct_ser.serialize_field("noExpiry", &self.no_expiry)?;
-        }
         if let Some(v) = self.status.as_ref() {
             struct_ser.serialize_field("status", v)?;
         }
@@ -4430,9 +4119,6 @@ impl serde::Serialize for Entity {
         }
         if let Some(v) = self.location_uncertainty.as_ref() {
             struct_ser.serialize_field("locationUncertainty", v)?;
-        }
-        if let Some(v) = self.geopolygon.as_ref() {
-            struct_ser.serialize_field("geopolygon", v)?;
         }
         if let Some(v) = self.geo_shape.as_ref() {
             struct_ser.serialize_field("geoShape", v)?;
@@ -4446,8 +4132,8 @@ impl serde::Serialize for Entity {
         if let Some(v) = self.tracked.as_ref() {
             struct_ser.serialize_field("tracked", v)?;
         }
-        if let Some(v) = self.correlated.as_ref() {
-            struct_ser.serialize_field("correlated", v)?;
+        if let Some(v) = self.correlation.as_ref() {
+            struct_ser.serialize_field("correlation", v)?;
         }
         if let Some(v) = self.mil_view.as_ref() {
             struct_ser.serialize_field("milView", v)?;
@@ -4473,9 +4159,6 @@ impl serde::Serialize for Entity {
         if let Some(v) = self.indicators.as_ref() {
             struct_ser.serialize_field("indicators", v)?;
         }
-        if let Some(v) = self.original_data.as_ref() {
-            struct_ser.serialize_field("originalData", v)?;
-        }
         if let Some(v) = self.target_priority.as_ref() {
             struct_ser.serialize_field("targetPriority", v)?;
         }
@@ -4485,17 +4168,11 @@ impl serde::Serialize for Entity {
         if let Some(v) = self.transponder_codes.as_ref() {
             struct_ser.serialize_field("transponderCodes", v)?;
         }
-        if let Some(v) = self.contact.as_ref() {
-            struct_ser.serialize_field("contact", v)?;
-        }
         if let Some(v) = self.data_classification.as_ref() {
             struct_ser.serialize_field("dataClassification", v)?;
         }
         if let Some(v) = self.task_catalog.as_ref() {
             struct_ser.serialize_field("taskCatalog", v)?;
-        }
-        if let Some(v) = self.media.as_ref() {
-            struct_ser.serialize_field("media", v)?;
         }
         if let Some(v) = self.relationships.as_ref() {
             struct_ser.serialize_field("relationships", v)?;
@@ -4517,9 +4194,6 @@ impl serde::Serialize for Entity {
         }
         if let Some(v) = self.group_details.as_ref() {
             struct_ser.serialize_field("groupDetails", v)?;
-        }
-        if let Some(v) = self.team_status.as_ref() {
-            struct_ser.serialize_field("teamStatus", v)?;
         }
         if let Some(v) = self.supplies.as_ref() {
             struct_ser.serialize_field("supplies", v)?;
@@ -4546,20 +4220,17 @@ impl<'de> serde::Deserialize<'de> for Entity {
             "createdTime",
             "expiry_time",
             "expiryTime",
-            "no_expiry",
-            "noExpiry",
             "status",
             "location",
             "location_uncertainty",
             "locationUncertainty",
-            "geopolygon",
             "geo_shape",
             "geoShape",
             "geo_details",
             "geoDetails",
             "aliases",
             "tracked",
-            "correlated",
+            "correlation",
             "mil_view",
             "milView",
             "ontology",
@@ -4570,19 +4241,15 @@ impl<'de> serde::Deserialize<'de> for Entity {
             "provenance",
             "overrides",
             "indicators",
-            "original_data",
-            "originalData",
             "target_priority",
             "targetPriority",
             "signal",
             "transponder_codes",
             "transponderCodes",
-            "contact",
             "data_classification",
             "dataClassification",
             "task_catalog",
             "taskCatalog",
-            "media",
             "relationships",
             "visual_details",
             "visualDetails",
@@ -4593,8 +4260,6 @@ impl<'de> serde::Deserialize<'de> for Entity {
             "health",
             "group_details",
             "groupDetails",
-            "team_status",
-            "teamStatus",
             "supplies",
             "orbit",
         ];
@@ -4606,16 +4271,14 @@ impl<'de> serde::Deserialize<'de> for Entity {
             IsLive,
             CreatedTime,
             ExpiryTime,
-            NoExpiry,
             Status,
             Location,
             LocationUncertainty,
-            Geopolygon,
             GeoShape,
             GeoDetails,
             Aliases,
             Tracked,
-            Correlated,
+            Correlation,
             MilView,
             Ontology,
             Sensors,
@@ -4624,14 +4287,11 @@ impl<'de> serde::Deserialize<'de> for Entity {
             Provenance,
             Overrides,
             Indicators,
-            OriginalData,
             TargetPriority,
             Signal,
             TransponderCodes,
-            Contact,
             DataClassification,
             TaskCatalog,
-            Media,
             Relationships,
             VisualDetails,
             Dimensions,
@@ -4639,7 +4299,6 @@ impl<'de> serde::Deserialize<'de> for Entity {
             Schedules,
             Health,
             GroupDetails,
-            TeamStatus,
             Supplies,
             Orbit,
         }
@@ -4668,16 +4327,14 @@ impl<'de> serde::Deserialize<'de> for Entity {
                             "isLive" | "is_live" => Ok(GeneratedField::IsLive),
                             "createdTime" | "created_time" => Ok(GeneratedField::CreatedTime),
                             "expiryTime" | "expiry_time" => Ok(GeneratedField::ExpiryTime),
-                            "noExpiry" | "no_expiry" => Ok(GeneratedField::NoExpiry),
                             "status" => Ok(GeneratedField::Status),
                             "location" => Ok(GeneratedField::Location),
                             "locationUncertainty" | "location_uncertainty" => Ok(GeneratedField::LocationUncertainty),
-                            "geopolygon" => Ok(GeneratedField::Geopolygon),
                             "geoShape" | "geo_shape" => Ok(GeneratedField::GeoShape),
                             "geoDetails" | "geo_details" => Ok(GeneratedField::GeoDetails),
                             "aliases" => Ok(GeneratedField::Aliases),
                             "tracked" => Ok(GeneratedField::Tracked),
-                            "correlated" => Ok(GeneratedField::Correlated),
+                            "correlation" => Ok(GeneratedField::Correlation),
                             "milView" | "mil_view" => Ok(GeneratedField::MilView),
                             "ontology" => Ok(GeneratedField::Ontology),
                             "sensors" => Ok(GeneratedField::Sensors),
@@ -4686,14 +4343,11 @@ impl<'de> serde::Deserialize<'de> for Entity {
                             "provenance" => Ok(GeneratedField::Provenance),
                             "overrides" => Ok(GeneratedField::Overrides),
                             "indicators" => Ok(GeneratedField::Indicators),
-                            "originalData" | "original_data" => Ok(GeneratedField::OriginalData),
                             "targetPriority" | "target_priority" => Ok(GeneratedField::TargetPriority),
                             "signal" => Ok(GeneratedField::Signal),
                             "transponderCodes" | "transponder_codes" => Ok(GeneratedField::TransponderCodes),
-                            "contact" => Ok(GeneratedField::Contact),
                             "dataClassification" | "data_classification" => Ok(GeneratedField::DataClassification),
                             "taskCatalog" | "task_catalog" => Ok(GeneratedField::TaskCatalog),
-                            "media" => Ok(GeneratedField::Media),
                             "relationships" => Ok(GeneratedField::Relationships),
                             "visualDetails" | "visual_details" => Ok(GeneratedField::VisualDetails),
                             "dimensions" => Ok(GeneratedField::Dimensions),
@@ -4701,7 +4355,6 @@ impl<'de> serde::Deserialize<'de> for Entity {
                             "schedules" => Ok(GeneratedField::Schedules),
                             "health" => Ok(GeneratedField::Health),
                             "groupDetails" | "group_details" => Ok(GeneratedField::GroupDetails),
-                            "teamStatus" | "team_status" => Ok(GeneratedField::TeamStatus),
                             "supplies" => Ok(GeneratedField::Supplies),
                             "orbit" => Ok(GeneratedField::Orbit),
                             _ => Err(serde::de::Error::unknown_field(value, FIELDS)),
@@ -4728,16 +4381,14 @@ impl<'de> serde::Deserialize<'de> for Entity {
                 let mut is_live__ = None;
                 let mut created_time__ = None;
                 let mut expiry_time__ = None;
-                let mut no_expiry__ = None;
                 let mut status__ = None;
                 let mut location__ = None;
                 let mut location_uncertainty__ = None;
-                let mut geopolygon__ = None;
                 let mut geo_shape__ = None;
                 let mut geo_details__ = None;
                 let mut aliases__ = None;
                 let mut tracked__ = None;
-                let mut correlated__ = None;
+                let mut correlation__ = None;
                 let mut mil_view__ = None;
                 let mut ontology__ = None;
                 let mut sensors__ = None;
@@ -4746,14 +4397,11 @@ impl<'de> serde::Deserialize<'de> for Entity {
                 let mut provenance__ = None;
                 let mut overrides__ = None;
                 let mut indicators__ = None;
-                let mut original_data__ = None;
                 let mut target_priority__ = None;
                 let mut signal__ = None;
                 let mut transponder_codes__ = None;
-                let mut contact__ = None;
                 let mut data_classification__ = None;
                 let mut task_catalog__ = None;
-                let mut media__ = None;
                 let mut relationships__ = None;
                 let mut visual_details__ = None;
                 let mut dimensions__ = None;
@@ -4761,7 +4409,6 @@ impl<'de> serde::Deserialize<'de> for Entity {
                 let mut schedules__ = None;
                 let mut health__ = None;
                 let mut group_details__ = None;
-                let mut team_status__ = None;
                 let mut supplies__ = None;
                 let mut orbit__ = None;
                 while let Some(k) = map_.next_key()? {
@@ -4796,12 +4443,6 @@ impl<'de> serde::Deserialize<'de> for Entity {
                             }
                             expiry_time__ = map_.next_value()?;
                         }
-                        GeneratedField::NoExpiry => {
-                            if no_expiry__.is_some() {
-                                return Err(serde::de::Error::duplicate_field("noExpiry"));
-                            }
-                            no_expiry__ = Some(map_.next_value()?);
-                        }
                         GeneratedField::Status => {
                             if status__.is_some() {
                                 return Err(serde::de::Error::duplicate_field("status"));
@@ -4819,12 +4460,6 @@ impl<'de> serde::Deserialize<'de> for Entity {
                                 return Err(serde::de::Error::duplicate_field("locationUncertainty"));
                             }
                             location_uncertainty__ = map_.next_value()?;
-                        }
-                        GeneratedField::Geopolygon => {
-                            if geopolygon__.is_some() {
-                                return Err(serde::de::Error::duplicate_field("geopolygon"));
-                            }
-                            geopolygon__ = map_.next_value()?;
                         }
                         GeneratedField::GeoShape => {
                             if geo_shape__.is_some() {
@@ -4850,11 +4485,11 @@ impl<'de> serde::Deserialize<'de> for Entity {
                             }
                             tracked__ = map_.next_value()?;
                         }
-                        GeneratedField::Correlated => {
-                            if correlated__.is_some() {
-                                return Err(serde::de::Error::duplicate_field("correlated"));
+                        GeneratedField::Correlation => {
+                            if correlation__.is_some() {
+                                return Err(serde::de::Error::duplicate_field("correlation"));
                             }
-                            correlated__ = map_.next_value()?;
+                            correlation__ = map_.next_value()?;
                         }
                         GeneratedField::MilView => {
                             if mil_view__.is_some() {
@@ -4904,12 +4539,6 @@ impl<'de> serde::Deserialize<'de> for Entity {
                             }
                             indicators__ = map_.next_value()?;
                         }
-                        GeneratedField::OriginalData => {
-                            if original_data__.is_some() {
-                                return Err(serde::de::Error::duplicate_field("originalData"));
-                            }
-                            original_data__ = map_.next_value()?;
-                        }
                         GeneratedField::TargetPriority => {
                             if target_priority__.is_some() {
                                 return Err(serde::de::Error::duplicate_field("targetPriority"));
@@ -4928,12 +4557,6 @@ impl<'de> serde::Deserialize<'de> for Entity {
                             }
                             transponder_codes__ = map_.next_value()?;
                         }
-                        GeneratedField::Contact => {
-                            if contact__.is_some() {
-                                return Err(serde::de::Error::duplicate_field("contact"));
-                            }
-                            contact__ = map_.next_value()?;
-                        }
                         GeneratedField::DataClassification => {
                             if data_classification__.is_some() {
                                 return Err(serde::de::Error::duplicate_field("dataClassification"));
@@ -4945,12 +4568,6 @@ impl<'de> serde::Deserialize<'de> for Entity {
                                 return Err(serde::de::Error::duplicate_field("taskCatalog"));
                             }
                             task_catalog__ = map_.next_value()?;
-                        }
-                        GeneratedField::Media => {
-                            if media__.is_some() {
-                                return Err(serde::de::Error::duplicate_field("media"));
-                            }
-                            media__ = map_.next_value()?;
                         }
                         GeneratedField::Relationships => {
                             if relationships__.is_some() {
@@ -4994,12 +4611,6 @@ impl<'de> serde::Deserialize<'de> for Entity {
                             }
                             group_details__ = map_.next_value()?;
                         }
-                        GeneratedField::TeamStatus => {
-                            if team_status__.is_some() {
-                                return Err(serde::de::Error::duplicate_field("teamStatus"));
-                            }
-                            team_status__ = map_.next_value()?;
-                        }
                         GeneratedField::Supplies => {
                             if supplies__.is_some() {
                                 return Err(serde::de::Error::duplicate_field("supplies"));
@@ -5020,16 +4631,14 @@ impl<'de> serde::Deserialize<'de> for Entity {
                     is_live: is_live__.unwrap_or_default(),
                     created_time: created_time__,
                     expiry_time: expiry_time__,
-                    no_expiry: no_expiry__.unwrap_or_default(),
                     status: status__,
                     location: location__,
                     location_uncertainty: location_uncertainty__,
-                    geopolygon: geopolygon__,
                     geo_shape: geo_shape__,
                     geo_details: geo_details__,
                     aliases: aliases__,
                     tracked: tracked__,
-                    correlated: correlated__,
+                    correlation: correlation__,
                     mil_view: mil_view__,
                     ontology: ontology__,
                     sensors: sensors__,
@@ -5038,14 +4647,11 @@ impl<'de> serde::Deserialize<'de> for Entity {
                     provenance: provenance__,
                     overrides: overrides__,
                     indicators: indicators__,
-                    original_data: original_data__,
                     target_priority: target_priority__,
                     signal: signal__,
                     transponder_codes: transponder_codes__,
-                    contact: contact__,
                     data_classification: data_classification__,
                     task_catalog: task_catalog__,
-                    media: media__,
                     relationships: relationships__,
                     visual_details: visual_details__,
                     dimensions: dimensions__,
@@ -5053,7 +4659,6 @@ impl<'de> serde::Deserialize<'de> for Entity {
                     schedules: schedules__,
                     health: health__,
                     group_details: group_details__,
-                    team_status: team_status__,
                     supplies: supplies__,
                     orbit: orbit__,
                 })
@@ -5511,365 +5116,6 @@ impl<'de> serde::Deserialize<'de> for EventType {
         deserializer.deserialize_any(GeneratedVisitor)
     }
 }
-impl serde::Serialize for FscmDetailType {
-    #[allow(deprecated)]
-    fn serialize<S>(&self, serializer: S) -> std::result::Result<S::Ok, S::Error>
-    where
-        S: serde::Serializer,
-    {
-        let variant = match self {
-            Self::Invalid => "FSCM_DETAIL_TYPE_INVALID",
-            Self::DeadSpaceArea => "FSCM_DETAIL_TYPE_DEAD_SPACE_AREA",
-            Self::NoFireArea => "FSCM_DETAIL_TYPE_NO_FIRE_AREA",
-            Self::FreeFireArea => "FSCM_DETAIL_TYPE_FREE_FIRE_AREA",
-            Self::RestrictiveFireArea => "FSCM_DETAIL_TYPE_RESTRICTIVE_FIRE_AREA",
-            Self::SafeFireArea => "FSCM_DETAIL_TYPE_SAFE_FIRE_AREA",
-            Self::AirspaceCoordinationArea => "FSCM_DETAIL_TYPE_AIRSPACE_COORDINATION_AREA",
-            Self::ForwardEdgeOfTheBattleArea => "FSCM_DETAIL_TYPE_FORWARD_EDGE_OF_THE_BATTLE_AREA",
-            Self::FireSupportArea => "FSCM_DETAIL_TYPE_FIRE_SUPPORT_AREA",
-            Self::PatrolReconnaissance => "FSCM_DETAIL_TYPE_PATROL_RECONNAISSANCE",
-            Self::ZoneOfResponsibility => "FSCM_DETAIL_TYPE_ZONE_OF_RESPONSIBILITY",
-            Self::PriorityCallForFireZone => "FSCM_DETAIL_TYPE_PRIORITY_CALL_FOR_FIRE_ZONE",
-            Self::CensoredZone => "FSCM_DETAIL_TYPE_CENSORED_ZONE",
-            Self::ZoneOfAction => "FSCM_DETAIL_TYPE_ZONE_OF_ACTION",
-            Self::CriticalFriendlyZone => "FSCM_DETAIL_TYPE_CRITICAL_FRIENDLY_ZONE",
-            Self::PlatoonAreaHazard => "FSCM_DETAIL_TYPE_PLATOON_AREA_HAZARD",
-            Self::TargetAreaHazard => "FSCM_DETAIL_TYPE_TARGET_AREA_HAZARD",
-            Self::RestrictedOperationsZone => "FSCM_DETAIL_TYPE_RESTRICTED_OPERATIONS_ZONE",
-            Self::AirCorridor => "FSCM_DETAIL_TYPE_AIR_CORRIDOR",
-            Self::RestrictiveFireLine => "FSCM_DETAIL_TYPE_RESTRICTIVE_FIRE_LINE",
-            Self::CoordinatedFireLineNoFireLine => "FSCM_DETAIL_TYPE_COORDINATED_FIRE_LINE_NO_FIRE_LINE",
-            Self::BoundaryLine => "FSCM_DETAIL_TYPE_BOUNDARY_LINE",
-            Self::ForwardLine => "FSCM_DETAIL_TYPE_FORWARD_LINE",
-            Self::FireSupportLine => "FSCM_DETAIL_TYPE_FIRE_SUPPORT_LINE",
-            Self::LineOfDeparture => "FSCM_DETAIL_TYPE_LINE_OF_DEPARTURE",
-            Self::LineOfContact => "FSCM_DETAIL_TYPE_LINE_OF_CONTACT",
-            Self::LineOfDepartureLineOfContact => "FSCM_DETAIL_TYPE_LINE_OF_DEPARTURE_LINE_OF_CONTACT",
-            Self::ZoneOfFire => "FSCM_DETAIL_TYPE_ZONE_OF_FIRE",
-        };
-        serializer.serialize_str(variant)
-    }
-}
-impl<'de> serde::Deserialize<'de> for FscmDetailType {
-    #[allow(deprecated)]
-    fn deserialize<D>(deserializer: D) -> std::result::Result<Self, D::Error>
-    where
-        D: serde::Deserializer<'de>,
-    {
-        const FIELDS: &[&str] = &[
-            "FSCM_DETAIL_TYPE_INVALID",
-            "FSCM_DETAIL_TYPE_DEAD_SPACE_AREA",
-            "FSCM_DETAIL_TYPE_NO_FIRE_AREA",
-            "FSCM_DETAIL_TYPE_FREE_FIRE_AREA",
-            "FSCM_DETAIL_TYPE_RESTRICTIVE_FIRE_AREA",
-            "FSCM_DETAIL_TYPE_SAFE_FIRE_AREA",
-            "FSCM_DETAIL_TYPE_AIRSPACE_COORDINATION_AREA",
-            "FSCM_DETAIL_TYPE_FORWARD_EDGE_OF_THE_BATTLE_AREA",
-            "FSCM_DETAIL_TYPE_FIRE_SUPPORT_AREA",
-            "FSCM_DETAIL_TYPE_PATROL_RECONNAISSANCE",
-            "FSCM_DETAIL_TYPE_ZONE_OF_RESPONSIBILITY",
-            "FSCM_DETAIL_TYPE_PRIORITY_CALL_FOR_FIRE_ZONE",
-            "FSCM_DETAIL_TYPE_CENSORED_ZONE",
-            "FSCM_DETAIL_TYPE_ZONE_OF_ACTION",
-            "FSCM_DETAIL_TYPE_CRITICAL_FRIENDLY_ZONE",
-            "FSCM_DETAIL_TYPE_PLATOON_AREA_HAZARD",
-            "FSCM_DETAIL_TYPE_TARGET_AREA_HAZARD",
-            "FSCM_DETAIL_TYPE_RESTRICTED_OPERATIONS_ZONE",
-            "FSCM_DETAIL_TYPE_AIR_CORRIDOR",
-            "FSCM_DETAIL_TYPE_RESTRICTIVE_FIRE_LINE",
-            "FSCM_DETAIL_TYPE_COORDINATED_FIRE_LINE_NO_FIRE_LINE",
-            "FSCM_DETAIL_TYPE_BOUNDARY_LINE",
-            "FSCM_DETAIL_TYPE_FORWARD_LINE",
-            "FSCM_DETAIL_TYPE_FIRE_SUPPORT_LINE",
-            "FSCM_DETAIL_TYPE_LINE_OF_DEPARTURE",
-            "FSCM_DETAIL_TYPE_LINE_OF_CONTACT",
-            "FSCM_DETAIL_TYPE_LINE_OF_DEPARTURE_LINE_OF_CONTACT",
-            "FSCM_DETAIL_TYPE_ZONE_OF_FIRE",
-        ];
-
-        struct GeneratedVisitor;
-
-        impl<'de> serde::de::Visitor<'de> for GeneratedVisitor {
-            type Value = FscmDetailType;
-
-            fn expecting(&self, formatter: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
-                write!(formatter, "expected one of: {:?}", &FIELDS)
-            }
-
-            fn visit_i64<E>(self, v: i64) -> std::result::Result<Self::Value, E>
-            where
-                E: serde::de::Error,
-            {
-                i32::try_from(v)
-                    .ok()
-                    .and_then(|x| x.try_into().ok())
-                    .ok_or_else(|| {
-                        serde::de::Error::invalid_value(serde::de::Unexpected::Signed(v), &self)
-                    })
-            }
-
-            fn visit_u64<E>(self, v: u64) -> std::result::Result<Self::Value, E>
-            where
-                E: serde::de::Error,
-            {
-                i32::try_from(v)
-                    .ok()
-                    .and_then(|x| x.try_into().ok())
-                    .ok_or_else(|| {
-                        serde::de::Error::invalid_value(serde::de::Unexpected::Unsigned(v), &self)
-                    })
-            }
-
-            fn visit_str<E>(self, value: &str) -> std::result::Result<Self::Value, E>
-            where
-                E: serde::de::Error,
-            {
-                match value {
-                    "FSCM_DETAIL_TYPE_INVALID" => Ok(FscmDetailType::Invalid),
-                    "FSCM_DETAIL_TYPE_DEAD_SPACE_AREA" => Ok(FscmDetailType::DeadSpaceArea),
-                    "FSCM_DETAIL_TYPE_NO_FIRE_AREA" => Ok(FscmDetailType::NoFireArea),
-                    "FSCM_DETAIL_TYPE_FREE_FIRE_AREA" => Ok(FscmDetailType::FreeFireArea),
-                    "FSCM_DETAIL_TYPE_RESTRICTIVE_FIRE_AREA" => Ok(FscmDetailType::RestrictiveFireArea),
-                    "FSCM_DETAIL_TYPE_SAFE_FIRE_AREA" => Ok(FscmDetailType::SafeFireArea),
-                    "FSCM_DETAIL_TYPE_AIRSPACE_COORDINATION_AREA" => Ok(FscmDetailType::AirspaceCoordinationArea),
-                    "FSCM_DETAIL_TYPE_FORWARD_EDGE_OF_THE_BATTLE_AREA" => Ok(FscmDetailType::ForwardEdgeOfTheBattleArea),
-                    "FSCM_DETAIL_TYPE_FIRE_SUPPORT_AREA" => Ok(FscmDetailType::FireSupportArea),
-                    "FSCM_DETAIL_TYPE_PATROL_RECONNAISSANCE" => Ok(FscmDetailType::PatrolReconnaissance),
-                    "FSCM_DETAIL_TYPE_ZONE_OF_RESPONSIBILITY" => Ok(FscmDetailType::ZoneOfResponsibility),
-                    "FSCM_DETAIL_TYPE_PRIORITY_CALL_FOR_FIRE_ZONE" => Ok(FscmDetailType::PriorityCallForFireZone),
-                    "FSCM_DETAIL_TYPE_CENSORED_ZONE" => Ok(FscmDetailType::CensoredZone),
-                    "FSCM_DETAIL_TYPE_ZONE_OF_ACTION" => Ok(FscmDetailType::ZoneOfAction),
-                    "FSCM_DETAIL_TYPE_CRITICAL_FRIENDLY_ZONE" => Ok(FscmDetailType::CriticalFriendlyZone),
-                    "FSCM_DETAIL_TYPE_PLATOON_AREA_HAZARD" => Ok(FscmDetailType::PlatoonAreaHazard),
-                    "FSCM_DETAIL_TYPE_TARGET_AREA_HAZARD" => Ok(FscmDetailType::TargetAreaHazard),
-                    "FSCM_DETAIL_TYPE_RESTRICTED_OPERATIONS_ZONE" => Ok(FscmDetailType::RestrictedOperationsZone),
-                    "FSCM_DETAIL_TYPE_AIR_CORRIDOR" => Ok(FscmDetailType::AirCorridor),
-                    "FSCM_DETAIL_TYPE_RESTRICTIVE_FIRE_LINE" => Ok(FscmDetailType::RestrictiveFireLine),
-                    "FSCM_DETAIL_TYPE_COORDINATED_FIRE_LINE_NO_FIRE_LINE" => Ok(FscmDetailType::CoordinatedFireLineNoFireLine),
-                    "FSCM_DETAIL_TYPE_BOUNDARY_LINE" => Ok(FscmDetailType::BoundaryLine),
-                    "FSCM_DETAIL_TYPE_FORWARD_LINE" => Ok(FscmDetailType::ForwardLine),
-                    "FSCM_DETAIL_TYPE_FIRE_SUPPORT_LINE" => Ok(FscmDetailType::FireSupportLine),
-                    "FSCM_DETAIL_TYPE_LINE_OF_DEPARTURE" => Ok(FscmDetailType::LineOfDeparture),
-                    "FSCM_DETAIL_TYPE_LINE_OF_CONTACT" => Ok(FscmDetailType::LineOfContact),
-                    "FSCM_DETAIL_TYPE_LINE_OF_DEPARTURE_LINE_OF_CONTACT" => Ok(FscmDetailType::LineOfDepartureLineOfContact),
-                    "FSCM_DETAIL_TYPE_ZONE_OF_FIRE" => Ok(FscmDetailType::ZoneOfFire),
-                    _ => Err(serde::de::Error::unknown_variant(value, FIELDS)),
-                }
-            }
-        }
-        deserializer.deserialize_any(GeneratedVisitor)
-    }
-}
-impl serde::Serialize for FscmDetails {
-    #[allow(deprecated)]
-    fn serialize<S>(&self, serializer: S) -> std::result::Result<S::Ok, S::Error>
-    where
-        S: serde::Serializer,
-    {
-        use serde::ser::SerializeStruct;
-        let mut len = 0;
-        if self.fscm_type != 0 {
-            len += 1;
-        }
-        if !self.fscm_description.is_empty() {
-            len += 1;
-        }
-        if self.firing_authority.is_some() {
-            len += 1;
-        }
-        if self.ammo_restriction_type != 0 {
-            len += 1;
-        }
-        if self.restrictive_measure_type != 0 {
-            len += 1;
-        }
-        if !self.ammo_restrict_types.is_empty() {
-            len += 1;
-        }
-        if self.is_ground {
-            len += 1;
-        }
-        let mut struct_ser = serializer.serialize_struct("anduril.entitymanager.v1.FSCMDetails", len)?;
-        if self.fscm_type != 0 {
-            let v = FscmDetailType::try_from(self.fscm_type)
-                .map_err(|_| serde::ser::Error::custom(format!("Invalid variant {}", self.fscm_type)))?;
-            struct_ser.serialize_field("fscmType", &v)?;
-        }
-        if !self.fscm_description.is_empty() {
-            struct_ser.serialize_field("fscmDescription", &self.fscm_description)?;
-        }
-        if let Some(v) = self.firing_authority.as_ref() {
-            struct_ser.serialize_field("firingAuthority", v)?;
-        }
-        if self.ammo_restriction_type != 0 {
-            let v = AmmoRestrictionType::try_from(self.ammo_restriction_type)
-                .map_err(|_| serde::ser::Error::custom(format!("Invalid variant {}", self.ammo_restriction_type)))?;
-            struct_ser.serialize_field("ammoRestrictionType", &v)?;
-        }
-        if self.restrictive_measure_type != 0 {
-            let v = RestrictiveMeasureType::try_from(self.restrictive_measure_type)
-                .map_err(|_| serde::ser::Error::custom(format!("Invalid variant {}", self.restrictive_measure_type)))?;
-            struct_ser.serialize_field("restrictiveMeasureType", &v)?;
-        }
-        if !self.ammo_restrict_types.is_empty() {
-            let v = self.ammo_restrict_types.iter().cloned().map(|v| {
-                AmmoRestrictionType::try_from(v)
-                    .map_err(|_| serde::ser::Error::custom(format!("Invalid variant {}", v)))
-                }).collect::<Result<Vec<_>, _>>()?;
-            struct_ser.serialize_field("ammoRestrictTypes", &v)?;
-        }
-        if self.is_ground {
-            struct_ser.serialize_field("isGround", &self.is_ground)?;
-        }
-        struct_ser.end()
-    }
-}
-impl<'de> serde::Deserialize<'de> for FscmDetails {
-    #[allow(deprecated)]
-    fn deserialize<D>(deserializer: D) -> std::result::Result<Self, D::Error>
-    where
-        D: serde::Deserializer<'de>,
-    {
-        const FIELDS: &[&str] = &[
-            "fscm_type",
-            "fscmType",
-            "fscm_description",
-            "fscmDescription",
-            "firing_authority",
-            "firingAuthority",
-            "ammo_restriction_type",
-            "ammoRestrictionType",
-            "restrictive_measure_type",
-            "restrictiveMeasureType",
-            "ammo_restrict_types",
-            "ammoRestrictTypes",
-            "is_ground",
-            "isGround",
-        ];
-
-        #[allow(clippy::enum_variant_names)]
-        enum GeneratedField {
-            FscmType,
-            FscmDescription,
-            FiringAuthority,
-            AmmoRestrictionType,
-            RestrictiveMeasureType,
-            AmmoRestrictTypes,
-            IsGround,
-        }
-        impl<'de> serde::Deserialize<'de> for GeneratedField {
-            fn deserialize<D>(deserializer: D) -> std::result::Result<GeneratedField, D::Error>
-            where
-                D: serde::Deserializer<'de>,
-            {
-                struct GeneratedVisitor;
-
-                impl<'de> serde::de::Visitor<'de> for GeneratedVisitor {
-                    type Value = GeneratedField;
-
-                    fn expecting(&self, formatter: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
-                        write!(formatter, "expected one of: {:?}", &FIELDS)
-                    }
-
-                    #[allow(unused_variables)]
-                    fn visit_str<E>(self, value: &str) -> std::result::Result<GeneratedField, E>
-                    where
-                        E: serde::de::Error,
-                    {
-                        match value {
-                            "fscmType" | "fscm_type" => Ok(GeneratedField::FscmType),
-                            "fscmDescription" | "fscm_description" => Ok(GeneratedField::FscmDescription),
-                            "firingAuthority" | "firing_authority" => Ok(GeneratedField::FiringAuthority),
-                            "ammoRestrictionType" | "ammo_restriction_type" => Ok(GeneratedField::AmmoRestrictionType),
-                            "restrictiveMeasureType" | "restrictive_measure_type" => Ok(GeneratedField::RestrictiveMeasureType),
-                            "ammoRestrictTypes" | "ammo_restrict_types" => Ok(GeneratedField::AmmoRestrictTypes),
-                            "isGround" | "is_ground" => Ok(GeneratedField::IsGround),
-                            _ => Err(serde::de::Error::unknown_field(value, FIELDS)),
-                        }
-                    }
-                }
-                deserializer.deserialize_identifier(GeneratedVisitor)
-            }
-        }
-        struct GeneratedVisitor;
-        impl<'de> serde::de::Visitor<'de> for GeneratedVisitor {
-            type Value = FscmDetails;
-
-            fn expecting(&self, formatter: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
-                formatter.write_str("struct anduril.entitymanager.v1.FSCMDetails")
-            }
-
-            fn visit_map<V>(self, mut map_: V) -> std::result::Result<FscmDetails, V::Error>
-                where
-                    V: serde::de::MapAccess<'de>,
-            {
-                let mut fscm_type__ = None;
-                let mut fscm_description__ = None;
-                let mut firing_authority__ = None;
-                let mut ammo_restriction_type__ = None;
-                let mut restrictive_measure_type__ = None;
-                let mut ammo_restrict_types__ = None;
-                let mut is_ground__ = None;
-                while let Some(k) = map_.next_key()? {
-                    match k {
-                        GeneratedField::FscmType => {
-                            if fscm_type__.is_some() {
-                                return Err(serde::de::Error::duplicate_field("fscmType"));
-                            }
-                            fscm_type__ = Some(map_.next_value::<FscmDetailType>()? as i32);
-                        }
-                        GeneratedField::FscmDescription => {
-                            if fscm_description__.is_some() {
-                                return Err(serde::de::Error::duplicate_field("fscmDescription"));
-                            }
-                            fscm_description__ = Some(map_.next_value()?);
-                        }
-                        GeneratedField::FiringAuthority => {
-                            if firing_authority__.is_some() {
-                                return Err(serde::de::Error::duplicate_field("firingAuthority"));
-                            }
-                            firing_authority__ = map_.next_value()?;
-                        }
-                        GeneratedField::AmmoRestrictionType => {
-                            if ammo_restriction_type__.is_some() {
-                                return Err(serde::de::Error::duplicate_field("ammoRestrictionType"));
-                            }
-                            ammo_restriction_type__ = Some(map_.next_value::<AmmoRestrictionType>()? as i32);
-                        }
-                        GeneratedField::RestrictiveMeasureType => {
-                            if restrictive_measure_type__.is_some() {
-                                return Err(serde::de::Error::duplicate_field("restrictiveMeasureType"));
-                            }
-                            restrictive_measure_type__ = Some(map_.next_value::<RestrictiveMeasureType>()? as i32);
-                        }
-                        GeneratedField::AmmoRestrictTypes => {
-                            if ammo_restrict_types__.is_some() {
-                                return Err(serde::de::Error::duplicate_field("ammoRestrictTypes"));
-                            }
-                            ammo_restrict_types__ = Some(map_.next_value::<Vec<AmmoRestrictionType>>()?.into_iter().map(|x| x as i32).collect());
-                        }
-                        GeneratedField::IsGround => {
-                            if is_ground__.is_some() {
-                                return Err(serde::de::Error::duplicate_field("isGround"));
-                            }
-                            is_ground__ = Some(map_.next_value()?);
-                        }
-                    }
-                }
-                Ok(FscmDetails {
-                    fscm_type: fscm_type__.unwrap_or_default(),
-                    fscm_description: fscm_description__.unwrap_or_default(),
-                    firing_authority: firing_authority__,
-                    ammo_restriction_type: ammo_restriction_type__.unwrap_or_default(),
-                    restrictive_measure_type: restrictive_measure_type__.unwrap_or_default(),
-                    ammo_restrict_types: ammo_restrict_types__.unwrap_or_default(),
-                    is_ground: is_ground__.unwrap_or_default(),
-                })
-            }
-        }
-        deserializer.deserialize_struct("anduril.entitymanager.v1.FSCMDetails", FIELDS, GeneratedVisitor)
-    }
-}
 impl serde::Serialize for FieldClassificationInformation {
     #[allow(deprecated)]
     fn serialize<S>(&self, serializer: S) -> std::result::Result<S::Ok, S::Error>
@@ -6220,98 +5466,6 @@ impl<'de> serde::Deserialize<'de> for FieldOfView {
             }
         }
         deserializer.deserialize_struct("anduril.entitymanager.v1.FieldOfView", FIELDS, GeneratedVisitor)
-    }
-}
-impl serde::Serialize for FiringAuthority {
-    #[allow(deprecated)]
-    fn serialize<S>(&self, serializer: S) -> std::result::Result<S::Ok, S::Error>
-    where
-        S: serde::Serializer,
-    {
-        use serde::ser::SerializeStruct;
-        let mut len = 0;
-        if !self.entity_ids.is_empty() {
-            len += 1;
-        }
-        let mut struct_ser = serializer.serialize_struct("anduril.entitymanager.v1.FiringAuthority", len)?;
-        if !self.entity_ids.is_empty() {
-            struct_ser.serialize_field("entityIds", &self.entity_ids)?;
-        }
-        struct_ser.end()
-    }
-}
-impl<'de> serde::Deserialize<'de> for FiringAuthority {
-    #[allow(deprecated)]
-    fn deserialize<D>(deserializer: D) -> std::result::Result<Self, D::Error>
-    where
-        D: serde::Deserializer<'de>,
-    {
-        const FIELDS: &[&str] = &[
-            "entity_ids",
-            "entityIds",
-        ];
-
-        #[allow(clippy::enum_variant_names)]
-        enum GeneratedField {
-            EntityIds,
-        }
-        impl<'de> serde::Deserialize<'de> for GeneratedField {
-            fn deserialize<D>(deserializer: D) -> std::result::Result<GeneratedField, D::Error>
-            where
-                D: serde::Deserializer<'de>,
-            {
-                struct GeneratedVisitor;
-
-                impl<'de> serde::de::Visitor<'de> for GeneratedVisitor {
-                    type Value = GeneratedField;
-
-                    fn expecting(&self, formatter: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
-                        write!(formatter, "expected one of: {:?}", &FIELDS)
-                    }
-
-                    #[allow(unused_variables)]
-                    fn visit_str<E>(self, value: &str) -> std::result::Result<GeneratedField, E>
-                    where
-                        E: serde::de::Error,
-                    {
-                        match value {
-                            "entityIds" | "entity_ids" => Ok(GeneratedField::EntityIds),
-                            _ => Err(serde::de::Error::unknown_field(value, FIELDS)),
-                        }
-                    }
-                }
-                deserializer.deserialize_identifier(GeneratedVisitor)
-            }
-        }
-        struct GeneratedVisitor;
-        impl<'de> serde::de::Visitor<'de> for GeneratedVisitor {
-            type Value = FiringAuthority;
-
-            fn expecting(&self, formatter: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
-                formatter.write_str("struct anduril.entitymanager.v1.FiringAuthority")
-            }
-
-            fn visit_map<V>(self, mut map_: V) -> std::result::Result<FiringAuthority, V::Error>
-                where
-                    V: serde::de::MapAccess<'de>,
-            {
-                let mut entity_ids__ = None;
-                while let Some(k) = map_.next_key()? {
-                    match k {
-                        GeneratedField::EntityIds => {
-                            if entity_ids__.is_some() {
-                                return Err(serde::de::Error::duplicate_field("entityIds"));
-                            }
-                            entity_ids__ = Some(map_.next_value()?);
-                        }
-                    }
-                }
-                Ok(FiringAuthority {
-                    entity_ids: entity_ids__.unwrap_or_default(),
-                })
-            }
-        }
-        deserializer.deserialize_struct("anduril.entitymanager.v1.FiringAuthority", FIELDS, GeneratedVisitor)
     }
 }
 impl serde::Serialize for Fixed {
@@ -6935,39 +6089,11 @@ impl serde::Serialize for GeoDetails {
         if self.r#type != 0 {
             len += 1;
         }
-        if self.visual_details.is_some() {
-            len += 1;
-        }
-        if self.type_details.is_some() {
-            len += 1;
-        }
         let mut struct_ser = serializer.serialize_struct("anduril.entitymanager.v1.GeoDetails", len)?;
         if self.r#type != 0 {
             let v = GeoType::try_from(self.r#type)
                 .map_err(|_| serde::ser::Error::custom(format!("Invalid variant {}", self.r#type)))?;
             struct_ser.serialize_field("type", &v)?;
-        }
-        if let Some(v) = self.visual_details.as_ref() {
-            struct_ser.serialize_field("visualDetails", v)?;
-        }
-        if let Some(v) = self.type_details.as_ref() {
-            match v {
-                geo_details::TypeDetails::Emergency(v) => {
-                    struct_ser.serialize_field("emergency", v)?;
-                }
-                geo_details::TypeDetails::Fscm(v) => {
-                    struct_ser.serialize_field("fscm", v)?;
-                }
-                geo_details::TypeDetails::ControlArea(v) => {
-                    struct_ser.serialize_field("controlArea", v)?;
-                }
-                geo_details::TypeDetails::Acm(v) => {
-                    struct_ser.serialize_field("acm", v)?;
-                }
-                geo_details::TypeDetails::Mcm(v) => {
-                    struct_ser.serialize_field("mcm", v)?;
-                }
-            }
         }
         struct_ser.end()
     }
@@ -6980,25 +6106,11 @@ impl<'de> serde::Deserialize<'de> for GeoDetails {
     {
         const FIELDS: &[&str] = &[
             "type",
-            "visual_details",
-            "visualDetails",
-            "emergency",
-            "fscm",
-            "control_area",
-            "controlArea",
-            "acm",
-            "mcm",
         ];
 
         #[allow(clippy::enum_variant_names)]
         enum GeneratedField {
             Type,
-            VisualDetails,
-            Emergency,
-            Fscm,
-            ControlArea,
-            Acm,
-            Mcm,
         }
         impl<'de> serde::Deserialize<'de> for GeneratedField {
             fn deserialize<D>(deserializer: D) -> std::result::Result<GeneratedField, D::Error>
@@ -7021,12 +6133,6 @@ impl<'de> serde::Deserialize<'de> for GeoDetails {
                     {
                         match value {
                             "type" => Ok(GeneratedField::Type),
-                            "visualDetails" | "visual_details" => Ok(GeneratedField::VisualDetails),
-                            "emergency" => Ok(GeneratedField::Emergency),
-                            "fscm" => Ok(GeneratedField::Fscm),
-                            "controlArea" | "control_area" => Ok(GeneratedField::ControlArea),
-                            "acm" => Ok(GeneratedField::Acm),
-                            "mcm" => Ok(GeneratedField::Mcm),
                             _ => Err(serde::de::Error::unknown_field(value, FIELDS)),
                         }
                     }
@@ -7047,8 +6153,6 @@ impl<'de> serde::Deserialize<'de> for GeoDetails {
                     V: serde::de::MapAccess<'de>,
             {
                 let mut r#type__ = None;
-                let mut visual_details__ = None;
-                let mut type_details__ = None;
                 while let Some(k) = map_.next_key()? {
                     match k {
                         GeneratedField::Type => {
@@ -7057,53 +6161,10 @@ impl<'de> serde::Deserialize<'de> for GeoDetails {
                             }
                             r#type__ = Some(map_.next_value::<GeoType>()? as i32);
                         }
-                        GeneratedField::VisualDetails => {
-                            if visual_details__.is_some() {
-                                return Err(serde::de::Error::duplicate_field("visualDetails"));
-                            }
-                            visual_details__ = map_.next_value()?;
-                        }
-                        GeneratedField::Emergency => {
-                            if type_details__.is_some() {
-                                return Err(serde::de::Error::duplicate_field("emergency"));
-                            }
-                            type_details__ = map_.next_value::<::std::option::Option<_>>()?.map(geo_details::TypeDetails::Emergency)
-;
-                        }
-                        GeneratedField::Fscm => {
-                            if type_details__.is_some() {
-                                return Err(serde::de::Error::duplicate_field("fscm"));
-                            }
-                            type_details__ = map_.next_value::<::std::option::Option<_>>()?.map(geo_details::TypeDetails::Fscm)
-;
-                        }
-                        GeneratedField::ControlArea => {
-                            if type_details__.is_some() {
-                                return Err(serde::de::Error::duplicate_field("controlArea"));
-                            }
-                            type_details__ = map_.next_value::<::std::option::Option<_>>()?.map(geo_details::TypeDetails::ControlArea)
-;
-                        }
-                        GeneratedField::Acm => {
-                            if type_details__.is_some() {
-                                return Err(serde::de::Error::duplicate_field("acm"));
-                            }
-                            type_details__ = map_.next_value::<::std::option::Option<_>>()?.map(geo_details::TypeDetails::Acm)
-;
-                        }
-                        GeneratedField::Mcm => {
-                            if type_details__.is_some() {
-                                return Err(serde::de::Error::duplicate_field("mcm"));
-                            }
-                            type_details__ = map_.next_value::<::std::option::Option<_>>()?.map(geo_details::TypeDetails::Mcm)
-;
-                        }
                     }
                 }
                 Ok(GeoDetails {
                     r#type: r#type__.unwrap_or_default(),
-                    visual_details: visual_details__,
-                    type_details: type_details__,
                 })
             }
         }
@@ -7943,12 +7004,9 @@ impl serde::Serialize for GeoType {
             Self::General => "GEO_TYPE_GENERAL",
             Self::Hazard => "GEO_TYPE_HAZARD",
             Self::Emergency => "GEO_TYPE_EMERGENCY",
-            Self::Fscm => "GEO_TYPE_FSCM",
             Self::EngagementZone => "GEO_TYPE_ENGAGEMENT_ZONE",
             Self::ControlArea => "GEO_TYPE_CONTROL_AREA",
             Self::Bullseye => "GEO_TYPE_BULLSEYE",
-            Self::Acm => "GEO_TYPE_ACM",
-            Self::Mcm => "GEO_TYPE_MCM",
         };
         serializer.serialize_str(variant)
     }
@@ -7964,12 +7022,9 @@ impl<'de> serde::Deserialize<'de> for GeoType {
             "GEO_TYPE_GENERAL",
             "GEO_TYPE_HAZARD",
             "GEO_TYPE_EMERGENCY",
-            "GEO_TYPE_FSCM",
             "GEO_TYPE_ENGAGEMENT_ZONE",
             "GEO_TYPE_CONTROL_AREA",
             "GEO_TYPE_BULLSEYE",
-            "GEO_TYPE_ACM",
-            "GEO_TYPE_MCM",
         ];
 
         struct GeneratedVisitor;
@@ -8014,127 +7069,14 @@ impl<'de> serde::Deserialize<'de> for GeoType {
                     "GEO_TYPE_GENERAL" => Ok(GeoType::General),
                     "GEO_TYPE_HAZARD" => Ok(GeoType::Hazard),
                     "GEO_TYPE_EMERGENCY" => Ok(GeoType::Emergency),
-                    "GEO_TYPE_FSCM" => Ok(GeoType::Fscm),
                     "GEO_TYPE_ENGAGEMENT_ZONE" => Ok(GeoType::EngagementZone),
                     "GEO_TYPE_CONTROL_AREA" => Ok(GeoType::ControlArea),
                     "GEO_TYPE_BULLSEYE" => Ok(GeoType::Bullseye),
-                    "GEO_TYPE_ACM" => Ok(GeoType::Acm),
-                    "GEO_TYPE_MCM" => Ok(GeoType::Mcm),
                     _ => Err(serde::de::Error::unknown_variant(value, FIELDS)),
                 }
             }
         }
         deserializer.deserialize_any(GeneratedVisitor)
-    }
-}
-impl serde::Serialize for GeoVisualDetails {
-    #[allow(deprecated)]
-    fn serialize<S>(&self, serializer: S) -> std::result::Result<S::Ok, S::Error>
-    where
-        S: serde::Serializer,
-    {
-        use serde::ser::SerializeStruct;
-        let mut len = 0;
-        if self.fill_color.is_some() {
-            len += 1;
-        }
-        if self.line_color.is_some() {
-            len += 1;
-        }
-        let mut struct_ser = serializer.serialize_struct("anduril.entitymanager.v1.GeoVisualDetails", len)?;
-        if let Some(v) = self.fill_color.as_ref() {
-            struct_ser.serialize_field("fillColor", v)?;
-        }
-        if let Some(v) = self.line_color.as_ref() {
-            struct_ser.serialize_field("lineColor", v)?;
-        }
-        struct_ser.end()
-    }
-}
-impl<'de> serde::Deserialize<'de> for GeoVisualDetails {
-    #[allow(deprecated)]
-    fn deserialize<D>(deserializer: D) -> std::result::Result<Self, D::Error>
-    where
-        D: serde::Deserializer<'de>,
-    {
-        const FIELDS: &[&str] = &[
-            "fill_color",
-            "fillColor",
-            "line_color",
-            "lineColor",
-        ];
-
-        #[allow(clippy::enum_variant_names)]
-        enum GeneratedField {
-            FillColor,
-            LineColor,
-        }
-        impl<'de> serde::Deserialize<'de> for GeneratedField {
-            fn deserialize<D>(deserializer: D) -> std::result::Result<GeneratedField, D::Error>
-            where
-                D: serde::Deserializer<'de>,
-            {
-                struct GeneratedVisitor;
-
-                impl<'de> serde::de::Visitor<'de> for GeneratedVisitor {
-                    type Value = GeneratedField;
-
-                    fn expecting(&self, formatter: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
-                        write!(formatter, "expected one of: {:?}", &FIELDS)
-                    }
-
-                    #[allow(unused_variables)]
-                    fn visit_str<E>(self, value: &str) -> std::result::Result<GeneratedField, E>
-                    where
-                        E: serde::de::Error,
-                    {
-                        match value {
-                            "fillColor" | "fill_color" => Ok(GeneratedField::FillColor),
-                            "lineColor" | "line_color" => Ok(GeneratedField::LineColor),
-                            _ => Err(serde::de::Error::unknown_field(value, FIELDS)),
-                        }
-                    }
-                }
-                deserializer.deserialize_identifier(GeneratedVisitor)
-            }
-        }
-        struct GeneratedVisitor;
-        impl<'de> serde::de::Visitor<'de> for GeneratedVisitor {
-            type Value = GeoVisualDetails;
-
-            fn expecting(&self, formatter: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
-                formatter.write_str("struct anduril.entitymanager.v1.GeoVisualDetails")
-            }
-
-            fn visit_map<V>(self, mut map_: V) -> std::result::Result<GeoVisualDetails, V::Error>
-                where
-                    V: serde::de::MapAccess<'de>,
-            {
-                let mut fill_color__ = None;
-                let mut line_color__ = None;
-                while let Some(k) = map_.next_key()? {
-                    match k {
-                        GeneratedField::FillColor => {
-                            if fill_color__.is_some() {
-                                return Err(serde::de::Error::duplicate_field("fillColor"));
-                            }
-                            fill_color__ = map_.next_value()?;
-                        }
-                        GeneratedField::LineColor => {
-                            if line_color__.is_some() {
-                                return Err(serde::de::Error::duplicate_field("lineColor"));
-                            }
-                            line_color__ = map_.next_value()?;
-                        }
-                    }
-                }
-                Ok(GeoVisualDetails {
-                    fill_color: fill_color__,
-                    line_color: line_color__,
-                })
-            }
-        }
-        deserializer.deserialize_struct("anduril.entitymanager.v1.GeoVisualDetails", FIELDS, GeneratedVisitor)
     }
 }
 impl serde::Serialize for GetEntityRequest {
@@ -8398,18 +7340,8 @@ impl serde::Serialize for GroupDetails {
         S: serde::Serializer,
     {
         use serde::ser::SerializeStruct;
-        let mut len = 0;
-        if self.group_type.is_some() {
-            len += 1;
-        }
-        let mut struct_ser = serializer.serialize_struct("anduril.entitymanager.v1.GroupDetails", len)?;
-        if let Some(v) = self.group_type.as_ref() {
-            match v {
-                group_details::GroupType::Team(v) => {
-                    struct_ser.serialize_field("team", v)?;
-                }
-            }
-        }
+        let len = 0;
+        let struct_ser = serializer.serialize_struct("anduril.entitymanager.v1.GroupDetails", len)?;
         struct_ser.end()
     }
 }
@@ -8420,12 +7352,10 @@ impl<'de> serde::Deserialize<'de> for GroupDetails {
         D: serde::Deserializer<'de>,
     {
         const FIELDS: &[&str] = &[
-            "team",
         ];
 
         #[allow(clippy::enum_variant_names)]
         enum GeneratedField {
-            Team,
         }
         impl<'de> serde::Deserialize<'de> for GeneratedField {
             fn deserialize<D>(deserializer: D) -> std::result::Result<GeneratedField, D::Error>
@@ -8446,10 +7376,7 @@ impl<'de> serde::Deserialize<'de> for GroupDetails {
                     where
                         E: serde::de::Error,
                     {
-                        match value {
-                            "team" => Ok(GeneratedField::Team),
-                            _ => Err(serde::de::Error::unknown_field(value, FIELDS)),
-                        }
+                            Err(serde::de::Error::unknown_field(value, FIELDS))
                     }
                 }
                 deserializer.deserialize_identifier(GeneratedVisitor)
@@ -8467,20 +7394,10 @@ impl<'de> serde::Deserialize<'de> for GroupDetails {
                 where
                     V: serde::de::MapAccess<'de>,
             {
-                let mut group_type__ = None;
-                while let Some(k) = map_.next_key()? {
-                    match k {
-                        GeneratedField::Team => {
-                            if group_type__.is_some() {
-                                return Err(serde::de::Error::duplicate_field("team"));
-                            }
-                            group_type__ = map_.next_value::<::std::option::Option<_>>()?.map(group_details::GroupType::Team)
-;
-                        }
-                    }
+                while map_.next_key::<GeneratedField>()?.is_some() {
+                    let _ = map_.next_value::<serde::de::IgnoredAny>()?;
                 }
                 Ok(GroupDetails {
-                    group_type: group_type__,
                 })
             }
         }
@@ -9270,9 +8187,6 @@ impl serde::Serialize for Indicators {
         if self.c2.is_some() {
             len += 1;
         }
-        if self.deletable != 0 {
-            len += 1;
-        }
         if self.egressable.is_some() {
             len += 1;
         }
@@ -9291,11 +8205,6 @@ impl serde::Serialize for Indicators {
         }
         if let Some(v) = self.c2.as_ref() {
             struct_ser.serialize_field("c2", v)?;
-        }
-        if self.deletable != 0 {
-            let v = Deletable::try_from(self.deletable)
-                .map_err(|_| serde::ser::Error::custom(format!("Invalid variant {}", self.deletable)))?;
-            struct_ser.serialize_field("deletable", &v)?;
         }
         if let Some(v) = self.egressable.as_ref() {
             struct_ser.serialize_field("egressable", v)?;
@@ -9317,7 +8226,6 @@ impl<'de> serde::Deserialize<'de> for Indicators {
             "exercise",
             "emergency",
             "c2",
-            "deletable",
             "egressable",
             "starred",
         ];
@@ -9328,7 +8236,6 @@ impl<'de> serde::Deserialize<'de> for Indicators {
             Exercise,
             Emergency,
             C2,
-            Deletable,
             Egressable,
             Starred,
         }
@@ -9356,7 +8263,6 @@ impl<'de> serde::Deserialize<'de> for Indicators {
                             "exercise" => Ok(GeneratedField::Exercise),
                             "emergency" => Ok(GeneratedField::Emergency),
                             "c2" => Ok(GeneratedField::C2),
-                            "deletable" => Ok(GeneratedField::Deletable),
                             "egressable" => Ok(GeneratedField::Egressable),
                             "starred" => Ok(GeneratedField::Starred),
                             _ => Err(serde::de::Error::unknown_field(value, FIELDS)),
@@ -9382,7 +8288,6 @@ impl<'de> serde::Deserialize<'de> for Indicators {
                 let mut exercise__ = None;
                 let mut emergency__ = None;
                 let mut c2__ = None;
-                let mut deletable__ = None;
                 let mut egressable__ = None;
                 let mut starred__ = None;
                 while let Some(k) = map_.next_key()? {
@@ -9411,12 +8316,6 @@ impl<'de> serde::Deserialize<'de> for Indicators {
                             }
                             c2__ = map_.next_value()?;
                         }
-                        GeneratedField::Deletable => {
-                            if deletable__.is_some() {
-                                return Err(serde::de::Error::duplicate_field("deletable"));
-                            }
-                            deletable__ = Some(map_.next_value::<Deletable>()? as i32);
-                        }
                         GeneratedField::Egressable => {
                             if egressable__.is_some() {
                                 return Err(serde::de::Error::duplicate_field("egressable"));
@@ -9436,87 +8335,12 @@ impl<'de> serde::Deserialize<'de> for Indicators {
                     exercise: exercise__,
                     emergency: emergency__,
                     c2: c2__,
-                    deletable: deletable__.unwrap_or_default(),
                     egressable: egressable__,
                     starred: starred__,
                 })
             }
         }
         deserializer.deserialize_struct("anduril.entitymanager.v1.Indicators", FIELDS, GeneratedVisitor)
-    }
-}
-impl serde::Serialize for InteractivityMode {
-    #[allow(deprecated)]
-    fn serialize<S>(&self, serializer: S) -> std::result::Result<S::Ok, S::Error>
-    where
-        S: serde::Serializer,
-    {
-        let variant = match self {
-            Self::Invalid => "INTERACTIVITY_MODE_INVALID",
-            Self::Default => "INTERACTIVITY_MODE_DEFAULT",
-            Self::DisabledOnMap => "INTERACTIVITY_MODE_DISABLED_ON_MAP",
-        };
-        serializer.serialize_str(variant)
-    }
-}
-impl<'de> serde::Deserialize<'de> for InteractivityMode {
-    #[allow(deprecated)]
-    fn deserialize<D>(deserializer: D) -> std::result::Result<Self, D::Error>
-    where
-        D: serde::Deserializer<'de>,
-    {
-        const FIELDS: &[&str] = &[
-            "INTERACTIVITY_MODE_INVALID",
-            "INTERACTIVITY_MODE_DEFAULT",
-            "INTERACTIVITY_MODE_DISABLED_ON_MAP",
-        ];
-
-        struct GeneratedVisitor;
-
-        impl<'de> serde::de::Visitor<'de> for GeneratedVisitor {
-            type Value = InteractivityMode;
-
-            fn expecting(&self, formatter: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
-                write!(formatter, "expected one of: {:?}", &FIELDS)
-            }
-
-            fn visit_i64<E>(self, v: i64) -> std::result::Result<Self::Value, E>
-            where
-                E: serde::de::Error,
-            {
-                i32::try_from(v)
-                    .ok()
-                    .and_then(|x| x.try_into().ok())
-                    .ok_or_else(|| {
-                        serde::de::Error::invalid_value(serde::de::Unexpected::Signed(v), &self)
-                    })
-            }
-
-            fn visit_u64<E>(self, v: u64) -> std::result::Result<Self::Value, E>
-            where
-                E: serde::de::Error,
-            {
-                i32::try_from(v)
-                    .ok()
-                    .and_then(|x| x.try_into().ok())
-                    .ok_or_else(|| {
-                        serde::de::Error::invalid_value(serde::de::Unexpected::Unsigned(v), &self)
-                    })
-            }
-
-            fn visit_str<E>(self, value: &str) -> std::result::Result<Self::Value, E>
-            where
-                E: serde::de::Error,
-            {
-                match value {
-                    "INTERACTIVITY_MODE_INVALID" => Ok(InteractivityMode::Invalid),
-                    "INTERACTIVITY_MODE_DEFAULT" => Ok(InteractivityMode::Default),
-                    "INTERACTIVITY_MODE_DISABLED_ON_MAP" => Ok(InteractivityMode::DisabledOnMap),
-                    _ => Err(serde::de::Error::unknown_variant(value, FIELDS)),
-                }
-            }
-        }
-        deserializer.deserialize_any(GeneratedVisitor)
     }
 }
 impl serde::Serialize for InterrogationResponse {
@@ -10544,192 +9368,6 @@ impl<'de> serde::Deserialize<'de> for LocationUncertainty {
             }
         }
         deserializer.deserialize_struct("anduril.entitymanager.v1.LocationUncertainty", FIELDS, GeneratedVisitor)
-    }
-}
-impl serde::Serialize for McmDetailType {
-    #[allow(deprecated)]
-    fn serialize<S>(&self, serializer: S) -> std::result::Result<S::Ok, S::Error>
-    where
-        S: serde::Serializer,
-    {
-        let variant = match self {
-            Self::Invalid => "MCM_DETAIL_TYPE_INVALID",
-            Self::NamedAreaOfInterest => "MCM_DETAIL_TYPE_NAMED_AREA_OF_INTEREST",
-            Self::TargetAreaOfInterest => "MCM_DETAIL_TYPE_TARGET_AREA_OF_INTEREST",
-        };
-        serializer.serialize_str(variant)
-    }
-}
-impl<'de> serde::Deserialize<'de> for McmDetailType {
-    #[allow(deprecated)]
-    fn deserialize<D>(deserializer: D) -> std::result::Result<Self, D::Error>
-    where
-        D: serde::Deserializer<'de>,
-    {
-        const FIELDS: &[&str] = &[
-            "MCM_DETAIL_TYPE_INVALID",
-            "MCM_DETAIL_TYPE_NAMED_AREA_OF_INTEREST",
-            "MCM_DETAIL_TYPE_TARGET_AREA_OF_INTEREST",
-        ];
-
-        struct GeneratedVisitor;
-
-        impl<'de> serde::de::Visitor<'de> for GeneratedVisitor {
-            type Value = McmDetailType;
-
-            fn expecting(&self, formatter: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
-                write!(formatter, "expected one of: {:?}", &FIELDS)
-            }
-
-            fn visit_i64<E>(self, v: i64) -> std::result::Result<Self::Value, E>
-            where
-                E: serde::de::Error,
-            {
-                i32::try_from(v)
-                    .ok()
-                    .and_then(|x| x.try_into().ok())
-                    .ok_or_else(|| {
-                        serde::de::Error::invalid_value(serde::de::Unexpected::Signed(v), &self)
-                    })
-            }
-
-            fn visit_u64<E>(self, v: u64) -> std::result::Result<Self::Value, E>
-            where
-                E: serde::de::Error,
-            {
-                i32::try_from(v)
-                    .ok()
-                    .and_then(|x| x.try_into().ok())
-                    .ok_or_else(|| {
-                        serde::de::Error::invalid_value(serde::de::Unexpected::Unsigned(v), &self)
-                    })
-            }
-
-            fn visit_str<E>(self, value: &str) -> std::result::Result<Self::Value, E>
-            where
-                E: serde::de::Error,
-            {
-                match value {
-                    "MCM_DETAIL_TYPE_INVALID" => Ok(McmDetailType::Invalid),
-                    "MCM_DETAIL_TYPE_NAMED_AREA_OF_INTEREST" => Ok(McmDetailType::NamedAreaOfInterest),
-                    "MCM_DETAIL_TYPE_TARGET_AREA_OF_INTEREST" => Ok(McmDetailType::TargetAreaOfInterest),
-                    _ => Err(serde::de::Error::unknown_variant(value, FIELDS)),
-                }
-            }
-        }
-        deserializer.deserialize_any(GeneratedVisitor)
-    }
-}
-impl serde::Serialize for McmDetails {
-    #[allow(deprecated)]
-    fn serialize<S>(&self, serializer: S) -> std::result::Result<S::Ok, S::Error>
-    where
-        S: serde::Serializer,
-    {
-        use serde::ser::SerializeStruct;
-        let mut len = 0;
-        if self.mcm_type != 0 {
-            len += 1;
-        }
-        if !self.mcm_description.is_empty() {
-            len += 1;
-        }
-        let mut struct_ser = serializer.serialize_struct("anduril.entitymanager.v1.MCMDetails", len)?;
-        if self.mcm_type != 0 {
-            let v = McmDetailType::try_from(self.mcm_type)
-                .map_err(|_| serde::ser::Error::custom(format!("Invalid variant {}", self.mcm_type)))?;
-            struct_ser.serialize_field("mcmType", &v)?;
-        }
-        if !self.mcm_description.is_empty() {
-            struct_ser.serialize_field("mcmDescription", &self.mcm_description)?;
-        }
-        struct_ser.end()
-    }
-}
-impl<'de> serde::Deserialize<'de> for McmDetails {
-    #[allow(deprecated)]
-    fn deserialize<D>(deserializer: D) -> std::result::Result<Self, D::Error>
-    where
-        D: serde::Deserializer<'de>,
-    {
-        const FIELDS: &[&str] = &[
-            "mcm_type",
-            "mcmType",
-            "mcm_description",
-            "mcmDescription",
-        ];
-
-        #[allow(clippy::enum_variant_names)]
-        enum GeneratedField {
-            McmType,
-            McmDescription,
-        }
-        impl<'de> serde::Deserialize<'de> for GeneratedField {
-            fn deserialize<D>(deserializer: D) -> std::result::Result<GeneratedField, D::Error>
-            where
-                D: serde::Deserializer<'de>,
-            {
-                struct GeneratedVisitor;
-
-                impl<'de> serde::de::Visitor<'de> for GeneratedVisitor {
-                    type Value = GeneratedField;
-
-                    fn expecting(&self, formatter: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
-                        write!(formatter, "expected one of: {:?}", &FIELDS)
-                    }
-
-                    #[allow(unused_variables)]
-                    fn visit_str<E>(self, value: &str) -> std::result::Result<GeneratedField, E>
-                    where
-                        E: serde::de::Error,
-                    {
-                        match value {
-                            "mcmType" | "mcm_type" => Ok(GeneratedField::McmType),
-                            "mcmDescription" | "mcm_description" => Ok(GeneratedField::McmDescription),
-                            _ => Err(serde::de::Error::unknown_field(value, FIELDS)),
-                        }
-                    }
-                }
-                deserializer.deserialize_identifier(GeneratedVisitor)
-            }
-        }
-        struct GeneratedVisitor;
-        impl<'de> serde::de::Visitor<'de> for GeneratedVisitor {
-            type Value = McmDetails;
-
-            fn expecting(&self, formatter: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
-                formatter.write_str("struct anduril.entitymanager.v1.MCMDetails")
-            }
-
-            fn visit_map<V>(self, mut map_: V) -> std::result::Result<McmDetails, V::Error>
-                where
-                    V: serde::de::MapAccess<'de>,
-            {
-                let mut mcm_type__ = None;
-                let mut mcm_description__ = None;
-                while let Some(k) = map_.next_key()? {
-                    match k {
-                        GeneratedField::McmType => {
-                            if mcm_type__.is_some() {
-                                return Err(serde::de::Error::duplicate_field("mcmType"));
-                            }
-                            mcm_type__ = Some(map_.next_value::<McmDetailType>()? as i32);
-                        }
-                        GeneratedField::McmDescription => {
-                            if mcm_description__.is_some() {
-                                return Err(serde::de::Error::duplicate_field("mcmDescription"));
-                            }
-                            mcm_description__ = Some(map_.next_value()?);
-                        }
-                    }
-                }
-                Ok(McmDetails {
-                    mcm_type: mcm_type__.unwrap_or_default(),
-                    mcm_description: mcm_description__.unwrap_or_default(),
-                })
-            }
-        }
-        deserializer.deserialize_struct("anduril.entitymanager.v1.MCMDetails", FIELDS, GeneratedVisitor)
     }
 }
 impl serde::Serialize for Measurement {
@@ -12390,9 +11028,6 @@ impl serde::Serialize for Ontology {
     {
         use serde::ser::SerializeStruct;
         let mut len = 0;
-        if !self.descriptors.is_empty() {
-            len += 1;
-        }
         if !self.platform_type.is_empty() {
             len += 1;
         }
@@ -12403,9 +11038,6 @@ impl serde::Serialize for Ontology {
             len += 1;
         }
         let mut struct_ser = serializer.serialize_struct("anduril.entitymanager.v1.Ontology", len)?;
-        if !self.descriptors.is_empty() {
-            struct_ser.serialize_field("descriptors", &self.descriptors)?;
-        }
         if !self.platform_type.is_empty() {
             struct_ser.serialize_field("platformType", &self.platform_type)?;
         }
@@ -12427,7 +11059,6 @@ impl<'de> serde::Deserialize<'de> for Ontology {
         D: serde::Deserializer<'de>,
     {
         const FIELDS: &[&str] = &[
-            "descriptors",
             "platform_type",
             "platformType",
             "specific_type",
@@ -12437,7 +11068,6 @@ impl<'de> serde::Deserialize<'de> for Ontology {
 
         #[allow(clippy::enum_variant_names)]
         enum GeneratedField {
-            Descriptors,
             PlatformType,
             SpecificType,
             Template,
@@ -12462,7 +11092,6 @@ impl<'de> serde::Deserialize<'de> for Ontology {
                         E: serde::de::Error,
                     {
                         match value {
-                            "descriptors" => Ok(GeneratedField::Descriptors),
                             "platformType" | "platform_type" => Ok(GeneratedField::PlatformType),
                             "specificType" | "specific_type" => Ok(GeneratedField::SpecificType),
                             "template" => Ok(GeneratedField::Template),
@@ -12485,18 +11114,11 @@ impl<'de> serde::Deserialize<'de> for Ontology {
                 where
                     V: serde::de::MapAccess<'de>,
             {
-                let mut descriptors__ = None;
                 let mut platform_type__ = None;
                 let mut specific_type__ = None;
                 let mut template__ = None;
                 while let Some(k) = map_.next_key()? {
                     match k {
-                        GeneratedField::Descriptors => {
-                            if descriptors__.is_some() {
-                                return Err(serde::de::Error::duplicate_field("descriptors"));
-                            }
-                            descriptors__ = Some(map_.next_value()?);
-                        }
                         GeneratedField::PlatformType => {
                             if platform_type__.is_some() {
                                 return Err(serde::de::Error::duplicate_field("platformType"));
@@ -12518,7 +11140,6 @@ impl<'de> serde::Deserialize<'de> for Ontology {
                     }
                 }
                 Ok(Ontology {
-                    descriptors: descriptors__.unwrap_or_default(),
                     platform_type: platform_type__.unwrap_or_default(),
                     specific_type: specific_type__.unwrap_or_default(),
                     template: template__.unwrap_or_default(),
@@ -12812,222 +11433,6 @@ impl<'de> serde::Deserialize<'de> for Orbit {
             }
         }
         deserializer.deserialize_struct("anduril.entitymanager.v1.Orbit", FIELDS, GeneratedVisitor)
-    }
-}
-impl serde::Serialize for OriginalData {
-    #[allow(deprecated)]
-    fn serialize<S>(&self, serializer: S) -> std::result::Result<S::Ok, S::Error>
-    where
-        S: serde::Serializer,
-    {
-        use serde::ser::SerializeStruct;
-        let mut len = 0;
-        if !self.url.is_empty() {
-            len += 1;
-        }
-        if self.tle.is_some() {
-            len += 1;
-        }
-        let mut struct_ser = serializer.serialize_struct("anduril.entitymanager.v1.OriginalData", len)?;
-        if !self.url.is_empty() {
-            struct_ser.serialize_field("url", &self.url)?;
-        }
-        if let Some(v) = self.tle.as_ref() {
-            struct_ser.serialize_field("tle", v)?;
-        }
-        struct_ser.end()
-    }
-}
-impl<'de> serde::Deserialize<'de> for OriginalData {
-    #[allow(deprecated)]
-    fn deserialize<D>(deserializer: D) -> std::result::Result<Self, D::Error>
-    where
-        D: serde::Deserializer<'de>,
-    {
-        const FIELDS: &[&str] = &[
-            "url",
-            "tle",
-        ];
-
-        #[allow(clippy::enum_variant_names)]
-        enum GeneratedField {
-            Url,
-            Tle,
-        }
-        impl<'de> serde::Deserialize<'de> for GeneratedField {
-            fn deserialize<D>(deserializer: D) -> std::result::Result<GeneratedField, D::Error>
-            where
-                D: serde::Deserializer<'de>,
-            {
-                struct GeneratedVisitor;
-
-                impl<'de> serde::de::Visitor<'de> for GeneratedVisitor {
-                    type Value = GeneratedField;
-
-                    fn expecting(&self, formatter: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
-                        write!(formatter, "expected one of: {:?}", &FIELDS)
-                    }
-
-                    #[allow(unused_variables)]
-                    fn visit_str<E>(self, value: &str) -> std::result::Result<GeneratedField, E>
-                    where
-                        E: serde::de::Error,
-                    {
-                        match value {
-                            "url" => Ok(GeneratedField::Url),
-                            "tle" => Ok(GeneratedField::Tle),
-                            _ => Err(serde::de::Error::unknown_field(value, FIELDS)),
-                        }
-                    }
-                }
-                deserializer.deserialize_identifier(GeneratedVisitor)
-            }
-        }
-        struct GeneratedVisitor;
-        impl<'de> serde::de::Visitor<'de> for GeneratedVisitor {
-            type Value = OriginalData;
-
-            fn expecting(&self, formatter: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
-                formatter.write_str("struct anduril.entitymanager.v1.OriginalData")
-            }
-
-            fn visit_map<V>(self, mut map_: V) -> std::result::Result<OriginalData, V::Error>
-                where
-                    V: serde::de::MapAccess<'de>,
-            {
-                let mut url__ = None;
-                let mut tle__ = None;
-                while let Some(k) = map_.next_key()? {
-                    match k {
-                        GeneratedField::Url => {
-                            if url__.is_some() {
-                                return Err(serde::de::Error::duplicate_field("url"));
-                            }
-                            url__ = Some(map_.next_value()?);
-                        }
-                        GeneratedField::Tle => {
-                            if tle__.is_some() {
-                                return Err(serde::de::Error::duplicate_field("tle"));
-                            }
-                            tle__ = map_.next_value()?;
-                        }
-                    }
-                }
-                Ok(OriginalData {
-                    url: url__.unwrap_or_default(),
-                    tle: tle__,
-                })
-            }
-        }
-        deserializer.deserialize_struct("anduril.entitymanager.v1.OriginalData", FIELDS, GeneratedVisitor)
-    }
-}
-impl serde::Serialize for original_data::Tle {
-    #[allow(deprecated)]
-    fn serialize<S>(&self, serializer: S) -> std::result::Result<S::Ok, S::Error>
-    where
-        S: serde::Serializer,
-    {
-        use serde::ser::SerializeStruct;
-        let mut len = 0;
-        if !self.line1.is_empty() {
-            len += 1;
-        }
-        if !self.line2.is_empty() {
-            len += 1;
-        }
-        let mut struct_ser = serializer.serialize_struct("anduril.entitymanager.v1.OriginalData.TLE", len)?;
-        if !self.line1.is_empty() {
-            struct_ser.serialize_field("line1", &self.line1)?;
-        }
-        if !self.line2.is_empty() {
-            struct_ser.serialize_field("line2", &self.line2)?;
-        }
-        struct_ser.end()
-    }
-}
-impl<'de> serde::Deserialize<'de> for original_data::Tle {
-    #[allow(deprecated)]
-    fn deserialize<D>(deserializer: D) -> std::result::Result<Self, D::Error>
-    where
-        D: serde::Deserializer<'de>,
-    {
-        const FIELDS: &[&str] = &[
-            "line1",
-            "line2",
-        ];
-
-        #[allow(clippy::enum_variant_names)]
-        enum GeneratedField {
-            Line1,
-            Line2,
-        }
-        impl<'de> serde::Deserialize<'de> for GeneratedField {
-            fn deserialize<D>(deserializer: D) -> std::result::Result<GeneratedField, D::Error>
-            where
-                D: serde::Deserializer<'de>,
-            {
-                struct GeneratedVisitor;
-
-                impl<'de> serde::de::Visitor<'de> for GeneratedVisitor {
-                    type Value = GeneratedField;
-
-                    fn expecting(&self, formatter: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
-                        write!(formatter, "expected one of: {:?}", &FIELDS)
-                    }
-
-                    #[allow(unused_variables)]
-                    fn visit_str<E>(self, value: &str) -> std::result::Result<GeneratedField, E>
-                    where
-                        E: serde::de::Error,
-                    {
-                        match value {
-                            "line1" => Ok(GeneratedField::Line1),
-                            "line2" => Ok(GeneratedField::Line2),
-                            _ => Err(serde::de::Error::unknown_field(value, FIELDS)),
-                        }
-                    }
-                }
-                deserializer.deserialize_identifier(GeneratedVisitor)
-            }
-        }
-        struct GeneratedVisitor;
-        impl<'de> serde::de::Visitor<'de> for GeneratedVisitor {
-            type Value = original_data::Tle;
-
-            fn expecting(&self, formatter: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
-                formatter.write_str("struct anduril.entitymanager.v1.OriginalData.TLE")
-            }
-
-            fn visit_map<V>(self, mut map_: V) -> std::result::Result<original_data::Tle, V::Error>
-                where
-                    V: serde::de::MapAccess<'de>,
-            {
-                let mut line1__ = None;
-                let mut line2__ = None;
-                while let Some(k) = map_.next_key()? {
-                    match k {
-                        GeneratedField::Line1 => {
-                            if line1__.is_some() {
-                                return Err(serde::de::Error::duplicate_field("line1"));
-                            }
-                            line1__ = Some(map_.next_value()?);
-                        }
-                        GeneratedField::Line2 => {
-                            if line2__.is_some() {
-                                return Err(serde::de::Error::duplicate_field("line2"));
-                            }
-                            line2__ = Some(map_.next_value()?);
-                        }
-                    }
-                }
-                Ok(original_data::Tle {
-                    line1: line1__.unwrap_or_default(),
-                    line2: line2__.unwrap_or_default(),
-                })
-            }
-        }
-        deserializer.deserialize_struct("anduril.entitymanager.v1.OriginalData.TLE", FIELDS, GeneratedVisitor)
     }
 }
 impl serde::Serialize for Override {
@@ -13576,133 +11981,6 @@ impl<'de> serde::Deserialize<'de> for OverrideNotificationPayload {
         deserializer.deserialize_struct("anduril.entitymanager.v1.OverrideNotificationPayload", FIELDS, GeneratedVisitor)
     }
 }
-impl serde::Serialize for OverrideProvenance {
-    #[allow(deprecated)]
-    fn serialize<S>(&self, serializer: S) -> std::result::Result<S::Ok, S::Error>
-    where
-        S: serde::Serializer,
-    {
-        use serde::ser::SerializeStruct;
-        let mut len = 0;
-        if !self.field_path.is_empty() {
-            len += 1;
-        }
-        if !self.source_id.is_empty() {
-            len += 1;
-        }
-        if self.provenance.is_some() {
-            len += 1;
-        }
-        let mut struct_ser = serializer.serialize_struct("anduril.entitymanager.v1.OverrideProvenance", len)?;
-        if !self.field_path.is_empty() {
-            struct_ser.serialize_field("fieldPath", &self.field_path)?;
-        }
-        if !self.source_id.is_empty() {
-            struct_ser.serialize_field("sourceId", &self.source_id)?;
-        }
-        if let Some(v) = self.provenance.as_ref() {
-            struct_ser.serialize_field("provenance", v)?;
-        }
-        struct_ser.end()
-    }
-}
-impl<'de> serde::Deserialize<'de> for OverrideProvenance {
-    #[allow(deprecated)]
-    fn deserialize<D>(deserializer: D) -> std::result::Result<Self, D::Error>
-    where
-        D: serde::Deserializer<'de>,
-    {
-        const FIELDS: &[&str] = &[
-            "field_path",
-            "fieldPath",
-            "source_id",
-            "sourceId",
-            "provenance",
-        ];
-
-        #[allow(clippy::enum_variant_names)]
-        enum GeneratedField {
-            FieldPath,
-            SourceId,
-            Provenance,
-        }
-        impl<'de> serde::Deserialize<'de> for GeneratedField {
-            fn deserialize<D>(deserializer: D) -> std::result::Result<GeneratedField, D::Error>
-            where
-                D: serde::Deserializer<'de>,
-            {
-                struct GeneratedVisitor;
-
-                impl<'de> serde::de::Visitor<'de> for GeneratedVisitor {
-                    type Value = GeneratedField;
-
-                    fn expecting(&self, formatter: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
-                        write!(formatter, "expected one of: {:?}", &FIELDS)
-                    }
-
-                    #[allow(unused_variables)]
-                    fn visit_str<E>(self, value: &str) -> std::result::Result<GeneratedField, E>
-                    where
-                        E: serde::de::Error,
-                    {
-                        match value {
-                            "fieldPath" | "field_path" => Ok(GeneratedField::FieldPath),
-                            "sourceId" | "source_id" => Ok(GeneratedField::SourceId),
-                            "provenance" => Ok(GeneratedField::Provenance),
-                            _ => Err(serde::de::Error::unknown_field(value, FIELDS)),
-                        }
-                    }
-                }
-                deserializer.deserialize_identifier(GeneratedVisitor)
-            }
-        }
-        struct GeneratedVisitor;
-        impl<'de> serde::de::Visitor<'de> for GeneratedVisitor {
-            type Value = OverrideProvenance;
-
-            fn expecting(&self, formatter: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
-                formatter.write_str("struct anduril.entitymanager.v1.OverrideProvenance")
-            }
-
-            fn visit_map<V>(self, mut map_: V) -> std::result::Result<OverrideProvenance, V::Error>
-                where
-                    V: serde::de::MapAccess<'de>,
-            {
-                let mut field_path__ = None;
-                let mut source_id__ = None;
-                let mut provenance__ = None;
-                while let Some(k) = map_.next_key()? {
-                    match k {
-                        GeneratedField::FieldPath => {
-                            if field_path__.is_some() {
-                                return Err(serde::de::Error::duplicate_field("fieldPath"));
-                            }
-                            field_path__ = Some(map_.next_value()?);
-                        }
-                        GeneratedField::SourceId => {
-                            if source_id__.is_some() {
-                                return Err(serde::de::Error::duplicate_field("sourceId"));
-                            }
-                            source_id__ = Some(map_.next_value()?);
-                        }
-                        GeneratedField::Provenance => {
-                            if provenance__.is_some() {
-                                return Err(serde::de::Error::duplicate_field("provenance"));
-                            }
-                            provenance__ = map_.next_value()?;
-                        }
-                    }
-                }
-                Ok(OverrideProvenance {
-                    field_path: field_path__.unwrap_or_default(),
-                    source_id: source_id__.unwrap_or_default(),
-                    provenance: provenance__,
-                })
-            }
-        }
-        deserializer.deserialize_struct("anduril.entitymanager.v1.OverrideProvenance", FIELDS, GeneratedVisitor)
-    }
-}
 impl serde::Serialize for OverrideStatus {
     #[allow(deprecated)]
     fn serialize<S>(&self, serializer: S) -> std::result::Result<S::Ok, S::Error>
@@ -13871,15 +12149,9 @@ impl serde::Serialize for Overrides {
         if !self.r#override.is_empty() {
             len += 1;
         }
-        if !self.provenance.is_empty() {
-            len += 1;
-        }
         let mut struct_ser = serializer.serialize_struct("anduril.entitymanager.v1.Overrides", len)?;
         if !self.r#override.is_empty() {
             struct_ser.serialize_field("override", &self.r#override)?;
-        }
-        if !self.provenance.is_empty() {
-            struct_ser.serialize_field("provenance", &self.provenance)?;
         }
         struct_ser.end()
     }
@@ -13892,13 +12164,11 @@ impl<'de> serde::Deserialize<'de> for Overrides {
     {
         const FIELDS: &[&str] = &[
             "override",
-            "provenance",
         ];
 
         #[allow(clippy::enum_variant_names)]
         enum GeneratedField {
             Override,
-            Provenance,
         }
         impl<'de> serde::Deserialize<'de> for GeneratedField {
             fn deserialize<D>(deserializer: D) -> std::result::Result<GeneratedField, D::Error>
@@ -13921,7 +12191,6 @@ impl<'de> serde::Deserialize<'de> for Overrides {
                     {
                         match value {
                             "override" => Ok(GeneratedField::Override),
-                            "provenance" => Ok(GeneratedField::Provenance),
                             _ => Err(serde::de::Error::unknown_field(value, FIELDS)),
                         }
                     }
@@ -13942,7 +12211,6 @@ impl<'de> serde::Deserialize<'de> for Overrides {
                     V: serde::de::MapAccess<'de>,
             {
                 let mut r#override__ = None;
-                let mut provenance__ = None;
                 while let Some(k) = map_.next_key()? {
                     match k {
                         GeneratedField::Override => {
@@ -13951,17 +12219,10 @@ impl<'de> serde::Deserialize<'de> for Overrides {
                             }
                             r#override__ = Some(map_.next_value()?);
                         }
-                        GeneratedField::Provenance => {
-                            if provenance__.is_some() {
-                                return Err(serde::de::Error::duplicate_field("provenance"));
-                            }
-                            provenance__ = Some(map_.next_value()?);
-                        }
                     }
                 }
                 Ok(Overrides {
                     r#override: r#override__.unwrap_or_default(),
-                    provenance: provenance__.unwrap_or_default(),
                 })
             }
         }
@@ -15710,6 +13971,98 @@ impl<'de> serde::Deserialize<'de> for PredicateSet {
         deserializer.deserialize_struct("anduril.entitymanager.v1.PredicateSet", FIELDS, GeneratedVisitor)
     }
 }
+impl serde::Serialize for PrimaryCorrelation {
+    #[allow(deprecated)]
+    fn serialize<S>(&self, serializer: S) -> std::result::Result<S::Ok, S::Error>
+    where
+        S: serde::Serializer,
+    {
+        use serde::ser::SerializeStruct;
+        let mut len = 0;
+        if !self.secondary_entity_ids.is_empty() {
+            len += 1;
+        }
+        let mut struct_ser = serializer.serialize_struct("anduril.entitymanager.v1.PrimaryCorrelation", len)?;
+        if !self.secondary_entity_ids.is_empty() {
+            struct_ser.serialize_field("secondaryEntityIds", &self.secondary_entity_ids)?;
+        }
+        struct_ser.end()
+    }
+}
+impl<'de> serde::Deserialize<'de> for PrimaryCorrelation {
+    #[allow(deprecated)]
+    fn deserialize<D>(deserializer: D) -> std::result::Result<Self, D::Error>
+    where
+        D: serde::Deserializer<'de>,
+    {
+        const FIELDS: &[&str] = &[
+            "secondary_entity_ids",
+            "secondaryEntityIds",
+        ];
+
+        #[allow(clippy::enum_variant_names)]
+        enum GeneratedField {
+            SecondaryEntityIds,
+        }
+        impl<'de> serde::Deserialize<'de> for GeneratedField {
+            fn deserialize<D>(deserializer: D) -> std::result::Result<GeneratedField, D::Error>
+            where
+                D: serde::Deserializer<'de>,
+            {
+                struct GeneratedVisitor;
+
+                impl<'de> serde::de::Visitor<'de> for GeneratedVisitor {
+                    type Value = GeneratedField;
+
+                    fn expecting(&self, formatter: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
+                        write!(formatter, "expected one of: {:?}", &FIELDS)
+                    }
+
+                    #[allow(unused_variables)]
+                    fn visit_str<E>(self, value: &str) -> std::result::Result<GeneratedField, E>
+                    where
+                        E: serde::de::Error,
+                    {
+                        match value {
+                            "secondaryEntityIds" | "secondary_entity_ids" => Ok(GeneratedField::SecondaryEntityIds),
+                            _ => Err(serde::de::Error::unknown_field(value, FIELDS)),
+                        }
+                    }
+                }
+                deserializer.deserialize_identifier(GeneratedVisitor)
+            }
+        }
+        struct GeneratedVisitor;
+        impl<'de> serde::de::Visitor<'de> for GeneratedVisitor {
+            type Value = PrimaryCorrelation;
+
+            fn expecting(&self, formatter: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
+                formatter.write_str("struct anduril.entitymanager.v1.PrimaryCorrelation")
+            }
+
+            fn visit_map<V>(self, mut map_: V) -> std::result::Result<PrimaryCorrelation, V::Error>
+                where
+                    V: serde::de::MapAccess<'de>,
+            {
+                let mut secondary_entity_ids__ = None;
+                while let Some(k) = map_.next_key()? {
+                    match k {
+                        GeneratedField::SecondaryEntityIds => {
+                            if secondary_entity_ids__.is_some() {
+                                return Err(serde::de::Error::duplicate_field("secondaryEntityIds"));
+                            }
+                            secondary_entity_ids__ = Some(map_.next_value()?);
+                        }
+                    }
+                }
+                Ok(PrimaryCorrelation {
+                    secondary_entity_ids: secondary_entity_ids__.unwrap_or_default(),
+                })
+            }
+        }
+        deserializer.deserialize_struct("anduril.entitymanager.v1.PrimaryCorrelation", FIELDS, GeneratedVisitor)
+    }
+}
 impl serde::Serialize for ProjectedFrustum {
     #[allow(deprecated)]
     fn serialize<S>(&self, serializer: S) -> std::result::Result<S::Ok, S::Error>
@@ -15864,9 +14217,6 @@ impl serde::Serialize for Provenance {
     {
         use serde::ser::SerializeStruct;
         let mut len = 0;
-        if !self.feed_name.is_empty() {
-            len += 1;
-        }
         if !self.integration_name.is_empty() {
             len += 1;
         }
@@ -15886,9 +14236,6 @@ impl serde::Serialize for Provenance {
             len += 1;
         }
         let mut struct_ser = serializer.serialize_struct("anduril.entitymanager.v1.Provenance", len)?;
-        if !self.feed_name.is_empty() {
-            struct_ser.serialize_field("feedName", &self.feed_name)?;
-        }
         if !self.integration_name.is_empty() {
             struct_ser.serialize_field("integrationName", &self.integration_name)?;
         }
@@ -15919,8 +14266,6 @@ impl<'de> serde::Deserialize<'de> for Provenance {
         D: serde::Deserializer<'de>,
     {
         const FIELDS: &[&str] = &[
-            "feed_name",
-            "feedName",
             "integration_name",
             "integrationName",
             "data_type",
@@ -15936,7 +14281,6 @@ impl<'de> serde::Deserialize<'de> for Provenance {
 
         #[allow(clippy::enum_variant_names)]
         enum GeneratedField {
-            FeedName,
             IntegrationName,
             DataType,
             Source,
@@ -15964,7 +14308,6 @@ impl<'de> serde::Deserialize<'de> for Provenance {
                         E: serde::de::Error,
                     {
                         match value {
-                            "feedName" | "feed_name" => Ok(GeneratedField::FeedName),
                             "integrationName" | "integration_name" => Ok(GeneratedField::IntegrationName),
                             "dataType" | "data_type" => Ok(GeneratedField::DataType),
                             "source" => Ok(GeneratedField::Source),
@@ -15990,7 +14333,6 @@ impl<'de> serde::Deserialize<'de> for Provenance {
                 where
                     V: serde::de::MapAccess<'de>,
             {
-                let mut feed_name__ = None;
                 let mut integration_name__ = None;
                 let mut data_type__ = None;
                 let mut source__ = None;
@@ -15999,12 +14341,6 @@ impl<'de> serde::Deserialize<'de> for Provenance {
                 let mut source_description__ = None;
                 while let Some(k) = map_.next_key()? {
                     match k {
-                        GeneratedField::FeedName => {
-                            if feed_name__.is_some() {
-                                return Err(serde::de::Error::duplicate_field("feedName"));
-                            }
-                            feed_name__ = Some(map_.next_value()?);
-                        }
                         GeneratedField::IntegrationName => {
                             if integration_name__.is_some() {
                                 return Err(serde::de::Error::duplicate_field("integrationName"));
@@ -16044,7 +14380,6 @@ impl<'de> serde::Deserialize<'de> for Provenance {
                     }
                 }
                 Ok(Provenance {
-                    feed_name: feed_name__.unwrap_or_default(),
                     integration_name: integration_name__.unwrap_or_default(),
                     data_type: data_type__.unwrap_or_default(),
                     source: source__.unwrap_or_default(),
@@ -16746,6 +15081,9 @@ impl serde::Serialize for RangeRings {
         if self.ring_count != 0 {
             len += 1;
         }
+        if self.ring_line_color.is_some() {
+            len += 1;
+        }
         let mut struct_ser = serializer.serialize_struct("anduril.entitymanager.v1.RangeRings", len)?;
         if let Some(v) = self.min_distance_m.as_ref() {
             struct_ser.serialize_field("minDistanceM", v)?;
@@ -16755,6 +15093,9 @@ impl serde::Serialize for RangeRings {
         }
         if self.ring_count != 0 {
             struct_ser.serialize_field("ringCount", &self.ring_count)?;
+        }
+        if let Some(v) = self.ring_line_color.as_ref() {
+            struct_ser.serialize_field("ringLineColor", v)?;
         }
         struct_ser.end()
     }
@@ -16772,6 +15113,8 @@ impl<'de> serde::Deserialize<'de> for RangeRings {
             "maxDistanceM",
             "ring_count",
             "ringCount",
+            "ring_line_color",
+            "ringLineColor",
         ];
 
         #[allow(clippy::enum_variant_names)]
@@ -16779,6 +15122,7 @@ impl<'de> serde::Deserialize<'de> for RangeRings {
             MinDistanceM,
             MaxDistanceM,
             RingCount,
+            RingLineColor,
         }
         impl<'de> serde::Deserialize<'de> for GeneratedField {
             fn deserialize<D>(deserializer: D) -> std::result::Result<GeneratedField, D::Error>
@@ -16803,6 +15147,7 @@ impl<'de> serde::Deserialize<'de> for RangeRings {
                             "minDistanceM" | "min_distance_m" => Ok(GeneratedField::MinDistanceM),
                             "maxDistanceM" | "max_distance_m" => Ok(GeneratedField::MaxDistanceM),
                             "ringCount" | "ring_count" => Ok(GeneratedField::RingCount),
+                            "ringLineColor" | "ring_line_color" => Ok(GeneratedField::RingLineColor),
                             _ => Err(serde::de::Error::unknown_field(value, FIELDS)),
                         }
                     }
@@ -16825,6 +15170,7 @@ impl<'de> serde::Deserialize<'de> for RangeRings {
                 let mut min_distance_m__ = None;
                 let mut max_distance_m__ = None;
                 let mut ring_count__ = None;
+                let mut ring_line_color__ = None;
                 while let Some(k) = map_.next_key()? {
                     match k {
                         GeneratedField::MinDistanceM => {
@@ -16847,12 +15193,19 @@ impl<'de> serde::Deserialize<'de> for RangeRings {
                                 Some(map_.next_value::<::pbjson::private::NumberDeserialize<_>>()?.0)
                             ;
                         }
+                        GeneratedField::RingLineColor => {
+                            if ring_line_color__.is_some() {
+                                return Err(serde::de::Error::duplicate_field("ringLineColor"));
+                            }
+                            ring_line_color__ = map_.next_value()?;
+                        }
                     }
                 }
                 Ok(RangeRings {
                     min_distance_m: min_distance_m__,
                     max_distance_m: max_distance_m__,
                     ring_count: ring_count__.unwrap_or_default(),
+                    ring_line_color: ring_line_color__,
                 })
             }
         }
@@ -17203,14 +15556,8 @@ impl serde::Serialize for RelationshipType {
         let mut struct_ser = serializer.serialize_struct("anduril.entitymanager.v1.RelationshipType", len)?;
         if let Some(v) = self.r#type.as_ref() {
             match v {
-                relationship_type::Type::Tether(v) => {
-                    struct_ser.serialize_field("tether", v)?;
-                }
                 relationship_type::Type::TrackedBy(v) => {
                     struct_ser.serialize_field("trackedBy", v)?;
-                }
-                relationship_type::Type::Configure(v) => {
-                    struct_ser.serialize_field("configure", v)?;
                 }
                 relationship_type::Type::GroupChild(v) => {
                     struct_ser.serialize_field("groupChild", v)?;
@@ -17233,10 +15580,8 @@ impl<'de> serde::Deserialize<'de> for RelationshipType {
         D: serde::Deserializer<'de>,
     {
         const FIELDS: &[&str] = &[
-            "tether",
             "tracked_by",
             "trackedBy",
-            "configure",
             "group_child",
             "groupChild",
             "group_parent",
@@ -17247,9 +15592,7 @@ impl<'de> serde::Deserialize<'de> for RelationshipType {
 
         #[allow(clippy::enum_variant_names)]
         enum GeneratedField {
-            Tether,
             TrackedBy,
-            Configure,
             GroupChild,
             GroupParent,
             MergedFrom,
@@ -17274,9 +15617,7 @@ impl<'de> serde::Deserialize<'de> for RelationshipType {
                         E: serde::de::Error,
                     {
                         match value {
-                            "tether" => Ok(GeneratedField::Tether),
                             "trackedBy" | "tracked_by" => Ok(GeneratedField::TrackedBy),
-                            "configure" => Ok(GeneratedField::Configure),
                             "groupChild" | "group_child" => Ok(GeneratedField::GroupChild),
                             "groupParent" | "group_parent" => Ok(GeneratedField::GroupParent),
                             "mergedFrom" | "merged_from" => Ok(GeneratedField::MergedFrom),
@@ -17302,25 +15643,11 @@ impl<'de> serde::Deserialize<'de> for RelationshipType {
                 let mut r#type__ = None;
                 while let Some(k) = map_.next_key()? {
                     match k {
-                        GeneratedField::Tether => {
-                            if r#type__.is_some() {
-                                return Err(serde::de::Error::duplicate_field("tether"));
-                            }
-                            r#type__ = map_.next_value::<::std::option::Option<_>>()?.map(relationship_type::Type::Tether)
-;
-                        }
                         GeneratedField::TrackedBy => {
                             if r#type__.is_some() {
                                 return Err(serde::de::Error::duplicate_field("trackedBy"));
                             }
                             r#type__ = map_.next_value::<::std::option::Option<_>>()?.map(relationship_type::Type::TrackedBy)
-;
-                        }
-                        GeneratedField::Configure => {
-                            if r#type__.is_some() {
-                                return Err(serde::de::Error::duplicate_field("configure"));
-                            }
-                            r#type__ = map_.next_value::<::std::option::Option<_>>()?.map(relationship_type::Type::Configure)
 ;
                         }
                         GeneratedField::GroupChild => {
@@ -17624,98 +15951,6 @@ impl<'de> serde::Deserialize<'de> for RemoveEntityOverrideResponse {
             }
         }
         deserializer.deserialize_struct("anduril.entitymanager.v1.RemoveEntityOverrideResponse", FIELDS, GeneratedVisitor)
-    }
-}
-impl serde::Serialize for RestrictiveMeasureType {
-    #[allow(deprecated)]
-    fn serialize<S>(&self, serializer: S) -> std::result::Result<S::Ok, S::Error>
-    where
-        S: serde::Serializer,
-    {
-        let variant = match self {
-            Self::Invalid => "RESTRICTIVE_MEASURE_TYPE_INVALID",
-            Self::StayInsideArea => "RESTRICTIVE_MEASURE_TYPE_STAY_INSIDE_AREA",
-            Self::StayOutsideArea => "RESTRICTIVE_MEASURE_TYPE_STAY_OUTSIDE_AREA",
-            Self::StayAboveArea => "RESTRICTIVE_MEASURE_TYPE_STAY_ABOVE_AREA",
-            Self::StayBelowArea => "RESTRICTIVE_MEASURE_TYPE_STAY_BELOW_AREA",
-            Self::StayNorthOfLine => "RESTRICTIVE_MEASURE_TYPE_STAY_NORTH_OF_LINE",
-            Self::StayEastOfLine => "RESTRICTIVE_MEASURE_TYPE_STAY_EAST_OF_LINE",
-            Self::StaySouthOfLine => "RESTRICTIVE_MEASURE_TYPE_STAY_SOUTH_OF_LINE",
-            Self::StayWestOfLine => "RESTRICTIVE_MEASURE_TYPE_STAY_WEST_OF_LINE",
-        };
-        serializer.serialize_str(variant)
-    }
-}
-impl<'de> serde::Deserialize<'de> for RestrictiveMeasureType {
-    #[allow(deprecated)]
-    fn deserialize<D>(deserializer: D) -> std::result::Result<Self, D::Error>
-    where
-        D: serde::Deserializer<'de>,
-    {
-        const FIELDS: &[&str] = &[
-            "RESTRICTIVE_MEASURE_TYPE_INVALID",
-            "RESTRICTIVE_MEASURE_TYPE_STAY_INSIDE_AREA",
-            "RESTRICTIVE_MEASURE_TYPE_STAY_OUTSIDE_AREA",
-            "RESTRICTIVE_MEASURE_TYPE_STAY_ABOVE_AREA",
-            "RESTRICTIVE_MEASURE_TYPE_STAY_BELOW_AREA",
-            "RESTRICTIVE_MEASURE_TYPE_STAY_NORTH_OF_LINE",
-            "RESTRICTIVE_MEASURE_TYPE_STAY_EAST_OF_LINE",
-            "RESTRICTIVE_MEASURE_TYPE_STAY_SOUTH_OF_LINE",
-            "RESTRICTIVE_MEASURE_TYPE_STAY_WEST_OF_LINE",
-        ];
-
-        struct GeneratedVisitor;
-
-        impl<'de> serde::de::Visitor<'de> for GeneratedVisitor {
-            type Value = RestrictiveMeasureType;
-
-            fn expecting(&self, formatter: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
-                write!(formatter, "expected one of: {:?}", &FIELDS)
-            }
-
-            fn visit_i64<E>(self, v: i64) -> std::result::Result<Self::Value, E>
-            where
-                E: serde::de::Error,
-            {
-                i32::try_from(v)
-                    .ok()
-                    .and_then(|x| x.try_into().ok())
-                    .ok_or_else(|| {
-                        serde::de::Error::invalid_value(serde::de::Unexpected::Signed(v), &self)
-                    })
-            }
-
-            fn visit_u64<E>(self, v: u64) -> std::result::Result<Self::Value, E>
-            where
-                E: serde::de::Error,
-            {
-                i32::try_from(v)
-                    .ok()
-                    .and_then(|x| x.try_into().ok())
-                    .ok_or_else(|| {
-                        serde::de::Error::invalid_value(serde::de::Unexpected::Unsigned(v), &self)
-                    })
-            }
-
-            fn visit_str<E>(self, value: &str) -> std::result::Result<Self::Value, E>
-            where
-                E: serde::de::Error,
-            {
-                match value {
-                    "RESTRICTIVE_MEASURE_TYPE_INVALID" => Ok(RestrictiveMeasureType::Invalid),
-                    "RESTRICTIVE_MEASURE_TYPE_STAY_INSIDE_AREA" => Ok(RestrictiveMeasureType::StayInsideArea),
-                    "RESTRICTIVE_MEASURE_TYPE_STAY_OUTSIDE_AREA" => Ok(RestrictiveMeasureType::StayOutsideArea),
-                    "RESTRICTIVE_MEASURE_TYPE_STAY_ABOVE_AREA" => Ok(RestrictiveMeasureType::StayAboveArea),
-                    "RESTRICTIVE_MEASURE_TYPE_STAY_BELOW_AREA" => Ok(RestrictiveMeasureType::StayBelowArea),
-                    "RESTRICTIVE_MEASURE_TYPE_STAY_NORTH_OF_LINE" => Ok(RestrictiveMeasureType::StayNorthOfLine),
-                    "RESTRICTIVE_MEASURE_TYPE_STAY_EAST_OF_LINE" => Ok(RestrictiveMeasureType::StayEastOfLine),
-                    "RESTRICTIVE_MEASURE_TYPE_STAY_SOUTH_OF_LINE" => Ok(RestrictiveMeasureType::StaySouthOfLine),
-                    "RESTRICTIVE_MEASURE_TYPE_STAY_WEST_OF_LINE" => Ok(RestrictiveMeasureType::StayWestOfLine),
-                    _ => Err(serde::de::Error::unknown_variant(value, FIELDS)),
-                }
-            }
-        }
-        deserializer.deserialize_any(GeneratedVisitor)
     }
 }
 impl serde::Serialize for RouteDetails {
@@ -18425,6 +16660,115 @@ impl<'de> serde::Deserialize<'de> for ScoreInterpretation {
             }
         }
         deserializer.deserialize_any(GeneratedVisitor)
+    }
+}
+impl serde::Serialize for SecondaryCorrelation {
+    #[allow(deprecated)]
+    fn serialize<S>(&self, serializer: S) -> std::result::Result<S::Ok, S::Error>
+    where
+        S: serde::Serializer,
+    {
+        use serde::ser::SerializeStruct;
+        let mut len = 0;
+        if !self.primary_entity_id.is_empty() {
+            len += 1;
+        }
+        if self.metadata.is_some() {
+            len += 1;
+        }
+        let mut struct_ser = serializer.serialize_struct("anduril.entitymanager.v1.SecondaryCorrelation", len)?;
+        if !self.primary_entity_id.is_empty() {
+            struct_ser.serialize_field("primaryEntityId", &self.primary_entity_id)?;
+        }
+        if let Some(v) = self.metadata.as_ref() {
+            struct_ser.serialize_field("metadata", v)?;
+        }
+        struct_ser.end()
+    }
+}
+impl<'de> serde::Deserialize<'de> for SecondaryCorrelation {
+    #[allow(deprecated)]
+    fn deserialize<D>(deserializer: D) -> std::result::Result<Self, D::Error>
+    where
+        D: serde::Deserializer<'de>,
+    {
+        const FIELDS: &[&str] = &[
+            "primary_entity_id",
+            "primaryEntityId",
+            "metadata",
+        ];
+
+        #[allow(clippy::enum_variant_names)]
+        enum GeneratedField {
+            PrimaryEntityId,
+            Metadata,
+        }
+        impl<'de> serde::Deserialize<'de> for GeneratedField {
+            fn deserialize<D>(deserializer: D) -> std::result::Result<GeneratedField, D::Error>
+            where
+                D: serde::Deserializer<'de>,
+            {
+                struct GeneratedVisitor;
+
+                impl<'de> serde::de::Visitor<'de> for GeneratedVisitor {
+                    type Value = GeneratedField;
+
+                    fn expecting(&self, formatter: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
+                        write!(formatter, "expected one of: {:?}", &FIELDS)
+                    }
+
+                    #[allow(unused_variables)]
+                    fn visit_str<E>(self, value: &str) -> std::result::Result<GeneratedField, E>
+                    where
+                        E: serde::de::Error,
+                    {
+                        match value {
+                            "primaryEntityId" | "primary_entity_id" => Ok(GeneratedField::PrimaryEntityId),
+                            "metadata" => Ok(GeneratedField::Metadata),
+                            _ => Err(serde::de::Error::unknown_field(value, FIELDS)),
+                        }
+                    }
+                }
+                deserializer.deserialize_identifier(GeneratedVisitor)
+            }
+        }
+        struct GeneratedVisitor;
+        impl<'de> serde::de::Visitor<'de> for GeneratedVisitor {
+            type Value = SecondaryCorrelation;
+
+            fn expecting(&self, formatter: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
+                formatter.write_str("struct anduril.entitymanager.v1.SecondaryCorrelation")
+            }
+
+            fn visit_map<V>(self, mut map_: V) -> std::result::Result<SecondaryCorrelation, V::Error>
+                where
+                    V: serde::de::MapAccess<'de>,
+            {
+                let mut primary_entity_id__ = None;
+                let mut metadata__ = None;
+                while let Some(k) = map_.next_key()? {
+                    match k {
+                        GeneratedField::PrimaryEntityId => {
+                            if primary_entity_id__.is_some() {
+                                return Err(serde::de::Error::duplicate_field("primaryEntityId"));
+                            }
+                            primary_entity_id__ = Some(map_.next_value()?);
+                        }
+                        GeneratedField::Metadata => {
+                            if metadata__.is_some() {
+                                return Err(serde::de::Error::duplicate_field("metadata"));
+                            }
+                            metadata__ = map_.next_value()?;
+                        }
+                    }
+                }
+                Ok(SecondaryCorrelation {
+                    primary_entity_id: primary_entity_id__.unwrap_or_default(),
+                    metadata: metadata__,
+                })
+            }
+        }
+        deserializer.deserialize_struct("anduril.entitymanager.v1.SecondaryCorrelation", FIELDS, GeneratedVisitor)
     }
 }
 impl serde::Serialize for Sensor {
@@ -20511,148 +18855,6 @@ impl<'de> serde::Deserialize<'de> for TargetPriority {
         deserializer.deserialize_struct("anduril.entitymanager.v1.TargetPriority", FIELDS, GeneratedVisitor)
     }
 }
-impl serde::Serialize for Team {
-    #[allow(deprecated)]
-    fn serialize<S>(&self, serializer: S) -> std::result::Result<S::Ok, S::Error>
-    where
-        S: serde::Serializer,
-    {
-        use serde::ser::SerializeStruct;
-        let len = 0;
-        let struct_ser = serializer.serialize_struct("anduril.entitymanager.v1.Team", len)?;
-        struct_ser.end()
-    }
-}
-impl<'de> serde::Deserialize<'de> for Team {
-    #[allow(deprecated)]
-    fn deserialize<D>(deserializer: D) -> std::result::Result<Self, D::Error>
-    where
-        D: serde::Deserializer<'de>,
-    {
-        const FIELDS: &[&str] = &[
-        ];
-
-        #[allow(clippy::enum_variant_names)]
-        enum GeneratedField {
-        }
-        impl<'de> serde::Deserialize<'de> for GeneratedField {
-            fn deserialize<D>(deserializer: D) -> std::result::Result<GeneratedField, D::Error>
-            where
-                D: serde::Deserializer<'de>,
-            {
-                struct GeneratedVisitor;
-
-                impl<'de> serde::de::Visitor<'de> for GeneratedVisitor {
-                    type Value = GeneratedField;
-
-                    fn expecting(&self, formatter: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
-                        write!(formatter, "expected one of: {:?}", &FIELDS)
-                    }
-
-                    #[allow(unused_variables)]
-                    fn visit_str<E>(self, value: &str) -> std::result::Result<GeneratedField, E>
-                    where
-                        E: serde::de::Error,
-                    {
-                            Err(serde::de::Error::unknown_field(value, FIELDS))
-                    }
-                }
-                deserializer.deserialize_identifier(GeneratedVisitor)
-            }
-        }
-        struct GeneratedVisitor;
-        impl<'de> serde::de::Visitor<'de> for GeneratedVisitor {
-            type Value = Team;
-
-            fn expecting(&self, formatter: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
-                formatter.write_str("struct anduril.entitymanager.v1.Team")
-            }
-
-            fn visit_map<V>(self, mut map_: V) -> std::result::Result<Team, V::Error>
-                where
-                    V: serde::de::MapAccess<'de>,
-            {
-                while map_.next_key::<GeneratedField>()?.is_some() {
-                    let _ = map_.next_value::<serde::de::IgnoredAny>()?;
-                }
-                Ok(Team {
-                })
-            }
-        }
-        deserializer.deserialize_struct("anduril.entitymanager.v1.Team", FIELDS, GeneratedVisitor)
-    }
-}
-impl serde::Serialize for TeamStatus {
-    #[allow(deprecated)]
-    fn serialize<S>(&self, serializer: S) -> std::result::Result<S::Ok, S::Error>
-    where
-        S: serde::Serializer,
-    {
-        use serde::ser::SerializeStruct;
-        let len = 0;
-        let struct_ser = serializer.serialize_struct("anduril.entitymanager.v1.TeamStatus", len)?;
-        struct_ser.end()
-    }
-}
-impl<'de> serde::Deserialize<'de> for TeamStatus {
-    #[allow(deprecated)]
-    fn deserialize<D>(deserializer: D) -> std::result::Result<Self, D::Error>
-    where
-        D: serde::Deserializer<'de>,
-    {
-        const FIELDS: &[&str] = &[
-        ];
-
-        #[allow(clippy::enum_variant_names)]
-        enum GeneratedField {
-        }
-        impl<'de> serde::Deserialize<'de> for GeneratedField {
-            fn deserialize<D>(deserializer: D) -> std::result::Result<GeneratedField, D::Error>
-            where
-                D: serde::Deserializer<'de>,
-            {
-                struct GeneratedVisitor;
-
-                impl<'de> serde::de::Visitor<'de> for GeneratedVisitor {
-                    type Value = GeneratedField;
-
-                    fn expecting(&self, formatter: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
-                        write!(formatter, "expected one of: {:?}", &FIELDS)
-                    }
-
-                    #[allow(unused_variables)]
-                    fn visit_str<E>(self, value: &str) -> std::result::Result<GeneratedField, E>
-                    where
-                        E: serde::de::Error,
-                    {
-                            Err(serde::de::Error::unknown_field(value, FIELDS))
-                    }
-                }
-                deserializer.deserialize_identifier(GeneratedVisitor)
-            }
-        }
-        struct GeneratedVisitor;
-        impl<'de> serde::de::Visitor<'de> for GeneratedVisitor {
-            type Value = TeamStatus;
-
-            fn expecting(&self, formatter: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
-                formatter.write_str("struct anduril.entitymanager.v1.TeamStatus")
-            }
-
-            fn visit_map<V>(self, mut map_: V) -> std::result::Result<TeamStatus, V::Error>
-                where
-                    V: serde::de::MapAccess<'de>,
-            {
-                while map_.next_key::<GeneratedField>()?.is_some() {
-                    let _ = map_.next_value::<serde::de::IgnoredAny>()?;
-                }
-                Ok(TeamStatus {
-                })
-            }
-        }
-        deserializer.deserialize_struct("anduril.entitymanager.v1.TeamStatus", FIELDS, GeneratedVisitor)
-    }
-}
 impl serde::Serialize for Template {
     #[allow(deprecated)]
     fn serialize<S>(&self, serializer: S) -> std::result::Result<S::Ok, S::Error>
@@ -20734,77 +18936,6 @@ impl<'de> serde::Deserialize<'de> for Template {
             }
         }
         deserializer.deserialize_any(GeneratedVisitor)
-    }
-}
-impl serde::Serialize for Tether {
-    #[allow(deprecated)]
-    fn serialize<S>(&self, serializer: S) -> std::result::Result<S::Ok, S::Error>
-    where
-        S: serde::Serializer,
-    {
-        use serde::ser::SerializeStruct;
-        let len = 0;
-        let struct_ser = serializer.serialize_struct("anduril.entitymanager.v1.Tether", len)?;
-        struct_ser.end()
-    }
-}
-impl<'de> serde::Deserialize<'de> for Tether {
-    #[allow(deprecated)]
-    fn deserialize<D>(deserializer: D) -> std::result::Result<Self, D::Error>
-    where
-        D: serde::Deserializer<'de>,
-    {
-        const FIELDS: &[&str] = &[
-        ];
-
-        #[allow(clippy::enum_variant_names)]
-        enum GeneratedField {
-        }
-        impl<'de> serde::Deserialize<'de> for GeneratedField {
-            fn deserialize<D>(deserializer: D) -> std::result::Result<GeneratedField, D::Error>
-            where
-                D: serde::Deserializer<'de>,
-            {
-                struct GeneratedVisitor;
-
-                impl<'de> serde::de::Visitor<'de> for GeneratedVisitor {
-                    type Value = GeneratedField;
-
-                    fn expecting(&self, formatter: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
-                        write!(formatter, "expected one of: {:?}", &FIELDS)
-                    }
-
-                    #[allow(unused_variables)]
-                    fn visit_str<E>(self, value: &str) -> std::result::Result<GeneratedField, E>
-                    where
-                        E: serde::de::Error,
-                    {
-                            Err(serde::de::Error::unknown_field(value, FIELDS))
-                    }
-                }
-                deserializer.deserialize_identifier(GeneratedVisitor)
-            }
-        }
-        struct GeneratedVisitor;
-        impl<'de> serde::de::Visitor<'de> for GeneratedVisitor {
-            type Value = Tether;
-
-            fn expecting(&self, formatter: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
-                formatter.write_str("struct anduril.entitymanager.v1.Tether")
-            }
-
-            fn visit_map<V>(self, mut map_: V) -> std::result::Result<Tether, V::Error>
-                where
-                    V: serde::de::MapAccess<'de>,
-            {
-                while map_.next_key::<GeneratedField>()?.is_some() {
-                    let _ = map_.next_value::<serde::de::IgnoredAny>()?;
-                }
-                Ok(Tether {
-                })
-            }
-        }
-        deserializer.deserialize_struct("anduril.entitymanager.v1.Tether", FIELDS, GeneratedVisitor)
     }
 }
 impl serde::Serialize for Threat {
@@ -20998,9 +19129,6 @@ impl serde::Serialize for Tracked {
     {
         use serde::ser::SerializeStruct;
         let mut len = 0;
-        if self.track_quality != 0 {
-            len += 1;
-        }
         if self.track_quality_wrapper.is_some() {
             len += 1;
         }
@@ -21008,9 +19136,6 @@ impl serde::Serialize for Tracked {
             len += 1;
         }
         if self.number_of_objects.is_some() {
-            len += 1;
-        }
-        if self.sensor_details.is_some() {
             len += 1;
         }
         if self.radar_cross_section.is_some() {
@@ -21023,9 +19148,6 @@ impl serde::Serialize for Tracked {
             len += 1;
         }
         let mut struct_ser = serializer.serialize_struct("anduril.entitymanager.v1.Tracked", len)?;
-        if self.track_quality != 0 {
-            struct_ser.serialize_field("trackQuality", &self.track_quality)?;
-        }
         if let Some(v) = self.track_quality_wrapper.as_ref() {
             struct_ser.serialize_field("trackQualityWrapper", v)?;
         }
@@ -21034,9 +19156,6 @@ impl serde::Serialize for Tracked {
         }
         if let Some(v) = self.number_of_objects.as_ref() {
             struct_ser.serialize_field("numberOfObjects", v)?;
-        }
-        if let Some(v) = self.sensor_details.as_ref() {
-            struct_ser.serialize_field("sensorDetails", v)?;
         }
         if let Some(v) = self.radar_cross_section.as_ref() {
             struct_ser.serialize_field("radarCrossSection", v)?;
@@ -21057,16 +19176,12 @@ impl<'de> serde::Deserialize<'de> for Tracked {
         D: serde::Deserializer<'de>,
     {
         const FIELDS: &[&str] = &[
-            "track_quality",
-            "trackQuality",
             "track_quality_wrapper",
             "trackQualityWrapper",
             "sensor_hits",
             "sensorHits",
             "number_of_objects",
             "numberOfObjects",
-            "sensor_details",
-            "sensorDetails",
             "radar_cross_section",
             "radarCrossSection",
             "last_measurement_time",
@@ -21077,11 +19192,9 @@ impl<'de> serde::Deserialize<'de> for Tracked {
 
         #[allow(clippy::enum_variant_names)]
         enum GeneratedField {
-            TrackQuality,
             TrackQualityWrapper,
             SensorHits,
             NumberOfObjects,
-            SensorDetails,
             RadarCrossSection,
             LastMeasurementTime,
             LineOfBearing,
@@ -21106,11 +19219,9 @@ impl<'de> serde::Deserialize<'de> for Tracked {
                         E: serde::de::Error,
                     {
                         match value {
-                            "trackQuality" | "track_quality" => Ok(GeneratedField::TrackQuality),
                             "trackQualityWrapper" | "track_quality_wrapper" => Ok(GeneratedField::TrackQualityWrapper),
                             "sensorHits" | "sensor_hits" => Ok(GeneratedField::SensorHits),
                             "numberOfObjects" | "number_of_objects" => Ok(GeneratedField::NumberOfObjects),
-                            "sensorDetails" | "sensor_details" => Ok(GeneratedField::SensorDetails),
                             "radarCrossSection" | "radar_cross_section" => Ok(GeneratedField::RadarCrossSection),
                             "lastMeasurementTime" | "last_measurement_time" => Ok(GeneratedField::LastMeasurementTime),
                             "lineOfBearing" | "line_of_bearing" => Ok(GeneratedField::LineOfBearing),
@@ -21133,24 +19244,14 @@ impl<'de> serde::Deserialize<'de> for Tracked {
                 where
                     V: serde::de::MapAccess<'de>,
             {
-                let mut track_quality__ = None;
                 let mut track_quality_wrapper__ = None;
                 let mut sensor_hits__ = None;
                 let mut number_of_objects__ = None;
-                let mut sensor_details__ = None;
                 let mut radar_cross_section__ = None;
                 let mut last_measurement_time__ = None;
                 let mut line_of_bearing__ = None;
                 while let Some(k) = map_.next_key()? {
                     match k {
-                        GeneratedField::TrackQuality => {
-                            if track_quality__.is_some() {
-                                return Err(serde::de::Error::duplicate_field("trackQuality"));
-                            }
-                            track_quality__ = 
-                                Some(map_.next_value::<::pbjson::private::NumberDeserialize<_>>()?.0)
-                            ;
-                        }
                         GeneratedField::TrackQualityWrapper => {
                             if track_quality_wrapper__.is_some() {
                                 return Err(serde::de::Error::duplicate_field("trackQualityWrapper"));
@@ -21168,12 +19269,6 @@ impl<'de> serde::Deserialize<'de> for Tracked {
                                 return Err(serde::de::Error::duplicate_field("numberOfObjects"));
                             }
                             number_of_objects__ = map_.next_value()?;
-                        }
-                        GeneratedField::SensorDetails => {
-                            if sensor_details__.is_some() {
-                                return Err(serde::de::Error::duplicate_field("sensorDetails"));
-                            }
-                            sensor_details__ = map_.next_value()?;
                         }
                         GeneratedField::RadarCrossSection => {
                             if radar_cross_section__.is_some() {
@@ -21196,11 +19291,9 @@ impl<'de> serde::Deserialize<'de> for Tracked {
                     }
                 }
                 Ok(Tracked {
-                    track_quality: track_quality__.unwrap_or_default(),
                     track_quality_wrapper: track_quality_wrapper__,
                     sensor_hits: sensor_hits__,
                     number_of_objects: number_of_objects__,
-                    sensor_details: sensor_details__,
                     radar_cross_section: radar_cross_section__,
                     last_measurement_time: last_measurement_time__,
                     line_of_bearing: line_of_bearing__,
@@ -21854,17 +19947,9 @@ impl serde::Serialize for VisualDetails {
         if self.range_rings.is_some() {
             len += 1;
         }
-        if self.interactivity_mode != 0 {
-            len += 1;
-        }
         let mut struct_ser = serializer.serialize_struct("anduril.entitymanager.v1.VisualDetails", len)?;
         if let Some(v) = self.range_rings.as_ref() {
             struct_ser.serialize_field("rangeRings", v)?;
-        }
-        if self.interactivity_mode != 0 {
-            let v = InteractivityMode::try_from(self.interactivity_mode)
-                .map_err(|_| serde::ser::Error::custom(format!("Invalid variant {}", self.interactivity_mode)))?;
-            struct_ser.serialize_field("interactivityMode", &v)?;
         }
         struct_ser.end()
     }
@@ -21878,14 +19963,11 @@ impl<'de> serde::Deserialize<'de> for VisualDetails {
         const FIELDS: &[&str] = &[
             "range_rings",
             "rangeRings",
-            "interactivity_mode",
-            "interactivityMode",
         ];
 
         #[allow(clippy::enum_variant_names)]
         enum GeneratedField {
             RangeRings,
-            InteractivityMode,
         }
         impl<'de> serde::Deserialize<'de> for GeneratedField {
             fn deserialize<D>(deserializer: D) -> std::result::Result<GeneratedField, D::Error>
@@ -21908,7 +19990,6 @@ impl<'de> serde::Deserialize<'de> for VisualDetails {
                     {
                         match value {
                             "rangeRings" | "range_rings" => Ok(GeneratedField::RangeRings),
-                            "interactivityMode" | "interactivity_mode" => Ok(GeneratedField::InteractivityMode),
                             _ => Err(serde::de::Error::unknown_field(value, FIELDS)),
                         }
                     }
@@ -21929,7 +20010,6 @@ impl<'de> serde::Deserialize<'de> for VisualDetails {
                     V: serde::de::MapAccess<'de>,
             {
                 let mut range_rings__ = None;
-                let mut interactivity_mode__ = None;
                 while let Some(k) = map_.next_key()? {
                     match k {
                         GeneratedField::RangeRings => {
@@ -21938,17 +20018,10 @@ impl<'de> serde::Deserialize<'de> for VisualDetails {
                             }
                             range_rings__ = map_.next_value()?;
                         }
-                        GeneratedField::InteractivityMode => {
-                            if interactivity_mode__.is_some() {
-                                return Err(serde::de::Error::duplicate_field("interactivityMode"));
-                            }
-                            interactivity_mode__ = Some(map_.next_value::<InteractivityMode>()? as i32);
-                        }
                     }
                 }
                 Ok(VisualDetails {
                     range_rings: range_rings__,
-                    interactivity_mode: interactivity_mode__.unwrap_or_default(),
                 })
             }
         }
