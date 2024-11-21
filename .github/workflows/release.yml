@@ -1,0 +1,41 @@
+name: Release
+on:
+  push:
+    branches:
+      - master
+
+permissions:
+  contents: read
+
+ # Only allow one release workflow to execute at a time, since each release
+# workflow uses shared resources (git tags, package registries)
+concurrency:
+  group: ${{ github.workflow }}
+
+jobs:
+  release:
+    name: Release
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write # to be able to publish a GitHub release
+      issues: write # to be able to comment on released issues
+      pull-requests: write # to be able to comment on released pull requests
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+      - name: Set up Rust
+        uses: actions-rust-lang/setup-rust-toolchain@v1
+      - name: Install dependencies
+        run: |
+          cargo install cargo-edit
+      - name: Semantic Release
+        uses: cycjimmy/semantic-release-action@v4
+        with:
+          semantic_version: 24.2.0
+          extra_plugins: |
+            @semantic-release/exec@6.0.3
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          CARGO_API_TOKEN: ${{ secrets.CARGO_API_TOKEN }}
