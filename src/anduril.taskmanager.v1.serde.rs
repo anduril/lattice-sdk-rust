@@ -7,16 +7,10 @@ impl serde::Serialize for Agent {
     {
         use serde::ser::SerializeStruct;
         let mut len = 0;
-        if !self.asset_id.is_empty() {
-            len += 1;
-        }
         if !self.entity_id.is_empty() {
             len += 1;
         }
         let mut struct_ser = serializer.serialize_struct("anduril.taskmanager.v1.Agent", len)?;
-        if !self.asset_id.is_empty() {
-            struct_ser.serialize_field("assetId", &self.asset_id)?;
-        }
         if !self.entity_id.is_empty() {
             struct_ser.serialize_field("entityId", &self.entity_id)?;
         }
@@ -30,15 +24,12 @@ impl<'de> serde::Deserialize<'de> for Agent {
         D: serde::Deserializer<'de>,
     {
         const FIELDS: &[&str] = &[
-            "asset_id",
-            "assetId",
             "entity_id",
             "entityId",
         ];
 
         #[allow(clippy::enum_variant_names)]
         enum GeneratedField {
-            AssetId,
             EntityId,
         }
         impl<'de> serde::Deserialize<'de> for GeneratedField {
@@ -61,7 +52,6 @@ impl<'de> serde::Deserialize<'de> for Agent {
                         E: serde::de::Error,
                     {
                         match value {
-                            "assetId" | "asset_id" => Ok(GeneratedField::AssetId),
                             "entityId" | "entity_id" => Ok(GeneratedField::EntityId),
                             _ => Err(serde::de::Error::unknown_field(value, FIELDS)),
                         }
@@ -82,16 +72,9 @@ impl<'de> serde::Deserialize<'de> for Agent {
                 where
                     V: serde::de::MapAccess<'de>,
             {
-                let mut asset_id__ = None;
                 let mut entity_id__ = None;
                 while let Some(k) = map_.next_key()? {
                     match k {
-                        GeneratedField::AssetId => {
-                            if asset_id__.is_some() {
-                                return Err(serde::de::Error::duplicate_field("assetId"));
-                            }
-                            asset_id__ = Some(map_.next_value()?);
-                        }
                         GeneratedField::EntityId => {
                             if entity_id__.is_some() {
                                 return Err(serde::de::Error::duplicate_field("entityId"));
@@ -101,7 +84,6 @@ impl<'de> serde::Deserialize<'de> for Agent {
                     }
                 }
                 Ok(Agent {
-                    asset_id: asset_id__.unwrap_or_default(),
                     entity_id: entity_id__.unwrap_or_default(),
                 })
             }
@@ -1138,6 +1120,97 @@ impl<'de> serde::Deserialize<'de> for ExecuteRequest {
         deserializer.deserialize_struct("anduril.taskmanager.v1.ExecuteRequest", FIELDS, GeneratedVisitor)
     }
 }
+impl serde::Serialize for GenericSpec {
+    #[allow(deprecated)]
+    fn serialize<S>(&self, serializer: S) -> std::result::Result<S::Ok, S::Error>
+    where
+        S: serde::Serializer,
+    {
+        use serde::ser::SerializeStruct;
+        let mut len = 0;
+        if self.payload.is_some() {
+            len += 1;
+        }
+        let mut struct_ser = serializer.serialize_struct("anduril.taskmanager.v1.GenericSpec", len)?;
+        if let Some(v) = self.payload.as_ref() {
+            struct_ser.serialize_field("payload", v)?;
+        }
+        struct_ser.end()
+    }
+}
+impl<'de> serde::Deserialize<'de> for GenericSpec {
+    #[allow(deprecated)]
+    fn deserialize<D>(deserializer: D) -> std::result::Result<Self, D::Error>
+    where
+        D: serde::Deserializer<'de>,
+    {
+        const FIELDS: &[&str] = &[
+            "payload",
+        ];
+
+        #[allow(clippy::enum_variant_names)]
+        enum GeneratedField {
+            Payload,
+        }
+        impl<'de> serde::Deserialize<'de> for GeneratedField {
+            fn deserialize<D>(deserializer: D) -> std::result::Result<GeneratedField, D::Error>
+            where
+                D: serde::Deserializer<'de>,
+            {
+                struct GeneratedVisitor;
+
+                impl<'de> serde::de::Visitor<'de> for GeneratedVisitor {
+                    type Value = GeneratedField;
+
+                    fn expecting(&self, formatter: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
+                        write!(formatter, "expected one of: {:?}", &FIELDS)
+                    }
+
+                    #[allow(unused_variables)]
+                    fn visit_str<E>(self, value: &str) -> std::result::Result<GeneratedField, E>
+                    where
+                        E: serde::de::Error,
+                    {
+                        match value {
+                            "payload" => Ok(GeneratedField::Payload),
+                            _ => Err(serde::de::Error::unknown_field(value, FIELDS)),
+                        }
+                    }
+                }
+                deserializer.deserialize_identifier(GeneratedVisitor)
+            }
+        }
+        struct GeneratedVisitor;
+        impl<'de> serde::de::Visitor<'de> for GeneratedVisitor {
+            type Value = GenericSpec;
+
+            fn expecting(&self, formatter: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
+                formatter.write_str("struct anduril.taskmanager.v1.GenericSpec")
+            }
+
+            fn visit_map<V>(self, mut map_: V) -> std::result::Result<GenericSpec, V::Error>
+                where
+                    V: serde::de::MapAccess<'de>,
+            {
+                let mut payload__ = None;
+                while let Some(k) = map_.next_key()? {
+                    match k {
+                        GeneratedField::Payload => {
+                            if payload__.is_some() {
+                                return Err(serde::de::Error::duplicate_field("payload"));
+                            }
+                            payload__ = map_.next_value()?;
+                        }
+                    }
+                }
+                Ok(GenericSpec {
+                    payload: payload__,
+                })
+            }
+        }
+        deserializer.deserialize_struct("anduril.taskmanager.v1.GenericSpec", FIELDS, GeneratedVisitor)
+    }
+}
 impl serde::Serialize for GetTaskRequest {
     #[allow(deprecated)]
     fn serialize<S>(&self, serializer: S) -> std::result::Result<S::Ok, S::Error>
@@ -1682,16 +1755,10 @@ impl serde::Serialize for Owner {
     {
         use serde::ser::SerializeStruct;
         let mut len = 0;
-        if !self.asset_id.is_empty() {
-            len += 1;
-        }
         if !self.entity_id.is_empty() {
             len += 1;
         }
         let mut struct_ser = serializer.serialize_struct("anduril.taskmanager.v1.Owner", len)?;
-        if !self.asset_id.is_empty() {
-            struct_ser.serialize_field("assetId", &self.asset_id)?;
-        }
         if !self.entity_id.is_empty() {
             struct_ser.serialize_field("entityId", &self.entity_id)?;
         }
@@ -1705,15 +1772,12 @@ impl<'de> serde::Deserialize<'de> for Owner {
         D: serde::Deserializer<'de>,
     {
         const FIELDS: &[&str] = &[
-            "asset_id",
-            "assetId",
             "entity_id",
             "entityId",
         ];
 
         #[allow(clippy::enum_variant_names)]
         enum GeneratedField {
-            AssetId,
             EntityId,
         }
         impl<'de> serde::Deserialize<'de> for GeneratedField {
@@ -1736,7 +1800,6 @@ impl<'de> serde::Deserialize<'de> for Owner {
                         E: serde::de::Error,
                     {
                         match value {
-                            "assetId" | "asset_id" => Ok(GeneratedField::AssetId),
                             "entityId" | "entity_id" => Ok(GeneratedField::EntityId),
                             _ => Err(serde::de::Error::unknown_field(value, FIELDS)),
                         }
@@ -1757,16 +1820,9 @@ impl<'de> serde::Deserialize<'de> for Owner {
                 where
                     V: serde::de::MapAccess<'de>,
             {
-                let mut asset_id__ = None;
                 let mut entity_id__ = None;
                 while let Some(k) = map_.next_key()? {
                     match k {
-                        GeneratedField::AssetId => {
-                            if asset_id__.is_some() {
-                                return Err(serde::de::Error::duplicate_field("assetId"));
-                            }
-                            asset_id__ = Some(map_.next_value()?);
-                        }
                         GeneratedField::EntityId => {
                             if entity_id__.is_some() {
                                 return Err(serde::de::Error::duplicate_field("entityId"));
@@ -1776,7 +1832,6 @@ impl<'de> serde::Deserialize<'de> for Owner {
                     }
                 }
                 Ok(Owner {
-                    asset_id: asset_id__.unwrap_or_default(),
                     entity_id: entity_id__.unwrap_or_default(),
                 })
             }
@@ -3059,9 +3114,6 @@ impl serde::Serialize for System {
         if !self.entity_id.is_empty() {
             len += 1;
         }
-        if !self.asset_id.is_empty() {
-            len += 1;
-        }
         if self.manages_own_scheduling {
             len += 1;
         }
@@ -3071,9 +3123,6 @@ impl serde::Serialize for System {
         }
         if !self.entity_id.is_empty() {
             struct_ser.serialize_field("entityId", &self.entity_id)?;
-        }
-        if !self.asset_id.is_empty() {
-            struct_ser.serialize_field("assetId", &self.asset_id)?;
         }
         if self.manages_own_scheduling {
             struct_ser.serialize_field("managesOwnScheduling", &self.manages_own_scheduling)?;
@@ -3092,8 +3141,6 @@ impl<'de> serde::Deserialize<'de> for System {
             "serviceName",
             "entity_id",
             "entityId",
-            "asset_id",
-            "assetId",
             "manages_own_scheduling",
             "managesOwnScheduling",
         ];
@@ -3102,7 +3149,6 @@ impl<'de> serde::Deserialize<'de> for System {
         enum GeneratedField {
             ServiceName,
             EntityId,
-            AssetId,
             ManagesOwnScheduling,
         }
         impl<'de> serde::Deserialize<'de> for GeneratedField {
@@ -3127,7 +3173,6 @@ impl<'de> serde::Deserialize<'de> for System {
                         match value {
                             "serviceName" | "service_name" => Ok(GeneratedField::ServiceName),
                             "entityId" | "entity_id" => Ok(GeneratedField::EntityId),
-                            "assetId" | "asset_id" => Ok(GeneratedField::AssetId),
                             "managesOwnScheduling" | "manages_own_scheduling" => Ok(GeneratedField::ManagesOwnScheduling),
                             _ => Err(serde::de::Error::unknown_field(value, FIELDS)),
                         }
@@ -3150,7 +3195,6 @@ impl<'de> serde::Deserialize<'de> for System {
             {
                 let mut service_name__ = None;
                 let mut entity_id__ = None;
-                let mut asset_id__ = None;
                 let mut manages_own_scheduling__ = None;
                 while let Some(k) = map_.next_key()? {
                     match k {
@@ -3166,12 +3210,6 @@ impl<'de> serde::Deserialize<'de> for System {
                             }
                             entity_id__ = Some(map_.next_value()?);
                         }
-                        GeneratedField::AssetId => {
-                            if asset_id__.is_some() {
-                                return Err(serde::de::Error::duplicate_field("assetId"));
-                            }
-                            asset_id__ = Some(map_.next_value()?);
-                        }
                         GeneratedField::ManagesOwnScheduling => {
                             if manages_own_scheduling__.is_some() {
                                 return Err(serde::de::Error::duplicate_field("managesOwnScheduling"));
@@ -3183,7 +3221,6 @@ impl<'de> serde::Deserialize<'de> for System {
                 Ok(System {
                     service_name: service_name__.unwrap_or_default(),
                     entity_id: entity_id__.unwrap_or_default(),
-                    asset_id: asset_id__.unwrap_or_default(),
                     manages_own_scheduling: manages_own_scheduling__.unwrap_or_default(),
                 })
             }

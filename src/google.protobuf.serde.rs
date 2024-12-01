@@ -6080,6 +6080,97 @@ impl<'de> serde::Deserialize<'de> for Int64Value {
         deserializer.deserialize_struct("google.protobuf.Int64Value", FIELDS, GeneratedVisitor)
     }
 }
+impl serde::Serialize for ListValue {
+    #[allow(deprecated)]
+    fn serialize<S>(&self, serializer: S) -> std::result::Result<S::Ok, S::Error>
+    where
+        S: serde::Serializer,
+    {
+        use serde::ser::SerializeStruct;
+        let mut len = 0;
+        if !self.values.is_empty() {
+            len += 1;
+        }
+        let mut struct_ser = serializer.serialize_struct("google.protobuf.ListValue", len)?;
+        if !self.values.is_empty() {
+            struct_ser.serialize_field("values", &self.values)?;
+        }
+        struct_ser.end()
+    }
+}
+impl<'de> serde::Deserialize<'de> for ListValue {
+    #[allow(deprecated)]
+    fn deserialize<D>(deserializer: D) -> std::result::Result<Self, D::Error>
+    where
+        D: serde::Deserializer<'de>,
+    {
+        const FIELDS: &[&str] = &[
+            "values",
+        ];
+
+        #[allow(clippy::enum_variant_names)]
+        enum GeneratedField {
+            Values,
+        }
+        impl<'de> serde::Deserialize<'de> for GeneratedField {
+            fn deserialize<D>(deserializer: D) -> std::result::Result<GeneratedField, D::Error>
+            where
+                D: serde::Deserializer<'de>,
+            {
+                struct GeneratedVisitor;
+
+                impl<'de> serde::de::Visitor<'de> for GeneratedVisitor {
+                    type Value = GeneratedField;
+
+                    fn expecting(&self, formatter: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
+                        write!(formatter, "expected one of: {:?}", &FIELDS)
+                    }
+
+                    #[allow(unused_variables)]
+                    fn visit_str<E>(self, value: &str) -> std::result::Result<GeneratedField, E>
+                    where
+                        E: serde::de::Error,
+                    {
+                        match value {
+                            "values" => Ok(GeneratedField::Values),
+                            _ => Err(serde::de::Error::unknown_field(value, FIELDS)),
+                        }
+                    }
+                }
+                deserializer.deserialize_identifier(GeneratedVisitor)
+            }
+        }
+        struct GeneratedVisitor;
+        impl<'de> serde::de::Visitor<'de> for GeneratedVisitor {
+            type Value = ListValue;
+
+            fn expecting(&self, formatter: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
+                formatter.write_str("struct google.protobuf.ListValue")
+            }
+
+            fn visit_map<V>(self, mut map_: V) -> std::result::Result<ListValue, V::Error>
+                where
+                    V: serde::de::MapAccess<'de>,
+            {
+                let mut values__ = None;
+                while let Some(k) = map_.next_key()? {
+                    match k {
+                        GeneratedField::Values => {
+                            if values__.is_some() {
+                                return Err(serde::de::Error::duplicate_field("values"));
+                            }
+                            values__ = Some(map_.next_value()?);
+                        }
+                    }
+                }
+                Ok(ListValue {
+                    values: values__.unwrap_or_default(),
+                })
+            }
+        }
+        deserializer.deserialize_struct("google.protobuf.ListValue", FIELDS, GeneratedVisitor)
+    }
+}
 impl serde::Serialize for MessageOptions {
     #[allow(deprecated)]
     fn serialize<S>(&self, serializer: S) -> std::result::Result<S::Ok, S::Error>
@@ -6671,6 +6762,74 @@ impl<'de> serde::Deserialize<'de> for method_options::IdempotencyLevel {
                     "IDEMPOTENCY_UNKNOWN" => Ok(method_options::IdempotencyLevel::IdempotencyUnknown),
                     "NO_SIDE_EFFECTS" => Ok(method_options::IdempotencyLevel::NoSideEffects),
                     "IDEMPOTENT" => Ok(method_options::IdempotencyLevel::Idempotent),
+                    _ => Err(serde::de::Error::unknown_variant(value, FIELDS)),
+                }
+            }
+        }
+        deserializer.deserialize_any(GeneratedVisitor)
+    }
+}
+impl serde::Serialize for NullValue {
+    #[allow(deprecated)]
+    fn serialize<S>(&self, serializer: S) -> std::result::Result<S::Ok, S::Error>
+    where
+        S: serde::Serializer,
+    {
+        let variant = match self {
+            Self::NullValue => "NULL_VALUE",
+        };
+        serializer.serialize_str(variant)
+    }
+}
+impl<'de> serde::Deserialize<'de> for NullValue {
+    #[allow(deprecated)]
+    fn deserialize<D>(deserializer: D) -> std::result::Result<Self, D::Error>
+    where
+        D: serde::Deserializer<'de>,
+    {
+        const FIELDS: &[&str] = &[
+            "NULL_VALUE",
+        ];
+
+        struct GeneratedVisitor;
+
+        impl<'de> serde::de::Visitor<'de> for GeneratedVisitor {
+            type Value = NullValue;
+
+            fn expecting(&self, formatter: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
+                write!(formatter, "expected one of: {:?}", &FIELDS)
+            }
+
+            fn visit_i64<E>(self, v: i64) -> std::result::Result<Self::Value, E>
+            where
+                E: serde::de::Error,
+            {
+                i32::try_from(v)
+                    .ok()
+                    .and_then(|x| x.try_into().ok())
+                    .ok_or_else(|| {
+                        serde::de::Error::invalid_value(serde::de::Unexpected::Signed(v), &self)
+                    })
+            }
+
+            fn visit_u64<E>(self, v: u64) -> std::result::Result<Self::Value, E>
+            where
+                E: serde::de::Error,
+            {
+                i32::try_from(v)
+                    .ok()
+                    .and_then(|x| x.try_into().ok())
+                    .ok_or_else(|| {
+                        serde::de::Error::invalid_value(serde::de::Unexpected::Unsigned(v), &self)
+                    })
+            }
+
+            fn visit_str<E>(self, value: &str) -> std::result::Result<Self::Value, E>
+            where
+                E: serde::de::Error,
+            {
+                match value {
+                    "NULL_VALUE" => Ok(NullValue::NullValue),
                     _ => Err(serde::de::Error::unknown_variant(value, FIELDS)),
                 }
             }
@@ -7496,6 +7655,99 @@ impl<'de> serde::Deserialize<'de> for StringValue {
         deserializer.deserialize_struct("google.protobuf.StringValue", FIELDS, GeneratedVisitor)
     }
 }
+impl serde::Serialize for Struct {
+    #[allow(deprecated)]
+    fn serialize<S>(&self, serializer: S) -> std::result::Result<S::Ok, S::Error>
+    where
+        S: serde::Serializer,
+    {
+        use serde::ser::SerializeStruct;
+        let mut len = 0;
+        if !self.fields.is_empty() {
+            len += 1;
+        }
+        let mut struct_ser = serializer.serialize_struct("google.protobuf.Struct", len)?;
+        if !self.fields.is_empty() {
+            struct_ser.serialize_field("fields", &self.fields)?;
+        }
+        struct_ser.end()
+    }
+}
+impl<'de> serde::Deserialize<'de> for Struct {
+    #[allow(deprecated)]
+    fn deserialize<D>(deserializer: D) -> std::result::Result<Self, D::Error>
+    where
+        D: serde::Deserializer<'de>,
+    {
+        const FIELDS: &[&str] = &[
+            "fields",
+        ];
+
+        #[allow(clippy::enum_variant_names)]
+        enum GeneratedField {
+            Fields,
+        }
+        impl<'de> serde::Deserialize<'de> for GeneratedField {
+            fn deserialize<D>(deserializer: D) -> std::result::Result<GeneratedField, D::Error>
+            where
+                D: serde::Deserializer<'de>,
+            {
+                struct GeneratedVisitor;
+
+                impl<'de> serde::de::Visitor<'de> for GeneratedVisitor {
+                    type Value = GeneratedField;
+
+                    fn expecting(&self, formatter: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
+                        write!(formatter, "expected one of: {:?}", &FIELDS)
+                    }
+
+                    #[allow(unused_variables)]
+                    fn visit_str<E>(self, value: &str) -> std::result::Result<GeneratedField, E>
+                    where
+                        E: serde::de::Error,
+                    {
+                        match value {
+                            "fields" => Ok(GeneratedField::Fields),
+                            _ => Err(serde::de::Error::unknown_field(value, FIELDS)),
+                        }
+                    }
+                }
+                deserializer.deserialize_identifier(GeneratedVisitor)
+            }
+        }
+        struct GeneratedVisitor;
+        impl<'de> serde::de::Visitor<'de> for GeneratedVisitor {
+            type Value = Struct;
+
+            fn expecting(&self, formatter: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
+                formatter.write_str("struct google.protobuf.Struct")
+            }
+
+            fn visit_map<V>(self, mut map_: V) -> std::result::Result<Struct, V::Error>
+                where
+                    V: serde::de::MapAccess<'de>,
+            {
+                let mut fields__ = None;
+                while let Some(k) = map_.next_key()? {
+                    match k {
+                        GeneratedField::Fields => {
+                            if fields__.is_some() {
+                                return Err(serde::de::Error::duplicate_field("fields"));
+                            }
+                            fields__ = Some(
+                                map_.next_value::<std::collections::HashMap<_, _>>()?
+                            );
+                        }
+                    }
+                }
+                Ok(Struct {
+                    fields: fields__.unwrap_or_default(),
+                })
+            }
+        }
+        deserializer.deserialize_struct("google.protobuf.Struct", FIELDS, GeneratedVisitor)
+    }
+}
 impl serde::Serialize for Timestamp {
     #[allow(deprecated)]
     fn serialize<S>(&self, serializer: S) -> std::result::Result<S::Ok, S::Error>
@@ -8104,5 +8356,170 @@ impl<'de> serde::Deserialize<'de> for uninterpreted_option::NamePart {
             }
         }
         deserializer.deserialize_struct("google.protobuf.UninterpretedOption.NamePart", FIELDS, GeneratedVisitor)
+    }
+}
+impl serde::Serialize for Value {
+    #[allow(deprecated)]
+    fn serialize<S>(&self, serializer: S) -> std::result::Result<S::Ok, S::Error>
+    where
+        S: serde::Serializer,
+    {
+        use serde::ser::SerializeStruct;
+        let mut len = 0;
+        if self.kind.is_some() {
+            len += 1;
+        }
+        let mut struct_ser = serializer.serialize_struct("google.protobuf.Value", len)?;
+        if let Some(v) = self.kind.as_ref() {
+            match v {
+                value::Kind::NullValue(v) => {
+                    let v = NullValue::try_from(*v)
+                        .map_err(|_| serde::ser::Error::custom(format!("Invalid variant {}", *v)))?;
+                    struct_ser.serialize_field("nullValue", &v)?;
+                }
+                value::Kind::NumberValue(v) => {
+                    struct_ser.serialize_field("numberValue", v)?;
+                }
+                value::Kind::StringValue(v) => {
+                    struct_ser.serialize_field("stringValue", v)?;
+                }
+                value::Kind::BoolValue(v) => {
+                    struct_ser.serialize_field("boolValue", v)?;
+                }
+                value::Kind::StructValue(v) => {
+                    struct_ser.serialize_field("structValue", v)?;
+                }
+                value::Kind::ListValue(v) => {
+                    struct_ser.serialize_field("listValue", v)?;
+                }
+            }
+        }
+        struct_ser.end()
+    }
+}
+impl<'de> serde::Deserialize<'de> for Value {
+    #[allow(deprecated)]
+    fn deserialize<D>(deserializer: D) -> std::result::Result<Self, D::Error>
+    where
+        D: serde::Deserializer<'de>,
+    {
+        const FIELDS: &[&str] = &[
+            "null_value",
+            "nullValue",
+            "number_value",
+            "numberValue",
+            "string_value",
+            "stringValue",
+            "bool_value",
+            "boolValue",
+            "struct_value",
+            "structValue",
+            "list_value",
+            "listValue",
+        ];
+
+        #[allow(clippy::enum_variant_names)]
+        enum GeneratedField {
+            NullValue,
+            NumberValue,
+            StringValue,
+            BoolValue,
+            StructValue,
+            ListValue,
+        }
+        impl<'de> serde::Deserialize<'de> for GeneratedField {
+            fn deserialize<D>(deserializer: D) -> std::result::Result<GeneratedField, D::Error>
+            where
+                D: serde::Deserializer<'de>,
+            {
+                struct GeneratedVisitor;
+
+                impl<'de> serde::de::Visitor<'de> for GeneratedVisitor {
+                    type Value = GeneratedField;
+
+                    fn expecting(&self, formatter: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
+                        write!(formatter, "expected one of: {:?}", &FIELDS)
+                    }
+
+                    #[allow(unused_variables)]
+                    fn visit_str<E>(self, value: &str) -> std::result::Result<GeneratedField, E>
+                    where
+                        E: serde::de::Error,
+                    {
+                        match value {
+                            "nullValue" | "null_value" => Ok(GeneratedField::NullValue),
+                            "numberValue" | "number_value" => Ok(GeneratedField::NumberValue),
+                            "stringValue" | "string_value" => Ok(GeneratedField::StringValue),
+                            "boolValue" | "bool_value" => Ok(GeneratedField::BoolValue),
+                            "structValue" | "struct_value" => Ok(GeneratedField::StructValue),
+                            "listValue" | "list_value" => Ok(GeneratedField::ListValue),
+                            _ => Err(serde::de::Error::unknown_field(value, FIELDS)),
+                        }
+                    }
+                }
+                deserializer.deserialize_identifier(GeneratedVisitor)
+            }
+        }
+        struct GeneratedVisitor;
+        impl<'de> serde::de::Visitor<'de> for GeneratedVisitor {
+            type Value = Value;
+
+            fn expecting(&self, formatter: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
+                formatter.write_str("struct google.protobuf.Value")
+            }
+
+            fn visit_map<V>(self, mut map_: V) -> std::result::Result<Value, V::Error>
+                where
+                    V: serde::de::MapAccess<'de>,
+            {
+                let mut kind__ = None;
+                while let Some(k) = map_.next_key()? {
+                    match k {
+                        GeneratedField::NullValue => {
+                            if kind__.is_some() {
+                                return Err(serde::de::Error::duplicate_field("nullValue"));
+                            }
+                            kind__ = map_.next_value::<::std::option::Option<NullValue>>()?.map(|x| value::Kind::NullValue(x as i32));
+                        }
+                        GeneratedField::NumberValue => {
+                            if kind__.is_some() {
+                                return Err(serde::de::Error::duplicate_field("numberValue"));
+                            }
+                            kind__ = map_.next_value::<::std::option::Option<::pbjson::private::NumberDeserialize<_>>>()?.map(|x| value::Kind::NumberValue(x.0));
+                        }
+                        GeneratedField::StringValue => {
+                            if kind__.is_some() {
+                                return Err(serde::de::Error::duplicate_field("stringValue"));
+                            }
+                            kind__ = map_.next_value::<::std::option::Option<_>>()?.map(value::Kind::StringValue);
+                        }
+                        GeneratedField::BoolValue => {
+                            if kind__.is_some() {
+                                return Err(serde::de::Error::duplicate_field("boolValue"));
+                            }
+                            kind__ = map_.next_value::<::std::option::Option<_>>()?.map(value::Kind::BoolValue);
+                        }
+                        GeneratedField::StructValue => {
+                            if kind__.is_some() {
+                                return Err(serde::de::Error::duplicate_field("structValue"));
+                            }
+                            kind__ = map_.next_value::<::std::option::Option<_>>()?.map(value::Kind::StructValue)
+;
+                        }
+                        GeneratedField::ListValue => {
+                            if kind__.is_some() {
+                                return Err(serde::de::Error::duplicate_field("listValue"));
+                            }
+                            kind__ = map_.next_value::<::std::option::Option<_>>()?.map(value::Kind::ListValue)
+;
+                        }
+                    }
+                }
+                Ok(Value {
+                    kind: kind__,
+                })
+            }
+        }
+        deserializer.deserialize_struct("google.protobuf.Value", FIELDS, GeneratedVisitor)
     }
 }

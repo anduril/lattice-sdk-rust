@@ -7,16 +7,10 @@ impl serde::Serialize for Agent {
     {
         use serde::ser::SerializeStruct;
         let mut len = 0;
-        if !self.asset_id.is_empty() {
-            len += 1;
-        }
         if !self.entity_id.is_empty() {
             len += 1;
         }
         let mut struct_ser = serializer.serialize_struct("anduril.tasks.v2.Agent", len)?;
-        if !self.asset_id.is_empty() {
-            struct_ser.serialize_field("assetId", &self.asset_id)?;
-        }
         if !self.entity_id.is_empty() {
             struct_ser.serialize_field("entityId", &self.entity_id)?;
         }
@@ -30,15 +24,12 @@ impl<'de> serde::Deserialize<'de> for Agent {
         D: serde::Deserializer<'de>,
     {
         const FIELDS: &[&str] = &[
-            "asset_id",
-            "assetId",
             "entity_id",
             "entityId",
         ];
 
         #[allow(clippy::enum_variant_names)]
         enum GeneratedField {
-            AssetId,
             EntityId,
         }
         impl<'de> serde::Deserialize<'de> for GeneratedField {
@@ -61,7 +52,6 @@ impl<'de> serde::Deserialize<'de> for Agent {
                         E: serde::de::Error,
                     {
                         match value {
-                            "assetId" | "asset_id" => Ok(GeneratedField::AssetId),
                             "entityId" | "entity_id" => Ok(GeneratedField::EntityId),
                             _ => Err(serde::de::Error::unknown_field(value, FIELDS)),
                         }
@@ -82,16 +72,9 @@ impl<'de> serde::Deserialize<'de> for Agent {
                 where
                     V: serde::de::MapAccess<'de>,
             {
-                let mut asset_id__ = None;
                 let mut entity_id__ = None;
                 while let Some(k) = map_.next_key()? {
                     match k {
-                        GeneratedField::AssetId => {
-                            if asset_id__.is_some() {
-                                return Err(serde::de::Error::duplicate_field("assetId"));
-                            }
-                            asset_id__ = Some(map_.next_value()?);
-                        }
                         GeneratedField::EntityId => {
                             if entity_id__.is_some() {
                                 return Err(serde::de::Error::duplicate_field("entityId"));
@@ -101,7 +84,6 @@ impl<'de> serde::Deserialize<'de> for Agent {
                     }
                 }
                 Ok(Agent {
-                    asset_id: asset_id__.unwrap_or_default(),
                     entity_id: entity_id__.unwrap_or_default(),
                 })
             }
@@ -2392,21 +2374,9 @@ impl serde::Serialize for Monitor {
         if self.objective.is_some() {
             len += 1;
         }
-        if !self.track_id.is_empty() {
-            len += 1;
-        }
-        if !self.track_producer.is_empty() {
-            len += 1;
-        }
         let mut struct_ser = serializer.serialize_struct("anduril.tasks.v2.Monitor", len)?;
         if let Some(v) = self.objective.as_ref() {
             struct_ser.serialize_field("objective", v)?;
-        }
-        if !self.track_id.is_empty() {
-            struct_ser.serialize_field("trackId", &self.track_id)?;
-        }
-        if !self.track_producer.is_empty() {
-            struct_ser.serialize_field("trackProducer", &self.track_producer)?;
         }
         struct_ser.end()
     }
@@ -2419,17 +2389,11 @@ impl<'de> serde::Deserialize<'de> for Monitor {
     {
         const FIELDS: &[&str] = &[
             "objective",
-            "track_id",
-            "trackId",
-            "track_producer",
-            "trackProducer",
         ];
 
         #[allow(clippy::enum_variant_names)]
         enum GeneratedField {
             Objective,
-            TrackId,
-            TrackProducer,
         }
         impl<'de> serde::Deserialize<'de> for GeneratedField {
             fn deserialize<D>(deserializer: D) -> std::result::Result<GeneratedField, D::Error>
@@ -2452,8 +2416,6 @@ impl<'de> serde::Deserialize<'de> for Monitor {
                     {
                         match value {
                             "objective" => Ok(GeneratedField::Objective),
-                            "trackId" | "track_id" => Ok(GeneratedField::TrackId),
-                            "trackProducer" | "track_producer" => Ok(GeneratedField::TrackProducer),
                             _ => Err(serde::de::Error::unknown_field(value, FIELDS)),
                         }
                     }
@@ -2474,8 +2436,6 @@ impl<'de> serde::Deserialize<'de> for Monitor {
                     V: serde::de::MapAccess<'de>,
             {
                 let mut objective__ = None;
-                let mut track_id__ = None;
-                let mut track_producer__ = None;
                 while let Some(k) = map_.next_key()? {
                     match k {
                         GeneratedField::Objective => {
@@ -2484,24 +2444,10 @@ impl<'de> serde::Deserialize<'de> for Monitor {
                             }
                             objective__ = map_.next_value()?;
                         }
-                        GeneratedField::TrackId => {
-                            if track_id__.is_some() {
-                                return Err(serde::de::Error::duplicate_field("trackId"));
-                            }
-                            track_id__ = Some(map_.next_value()?);
-                        }
-                        GeneratedField::TrackProducer => {
-                            if track_producer__.is_some() {
-                                return Err(serde::de::Error::duplicate_field("trackProducer"));
-                            }
-                            track_producer__ = Some(map_.next_value()?);
-                        }
                     }
                 }
                 Ok(Monitor {
                     objective: objective__,
-                    track_id: track_id__.unwrap_or_default(),
-                    track_producer: track_producer__.unwrap_or_default(),
                 })
             }
         }
@@ -2516,16 +2462,10 @@ impl serde::Serialize for Objective {
     {
         use serde::ser::SerializeStruct;
         let mut len = 0;
-        if !self.produced_by_asset_id.is_empty() {
-            len += 1;
-        }
         if self.objective.is_some() {
             len += 1;
         }
         let mut struct_ser = serializer.serialize_struct("anduril.tasks.v2.Objective", len)?;
-        if !self.produced_by_asset_id.is_empty() {
-            struct_ser.serialize_field("producedByAssetId", &self.produced_by_asset_id)?;
-        }
         if let Some(v) = self.objective.as_ref() {
             match v {
                 objective::Objective::EntityId(v) => {
@@ -2546,8 +2486,6 @@ impl<'de> serde::Deserialize<'de> for Objective {
         D: serde::Deserializer<'de>,
     {
         const FIELDS: &[&str] = &[
-            "produced_by_asset_id",
-            "producedByAssetId",
             "entity_id",
             "entityId",
             "point",
@@ -2555,7 +2493,6 @@ impl<'de> serde::Deserialize<'de> for Objective {
 
         #[allow(clippy::enum_variant_names)]
         enum GeneratedField {
-            ProducedByAssetId,
             EntityId,
             Point,
         }
@@ -2579,7 +2516,6 @@ impl<'de> serde::Deserialize<'de> for Objective {
                         E: serde::de::Error,
                     {
                         match value {
-                            "producedByAssetId" | "produced_by_asset_id" => Ok(GeneratedField::ProducedByAssetId),
                             "entityId" | "entity_id" => Ok(GeneratedField::EntityId),
                             "point" => Ok(GeneratedField::Point),
                             _ => Err(serde::de::Error::unknown_field(value, FIELDS)),
@@ -2601,16 +2537,9 @@ impl<'de> serde::Deserialize<'de> for Objective {
                 where
                     V: serde::de::MapAccess<'de>,
             {
-                let mut produced_by_asset_id__ = None;
                 let mut objective__ = None;
                 while let Some(k) = map_.next_key()? {
                     match k {
-                        GeneratedField::ProducedByAssetId => {
-                            if produced_by_asset_id__.is_some() {
-                                return Err(serde::de::Error::duplicate_field("producedByAssetId"));
-                            }
-                            produced_by_asset_id__ = Some(map_.next_value()?);
-                        }
                         GeneratedField::EntityId => {
                             if objective__.is_some() {
                                 return Err(serde::de::Error::duplicate_field("entityId"));
@@ -2627,7 +2556,6 @@ impl<'de> serde::Deserialize<'de> for Objective {
                     }
                 }
                 Ok(Objective {
-                    produced_by_asset_id: produced_by_asset_id__.unwrap_or_default(),
                     objective: objective__,
                 })
             }
@@ -4632,15 +4560,9 @@ impl serde::Serialize for TaskCatalog {
         if !self.task_definitions.is_empty() {
             len += 1;
         }
-        if self.is_asset_inhibited {
-            len += 1;
-        }
         let mut struct_ser = serializer.serialize_struct("anduril.tasks.v2.TaskCatalog", len)?;
         if !self.task_definitions.is_empty() {
             struct_ser.serialize_field("taskDefinitions", &self.task_definitions)?;
-        }
-        if self.is_asset_inhibited {
-            struct_ser.serialize_field("isAssetInhibited", &self.is_asset_inhibited)?;
         }
         struct_ser.end()
     }
@@ -4654,14 +4576,11 @@ impl<'de> serde::Deserialize<'de> for TaskCatalog {
         const FIELDS: &[&str] = &[
             "task_definitions",
             "taskDefinitions",
-            "is_asset_inhibited",
-            "isAssetInhibited",
         ];
 
         #[allow(clippy::enum_variant_names)]
         enum GeneratedField {
             TaskDefinitions,
-            IsAssetInhibited,
         }
         impl<'de> serde::Deserialize<'de> for GeneratedField {
             fn deserialize<D>(deserializer: D) -> std::result::Result<GeneratedField, D::Error>
@@ -4684,7 +4603,6 @@ impl<'de> serde::Deserialize<'de> for TaskCatalog {
                     {
                         match value {
                             "taskDefinitions" | "task_definitions" => Ok(GeneratedField::TaskDefinitions),
-                            "isAssetInhibited" | "is_asset_inhibited" => Ok(GeneratedField::IsAssetInhibited),
                             _ => Err(serde::de::Error::unknown_field(value, FIELDS)),
                         }
                     }
@@ -4705,7 +4623,6 @@ impl<'de> serde::Deserialize<'de> for TaskCatalog {
                     V: serde::de::MapAccess<'de>,
             {
                 let mut task_definitions__ = None;
-                let mut is_asset_inhibited__ = None;
                 while let Some(k) = map_.next_key()? {
                     match k {
                         GeneratedField::TaskDefinitions => {
@@ -4714,17 +4631,10 @@ impl<'de> serde::Deserialize<'de> for TaskCatalog {
                             }
                             task_definitions__ = Some(map_.next_value()?);
                         }
-                        GeneratedField::IsAssetInhibited => {
-                            if is_asset_inhibited__.is_some() {
-                                return Err(serde::de::Error::duplicate_field("isAssetInhibited"));
-                            }
-                            is_asset_inhibited__ = Some(map_.next_value()?);
-                        }
                     }
                 }
                 Ok(TaskCatalog {
                     task_definitions: task_definitions__.unwrap_or_default(),
-                    is_asset_inhibited: is_asset_inhibited__.unwrap_or_default(),
                 })
             }
         }
