@@ -1321,9 +1321,6 @@ impl serde::Serialize for Classification {
     {
         use serde::ser::SerializeStruct;
         let mut len = 0;
-        if self.level != 0 {
-            len += 1;
-        }
         if self.default.is_some() {
             len += 1;
         }
@@ -1331,11 +1328,6 @@ impl serde::Serialize for Classification {
             len += 1;
         }
         let mut struct_ser = serializer.serialize_struct("anduril.entitymanager.v1.Classification", len)?;
-        if self.level != 0 {
-            let v = ClassificationLevels::try_from(self.level)
-                .map_err(|_| serde::ser::Error::custom(format!("Invalid variant {}", self.level)))?;
-            struct_ser.serialize_field("level", &v)?;
-        }
         if let Some(v) = self.default.as_ref() {
             struct_ser.serialize_field("default", v)?;
         }
@@ -1352,14 +1344,12 @@ impl<'de> serde::Deserialize<'de> for Classification {
         D: serde::Deserializer<'de>,
     {
         const FIELDS: &[&str] = &[
-            "level",
             "default",
             "fields",
         ];
 
         #[allow(clippy::enum_variant_names)]
         enum GeneratedField {
-            Level,
             Default,
             Fields,
         }
@@ -1383,7 +1373,6 @@ impl<'de> serde::Deserialize<'de> for Classification {
                         E: serde::de::Error,
                     {
                         match value {
-                            "level" => Ok(GeneratedField::Level),
                             "default" => Ok(GeneratedField::Default),
                             "fields" => Ok(GeneratedField::Fields),
                             _ => Err(serde::de::Error::unknown_field(value, FIELDS)),
@@ -1405,17 +1394,10 @@ impl<'de> serde::Deserialize<'de> for Classification {
                 where
                     V: serde::de::MapAccess<'de>,
             {
-                let mut level__ = None;
                 let mut default__ = None;
                 let mut fields__ = None;
                 while let Some(k) = map_.next_key()? {
                     match k {
-                        GeneratedField::Level => {
-                            if level__.is_some() {
-                                return Err(serde::de::Error::duplicate_field("level"));
-                            }
-                            level__ = Some(map_.next_value::<ClassificationLevels>()? as i32);
-                        }
                         GeneratedField::Default => {
                             if default__.is_some() {
                                 return Err(serde::de::Error::duplicate_field("default"));
@@ -1431,7 +1413,6 @@ impl<'de> serde::Deserialize<'de> for Classification {
                     }
                 }
                 Ok(Classification {
-                    level: level__.unwrap_or_default(),
                     default: default__,
                     fields: fields__.unwrap_or_default(),
                 })
@@ -2329,6 +2310,9 @@ impl serde::Serialize for Correlation {
     {
         use serde::ser::SerializeStruct;
         let mut len = 0;
+        if self.membership.is_some() {
+            len += 1;
+        }
         if self.decorrelation.is_some() {
             len += 1;
         }
@@ -2336,6 +2320,9 @@ impl serde::Serialize for Correlation {
             len += 1;
         }
         let mut struct_ser = serializer.serialize_struct("anduril.entitymanager.v1.Correlation", len)?;
+        if let Some(v) = self.membership.as_ref() {
+            struct_ser.serialize_field("membership", v)?;
+        }
         if let Some(v) = self.decorrelation.as_ref() {
             struct_ser.serialize_field("decorrelation", v)?;
         }
@@ -2359,6 +2346,7 @@ impl<'de> serde::Deserialize<'de> for Correlation {
         D: serde::Deserializer<'de>,
     {
         const FIELDS: &[&str] = &[
+            "membership",
             "decorrelation",
             "primary",
             "secondary",
@@ -2366,6 +2354,7 @@ impl<'de> serde::Deserialize<'de> for Correlation {
 
         #[allow(clippy::enum_variant_names)]
         enum GeneratedField {
+            Membership,
             Decorrelation,
             Primary,
             Secondary,
@@ -2390,6 +2379,7 @@ impl<'de> serde::Deserialize<'de> for Correlation {
                         E: serde::de::Error,
                     {
                         match value {
+                            "membership" => Ok(GeneratedField::Membership),
                             "decorrelation" => Ok(GeneratedField::Decorrelation),
                             "primary" => Ok(GeneratedField::Primary),
                             "secondary" => Ok(GeneratedField::Secondary),
@@ -2412,10 +2402,17 @@ impl<'de> serde::Deserialize<'de> for Correlation {
                 where
                     V: serde::de::MapAccess<'de>,
             {
+                let mut membership__ = None;
                 let mut decorrelation__ = None;
                 let mut correlation__ = None;
                 while let Some(k) = map_.next_key()? {
                     match k {
+                        GeneratedField::Membership => {
+                            if membership__.is_some() {
+                                return Err(serde::de::Error::duplicate_field("membership"));
+                            }
+                            membership__ = map_.next_value()?;
+                        }
                         GeneratedField::Decorrelation => {
                             if decorrelation__.is_some() {
                                 return Err(serde::de::Error::duplicate_field("decorrelation"));
@@ -2439,12 +2436,158 @@ impl<'de> serde::Deserialize<'de> for Correlation {
                     }
                 }
                 Ok(Correlation {
+                    membership: membership__,
                     decorrelation: decorrelation__,
                     correlation: correlation__,
                 })
             }
         }
         deserializer.deserialize_struct("anduril.entitymanager.v1.Correlation", FIELDS, GeneratedVisitor)
+    }
+}
+impl serde::Serialize for CorrelationMembership {
+    #[allow(deprecated)]
+    fn serialize<S>(&self, serializer: S) -> std::result::Result<S::Ok, S::Error>
+    where
+        S: serde::Serializer,
+    {
+        use serde::ser::SerializeStruct;
+        let mut len = 0;
+        if !self.correlation_set_id.is_empty() {
+            len += 1;
+        }
+        if self.metadata.is_some() {
+            len += 1;
+        }
+        if self.membership.is_some() {
+            len += 1;
+        }
+        let mut struct_ser = serializer.serialize_struct("anduril.entitymanager.v1.CorrelationMembership", len)?;
+        if !self.correlation_set_id.is_empty() {
+            struct_ser.serialize_field("correlationSetId", &self.correlation_set_id)?;
+        }
+        if let Some(v) = self.metadata.as_ref() {
+            struct_ser.serialize_field("metadata", v)?;
+        }
+        if let Some(v) = self.membership.as_ref() {
+            match v {
+                correlation_membership::Membership::Primary(v) => {
+                    struct_ser.serialize_field("primary", v)?;
+                }
+                correlation_membership::Membership::NonPrimary(v) => {
+                    struct_ser.serialize_field("nonPrimary", v)?;
+                }
+            }
+        }
+        struct_ser.end()
+    }
+}
+impl<'de> serde::Deserialize<'de> for CorrelationMembership {
+    #[allow(deprecated)]
+    fn deserialize<D>(deserializer: D) -> std::result::Result<Self, D::Error>
+    where
+        D: serde::Deserializer<'de>,
+    {
+        const FIELDS: &[&str] = &[
+            "correlation_set_id",
+            "correlationSetId",
+            "metadata",
+            "primary",
+            "non_primary",
+            "nonPrimary",
+        ];
+
+        #[allow(clippy::enum_variant_names)]
+        enum GeneratedField {
+            CorrelationSetId,
+            Metadata,
+            Primary,
+            NonPrimary,
+        }
+        impl<'de> serde::Deserialize<'de> for GeneratedField {
+            fn deserialize<D>(deserializer: D) -> std::result::Result<GeneratedField, D::Error>
+            where
+                D: serde::Deserializer<'de>,
+            {
+                struct GeneratedVisitor;
+
+                impl<'de> serde::de::Visitor<'de> for GeneratedVisitor {
+                    type Value = GeneratedField;
+
+                    fn expecting(&self, formatter: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
+                        write!(formatter, "expected one of: {:?}", &FIELDS)
+                    }
+
+                    #[allow(unused_variables)]
+                    fn visit_str<E>(self, value: &str) -> std::result::Result<GeneratedField, E>
+                    where
+                        E: serde::de::Error,
+                    {
+                        match value {
+                            "correlationSetId" | "correlation_set_id" => Ok(GeneratedField::CorrelationSetId),
+                            "metadata" => Ok(GeneratedField::Metadata),
+                            "primary" => Ok(GeneratedField::Primary),
+                            "nonPrimary" | "non_primary" => Ok(GeneratedField::NonPrimary),
+                            _ => Err(serde::de::Error::unknown_field(value, FIELDS)),
+                        }
+                    }
+                }
+                deserializer.deserialize_identifier(GeneratedVisitor)
+            }
+        }
+        struct GeneratedVisitor;
+        impl<'de> serde::de::Visitor<'de> for GeneratedVisitor {
+            type Value = CorrelationMembership;
+
+            fn expecting(&self, formatter: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
+                formatter.write_str("struct anduril.entitymanager.v1.CorrelationMembership")
+            }
+
+            fn visit_map<V>(self, mut map_: V) -> std::result::Result<CorrelationMembership, V::Error>
+                where
+                    V: serde::de::MapAccess<'de>,
+            {
+                let mut correlation_set_id__ = None;
+                let mut metadata__ = None;
+                let mut membership__ = None;
+                while let Some(k) = map_.next_key()? {
+                    match k {
+                        GeneratedField::CorrelationSetId => {
+                            if correlation_set_id__.is_some() {
+                                return Err(serde::de::Error::duplicate_field("correlationSetId"));
+                            }
+                            correlation_set_id__ = Some(map_.next_value()?);
+                        }
+                        GeneratedField::Metadata => {
+                            if metadata__.is_some() {
+                                return Err(serde::de::Error::duplicate_field("metadata"));
+                            }
+                            metadata__ = map_.next_value()?;
+                        }
+                        GeneratedField::Primary => {
+                            if membership__.is_some() {
+                                return Err(serde::de::Error::duplicate_field("primary"));
+                            }
+                            membership__ = map_.next_value::<::std::option::Option<_>>()?.map(correlation_membership::Membership::Primary)
+;
+                        }
+                        GeneratedField::NonPrimary => {
+                            if membership__.is_some() {
+                                return Err(serde::de::Error::duplicate_field("nonPrimary"));
+                            }
+                            membership__ = map_.next_value::<::std::option::Option<_>>()?.map(correlation_membership::Membership::NonPrimary)
+;
+                        }
+                    }
+                }
+                Ok(CorrelationMembership {
+                    correlation_set_id: correlation_set_id__.unwrap_or_default(),
+                    metadata: metadata__,
+                    membership: membership__,
+                })
+            }
+        }
+        deserializer.deserialize_struct("anduril.entitymanager.v1.CorrelationMembership", FIELDS, GeneratedVisitor)
     }
 }
 impl serde::Serialize for CorrelationMetadata {
@@ -3089,134 +3232,6 @@ impl<'de> serde::Deserialize<'de> for CronWindow {
         deserializer.deserialize_struct("anduril.entitymanager.v1.CronWindow", FIELDS, GeneratedVisitor)
     }
 }
-impl serde::Serialize for DodConditionCode {
-    #[allow(deprecated)]
-    fn serialize<S>(&self, serializer: S) -> std::result::Result<S::Ok, S::Error>
-    where
-        S: serde::Serializer,
-    {
-        let variant = match self {
-            Self::Invalid => "DOD_CONDITION_CODE_INVALID",
-            Self::A => "DOD_CONDITION_CODE_A",
-            Self::B => "DOD_CONDITION_CODE_B",
-            Self::C => "DOD_CONDITION_CODE_C",
-            Self::D => "DOD_CONDITION_CODE_D",
-            Self::E => "DOD_CONDITION_CODE_E",
-            Self::F => "DOD_CONDITION_CODE_F",
-            Self::G => "DOD_CONDITION_CODE_G",
-            Self::H => "DOD_CONDITION_CODE_H",
-            Self::Q => "DOD_CONDITION_CODE_Q",
-            Self::S => "DOD_CONDITION_CODE_S",
-            Self::J => "DOD_CONDITION_CODE_J",
-            Self::K => "DOD_CONDITION_CODE_K",
-            Self::L => "DOD_CONDITION_CODE_L",
-            Self::M => "DOD_CONDITION_CODE_M",
-            Self::N => "DOD_CONDITION_CODE_N",
-            Self::P => "DOD_CONDITION_CODE_P",
-            Self::R => "DOD_CONDITION_CODE_R",
-            Self::T => "DOD_CONDITION_CODE_T",
-            Self::V => "DOD_CONDITION_CODE_V",
-            Self::X => "DOD_CONDITION_CODE_X",
-        };
-        serializer.serialize_str(variant)
-    }
-}
-impl<'de> serde::Deserialize<'de> for DodConditionCode {
-    #[allow(deprecated)]
-    fn deserialize<D>(deserializer: D) -> std::result::Result<Self, D::Error>
-    where
-        D: serde::Deserializer<'de>,
-    {
-        const FIELDS: &[&str] = &[
-            "DOD_CONDITION_CODE_INVALID",
-            "DOD_CONDITION_CODE_A",
-            "DOD_CONDITION_CODE_B",
-            "DOD_CONDITION_CODE_C",
-            "DOD_CONDITION_CODE_D",
-            "DOD_CONDITION_CODE_E",
-            "DOD_CONDITION_CODE_F",
-            "DOD_CONDITION_CODE_G",
-            "DOD_CONDITION_CODE_H",
-            "DOD_CONDITION_CODE_Q",
-            "DOD_CONDITION_CODE_S",
-            "DOD_CONDITION_CODE_J",
-            "DOD_CONDITION_CODE_K",
-            "DOD_CONDITION_CODE_L",
-            "DOD_CONDITION_CODE_M",
-            "DOD_CONDITION_CODE_N",
-            "DOD_CONDITION_CODE_P",
-            "DOD_CONDITION_CODE_R",
-            "DOD_CONDITION_CODE_T",
-            "DOD_CONDITION_CODE_V",
-            "DOD_CONDITION_CODE_X",
-        ];
-
-        struct GeneratedVisitor;
-
-        impl<'de> serde::de::Visitor<'de> for GeneratedVisitor {
-            type Value = DodConditionCode;
-
-            fn expecting(&self, formatter: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
-                write!(formatter, "expected one of: {:?}", &FIELDS)
-            }
-
-            fn visit_i64<E>(self, v: i64) -> std::result::Result<Self::Value, E>
-            where
-                E: serde::de::Error,
-            {
-                i32::try_from(v)
-                    .ok()
-                    .and_then(|x| x.try_into().ok())
-                    .ok_or_else(|| {
-                        serde::de::Error::invalid_value(serde::de::Unexpected::Signed(v), &self)
-                    })
-            }
-
-            fn visit_u64<E>(self, v: u64) -> std::result::Result<Self::Value, E>
-            where
-                E: serde::de::Error,
-            {
-                i32::try_from(v)
-                    .ok()
-                    .and_then(|x| x.try_into().ok())
-                    .ok_or_else(|| {
-                        serde::de::Error::invalid_value(serde::de::Unexpected::Unsigned(v), &self)
-                    })
-            }
-
-            fn visit_str<E>(self, value: &str) -> std::result::Result<Self::Value, E>
-            where
-                E: serde::de::Error,
-            {
-                match value {
-                    "DOD_CONDITION_CODE_INVALID" => Ok(DodConditionCode::Invalid),
-                    "DOD_CONDITION_CODE_A" => Ok(DodConditionCode::A),
-                    "DOD_CONDITION_CODE_B" => Ok(DodConditionCode::B),
-                    "DOD_CONDITION_CODE_C" => Ok(DodConditionCode::C),
-                    "DOD_CONDITION_CODE_D" => Ok(DodConditionCode::D),
-                    "DOD_CONDITION_CODE_E" => Ok(DodConditionCode::E),
-                    "DOD_CONDITION_CODE_F" => Ok(DodConditionCode::F),
-                    "DOD_CONDITION_CODE_G" => Ok(DodConditionCode::G),
-                    "DOD_CONDITION_CODE_H" => Ok(DodConditionCode::H),
-                    "DOD_CONDITION_CODE_Q" => Ok(DodConditionCode::Q),
-                    "DOD_CONDITION_CODE_S" => Ok(DodConditionCode::S),
-                    "DOD_CONDITION_CODE_J" => Ok(DodConditionCode::J),
-                    "DOD_CONDITION_CODE_K" => Ok(DodConditionCode::K),
-                    "DOD_CONDITION_CODE_L" => Ok(DodConditionCode::L),
-                    "DOD_CONDITION_CODE_M" => Ok(DodConditionCode::M),
-                    "DOD_CONDITION_CODE_N" => Ok(DodConditionCode::N),
-                    "DOD_CONDITION_CODE_P" => Ok(DodConditionCode::P),
-                    "DOD_CONDITION_CODE_R" => Ok(DodConditionCode::R),
-                    "DOD_CONDITION_CODE_T" => Ok(DodConditionCode::T),
-                    "DOD_CONDITION_CODE_V" => Ok(DodConditionCode::V),
-                    "DOD_CONDITION_CODE_X" => Ok(DodConditionCode::X),
-                    _ => Err(serde::de::Error::unknown_variant(value, FIELDS)),
-                }
-            }
-        }
-        deserializer.deserialize_any(GeneratedVisitor)
-    }
-}
 impl serde::Serialize for DecorrelatedAll {
     #[allow(deprecated)]
     fn serialize<S>(&self, serializer: S) -> std::result::Result<S::Ok, S::Error>
@@ -3852,134 +3867,6 @@ impl<'de> serde::Deserialize<'de> for EmitterNotation {
             }
         }
         deserializer.deserialize_struct("anduril.entitymanager.v1.EmitterNotation", FIELDS, GeneratedVisitor)
-    }
-}
-impl serde::Serialize for Encoding {
-    #[allow(deprecated)]
-    fn serialize<S>(&self, serializer: S) -> std::result::Result<S::Ok, S::Error>
-    where
-        S: serde::Serializer,
-    {
-        use serde::ser::SerializeStruct;
-        let mut len = 0;
-        if self.chip_hop_rate_num_sec.is_some() {
-            len += 1;
-        }
-        if self.hop_dwell_time_sec.is_some() {
-            len += 1;
-        }
-        if self.baud_rate_num_sec.is_some() {
-            len += 1;
-        }
-        let mut struct_ser = serializer.serialize_struct("anduril.entitymanager.v1.Encoding", len)?;
-        if let Some(v) = self.chip_hop_rate_num_sec.as_ref() {
-            struct_ser.serialize_field("chipHopRateNumSec", v)?;
-        }
-        if let Some(v) = self.hop_dwell_time_sec.as_ref() {
-            struct_ser.serialize_field("hopDwellTimeSec", v)?;
-        }
-        if let Some(v) = self.baud_rate_num_sec.as_ref() {
-            struct_ser.serialize_field("baudRateNumSec", v)?;
-        }
-        struct_ser.end()
-    }
-}
-impl<'de> serde::Deserialize<'de> for Encoding {
-    #[allow(deprecated)]
-    fn deserialize<D>(deserializer: D) -> std::result::Result<Self, D::Error>
-    where
-        D: serde::Deserializer<'de>,
-    {
-        const FIELDS: &[&str] = &[
-            "chip_hop_rate_num_sec",
-            "chipHopRateNumSec",
-            "hop_dwell_time_sec",
-            "hopDwellTimeSec",
-            "baud_rate_num_sec",
-            "baudRateNumSec",
-        ];
-
-        #[allow(clippy::enum_variant_names)]
-        enum GeneratedField {
-            ChipHopRateNumSec,
-            HopDwellTimeSec,
-            BaudRateNumSec,
-        }
-        impl<'de> serde::Deserialize<'de> for GeneratedField {
-            fn deserialize<D>(deserializer: D) -> std::result::Result<GeneratedField, D::Error>
-            where
-                D: serde::Deserializer<'de>,
-            {
-                struct GeneratedVisitor;
-
-                impl<'de> serde::de::Visitor<'de> for GeneratedVisitor {
-                    type Value = GeneratedField;
-
-                    fn expecting(&self, formatter: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
-                        write!(formatter, "expected one of: {:?}", &FIELDS)
-                    }
-
-                    #[allow(unused_variables)]
-                    fn visit_str<E>(self, value: &str) -> std::result::Result<GeneratedField, E>
-                    where
-                        E: serde::de::Error,
-                    {
-                        match value {
-                            "chipHopRateNumSec" | "chip_hop_rate_num_sec" => Ok(GeneratedField::ChipHopRateNumSec),
-                            "hopDwellTimeSec" | "hop_dwell_time_sec" => Ok(GeneratedField::HopDwellTimeSec),
-                            "baudRateNumSec" | "baud_rate_num_sec" => Ok(GeneratedField::BaudRateNumSec),
-                            _ => Err(serde::de::Error::unknown_field(value, FIELDS)),
-                        }
-                    }
-                }
-                deserializer.deserialize_identifier(GeneratedVisitor)
-            }
-        }
-        struct GeneratedVisitor;
-        impl<'de> serde::de::Visitor<'de> for GeneratedVisitor {
-            type Value = Encoding;
-
-            fn expecting(&self, formatter: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
-                formatter.write_str("struct anduril.entitymanager.v1.Encoding")
-            }
-
-            fn visit_map<V>(self, mut map_: V) -> std::result::Result<Encoding, V::Error>
-                where
-                    V: serde::de::MapAccess<'de>,
-            {
-                let mut chip_hop_rate_num_sec__ = None;
-                let mut hop_dwell_time_sec__ = None;
-                let mut baud_rate_num_sec__ = None;
-                while let Some(k) = map_.next_key()? {
-                    match k {
-                        GeneratedField::ChipHopRateNumSec => {
-                            if chip_hop_rate_num_sec__.is_some() {
-                                return Err(serde::de::Error::duplicate_field("chipHopRateNumSec"));
-                            }
-                            chip_hop_rate_num_sec__ = map_.next_value()?;
-                        }
-                        GeneratedField::HopDwellTimeSec => {
-                            if hop_dwell_time_sec__.is_some() {
-                                return Err(serde::de::Error::duplicate_field("hopDwellTimeSec"));
-                            }
-                            hop_dwell_time_sec__ = map_.next_value()?;
-                        }
-                        GeneratedField::BaudRateNumSec => {
-                            if baud_rate_num_sec__.is_some() {
-                                return Err(serde::de::Error::duplicate_field("baudRateNumSec"));
-                            }
-                            baud_rate_num_sec__ = map_.next_value()?;
-                        }
-                    }
-                }
-                Ok(Encoding {
-                    chip_hop_rate_num_sec: chip_hop_rate_num_sec__,
-                    hop_dwell_time_sec: hop_dwell_time_sec__,
-                    baud_rate_num_sec: baud_rate_num_sec__,
-                })
-            }
-        }
-        deserializer.deserialize_struct("anduril.entitymanager.v1.Encoding", FIELDS, GeneratedVisitor)
     }
 }
 impl serde::Serialize for Entity {
@@ -8525,12 +8412,6 @@ impl serde::Serialize for LineOfBearing {
     {
         use serde::ser::SerializeStruct;
         let mut len = 0;
-        if self.origin.is_some() {
-            len += 1;
-        }
-        if self.range_bearing.is_some() {
-            len += 1;
-        }
         if self.angle_of_arrival.is_some() {
             len += 1;
         }
@@ -8538,12 +8419,6 @@ impl serde::Serialize for LineOfBearing {
             len += 1;
         }
         let mut struct_ser = serializer.serialize_struct("anduril.entitymanager.v1.LineOfBearing", len)?;
-        if let Some(v) = self.origin.as_ref() {
-            struct_ser.serialize_field("origin", v)?;
-        }
-        if let Some(v) = self.range_bearing.as_ref() {
-            struct_ser.serialize_field("rangeBearing", v)?;
-        }
         if let Some(v) = self.angle_of_arrival.as_ref() {
             struct_ser.serialize_field("angleOfArrival", v)?;
         }
@@ -8567,9 +8442,6 @@ impl<'de> serde::Deserialize<'de> for LineOfBearing {
         D: serde::Deserializer<'de>,
     {
         const FIELDS: &[&str] = &[
-            "origin",
-            "range_bearing",
-            "rangeBearing",
             "angle_of_arrival",
             "angleOfArrival",
             "range_estimate_m",
@@ -8580,8 +8452,6 @@ impl<'de> serde::Deserialize<'de> for LineOfBearing {
 
         #[allow(clippy::enum_variant_names)]
         enum GeneratedField {
-            Origin,
-            RangeBearing,
             AngleOfArrival,
             RangeEstimateM,
             MaxRangeM,
@@ -8606,8 +8476,6 @@ impl<'de> serde::Deserialize<'de> for LineOfBearing {
                         E: serde::de::Error,
                     {
                         match value {
-                            "origin" => Ok(GeneratedField::Origin),
-                            "rangeBearing" | "range_bearing" => Ok(GeneratedField::RangeBearing),
                             "angleOfArrival" | "angle_of_arrival" => Ok(GeneratedField::AngleOfArrival),
                             "rangeEstimateM" | "range_estimate_m" => Ok(GeneratedField::RangeEstimateM),
                             "maxRangeM" | "max_range_m" => Ok(GeneratedField::MaxRangeM),
@@ -8630,24 +8498,10 @@ impl<'de> serde::Deserialize<'de> for LineOfBearing {
                 where
                     V: serde::de::MapAccess<'de>,
             {
-                let mut origin__ = None;
-                let mut range_bearing__ = None;
                 let mut angle_of_arrival__ = None;
                 let mut detection_range__ = None;
                 while let Some(k) = map_.next_key()? {
                     match k {
-                        GeneratedField::Origin => {
-                            if origin__.is_some() {
-                                return Err(serde::de::Error::duplicate_field("origin"));
-                            }
-                            origin__ = map_.next_value()?;
-                        }
-                        GeneratedField::RangeBearing => {
-                            if range_bearing__.is_some() {
-                                return Err(serde::de::Error::duplicate_field("rangeBearing"));
-                            }
-                            range_bearing__ = map_.next_value()?;
-                        }
                         GeneratedField::AngleOfArrival => {
                             if angle_of_arrival__.is_some() {
                                 return Err(serde::de::Error::duplicate_field("angleOfArrival"));
@@ -8671,8 +8525,6 @@ impl<'de> serde::Deserialize<'de> for LineOfBearing {
                     }
                 }
                 Ok(LineOfBearing {
-                    origin: origin__,
-                    range_bearing: range_bearing__,
                     angle_of_arrival: angle_of_arrival__,
                     detection_range: detection_range__,
                 })
@@ -8689,16 +8541,10 @@ impl serde::Serialize for LinearRing {
     {
         use serde::ser::SerializeStruct;
         let mut len = 0;
-        if !self.points.is_empty() {
-            len += 1;
-        }
         if !self.positions.is_empty() {
             len += 1;
         }
         let mut struct_ser = serializer.serialize_struct("anduril.entitymanager.v1.LinearRing", len)?;
-        if !self.points.is_empty() {
-            struct_ser.serialize_field("points", &self.points)?;
-        }
         if !self.positions.is_empty() {
             struct_ser.serialize_field("positions", &self.positions)?;
         }
@@ -8712,13 +8558,11 @@ impl<'de> serde::Deserialize<'de> for LinearRing {
         D: serde::Deserializer<'de>,
     {
         const FIELDS: &[&str] = &[
-            "points",
             "positions",
         ];
 
         #[allow(clippy::enum_variant_names)]
         enum GeneratedField {
-            Points,
             Positions,
         }
         impl<'de> serde::Deserialize<'de> for GeneratedField {
@@ -8741,7 +8585,6 @@ impl<'de> serde::Deserialize<'de> for LinearRing {
                         E: serde::de::Error,
                     {
                         match value {
-                            "points" => Ok(GeneratedField::Points),
                             "positions" => Ok(GeneratedField::Positions),
                             _ => Err(serde::de::Error::unknown_field(value, FIELDS)),
                         }
@@ -8762,16 +8605,9 @@ impl<'de> serde::Deserialize<'de> for LinearRing {
                 where
                     V: serde::de::MapAccess<'de>,
             {
-                let mut points__ = None;
                 let mut positions__ = None;
                 while let Some(k) = map_.next_key()? {
                     match k {
-                        GeneratedField::Points => {
-                            if points__.is_some() {
-                                return Err(serde::de::Error::duplicate_field("points"));
-                            }
-                            points__ = Some(map_.next_value()?);
-                        }
                         GeneratedField::Positions => {
                             if positions__.is_some() {
                                 return Err(serde::de::Error::duplicate_field("positions"));
@@ -8781,7 +8617,6 @@ impl<'de> serde::Deserialize<'de> for LinearRing {
                     }
                 }
                 Ok(LinearRing {
-                    points: points__.unwrap_or_default(),
                     positions: positions__.unwrap_or_default(),
                 })
             }
@@ -10222,65 +10057,29 @@ impl<'de> serde::Deserialize<'de> for ModeS {
         deserializer.deserialize_struct("anduril.entitymanager.v1.ModeS", FIELDS, GeneratedVisitor)
     }
 }
-impl serde::Serialize for Modulation {
+impl serde::Serialize for NonPrimaryMembership {
     #[allow(deprecated)]
     fn serialize<S>(&self, serializer: S) -> std::result::Result<S::Ok, S::Error>
     where
         S: serde::Serializer,
     {
         use serde::ser::SerializeStruct;
-        let mut len = 0;
-        if self.modulation_type != 0 {
-            len += 1;
-        }
-        if self.symbols.is_some() {
-            len += 1;
-        }
-        if !self.interpulse_modulation.is_empty() {
-            len += 1;
-        }
-        if self.encoding.is_some() {
-            len += 1;
-        }
-        let mut struct_ser = serializer.serialize_struct("anduril.entitymanager.v1.Modulation", len)?;
-        if self.modulation_type != 0 {
-            let v = ModulationType::try_from(self.modulation_type)
-                .map_err(|_| serde::ser::Error::custom(format!("Invalid variant {}", self.modulation_type)))?;
-            struct_ser.serialize_field("modulationType", &v)?;
-        }
-        if let Some(v) = self.symbols.as_ref() {
-            struct_ser.serialize_field("symbols", v)?;
-        }
-        if !self.interpulse_modulation.is_empty() {
-            struct_ser.serialize_field("interpulseModulation", &self.interpulse_modulation)?;
-        }
-        if let Some(v) = self.encoding.as_ref() {
-            struct_ser.serialize_field("encoding", v)?;
-        }
+        let len = 0;
+        let struct_ser = serializer.serialize_struct("anduril.entitymanager.v1.NonPrimaryMembership", len)?;
         struct_ser.end()
     }
 }
-impl<'de> serde::Deserialize<'de> for Modulation {
+impl<'de> serde::Deserialize<'de> for NonPrimaryMembership {
     #[allow(deprecated)]
     fn deserialize<D>(deserializer: D) -> std::result::Result<Self, D::Error>
     where
         D: serde::Deserializer<'de>,
     {
         const FIELDS: &[&str] = &[
-            "modulation_type",
-            "modulationType",
-            "symbols",
-            "interpulse_modulation",
-            "interpulseModulation",
-            "encoding",
         ];
 
         #[allow(clippy::enum_variant_names)]
         enum GeneratedField {
-            ModulationType,
-            Symbols,
-            InterpulseModulation,
-            Encoding,
         }
         impl<'de> serde::Deserialize<'de> for GeneratedField {
             fn deserialize<D>(deserializer: D) -> std::result::Result<GeneratedField, D::Error>
@@ -10301,13 +10100,7 @@ impl<'de> serde::Deserialize<'de> for Modulation {
                     where
                         E: serde::de::Error,
                     {
-                        match value {
-                            "modulationType" | "modulation_type" => Ok(GeneratedField::ModulationType),
-                            "symbols" => Ok(GeneratedField::Symbols),
-                            "interpulseModulation" | "interpulse_modulation" => Ok(GeneratedField::InterpulseModulation),
-                            "encoding" => Ok(GeneratedField::Encoding),
-                            _ => Err(serde::de::Error::unknown_field(value, FIELDS)),
-                        }
+                            Err(serde::de::Error::unknown_field(value, FIELDS))
                     }
                 }
                 deserializer.deserialize_identifier(GeneratedVisitor)
@@ -10315,437 +10108,24 @@ impl<'de> serde::Deserialize<'de> for Modulation {
         }
         struct GeneratedVisitor;
         impl<'de> serde::de::Visitor<'de> for GeneratedVisitor {
-            type Value = Modulation;
+            type Value = NonPrimaryMembership;
 
             fn expecting(&self, formatter: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
-                formatter.write_str("struct anduril.entitymanager.v1.Modulation")
+                formatter.write_str("struct anduril.entitymanager.v1.NonPrimaryMembership")
             }
 
-            fn visit_map<V>(self, mut map_: V) -> std::result::Result<Modulation, V::Error>
+            fn visit_map<V>(self, mut map_: V) -> std::result::Result<NonPrimaryMembership, V::Error>
                 where
                     V: serde::de::MapAccess<'de>,
             {
-                let mut modulation_type__ = None;
-                let mut symbols__ = None;
-                let mut interpulse_modulation__ = None;
-                let mut encoding__ = None;
-                while let Some(k) = map_.next_key()? {
-                    match k {
-                        GeneratedField::ModulationType => {
-                            if modulation_type__.is_some() {
-                                return Err(serde::de::Error::duplicate_field("modulationType"));
-                            }
-                            modulation_type__ = Some(map_.next_value::<ModulationType>()? as i32);
-                        }
-                        GeneratedField::Symbols => {
-                            if symbols__.is_some() {
-                                return Err(serde::de::Error::duplicate_field("symbols"));
-                            }
-                            symbols__ = map_.next_value()?;
-                        }
-                        GeneratedField::InterpulseModulation => {
-                            if interpulse_modulation__.is_some() {
-                                return Err(serde::de::Error::duplicate_field("interpulseModulation"));
-                            }
-                            interpulse_modulation__ = Some(map_.next_value()?);
-                        }
-                        GeneratedField::Encoding => {
-                            if encoding__.is_some() {
-                                return Err(serde::de::Error::duplicate_field("encoding"));
-                            }
-                            encoding__ = map_.next_value()?;
-                        }
-                    }
+                while map_.next_key::<GeneratedField>()?.is_some() {
+                    let _ = map_.next_value::<serde::de::IgnoredAny>()?;
                 }
-                Ok(Modulation {
-                    modulation_type: modulation_type__.unwrap_or_default(),
-                    symbols: symbols__,
-                    interpulse_modulation: interpulse_modulation__.unwrap_or_default(),
-                    encoding: encoding__,
+                Ok(NonPrimaryMembership {
                 })
             }
         }
-        deserializer.deserialize_struct("anduril.entitymanager.v1.Modulation", FIELDS, GeneratedVisitor)
-    }
-}
-impl serde::Serialize for ModulationType {
-    #[allow(deprecated)]
-    fn serialize<S>(&self, serializer: S) -> std::result::Result<S::Ok, S::Error>
-    where
-        S: serde::Serializer,
-    {
-        let variant = match self {
-            Self::Invalid => "MODULATION_TYPE_INVALID",
-            Self::Amplitude => "MODULATION_TYPE_AMPLITUDE",
-            Self::Frequency => "MODULATION_TYPE_FREQUENCY",
-            Self::Phase => "MODULATION_TYPE_PHASE",
-            Self::Spaced => "MODULATION_TYPE_SPACED",
-            Self::AmplitudeShiftKeying => "MODULATION_TYPE_AMPLITUDE_SHIFT_KEYING",
-            Self::FrequencyShiftKeying => "MODULATION_TYPE_FREQUENCY_SHIFT_KEYING",
-            Self::PhaseShiftKeying => "MODULATION_TYPE_PHASE_SHIFT_KEYING",
-            Self::MinimumShiftKeying => "MODULATION_TYPE_MINIMUM_SHIFT_KEYING",
-            Self::MinimumShiftKeyingGaussian => "MODULATION_TYPE_MINIMUM_SHIFT_KEYING_GAUSSIAN",
-            Self::SingleSideBandUpper => "MODULATION_TYPE_SINGLE_SIDE_BAND_UPPER",
-            Self::SingleSideBandLower => "MODULATION_TYPE_SINGLE_SIDE_BAND_LOWER",
-            Self::SingleSideBandFullCarrier => "MODULATION_TYPE_SINGLE_SIDE_BAND_FULL_CARRIER",
-            Self::SingleSideBandSuppressedCarrier => "MODULATION_TYPE_SINGLE_SIDE_BAND_SUPPRESSED_CARRIER",
-            Self::SingleSideBandReducedCarrier => "MODULATION_TYPE_SINGLE_SIDE_BAND_REDUCED_CARRIER",
-            Self::SingleSideBandWithoutCarrier => "MODULATION_TYPE_SINGLE_SIDE_BAND_WITHOUT_CARRIER",
-            Self::DualSideBandFullCarrier => "MODULATION_TYPE_DUAL_SIDE_BAND_FULL_CARRIER",
-            Self::DualSideBandSuppressedCarrier => "MODULATION_TYPE_DUAL_SIDE_BAND_SUPPRESSED_CARRIER",
-            Self::DualSideBandReducedCarrier => "MODULATION_TYPE_DUAL_SIDE_BAND_REDUCED_CARRIER",
-            Self::DualSideBandWithoutCarrier => "MODULATION_TYPE_DUAL_SIDE_BAND_WITHOUT_CARRIER",
-            Self::IndependentSideBand => "MODULATION_TYPE_INDEPENDENT_SIDE_BAND",
-            Self::VestigialSideBand => "MODULATION_TYPE_VESTIGIAL_SIDE_BAND",
-            Self::OnOffKeying => "MODULATION_TYPE_ON_OFF_KEYING",
-            Self::MultiFrequencyShiftKeying => "MODULATION_TYPE_MULTI_FREQUENCY_SHIFT_KEYING",
-            Self::AudioFrequencyShiftKeying => "MODULATION_TYPE_AUDIO_FREQUENCY_SHIFT_KEYING",
-            Self::ContinuousPhaseFrequencyShiftKeying => "MODULATION_TYPE_CONTINUOUS_PHASE_FREQUENCY_SHIFT_KEYING",
-            Self::CPhaseShiftKeying => "MODULATION_TYPE_C_PHASE_SHIFT_KEYING",
-            Self::DifferentiallyEncodedBinaryPhaseShiftKeying => "MODULATION_TYPE_DIFFERENTIALLY_ENCODED_BINARY_PHASE_SHIFT_KEYING",
-            Self::DifferentiallyEncodedQuadraturePhaseShiftKeying => "MODULATION_TYPE_DIFFERENTIALLY_ENCODED_QUADRATURE_PHASE_SHIFT_KEYING",
-            Self::OffsetQuadraturePhaseShiftKeying => "MODULATION_TYPE_OFFSET_QUADRATURE_PHASE_SHIFT_KEYING",
-            Self::DifferentialPhaseShiftKeying => "MODULATION_TYPE_DIFFERENTIAL_PHASE_SHIFT_KEYING",
-            Self::Pi4QuadraturePhaseShiftKeying => "MODULATION_TYPE_PI_4_QUADRATURE_PHASE_SHIFT_KEYING",
-            Self::StackedOverlappingQuadraturePhaseShiftKeying => "MODULATION_TYPE_STACKED_OVERLAPPING_QUADRATURE_PHASE_SHIFT_KEYING",
-            Self::FQuadraturePhaseShiftKeying => "MODULATION_TYPE_F_QUADRATURE_PHASE_SHIFT_KEYING",
-            Self::QuadratureAmplitudeAnalog => "MODULATION_TYPE_QUADRATURE_AMPLITUDE_ANALOG",
-            Self::QuadratureAmplitudeDigital => "MODULATION_TYPE_QUADRATURE_AMPLITUDE_DIGITAL",
-            Self::ContinuousPhase => "MODULATION_TYPE_CONTINUOUS_PHASE",
-            Self::PulsePosition => "MODULATION_TYPE_PULSE_POSITION",
-            Self::TrellisCode => "MODULATION_TYPE_TRELLIS_CODE",
-            Self::OrthogonalFrequencyDivisionMultiplexing => "MODULATION_TYPE_ORTHOGONAL_FREQUENCY_DIVISION_MULTIPLEXING",
-            Self::FrequencyHoppingSpreadSpectrum => "MODULATION_TYPE_FREQUENCY_HOPPING_SPREAD_SPECTRUM",
-            Self::DigitalSequenceSpreadSpectrum => "MODULATION_TYPE_DIGITAL_SEQUENCE_SPREAD_SPECTRUM",
-        };
-        serializer.serialize_str(variant)
-    }
-}
-impl<'de> serde::Deserialize<'de> for ModulationType {
-    #[allow(deprecated)]
-    fn deserialize<D>(deserializer: D) -> std::result::Result<Self, D::Error>
-    where
-        D: serde::Deserializer<'de>,
-    {
-        const FIELDS: &[&str] = &[
-            "MODULATION_TYPE_INVALID",
-            "MODULATION_TYPE_AMPLITUDE",
-            "MODULATION_TYPE_FREQUENCY",
-            "MODULATION_TYPE_PHASE",
-            "MODULATION_TYPE_SPACED",
-            "MODULATION_TYPE_AMPLITUDE_SHIFT_KEYING",
-            "MODULATION_TYPE_FREQUENCY_SHIFT_KEYING",
-            "MODULATION_TYPE_PHASE_SHIFT_KEYING",
-            "MODULATION_TYPE_MINIMUM_SHIFT_KEYING",
-            "MODULATION_TYPE_MINIMUM_SHIFT_KEYING_GAUSSIAN",
-            "MODULATION_TYPE_SINGLE_SIDE_BAND_UPPER",
-            "MODULATION_TYPE_SINGLE_SIDE_BAND_LOWER",
-            "MODULATION_TYPE_SINGLE_SIDE_BAND_FULL_CARRIER",
-            "MODULATION_TYPE_SINGLE_SIDE_BAND_SUPPRESSED_CARRIER",
-            "MODULATION_TYPE_SINGLE_SIDE_BAND_REDUCED_CARRIER",
-            "MODULATION_TYPE_SINGLE_SIDE_BAND_WITHOUT_CARRIER",
-            "MODULATION_TYPE_DUAL_SIDE_BAND_FULL_CARRIER",
-            "MODULATION_TYPE_DUAL_SIDE_BAND_SUPPRESSED_CARRIER",
-            "MODULATION_TYPE_DUAL_SIDE_BAND_REDUCED_CARRIER",
-            "MODULATION_TYPE_DUAL_SIDE_BAND_WITHOUT_CARRIER",
-            "MODULATION_TYPE_INDEPENDENT_SIDE_BAND",
-            "MODULATION_TYPE_VESTIGIAL_SIDE_BAND",
-            "MODULATION_TYPE_ON_OFF_KEYING",
-            "MODULATION_TYPE_MULTI_FREQUENCY_SHIFT_KEYING",
-            "MODULATION_TYPE_AUDIO_FREQUENCY_SHIFT_KEYING",
-            "MODULATION_TYPE_CONTINUOUS_PHASE_FREQUENCY_SHIFT_KEYING",
-            "MODULATION_TYPE_C_PHASE_SHIFT_KEYING",
-            "MODULATION_TYPE_DIFFERENTIALLY_ENCODED_BINARY_PHASE_SHIFT_KEYING",
-            "MODULATION_TYPE_DIFFERENTIALLY_ENCODED_QUADRATURE_PHASE_SHIFT_KEYING",
-            "MODULATION_TYPE_OFFSET_QUADRATURE_PHASE_SHIFT_KEYING",
-            "MODULATION_TYPE_DIFFERENTIAL_PHASE_SHIFT_KEYING",
-            "MODULATION_TYPE_PI_4_QUADRATURE_PHASE_SHIFT_KEYING",
-            "MODULATION_TYPE_STACKED_OVERLAPPING_QUADRATURE_PHASE_SHIFT_KEYING",
-            "MODULATION_TYPE_F_QUADRATURE_PHASE_SHIFT_KEYING",
-            "MODULATION_TYPE_QUADRATURE_AMPLITUDE_ANALOG",
-            "MODULATION_TYPE_QUADRATURE_AMPLITUDE_DIGITAL",
-            "MODULATION_TYPE_CONTINUOUS_PHASE",
-            "MODULATION_TYPE_PULSE_POSITION",
-            "MODULATION_TYPE_TRELLIS_CODE",
-            "MODULATION_TYPE_ORTHOGONAL_FREQUENCY_DIVISION_MULTIPLEXING",
-            "MODULATION_TYPE_FREQUENCY_HOPPING_SPREAD_SPECTRUM",
-            "MODULATION_TYPE_DIGITAL_SEQUENCE_SPREAD_SPECTRUM",
-        ];
-
-        struct GeneratedVisitor;
-
-        impl<'de> serde::de::Visitor<'de> for GeneratedVisitor {
-            type Value = ModulationType;
-
-            fn expecting(&self, formatter: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
-                write!(formatter, "expected one of: {:?}", &FIELDS)
-            }
-
-            fn visit_i64<E>(self, v: i64) -> std::result::Result<Self::Value, E>
-            where
-                E: serde::de::Error,
-            {
-                i32::try_from(v)
-                    .ok()
-                    .and_then(|x| x.try_into().ok())
-                    .ok_or_else(|| {
-                        serde::de::Error::invalid_value(serde::de::Unexpected::Signed(v), &self)
-                    })
-            }
-
-            fn visit_u64<E>(self, v: u64) -> std::result::Result<Self::Value, E>
-            where
-                E: serde::de::Error,
-            {
-                i32::try_from(v)
-                    .ok()
-                    .and_then(|x| x.try_into().ok())
-                    .ok_or_else(|| {
-                        serde::de::Error::invalid_value(serde::de::Unexpected::Unsigned(v), &self)
-                    })
-            }
-
-            fn visit_str<E>(self, value: &str) -> std::result::Result<Self::Value, E>
-            where
-                E: serde::de::Error,
-            {
-                match value {
-                    "MODULATION_TYPE_INVALID" => Ok(ModulationType::Invalid),
-                    "MODULATION_TYPE_AMPLITUDE" => Ok(ModulationType::Amplitude),
-                    "MODULATION_TYPE_FREQUENCY" => Ok(ModulationType::Frequency),
-                    "MODULATION_TYPE_PHASE" => Ok(ModulationType::Phase),
-                    "MODULATION_TYPE_SPACED" => Ok(ModulationType::Spaced),
-                    "MODULATION_TYPE_AMPLITUDE_SHIFT_KEYING" => Ok(ModulationType::AmplitudeShiftKeying),
-                    "MODULATION_TYPE_FREQUENCY_SHIFT_KEYING" => Ok(ModulationType::FrequencyShiftKeying),
-                    "MODULATION_TYPE_PHASE_SHIFT_KEYING" => Ok(ModulationType::PhaseShiftKeying),
-                    "MODULATION_TYPE_MINIMUM_SHIFT_KEYING" => Ok(ModulationType::MinimumShiftKeying),
-                    "MODULATION_TYPE_MINIMUM_SHIFT_KEYING_GAUSSIAN" => Ok(ModulationType::MinimumShiftKeyingGaussian),
-                    "MODULATION_TYPE_SINGLE_SIDE_BAND_UPPER" => Ok(ModulationType::SingleSideBandUpper),
-                    "MODULATION_TYPE_SINGLE_SIDE_BAND_LOWER" => Ok(ModulationType::SingleSideBandLower),
-                    "MODULATION_TYPE_SINGLE_SIDE_BAND_FULL_CARRIER" => Ok(ModulationType::SingleSideBandFullCarrier),
-                    "MODULATION_TYPE_SINGLE_SIDE_BAND_SUPPRESSED_CARRIER" => Ok(ModulationType::SingleSideBandSuppressedCarrier),
-                    "MODULATION_TYPE_SINGLE_SIDE_BAND_REDUCED_CARRIER" => Ok(ModulationType::SingleSideBandReducedCarrier),
-                    "MODULATION_TYPE_SINGLE_SIDE_BAND_WITHOUT_CARRIER" => Ok(ModulationType::SingleSideBandWithoutCarrier),
-                    "MODULATION_TYPE_DUAL_SIDE_BAND_FULL_CARRIER" => Ok(ModulationType::DualSideBandFullCarrier),
-                    "MODULATION_TYPE_DUAL_SIDE_BAND_SUPPRESSED_CARRIER" => Ok(ModulationType::DualSideBandSuppressedCarrier),
-                    "MODULATION_TYPE_DUAL_SIDE_BAND_REDUCED_CARRIER" => Ok(ModulationType::DualSideBandReducedCarrier),
-                    "MODULATION_TYPE_DUAL_SIDE_BAND_WITHOUT_CARRIER" => Ok(ModulationType::DualSideBandWithoutCarrier),
-                    "MODULATION_TYPE_INDEPENDENT_SIDE_BAND" => Ok(ModulationType::IndependentSideBand),
-                    "MODULATION_TYPE_VESTIGIAL_SIDE_BAND" => Ok(ModulationType::VestigialSideBand),
-                    "MODULATION_TYPE_ON_OFF_KEYING" => Ok(ModulationType::OnOffKeying),
-                    "MODULATION_TYPE_MULTI_FREQUENCY_SHIFT_KEYING" => Ok(ModulationType::MultiFrequencyShiftKeying),
-                    "MODULATION_TYPE_AUDIO_FREQUENCY_SHIFT_KEYING" => Ok(ModulationType::AudioFrequencyShiftKeying),
-                    "MODULATION_TYPE_CONTINUOUS_PHASE_FREQUENCY_SHIFT_KEYING" => Ok(ModulationType::ContinuousPhaseFrequencyShiftKeying),
-                    "MODULATION_TYPE_C_PHASE_SHIFT_KEYING" => Ok(ModulationType::CPhaseShiftKeying),
-                    "MODULATION_TYPE_DIFFERENTIALLY_ENCODED_BINARY_PHASE_SHIFT_KEYING" => Ok(ModulationType::DifferentiallyEncodedBinaryPhaseShiftKeying),
-                    "MODULATION_TYPE_DIFFERENTIALLY_ENCODED_QUADRATURE_PHASE_SHIFT_KEYING" => Ok(ModulationType::DifferentiallyEncodedQuadraturePhaseShiftKeying),
-                    "MODULATION_TYPE_OFFSET_QUADRATURE_PHASE_SHIFT_KEYING" => Ok(ModulationType::OffsetQuadraturePhaseShiftKeying),
-                    "MODULATION_TYPE_DIFFERENTIAL_PHASE_SHIFT_KEYING" => Ok(ModulationType::DifferentialPhaseShiftKeying),
-                    "MODULATION_TYPE_PI_4_QUADRATURE_PHASE_SHIFT_KEYING" => Ok(ModulationType::Pi4QuadraturePhaseShiftKeying),
-                    "MODULATION_TYPE_STACKED_OVERLAPPING_QUADRATURE_PHASE_SHIFT_KEYING" => Ok(ModulationType::StackedOverlappingQuadraturePhaseShiftKeying),
-                    "MODULATION_TYPE_F_QUADRATURE_PHASE_SHIFT_KEYING" => Ok(ModulationType::FQuadraturePhaseShiftKeying),
-                    "MODULATION_TYPE_QUADRATURE_AMPLITUDE_ANALOG" => Ok(ModulationType::QuadratureAmplitudeAnalog),
-                    "MODULATION_TYPE_QUADRATURE_AMPLITUDE_DIGITAL" => Ok(ModulationType::QuadratureAmplitudeDigital),
-                    "MODULATION_TYPE_CONTINUOUS_PHASE" => Ok(ModulationType::ContinuousPhase),
-                    "MODULATION_TYPE_PULSE_POSITION" => Ok(ModulationType::PulsePosition),
-                    "MODULATION_TYPE_TRELLIS_CODE" => Ok(ModulationType::TrellisCode),
-                    "MODULATION_TYPE_ORTHOGONAL_FREQUENCY_DIVISION_MULTIPLEXING" => Ok(ModulationType::OrthogonalFrequencyDivisionMultiplexing),
-                    "MODULATION_TYPE_FREQUENCY_HOPPING_SPREAD_SPECTRUM" => Ok(ModulationType::FrequencyHoppingSpreadSpectrum),
-                    "MODULATION_TYPE_DIGITAL_SEQUENCE_SPREAD_SPECTRUM" => Ok(ModulationType::DigitalSequenceSpreadSpectrum),
-                    _ => Err(serde::de::Error::unknown_variant(value, FIELDS)),
-                }
-            }
-        }
-        deserializer.deserialize_any(GeneratedVisitor)
-    }
-}
-impl serde::Serialize for Munition {
-    #[allow(deprecated)]
-    fn serialize<S>(&self, serializer: S) -> std::result::Result<S::Ok, S::Error>
-    where
-        S: serde::Serializer,
-    {
-        use serde::ser::SerializeStruct;
-        let mut len = 0;
-        if !self.munition_id.is_empty() {
-            len += 1;
-        }
-        if !self.name.is_empty() {
-            len += 1;
-        }
-        if self.quantity_units != 0 {
-            len += 1;
-        }
-        if self.data_classification.is_some() {
-            len += 1;
-        }
-        if !self.data_source.is_empty() {
-            len += 1;
-        }
-        if self.condition.is_some() {
-            len += 1;
-        }
-        let mut struct_ser = serializer.serialize_struct("anduril.entitymanager.v1.Munition", len)?;
-        if !self.munition_id.is_empty() {
-            struct_ser.serialize_field("munitionId", &self.munition_id)?;
-        }
-        if !self.name.is_empty() {
-            struct_ser.serialize_field("name", &self.name)?;
-        }
-        if self.quantity_units != 0 {
-            struct_ser.serialize_field("quantityUnits", &self.quantity_units)?;
-        }
-        if let Some(v) = self.data_classification.as_ref() {
-            struct_ser.serialize_field("dataClassification", v)?;
-        }
-        if !self.data_source.is_empty() {
-            struct_ser.serialize_field("dataSource", &self.data_source)?;
-        }
-        if let Some(v) = self.condition.as_ref() {
-            match v {
-                munition::Condition::DodConditionCode(v) => {
-                    let v = DodConditionCode::try_from(*v)
-                        .map_err(|_| serde::ser::Error::custom(format!("Invalid variant {}", *v)))?;
-                    struct_ser.serialize_field("dodConditionCode", &v)?;
-                }
-            }
-        }
-        struct_ser.end()
-    }
-}
-impl<'de> serde::Deserialize<'de> for Munition {
-    #[allow(deprecated)]
-    fn deserialize<D>(deserializer: D) -> std::result::Result<Self, D::Error>
-    where
-        D: serde::Deserializer<'de>,
-    {
-        const FIELDS: &[&str] = &[
-            "munition_id",
-            "munitionId",
-            "name",
-            "quantity_units",
-            "quantityUnits",
-            "data_classification",
-            "dataClassification",
-            "data_source",
-            "dataSource",
-            "dod_condition_code",
-            "dodConditionCode",
-        ];
-
-        #[allow(clippy::enum_variant_names)]
-        enum GeneratedField {
-            MunitionId,
-            Name,
-            QuantityUnits,
-            DataClassification,
-            DataSource,
-            DodConditionCode,
-        }
-        impl<'de> serde::Deserialize<'de> for GeneratedField {
-            fn deserialize<D>(deserializer: D) -> std::result::Result<GeneratedField, D::Error>
-            where
-                D: serde::Deserializer<'de>,
-            {
-                struct GeneratedVisitor;
-
-                impl<'de> serde::de::Visitor<'de> for GeneratedVisitor {
-                    type Value = GeneratedField;
-
-                    fn expecting(&self, formatter: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
-                        write!(formatter, "expected one of: {:?}", &FIELDS)
-                    }
-
-                    #[allow(unused_variables)]
-                    fn visit_str<E>(self, value: &str) -> std::result::Result<GeneratedField, E>
-                    where
-                        E: serde::de::Error,
-                    {
-                        match value {
-                            "munitionId" | "munition_id" => Ok(GeneratedField::MunitionId),
-                            "name" => Ok(GeneratedField::Name),
-                            "quantityUnits" | "quantity_units" => Ok(GeneratedField::QuantityUnits),
-                            "dataClassification" | "data_classification" => Ok(GeneratedField::DataClassification),
-                            "dataSource" | "data_source" => Ok(GeneratedField::DataSource),
-                            "dodConditionCode" | "dod_condition_code" => Ok(GeneratedField::DodConditionCode),
-                            _ => Err(serde::de::Error::unknown_field(value, FIELDS)),
-                        }
-                    }
-                }
-                deserializer.deserialize_identifier(GeneratedVisitor)
-            }
-        }
-        struct GeneratedVisitor;
-        impl<'de> serde::de::Visitor<'de> for GeneratedVisitor {
-            type Value = Munition;
-
-            fn expecting(&self, formatter: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
-                formatter.write_str("struct anduril.entitymanager.v1.Munition")
-            }
-
-            fn visit_map<V>(self, mut map_: V) -> std::result::Result<Munition, V::Error>
-                where
-                    V: serde::de::MapAccess<'de>,
-            {
-                let mut munition_id__ = None;
-                let mut name__ = None;
-                let mut quantity_units__ = None;
-                let mut data_classification__ = None;
-                let mut data_source__ = None;
-                let mut condition__ = None;
-                while let Some(k) = map_.next_key()? {
-                    match k {
-                        GeneratedField::MunitionId => {
-                            if munition_id__.is_some() {
-                                return Err(serde::de::Error::duplicate_field("munitionId"));
-                            }
-                            munition_id__ = Some(map_.next_value()?);
-                        }
-                        GeneratedField::Name => {
-                            if name__.is_some() {
-                                return Err(serde::de::Error::duplicate_field("name"));
-                            }
-                            name__ = Some(map_.next_value()?);
-                        }
-                        GeneratedField::QuantityUnits => {
-                            if quantity_units__.is_some() {
-                                return Err(serde::de::Error::duplicate_field("quantityUnits"));
-                            }
-                            quantity_units__ = 
-                                Some(map_.next_value::<::pbjson::private::NumberDeserialize<_>>()?.0)
-                            ;
-                        }
-                        GeneratedField::DataClassification => {
-                            if data_classification__.is_some() {
-                                return Err(serde::de::Error::duplicate_field("dataClassification"));
-                            }
-                            data_classification__ = map_.next_value()?;
-                        }
-                        GeneratedField::DataSource => {
-                            if data_source__.is_some() {
-                                return Err(serde::de::Error::duplicate_field("dataSource"));
-                            }
-                            data_source__ = Some(map_.next_value()?);
-                        }
-                        GeneratedField::DodConditionCode => {
-                            if condition__.is_some() {
-                                return Err(serde::de::Error::duplicate_field("dodConditionCode"));
-                            }
-                            condition__ = map_.next_value::<::std::option::Option<DodConditionCode>>()?.map(|x| munition::Condition::DodConditionCode(x as i32));
-                        }
-                    }
-                }
-                Ok(Munition {
-                    munition_id: munition_id__.unwrap_or_default(),
-                    name: name__.unwrap_or_default(),
-                    quantity_units: quantity_units__.unwrap_or_default(),
-                    data_classification: data_classification__,
-                    data_source: data_source__.unwrap_or_default(),
-                    condition: condition__,
-                })
-            }
-        }
-        deserializer.deserialize_struct("anduril.entitymanager.v1.Munition", FIELDS, GeneratedVisitor)
+        deserializer.deserialize_struct("anduril.entitymanager.v1.NonPrimaryMembership", FIELDS, GeneratedVisitor)
     }
 }
 impl serde::Serialize for NotOperation {
@@ -13434,37 +12814,9 @@ impl serde::Serialize for PowerState {
         if !self.source_id_to_state.is_empty() {
             len += 1;
         }
-        if self.power_status != 0 {
-            len += 1;
-        }
-        if self.power_type != 0 {
-            len += 1;
-        }
-        if self.power_level.is_some() {
-            len += 1;
-        }
-        if !self.messages.is_empty() {
-            len += 1;
-        }
         let mut struct_ser = serializer.serialize_struct("anduril.entitymanager.v1.PowerState", len)?;
         if !self.source_id_to_state.is_empty() {
             struct_ser.serialize_field("sourceIdToState", &self.source_id_to_state)?;
-        }
-        if self.power_status != 0 {
-            let v = PowerStatus::try_from(self.power_status)
-                .map_err(|_| serde::ser::Error::custom(format!("Invalid variant {}", self.power_status)))?;
-            struct_ser.serialize_field("powerStatus", &v)?;
-        }
-        if self.power_type != 0 {
-            let v = PowerType::try_from(self.power_type)
-                .map_err(|_| serde::ser::Error::custom(format!("Invalid variant {}", self.power_type)))?;
-            struct_ser.serialize_field("powerType", &v)?;
-        }
-        if let Some(v) = self.power_level.as_ref() {
-            struct_ser.serialize_field("powerLevel", v)?;
-        }
-        if !self.messages.is_empty() {
-            struct_ser.serialize_field("messages", &self.messages)?;
         }
         struct_ser.end()
     }
@@ -13478,22 +12830,11 @@ impl<'de> serde::Deserialize<'de> for PowerState {
         const FIELDS: &[&str] = &[
             "source_id_to_state",
             "sourceIdToState",
-            "power_status",
-            "powerStatus",
-            "power_type",
-            "powerType",
-            "power_level",
-            "powerLevel",
-            "messages",
         ];
 
         #[allow(clippy::enum_variant_names)]
         enum GeneratedField {
             SourceIdToState,
-            PowerStatus,
-            PowerType,
-            PowerLevel,
-            Messages,
         }
         impl<'de> serde::Deserialize<'de> for GeneratedField {
             fn deserialize<D>(deserializer: D) -> std::result::Result<GeneratedField, D::Error>
@@ -13516,10 +12857,6 @@ impl<'de> serde::Deserialize<'de> for PowerState {
                     {
                         match value {
                             "sourceIdToState" | "source_id_to_state" => Ok(GeneratedField::SourceIdToState),
-                            "powerStatus" | "power_status" => Ok(GeneratedField::PowerStatus),
-                            "powerType" | "power_type" => Ok(GeneratedField::PowerType),
-                            "powerLevel" | "power_level" => Ok(GeneratedField::PowerLevel),
-                            "messages" => Ok(GeneratedField::Messages),
                             _ => Err(serde::de::Error::unknown_field(value, FIELDS)),
                         }
                     }
@@ -13540,10 +12877,6 @@ impl<'de> serde::Deserialize<'de> for PowerState {
                     V: serde::de::MapAccess<'de>,
             {
                 let mut source_id_to_state__ = None;
-                let mut power_status__ = None;
-                let mut power_type__ = None;
-                let mut power_level__ = None;
-                let mut messages__ = None;
                 while let Some(k) = map_.next_key()? {
                     match k {
                         GeneratedField::SourceIdToState => {
@@ -13554,38 +12887,10 @@ impl<'de> serde::Deserialize<'de> for PowerState {
                                 map_.next_value::<std::collections::HashMap<_, _>>()?
                             );
                         }
-                        GeneratedField::PowerStatus => {
-                            if power_status__.is_some() {
-                                return Err(serde::de::Error::duplicate_field("powerStatus"));
-                            }
-                            power_status__ = Some(map_.next_value::<PowerStatus>()? as i32);
-                        }
-                        GeneratedField::PowerType => {
-                            if power_type__.is_some() {
-                                return Err(serde::de::Error::duplicate_field("powerType"));
-                            }
-                            power_type__ = Some(map_.next_value::<PowerType>()? as i32);
-                        }
-                        GeneratedField::PowerLevel => {
-                            if power_level__.is_some() {
-                                return Err(serde::de::Error::duplicate_field("powerLevel"));
-                            }
-                            power_level__ = map_.next_value()?;
-                        }
-                        GeneratedField::Messages => {
-                            if messages__.is_some() {
-                                return Err(serde::de::Error::duplicate_field("messages"));
-                            }
-                            messages__ = Some(map_.next_value()?);
-                        }
                     }
                 }
                 Ok(PowerState {
                     source_id_to_state: source_id_to_state__.unwrap_or_default(),
-                    power_status: power_status__.unwrap_or_default(),
-                    power_type: power_type__.unwrap_or_default(),
-                    power_level: power_level__,
-                    messages: messages__.unwrap_or_default(),
                 })
             }
         }
@@ -14063,6 +13368,77 @@ impl<'de> serde::Deserialize<'de> for PrimaryCorrelation {
         deserializer.deserialize_struct("anduril.entitymanager.v1.PrimaryCorrelation", FIELDS, GeneratedVisitor)
     }
 }
+impl serde::Serialize for PrimaryMembership {
+    #[allow(deprecated)]
+    fn serialize<S>(&self, serializer: S) -> std::result::Result<S::Ok, S::Error>
+    where
+        S: serde::Serializer,
+    {
+        use serde::ser::SerializeStruct;
+        let len = 0;
+        let struct_ser = serializer.serialize_struct("anduril.entitymanager.v1.PrimaryMembership", len)?;
+        struct_ser.end()
+    }
+}
+impl<'de> serde::Deserialize<'de> for PrimaryMembership {
+    #[allow(deprecated)]
+    fn deserialize<D>(deserializer: D) -> std::result::Result<Self, D::Error>
+    where
+        D: serde::Deserializer<'de>,
+    {
+        const FIELDS: &[&str] = &[
+        ];
+
+        #[allow(clippy::enum_variant_names)]
+        enum GeneratedField {
+        }
+        impl<'de> serde::Deserialize<'de> for GeneratedField {
+            fn deserialize<D>(deserializer: D) -> std::result::Result<GeneratedField, D::Error>
+            where
+                D: serde::Deserializer<'de>,
+            {
+                struct GeneratedVisitor;
+
+                impl<'de> serde::de::Visitor<'de> for GeneratedVisitor {
+                    type Value = GeneratedField;
+
+                    fn expecting(&self, formatter: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
+                        write!(formatter, "expected one of: {:?}", &FIELDS)
+                    }
+
+                    #[allow(unused_variables)]
+                    fn visit_str<E>(self, value: &str) -> std::result::Result<GeneratedField, E>
+                    where
+                        E: serde::de::Error,
+                    {
+                            Err(serde::de::Error::unknown_field(value, FIELDS))
+                    }
+                }
+                deserializer.deserialize_identifier(GeneratedVisitor)
+            }
+        }
+        struct GeneratedVisitor;
+        impl<'de> serde::de::Visitor<'de> for GeneratedVisitor {
+            type Value = PrimaryMembership;
+
+            fn expecting(&self, formatter: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
+                formatter.write_str("struct anduril.entitymanager.v1.PrimaryMembership")
+            }
+
+            fn visit_map<V>(self, mut map_: V) -> std::result::Result<PrimaryMembership, V::Error>
+                where
+                    V: serde::de::MapAccess<'de>,
+            {
+                while map_.next_key::<GeneratedField>()?.is_some() {
+                    let _ = map_.next_value::<serde::de::IgnoredAny>()?;
+                }
+                Ok(PrimaryMembership {
+                })
+            }
+        }
+        deserializer.deserialize_struct("anduril.entitymanager.v1.PrimaryMembership", FIELDS, GeneratedVisitor)
+    }
+}
 impl serde::Serialize for ProjectedFrustum {
     #[allow(deprecated)]
     fn serialize<S>(&self, serializer: S) -> std::result::Result<S::Ok, S::Error>
@@ -14223,9 +13599,6 @@ impl serde::Serialize for Provenance {
         if !self.data_type.is_empty() {
             len += 1;
         }
-        if self.source != 0 {
-            len += 1;
-        }
         if !self.source_id.is_empty() {
             len += 1;
         }
@@ -14241,11 +13614,6 @@ impl serde::Serialize for Provenance {
         }
         if !self.data_type.is_empty() {
             struct_ser.serialize_field("dataType", &self.data_type)?;
-        }
-        if self.source != 0 {
-            let v = Source::try_from(self.source)
-                .map_err(|_| serde::ser::Error::custom(format!("Invalid variant {}", self.source)))?;
-            struct_ser.serialize_field("source", &v)?;
         }
         if !self.source_id.is_empty() {
             struct_ser.serialize_field("sourceId", &self.source_id)?;
@@ -14270,7 +13638,6 @@ impl<'de> serde::Deserialize<'de> for Provenance {
             "integrationName",
             "data_type",
             "dataType",
-            "source",
             "source_id",
             "sourceId",
             "source_update_time",
@@ -14283,7 +13650,6 @@ impl<'de> serde::Deserialize<'de> for Provenance {
         enum GeneratedField {
             IntegrationName,
             DataType,
-            Source,
             SourceId,
             SourceUpdateTime,
             SourceDescription,
@@ -14310,7 +13676,6 @@ impl<'de> serde::Deserialize<'de> for Provenance {
                         match value {
                             "integrationName" | "integration_name" => Ok(GeneratedField::IntegrationName),
                             "dataType" | "data_type" => Ok(GeneratedField::DataType),
-                            "source" => Ok(GeneratedField::Source),
                             "sourceId" | "source_id" => Ok(GeneratedField::SourceId),
                             "sourceUpdateTime" | "source_update_time" => Ok(GeneratedField::SourceUpdateTime),
                             "sourceDescription" | "source_description" => Ok(GeneratedField::SourceDescription),
@@ -14335,7 +13700,6 @@ impl<'de> serde::Deserialize<'de> for Provenance {
             {
                 let mut integration_name__ = None;
                 let mut data_type__ = None;
-                let mut source__ = None;
                 let mut source_id__ = None;
                 let mut source_update_time__ = None;
                 let mut source_description__ = None;
@@ -14352,12 +13716,6 @@ impl<'de> serde::Deserialize<'de> for Provenance {
                                 return Err(serde::de::Error::duplicate_field("dataType"));
                             }
                             data_type__ = Some(map_.next_value()?);
-                        }
-                        GeneratedField::Source => {
-                            if source__.is_some() {
-                                return Err(serde::de::Error::duplicate_field("source"));
-                            }
-                            source__ = Some(map_.next_value::<Source>()? as i32);
                         }
                         GeneratedField::SourceId => {
                             if source_id__.is_some() {
@@ -14382,7 +13740,6 @@ impl<'de> serde::Deserialize<'de> for Provenance {
                 Ok(Provenance {
                     integration_name: integration_name__.unwrap_or_default(),
                     data_type: data_type__.unwrap_or_default(),
-                    source: source__.unwrap_or_default(),
                     source_id: source_id__.unwrap_or_default(),
                     source_update_time: source_update_time__,
                     source_description: source_description__.unwrap_or_default(),
@@ -14816,12 +14173,6 @@ impl serde::Serialize for RfConfiguration {
     {
         use serde::ser::SerializeStruct;
         let mut len = 0;
-        if !self.frequency_range.is_empty() {
-            len += 1;
-        }
-        if !self.bandwidth_range.is_empty() {
-            len += 1;
-        }
         if !self.frequency_range_hz.is_empty() {
             len += 1;
         }
@@ -14829,12 +14180,6 @@ impl serde::Serialize for RfConfiguration {
             len += 1;
         }
         let mut struct_ser = serializer.serialize_struct("anduril.entitymanager.v1.RFConfiguration", len)?;
-        if !self.frequency_range.is_empty() {
-            struct_ser.serialize_field("frequencyRange", &self.frequency_range)?;
-        }
-        if !self.bandwidth_range.is_empty() {
-            struct_ser.serialize_field("bandwidthRange", &self.bandwidth_range)?;
-        }
         if !self.frequency_range_hz.is_empty() {
             struct_ser.serialize_field("frequencyRangeHz", &self.frequency_range_hz)?;
         }
@@ -14851,10 +14196,6 @@ impl<'de> serde::Deserialize<'de> for RfConfiguration {
         D: serde::Deserializer<'de>,
     {
         const FIELDS: &[&str] = &[
-            "frequency_range",
-            "frequencyRange",
-            "bandwidth_range",
-            "bandwidthRange",
             "frequency_range_hz",
             "frequencyRangeHz",
             "bandwidth_range_hz",
@@ -14863,8 +14204,6 @@ impl<'de> serde::Deserialize<'de> for RfConfiguration {
 
         #[allow(clippy::enum_variant_names)]
         enum GeneratedField {
-            FrequencyRange,
-            BandwidthRange,
             FrequencyRangeHz,
             BandwidthRangeHz,
         }
@@ -14888,8 +14227,6 @@ impl<'de> serde::Deserialize<'de> for RfConfiguration {
                         E: serde::de::Error,
                     {
                         match value {
-                            "frequencyRange" | "frequency_range" => Ok(GeneratedField::FrequencyRange),
-                            "bandwidthRange" | "bandwidth_range" => Ok(GeneratedField::BandwidthRange),
                             "frequencyRangeHz" | "frequency_range_hz" => Ok(GeneratedField::FrequencyRangeHz),
                             "bandwidthRangeHz" | "bandwidth_range_hz" => Ok(GeneratedField::BandwidthRangeHz),
                             _ => Err(serde::de::Error::unknown_field(value, FIELDS)),
@@ -14911,24 +14248,10 @@ impl<'de> serde::Deserialize<'de> for RfConfiguration {
                 where
                     V: serde::de::MapAccess<'de>,
             {
-                let mut frequency_range__ = None;
-                let mut bandwidth_range__ = None;
                 let mut frequency_range_hz__ = None;
                 let mut bandwidth_range_hz__ = None;
                 while let Some(k) = map_.next_key()? {
                     match k {
-                        GeneratedField::FrequencyRange => {
-                            if frequency_range__.is_some() {
-                                return Err(serde::de::Error::duplicate_field("frequencyRange"));
-                            }
-                            frequency_range__ = Some(map_.next_value()?);
-                        }
-                        GeneratedField::BandwidthRange => {
-                            if bandwidth_range__.is_some() {
-                                return Err(serde::de::Error::duplicate_field("bandwidthRange"));
-                            }
-                            bandwidth_range__ = Some(map_.next_value()?);
-                        }
                         GeneratedField::FrequencyRangeHz => {
                             if frequency_range_hz__.is_some() {
                                 return Err(serde::de::Error::duplicate_field("frequencyRangeHz"));
@@ -14944,124 +14267,12 @@ impl<'de> serde::Deserialize<'de> for RfConfiguration {
                     }
                 }
                 Ok(RfConfiguration {
-                    frequency_range: frequency_range__.unwrap_or_default(),
-                    bandwidth_range: bandwidth_range__.unwrap_or_default(),
                     frequency_range_hz: frequency_range_hz__.unwrap_or_default(),
                     bandwidth_range_hz: bandwidth_range_hz__.unwrap_or_default(),
                 })
             }
         }
         deserializer.deserialize_struct("anduril.entitymanager.v1.RFConfiguration", FIELDS, GeneratedVisitor)
-    }
-}
-impl serde::Serialize for RangeBearing {
-    #[allow(deprecated)]
-    fn serialize<S>(&self, serializer: S) -> std::result::Result<S::Ok, S::Error>
-    where
-        S: serde::Serializer,
-    {
-        use serde::ser::SerializeStruct;
-        let mut len = 0;
-        if self.range_m.is_some() {
-            len += 1;
-        }
-        if self.range_angle_d.is_some() {
-            len += 1;
-        }
-        let mut struct_ser = serializer.serialize_struct("anduril.entitymanager.v1.RangeBearing", len)?;
-        if let Some(v) = self.range_m.as_ref() {
-            struct_ser.serialize_field("rangeM", v)?;
-        }
-        if let Some(v) = self.range_angle_d.as_ref() {
-            struct_ser.serialize_field("rangeAngleD", v)?;
-        }
-        struct_ser.end()
-    }
-}
-impl<'de> serde::Deserialize<'de> for RangeBearing {
-    #[allow(deprecated)]
-    fn deserialize<D>(deserializer: D) -> std::result::Result<Self, D::Error>
-    where
-        D: serde::Deserializer<'de>,
-    {
-        const FIELDS: &[&str] = &[
-            "range_m",
-            "rangeM",
-            "range_angle_d",
-            "rangeAngleD",
-        ];
-
-        #[allow(clippy::enum_variant_names)]
-        enum GeneratedField {
-            RangeM,
-            RangeAngleD,
-        }
-        impl<'de> serde::Deserialize<'de> for GeneratedField {
-            fn deserialize<D>(deserializer: D) -> std::result::Result<GeneratedField, D::Error>
-            where
-                D: serde::Deserializer<'de>,
-            {
-                struct GeneratedVisitor;
-
-                impl<'de> serde::de::Visitor<'de> for GeneratedVisitor {
-                    type Value = GeneratedField;
-
-                    fn expecting(&self, formatter: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
-                        write!(formatter, "expected one of: {:?}", &FIELDS)
-                    }
-
-                    #[allow(unused_variables)]
-                    fn visit_str<E>(self, value: &str) -> std::result::Result<GeneratedField, E>
-                    where
-                        E: serde::de::Error,
-                    {
-                        match value {
-                            "rangeM" | "range_m" => Ok(GeneratedField::RangeM),
-                            "rangeAngleD" | "range_angle_d" => Ok(GeneratedField::RangeAngleD),
-                            _ => Err(serde::de::Error::unknown_field(value, FIELDS)),
-                        }
-                    }
-                }
-                deserializer.deserialize_identifier(GeneratedVisitor)
-            }
-        }
-        struct GeneratedVisitor;
-        impl<'de> serde::de::Visitor<'de> for GeneratedVisitor {
-            type Value = RangeBearing;
-
-            fn expecting(&self, formatter: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
-                formatter.write_str("struct anduril.entitymanager.v1.RangeBearing")
-            }
-
-            fn visit_map<V>(self, mut map_: V) -> std::result::Result<RangeBearing, V::Error>
-                where
-                    V: serde::de::MapAccess<'de>,
-            {
-                let mut range_m__ = None;
-                let mut range_angle_d__ = None;
-                while let Some(k) = map_.next_key()? {
-                    match k {
-                        GeneratedField::RangeM => {
-                            if range_m__.is_some() {
-                                return Err(serde::de::Error::duplicate_field("rangeM"));
-                            }
-                            range_m__ = map_.next_value()?;
-                        }
-                        GeneratedField::RangeAngleD => {
-                            if range_angle_d__.is_some() {
-                                return Err(serde::de::Error::duplicate_field("rangeAngleD"));
-                            }
-                            range_angle_d__ = map_.next_value()?;
-                        }
-                    }
-                }
-                Ok(RangeBearing {
-                    range_m: range_m__,
-                    range_angle_d: range_angle_d__,
-                })
-            }
-        }
-        deserializer.deserialize_struct("anduril.entitymanager.v1.RangeBearing", FIELDS, GeneratedVisitor)
     }
 }
 impl serde::Serialize for RangeRings {
@@ -16785,9 +15996,6 @@ impl serde::Serialize for Sensor {
         if self.operational_state != 0 {
             len += 1;
         }
-        if self.field_of_view.is_some() {
-            len += 1;
-        }
         if self.sensor_type != 0 {
             len += 1;
         }
@@ -16811,9 +16019,6 @@ impl serde::Serialize for Sensor {
             let v = OperationalState::try_from(self.operational_state)
                 .map_err(|_| serde::ser::Error::custom(format!("Invalid variant {}", self.operational_state)))?;
             struct_ser.serialize_field("operationalState", &v)?;
-        }
-        if let Some(v) = self.field_of_view.as_ref() {
-            struct_ser.serialize_field("fieldOfView", v)?;
         }
         if self.sensor_type != 0 {
             let v = SensorType::try_from(self.sensor_type)
@@ -16846,8 +16051,6 @@ impl<'de> serde::Deserialize<'de> for Sensor {
             "sensorId",
             "operational_state",
             "operationalState",
-            "field_of_view",
-            "fieldOfView",
             "sensor_type",
             "sensorType",
             "sensor_description",
@@ -16864,7 +16067,6 @@ impl<'de> serde::Deserialize<'de> for Sensor {
         enum GeneratedField {
             SensorId,
             OperationalState,
-            FieldOfView,
             SensorType,
             SensorDescription,
             RfConfiguraton,
@@ -16893,7 +16095,6 @@ impl<'de> serde::Deserialize<'de> for Sensor {
                         match value {
                             "sensorId" | "sensor_id" => Ok(GeneratedField::SensorId),
                             "operationalState" | "operational_state" => Ok(GeneratedField::OperationalState),
-                            "fieldOfView" | "field_of_view" => Ok(GeneratedField::FieldOfView),
                             "sensorType" | "sensor_type" => Ok(GeneratedField::SensorType),
                             "sensorDescription" | "sensor_description" => Ok(GeneratedField::SensorDescription),
                             "rfConfiguraton" | "rf_configuraton" => Ok(GeneratedField::RfConfiguraton),
@@ -16920,7 +16121,6 @@ impl<'de> serde::Deserialize<'de> for Sensor {
             {
                 let mut sensor_id__ = None;
                 let mut operational_state__ = None;
-                let mut field_of_view__ = None;
                 let mut sensor_type__ = None;
                 let mut sensor_description__ = None;
                 let mut rf_configuraton__ = None;
@@ -16939,12 +16139,6 @@ impl<'de> serde::Deserialize<'de> for Sensor {
                                 return Err(serde::de::Error::duplicate_field("operationalState"));
                             }
                             operational_state__ = Some(map_.next_value::<OperationalState>()? as i32);
-                        }
-                        GeneratedField::FieldOfView => {
-                            if field_of_view__.is_some() {
-                                return Err(serde::de::Error::duplicate_field("fieldOfView"));
-                            }
-                            field_of_view__ = map_.next_value()?;
                         }
                         GeneratedField::SensorType => {
                             if sensor_type__.is_some() {
@@ -16981,7 +16175,6 @@ impl<'de> serde::Deserialize<'de> for Sensor {
                 Ok(Sensor {
                     sensor_id: sensor_id__.unwrap_or_default(),
                     operational_state: operational_state__.unwrap_or_default(),
-                    field_of_view: field_of_view__,
                     sensor_type: sensor_type__.unwrap_or_default(),
                     sensor_description: sensor_description__.unwrap_or_default(),
                     rf_configuraton: rf_configuraton__,
@@ -17090,7 +16283,6 @@ impl serde::Serialize for SensorType {
             Self::Rf => "SENSOR_TYPE_RF",
             Self::Gps => "SENSOR_TYPE_GPS",
             Self::PtuPos => "SENSOR_TYPE_PTU_POS",
-            Self::Wisp => "SENSOR_TYPE_WISP",
             Self::Perimeter => "SENSOR_TYPE_PERIMETER",
             Self::Sonar => "SENSOR_TYPE_SONAR",
         };
@@ -17111,7 +16303,6 @@ impl<'de> serde::Deserialize<'de> for SensorType {
             "SENSOR_TYPE_RF",
             "SENSOR_TYPE_GPS",
             "SENSOR_TYPE_PTU_POS",
-            "SENSOR_TYPE_WISP",
             "SENSOR_TYPE_PERIMETER",
             "SENSOR_TYPE_SONAR",
         ];
@@ -17161,7 +16352,6 @@ impl<'de> serde::Deserialize<'de> for SensorType {
                     "SENSOR_TYPE_RF" => Ok(SensorType::Rf),
                     "SENSOR_TYPE_GPS" => Ok(SensorType::Gps),
                     "SENSOR_TYPE_PTU_POS" => Ok(SensorType::PtuPos),
-                    "SENSOR_TYPE_WISP" => Ok(SensorType::Wisp),
                     "SENSOR_TYPE_PERIMETER" => Ok(SensorType::Perimeter),
                     "SENSOR_TYPE_SONAR" => Ok(SensorType::Sonar),
                     _ => Err(serde::de::Error::unknown_variant(value, FIELDS)),
@@ -17285,9 +16475,6 @@ impl serde::Serialize for Signal {
         if self.pulse_repetition_interval.is_some() {
             len += 1;
         }
-        if self.modulation.is_some() {
-            len += 1;
-        }
         if self.scan_characteristics.is_some() {
             len += 1;
         }
@@ -17312,9 +16499,6 @@ impl serde::Serialize for Signal {
         }
         if let Some(v) = self.pulse_repetition_interval.as_ref() {
             struct_ser.serialize_field("pulseRepetitionInterval", v)?;
-        }
-        if let Some(v) = self.modulation.as_ref() {
-            struct_ser.serialize_field("modulation", v)?;
         }
         if let Some(v) = self.scan_characteristics.as_ref() {
             struct_ser.serialize_field("scanCharacteristics", v)?;
@@ -17359,7 +16543,6 @@ impl<'de> serde::Deserialize<'de> for Signal {
             "pulseWidthS",
             "pulse_repetition_interval",
             "pulseRepetitionInterval",
-            "modulation",
             "scan_characteristics",
             "scanCharacteristics",
             "frequency_center",
@@ -17378,7 +16561,6 @@ impl<'de> serde::Deserialize<'de> for Signal {
             EmitterNotations,
             PulseWidthS,
             PulseRepetitionInterval,
-            Modulation,
             ScanCharacteristics,
             FrequencyCenter,
             FrequencyRange,
@@ -17410,7 +16592,6 @@ impl<'de> serde::Deserialize<'de> for Signal {
                             "emitterNotations" | "emitter_notations" => Ok(GeneratedField::EmitterNotations),
                             "pulseWidthS" | "pulse_width_s" => Ok(GeneratedField::PulseWidthS),
                             "pulseRepetitionInterval" | "pulse_repetition_interval" => Ok(GeneratedField::PulseRepetitionInterval),
-                            "modulation" => Ok(GeneratedField::Modulation),
                             "scanCharacteristics" | "scan_characteristics" => Ok(GeneratedField::ScanCharacteristics),
                             "frequencyCenter" | "frequency_center" => Ok(GeneratedField::FrequencyCenter),
                             "frequencyRange" | "frequency_range" => Ok(GeneratedField::FrequencyRange),
@@ -17440,7 +16621,6 @@ impl<'de> serde::Deserialize<'de> for Signal {
                 let mut emitter_notations__ = None;
                 let mut pulse_width_s__ = None;
                 let mut pulse_repetition_interval__ = None;
-                let mut modulation__ = None;
                 let mut scan_characteristics__ = None;
                 let mut frequency_measurement__ = None;
                 let mut report__ = None;
@@ -17475,12 +16655,6 @@ impl<'de> serde::Deserialize<'de> for Signal {
                                 return Err(serde::de::Error::duplicate_field("pulseRepetitionInterval"));
                             }
                             pulse_repetition_interval__ = map_.next_value()?;
-                        }
-                        GeneratedField::Modulation => {
-                            if modulation__.is_some() {
-                                return Err(serde::de::Error::duplicate_field("modulation"));
-                            }
-                            modulation__ = map_.next_value()?;
                         }
                         GeneratedField::ScanCharacteristics => {
                             if scan_characteristics__.is_some() {
@@ -17524,7 +16698,6 @@ impl<'de> serde::Deserialize<'de> for Signal {
                     emitter_notations: emitter_notations__.unwrap_or_default(),
                     pulse_width_s: pulse_width_s__,
                     pulse_repetition_interval: pulse_repetition_interval__,
-                    modulation: modulation__,
                     scan_characteristics: scan_characteristics__,
                     frequency_measurement: frequency_measurement__,
                     report: report__,
@@ -17532,191 +16705,6 @@ impl<'de> serde::Deserialize<'de> for Signal {
             }
         }
         deserializer.deserialize_struct("anduril.entitymanager.v1.Signal", FIELDS, GeneratedVisitor)
-    }
-}
-impl serde::Serialize for Source {
-    #[allow(deprecated)]
-    fn serialize<S>(&self, serializer: S) -> std::result::Result<S::Ok, S::Error>
-    where
-        S: serde::Serializer,
-    {
-        let variant = match self {
-            Self::Invalid => "SOURCE_INVALID",
-            Self::Anduril => "SOURCE_ANDURIL",
-            Self::Link16 => "SOURCE_LINK_16",
-            Self::Vmf => "SOURCE_VMF",
-            Self::Adsb => "SOURCE_ADSB",
-            Self::CursorOnTarget => "SOURCE_CURSOR_ON_TARGET",
-            Self::Maxar => "SOURCE_MAXAR",
-            Self::Martac => "SOURCE_MARTAC",
-            Self::Saildrone => "SOURCE_SAILDRONE",
-            Self::He360 => "SOURCE_HE_360",
-            Self::Ofx => "SOURCE_OFX",
-            Self::BasT => "SOURCE_BAS_T",
-            Self::Kinetica => "SOURCE_KINETICA",
-            Self::User => "SOURCE_USER",
-            Self::Ncct => "SOURCE_NCCT",
-            Self::Ais => "SOURCE_AIS",
-            Self::Klv => "SOURCE_KLV",
-            Self::Nitf => "SOURCE_NITF",
-            Self::Tak => "SOURCE_TAK",
-            Self::SpireAis => "SOURCE_SPIRE_AIS",
-            Self::Sefi => "SOURCE_SEFI",
-            Self::AdsbExchange => "SOURCE_ADSB_EXCHANGE",
-            Self::LiveUaMap => "SOURCE_LIVE_UA_MAP",
-            Self::Crucible => "SOURCE_CRUCIBLE",
-            Self::Ibs => "SOURCE_IBS",
-            Self::Advana => "SOURCE_ADVANA",
-            Self::Thresher => "SOURCE_THRESHER",
-            Self::Seatracks => "SOURCE_SEATRACKS",
-            Self::Tass => "SOURCE_TASS",
-            Self::SmartSensor => "SOURCE_SMART_SENSOR",
-            Self::Striveworks => "SOURCE_STRIVEWORKS",
-            Self::L3hTheia => "SOURCE_L3H_THEIA",
-            Self::TalonPowderhorn => "SOURCE_TALON_POWDERHORN",
-            Self::IdtVirtualTwin => "SOURCE_IDT_VIRTUAL_TWIN",
-            Self::MissionAutonomy => "SOURCE_MISSION_AUTONOMY",
-            Self::Gccs => "SOURCE_GCCS",
-            Self::Foundry => "SOURCE_FOUNDRY",
-            Self::Midb => "SOURCE_MIDB",
-            Self::Fom => "SOURCE_FOM",
-            Self::Gale => "SOURCE_GALE",
-        };
-        serializer.serialize_str(variant)
-    }
-}
-impl<'de> serde::Deserialize<'de> for Source {
-    #[allow(deprecated)]
-    fn deserialize<D>(deserializer: D) -> std::result::Result<Self, D::Error>
-    where
-        D: serde::Deserializer<'de>,
-    {
-        const FIELDS: &[&str] = &[
-            "SOURCE_INVALID",
-            "SOURCE_ANDURIL",
-            "SOURCE_LINK_16",
-            "SOURCE_VMF",
-            "SOURCE_ADSB",
-            "SOURCE_CURSOR_ON_TARGET",
-            "SOURCE_MAXAR",
-            "SOURCE_MARTAC",
-            "SOURCE_SAILDRONE",
-            "SOURCE_HE_360",
-            "SOURCE_OFX",
-            "SOURCE_BAS_T",
-            "SOURCE_KINETICA",
-            "SOURCE_USER",
-            "SOURCE_NCCT",
-            "SOURCE_AIS",
-            "SOURCE_KLV",
-            "SOURCE_NITF",
-            "SOURCE_TAK",
-            "SOURCE_SPIRE_AIS",
-            "SOURCE_SEFI",
-            "SOURCE_ADSB_EXCHANGE",
-            "SOURCE_LIVE_UA_MAP",
-            "SOURCE_CRUCIBLE",
-            "SOURCE_IBS",
-            "SOURCE_ADVANA",
-            "SOURCE_THRESHER",
-            "SOURCE_SEATRACKS",
-            "SOURCE_TASS",
-            "SOURCE_SMART_SENSOR",
-            "SOURCE_STRIVEWORKS",
-            "SOURCE_L3H_THEIA",
-            "SOURCE_TALON_POWDERHORN",
-            "SOURCE_IDT_VIRTUAL_TWIN",
-            "SOURCE_MISSION_AUTONOMY",
-            "SOURCE_GCCS",
-            "SOURCE_FOUNDRY",
-            "SOURCE_MIDB",
-            "SOURCE_FOM",
-            "SOURCE_GALE",
-        ];
-
-        struct GeneratedVisitor;
-
-        impl<'de> serde::de::Visitor<'de> for GeneratedVisitor {
-            type Value = Source;
-
-            fn expecting(&self, formatter: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
-                write!(formatter, "expected one of: {:?}", &FIELDS)
-            }
-
-            fn visit_i64<E>(self, v: i64) -> std::result::Result<Self::Value, E>
-            where
-                E: serde::de::Error,
-            {
-                i32::try_from(v)
-                    .ok()
-                    .and_then(|x| x.try_into().ok())
-                    .ok_or_else(|| {
-                        serde::de::Error::invalid_value(serde::de::Unexpected::Signed(v), &self)
-                    })
-            }
-
-            fn visit_u64<E>(self, v: u64) -> std::result::Result<Self::Value, E>
-            where
-                E: serde::de::Error,
-            {
-                i32::try_from(v)
-                    .ok()
-                    .and_then(|x| x.try_into().ok())
-                    .ok_or_else(|| {
-                        serde::de::Error::invalid_value(serde::de::Unexpected::Unsigned(v), &self)
-                    })
-            }
-
-            fn visit_str<E>(self, value: &str) -> std::result::Result<Self::Value, E>
-            where
-                E: serde::de::Error,
-            {
-                match value {
-                    "SOURCE_INVALID" => Ok(Source::Invalid),
-                    "SOURCE_ANDURIL" => Ok(Source::Anduril),
-                    "SOURCE_LINK_16" => Ok(Source::Link16),
-                    "SOURCE_VMF" => Ok(Source::Vmf),
-                    "SOURCE_ADSB" => Ok(Source::Adsb),
-                    "SOURCE_CURSOR_ON_TARGET" => Ok(Source::CursorOnTarget),
-                    "SOURCE_MAXAR" => Ok(Source::Maxar),
-                    "SOURCE_MARTAC" => Ok(Source::Martac),
-                    "SOURCE_SAILDRONE" => Ok(Source::Saildrone),
-                    "SOURCE_HE_360" => Ok(Source::He360),
-                    "SOURCE_OFX" => Ok(Source::Ofx),
-                    "SOURCE_BAS_T" => Ok(Source::BasT),
-                    "SOURCE_KINETICA" => Ok(Source::Kinetica),
-                    "SOURCE_USER" => Ok(Source::User),
-                    "SOURCE_NCCT" => Ok(Source::Ncct),
-                    "SOURCE_AIS" => Ok(Source::Ais),
-                    "SOURCE_KLV" => Ok(Source::Klv),
-                    "SOURCE_NITF" => Ok(Source::Nitf),
-                    "SOURCE_TAK" => Ok(Source::Tak),
-                    "SOURCE_SPIRE_AIS" => Ok(Source::SpireAis),
-                    "SOURCE_SEFI" => Ok(Source::Sefi),
-                    "SOURCE_ADSB_EXCHANGE" => Ok(Source::AdsbExchange),
-                    "SOURCE_LIVE_UA_MAP" => Ok(Source::LiveUaMap),
-                    "SOURCE_CRUCIBLE" => Ok(Source::Crucible),
-                    "SOURCE_IBS" => Ok(Source::Ibs),
-                    "SOURCE_ADVANA" => Ok(Source::Advana),
-                    "SOURCE_THRESHER" => Ok(Source::Thresher),
-                    "SOURCE_SEATRACKS" => Ok(Source::Seatracks),
-                    "SOURCE_TASS" => Ok(Source::Tass),
-                    "SOURCE_SMART_SENSOR" => Ok(Source::SmartSensor),
-                    "SOURCE_STRIVEWORKS" => Ok(Source::Striveworks),
-                    "SOURCE_L3H_THEIA" => Ok(Source::L3hTheia),
-                    "SOURCE_TALON_POWDERHORN" => Ok(Source::TalonPowderhorn),
-                    "SOURCE_IDT_VIRTUAL_TWIN" => Ok(Source::IdtVirtualTwin),
-                    "SOURCE_MISSION_AUTONOMY" => Ok(Source::MissionAutonomy),
-                    "SOURCE_GCCS" => Ok(Source::Gccs),
-                    "SOURCE_FOUNDRY" => Ok(Source::Foundry),
-                    "SOURCE_MIDB" => Ok(Source::Midb),
-                    "SOURCE_FOM" => Ok(Source::Fom),
-                    "SOURCE_GALE" => Ok(Source::Gale),
-                    _ => Err(serde::de::Error::unknown_variant(value, FIELDS)),
-                }
-            }
-        }
-        deserializer.deserialize_any(GeneratedVisitor)
     }
 }
 impl serde::Serialize for Statement {
@@ -18458,16 +17446,10 @@ impl serde::Serialize for Supplies {
     {
         use serde::ser::SerializeStruct;
         let mut len = 0;
-        if !self.munitions.is_empty() {
-            len += 1;
-        }
         if !self.fuel.is_empty() {
             len += 1;
         }
         let mut struct_ser = serializer.serialize_struct("anduril.entitymanager.v1.Supplies", len)?;
-        if !self.munitions.is_empty() {
-            struct_ser.serialize_field("munitions", &self.munitions)?;
-        }
         if !self.fuel.is_empty() {
             struct_ser.serialize_field("fuel", &self.fuel)?;
         }
@@ -18481,13 +17463,11 @@ impl<'de> serde::Deserialize<'de> for Supplies {
         D: serde::Deserializer<'de>,
     {
         const FIELDS: &[&str] = &[
-            "munitions",
             "fuel",
         ];
 
         #[allow(clippy::enum_variant_names)]
         enum GeneratedField {
-            Munitions,
             Fuel,
         }
         impl<'de> serde::Deserialize<'de> for GeneratedField {
@@ -18510,7 +17490,6 @@ impl<'de> serde::Deserialize<'de> for Supplies {
                         E: serde::de::Error,
                     {
                         match value {
-                            "munitions" => Ok(GeneratedField::Munitions),
                             "fuel" => Ok(GeneratedField::Fuel),
                             _ => Err(serde::de::Error::unknown_field(value, FIELDS)),
                         }
@@ -18531,16 +17510,9 @@ impl<'de> serde::Deserialize<'de> for Supplies {
                 where
                     V: serde::de::MapAccess<'de>,
             {
-                let mut munitions__ = None;
                 let mut fuel__ = None;
                 while let Some(k) = map_.next_key()? {
                     match k {
-                        GeneratedField::Munitions => {
-                            if munitions__.is_some() {
-                                return Err(serde::de::Error::duplicate_field("munitions"));
-                            }
-                            munitions__ = Some(map_.next_value()?);
-                        }
                         GeneratedField::Fuel => {
                             if fuel__.is_some() {
                                 return Err(serde::de::Error::duplicate_field("fuel"));
@@ -18550,7 +17522,6 @@ impl<'de> serde::Deserialize<'de> for Supplies {
                     }
                 }
                 Ok(Supplies {
-                    munitions: munitions__.unwrap_or_default(),
                     fuel: fuel__.unwrap_or_default(),
                 })
             }
