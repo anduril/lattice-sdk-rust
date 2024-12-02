@@ -1,105 +1,4 @@
 // @generated
-impl serde::Serialize for Class {
-    #[allow(deprecated)]
-    fn serialize<S>(&self, serializer: S) -> std::result::Result<S::Ok, S::Error>
-    where
-        S: serde::Serializer,
-    {
-        let variant = match self {
-            Self::Unknown => "CLASS_UNKNOWN",
-            Self::Person => "CLASS_PERSON",
-            Self::Car => "CLASS_CAR",
-            Self::Animal => "CLASS_ANIMAL",
-            Self::AirVehicle => "CLASS_AIR_VEHICLE",
-            Self::Bicycle => "CLASS_BICYCLE",
-            Self::WaterVehicle => "CLASS_WATER_VEHICLE",
-            Self::UnknownVehicle => "CLASS_UNKNOWN_VEHICLE",
-            Self::Missile => "CLASS_MISSILE",
-            Self::UnknownAirVehicle => "CLASS_UNKNOWN_AIR_VEHICLE",
-            Self::Bird => "CLASS_BIRD",
-            Self::Background => "CLASS_BACKGROUND",
-        };
-        serializer.serialize_str(variant)
-    }
-}
-impl<'de> serde::Deserialize<'de> for Class {
-    #[allow(deprecated)]
-    fn deserialize<D>(deserializer: D) -> std::result::Result<Self, D::Error>
-    where
-        D: serde::Deserializer<'de>,
-    {
-        const FIELDS: &[&str] = &[
-            "CLASS_UNKNOWN",
-            "CLASS_PERSON",
-            "CLASS_CAR",
-            "CLASS_ANIMAL",
-            "CLASS_AIR_VEHICLE",
-            "CLASS_BICYCLE",
-            "CLASS_WATER_VEHICLE",
-            "CLASS_UNKNOWN_VEHICLE",
-            "CLASS_MISSILE",
-            "CLASS_UNKNOWN_AIR_VEHICLE",
-            "CLASS_BIRD",
-            "CLASS_BACKGROUND",
-        ];
-
-        struct GeneratedVisitor;
-
-        impl<'de> serde::de::Visitor<'de> for GeneratedVisitor {
-            type Value = Class;
-
-            fn expecting(&self, formatter: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
-                write!(formatter, "expected one of: {:?}", &FIELDS)
-            }
-
-            fn visit_i64<E>(self, v: i64) -> std::result::Result<Self::Value, E>
-            where
-                E: serde::de::Error,
-            {
-                i32::try_from(v)
-                    .ok()
-                    .and_then(|x| x.try_into().ok())
-                    .ok_or_else(|| {
-                        serde::de::Error::invalid_value(serde::de::Unexpected::Signed(v), &self)
-                    })
-            }
-
-            fn visit_u64<E>(self, v: u64) -> std::result::Result<Self::Value, E>
-            where
-                E: serde::de::Error,
-            {
-                i32::try_from(v)
-                    .ok()
-                    .and_then(|x| x.try_into().ok())
-                    .ok_or_else(|| {
-                        serde::de::Error::invalid_value(serde::de::Unexpected::Unsigned(v), &self)
-                    })
-            }
-
-            fn visit_str<E>(self, value: &str) -> std::result::Result<Self::Value, E>
-            where
-                E: serde::de::Error,
-            {
-                match value {
-                    "CLASS_UNKNOWN" => Ok(Class::Unknown),
-                    "CLASS_PERSON" => Ok(Class::Person),
-                    "CLASS_CAR" => Ok(Class::Car),
-                    "CLASS_ANIMAL" => Ok(Class::Animal),
-                    "CLASS_AIR_VEHICLE" => Ok(Class::AirVehicle),
-                    "CLASS_BICYCLE" => Ok(Class::Bicycle),
-                    "CLASS_WATER_VEHICLE" => Ok(Class::WaterVehicle),
-                    "CLASS_UNKNOWN_VEHICLE" => Ok(Class::UnknownVehicle),
-                    "CLASS_MISSILE" => Ok(Class::Missile),
-                    "CLASS_UNKNOWN_AIR_VEHICLE" => Ok(Class::UnknownAirVehicle),
-                    "CLASS_BIRD" => Ok(Class::Bird),
-                    "CLASS_BACKGROUND" => Ok(Class::Background),
-                    _ => Err(serde::de::Error::unknown_variant(value, FIELDS)),
-                }
-            }
-        }
-        deserializer.deserialize_any(GeneratedVisitor)
-    }
-}
 impl serde::Serialize for Disposition {
     #[allow(deprecated)]
     fn serialize<S>(&self, serializer: S) -> std::result::Result<S::Ok, S::Error>
@@ -371,7 +270,7 @@ impl serde::Serialize for Nationality {
             Self::Sweden => "NATIONALITY_SWEDEN",
             Self::Switzerland => "NATIONALITY_SWITZERLAND",
             Self::SyrianArabRepublic => "NATIONALITY_SYRIAN_ARAB_REPUBLIC",
-            Self::TaiwanProvinceOfChina => "NATIONALITY_TAIWAN_PROVINCE_OF_CHINA",
+            Self::Taiwan => "NATIONALITY_TAIWAN",
             Self::Tajikistan => "NATIONALITY_TAJIKISTAN",
             Self::Thailand => "NATIONALITY_THAILAND",
             Self::TheFormerYugoslavRepublicOfMacedonia => "NATIONALITY_THE_FORMER_YUGOSLAV_REPUBLIC_OF_MACEDONIA",
@@ -496,7 +395,7 @@ impl<'de> serde::Deserialize<'de> for Nationality {
             "NATIONALITY_SWEDEN",
             "NATIONALITY_SWITZERLAND",
             "NATIONALITY_SYRIAN_ARAB_REPUBLIC",
-            "NATIONALITY_TAIWAN_PROVINCE_OF_CHINA",
+            "NATIONALITY_TAIWAN",
             "NATIONALITY_TAJIKISTAN",
             "NATIONALITY_THAILAND",
             "NATIONALITY_THE_FORMER_YUGOSLAV_REPUBLIC_OF_MACEDONIA",
@@ -650,7 +549,7 @@ impl<'de> serde::Deserialize<'de> for Nationality {
                     "NATIONALITY_SWEDEN" => Ok(Nationality::Sweden),
                     "NATIONALITY_SWITZERLAND" => Ok(Nationality::Switzerland),
                     "NATIONALITY_SYRIAN_ARAB_REPUBLIC" => Ok(Nationality::SyrianArabRepublic),
-                    "NATIONALITY_TAIWAN_PROVINCE_OF_CHINA" => Ok(Nationality::TaiwanProvinceOfChina),
+                    "NATIONALITY_TAIWAN" => Ok(Nationality::Taiwan),
                     "NATIONALITY_TAJIKISTAN" => Ok(Nationality::Tajikistan),
                     "NATIONALITY_THAILAND" => Ok(Nationality::Thailand),
                     "NATIONALITY_THE_FORMER_YUGOSLAV_REPUBLIC_OF_MACEDONIA" => Ok(Nationality::TheFormerYugoslavRepublicOfMacedonia),
@@ -674,136 +573,5 @@ impl<'de> serde::Deserialize<'de> for Nationality {
             }
         }
         deserializer.deserialize_any(GeneratedVisitor)
-    }
-}
-impl serde::Serialize for ObjectType {
-    #[allow(deprecated)]
-    fn serialize<S>(&self, serializer: S) -> std::result::Result<S::Ok, S::Error>
-    where
-        S: serde::Serializer,
-    {
-        use serde::ser::SerializeStruct;
-        let mut len = 0;
-        if self.class != 0 {
-            len += 1;
-        }
-        if self.disposition != 0 {
-            len += 1;
-        }
-        if self.environment != 0 {
-            len += 1;
-        }
-        let mut struct_ser = serializer.serialize_struct("anduril.ontology.v1.ObjectType", len)?;
-        if self.class != 0 {
-            let v = Class::try_from(self.class)
-                .map_err(|_| serde::ser::Error::custom(format!("Invalid variant {}", self.class)))?;
-            struct_ser.serialize_field("class", &v)?;
-        }
-        if self.disposition != 0 {
-            let v = Disposition::try_from(self.disposition)
-                .map_err(|_| serde::ser::Error::custom(format!("Invalid variant {}", self.disposition)))?;
-            struct_ser.serialize_field("disposition", &v)?;
-        }
-        if self.environment != 0 {
-            let v = Environment::try_from(self.environment)
-                .map_err(|_| serde::ser::Error::custom(format!("Invalid variant {}", self.environment)))?;
-            struct_ser.serialize_field("environment", &v)?;
-        }
-        struct_ser.end()
-    }
-}
-impl<'de> serde::Deserialize<'de> for ObjectType {
-    #[allow(deprecated)]
-    fn deserialize<D>(deserializer: D) -> std::result::Result<Self, D::Error>
-    where
-        D: serde::Deserializer<'de>,
-    {
-        const FIELDS: &[&str] = &[
-            "class",
-            "disposition",
-            "environment",
-        ];
-
-        #[allow(clippy::enum_variant_names)]
-        enum GeneratedField {
-            Class,
-            Disposition,
-            Environment,
-        }
-        impl<'de> serde::Deserialize<'de> for GeneratedField {
-            fn deserialize<D>(deserializer: D) -> std::result::Result<GeneratedField, D::Error>
-            where
-                D: serde::Deserializer<'de>,
-            {
-                struct GeneratedVisitor;
-
-                impl<'de> serde::de::Visitor<'de> for GeneratedVisitor {
-                    type Value = GeneratedField;
-
-                    fn expecting(&self, formatter: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
-                        write!(formatter, "expected one of: {:?}", &FIELDS)
-                    }
-
-                    #[allow(unused_variables)]
-                    fn visit_str<E>(self, value: &str) -> std::result::Result<GeneratedField, E>
-                    where
-                        E: serde::de::Error,
-                    {
-                        match value {
-                            "class" => Ok(GeneratedField::Class),
-                            "disposition" => Ok(GeneratedField::Disposition),
-                            "environment" => Ok(GeneratedField::Environment),
-                            _ => Err(serde::de::Error::unknown_field(value, FIELDS)),
-                        }
-                    }
-                }
-                deserializer.deserialize_identifier(GeneratedVisitor)
-            }
-        }
-        struct GeneratedVisitor;
-        impl<'de> serde::de::Visitor<'de> for GeneratedVisitor {
-            type Value = ObjectType;
-
-            fn expecting(&self, formatter: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
-                formatter.write_str("struct anduril.ontology.v1.ObjectType")
-            }
-
-            fn visit_map<V>(self, mut map_: V) -> std::result::Result<ObjectType, V::Error>
-                where
-                    V: serde::de::MapAccess<'de>,
-            {
-                let mut class__ = None;
-                let mut disposition__ = None;
-                let mut environment__ = None;
-                while let Some(k) = map_.next_key()? {
-                    match k {
-                        GeneratedField::Class => {
-                            if class__.is_some() {
-                                return Err(serde::de::Error::duplicate_field("class"));
-                            }
-                            class__ = Some(map_.next_value::<Class>()? as i32);
-                        }
-                        GeneratedField::Disposition => {
-                            if disposition__.is_some() {
-                                return Err(serde::de::Error::duplicate_field("disposition"));
-                            }
-                            disposition__ = Some(map_.next_value::<Disposition>()? as i32);
-                        }
-                        GeneratedField::Environment => {
-                            if environment__.is_some() {
-                                return Err(serde::de::Error::duplicate_field("environment"));
-                            }
-                            environment__ = Some(map_.next_value::<Environment>()? as i32);
-                        }
-                    }
-                }
-                Ok(ObjectType {
-                    class: class__.unwrap_or_default(),
-                    disposition: disposition__.unwrap_or_default(),
-                    environment: environment__.unwrap_or_default(),
-                })
-            }
-        }
-        deserializer.deserialize_struct("anduril.ontology.v1.ObjectType", FIELDS, GeneratedVisitor)
     }
 }

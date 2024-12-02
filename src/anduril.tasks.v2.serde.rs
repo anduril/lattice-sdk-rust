@@ -1457,16 +1457,10 @@ impl serde::Serialize for IsrParameters {
     {
         use serde::ser::SerializeStruct;
         let mut len = 0;
-        if self.speed.is_some() {
-            len += 1;
-        }
         if self.speed_m_s.is_some() {
             len += 1;
         }
         if self.standoff_distance_m.is_some() {
-            len += 1;
-        }
-        if self.standoff_distance.is_some() {
             len += 1;
         }
         if self.standoff_angle.is_some() {
@@ -1476,17 +1470,11 @@ impl serde::Serialize for IsrParameters {
             len += 1;
         }
         let mut struct_ser = serializer.serialize_struct("anduril.tasks.v2.ISRParameters", len)?;
-        if let Some(v) = self.speed.as_ref() {
-            struct_ser.serialize_field("speed", v)?;
-        }
         if let Some(v) = self.speed_m_s.as_ref() {
             struct_ser.serialize_field("speedMS", v)?;
         }
         if let Some(v) = self.standoff_distance_m.as_ref() {
             struct_ser.serialize_field("standoffDistanceM", v)?;
-        }
-        if let Some(v) = self.standoff_distance.as_ref() {
-            struct_ser.serialize_field("standoffDistance", v)?;
         }
         if let Some(v) = self.standoff_angle.as_ref() {
             struct_ser.serialize_field("standoffAngle", v)?;
@@ -1504,13 +1492,10 @@ impl<'de> serde::Deserialize<'de> for IsrParameters {
         D: serde::Deserializer<'de>,
     {
         const FIELDS: &[&str] = &[
-            "speed",
             "speed_m_s",
             "speedMS",
             "standoff_distance_m",
             "standoffDistanceM",
-            "standoff_distance",
-            "standoffDistance",
             "standoff_angle",
             "standoffAngle",
             "expiration_time_ms",
@@ -1519,10 +1504,8 @@ impl<'de> serde::Deserialize<'de> for IsrParameters {
 
         #[allow(clippy::enum_variant_names)]
         enum GeneratedField {
-            Speed,
             SpeedMS,
             StandoffDistanceM,
-            StandoffDistance,
             StandoffAngle,
             ExpirationTimeMs,
         }
@@ -1546,10 +1529,8 @@ impl<'de> serde::Deserialize<'de> for IsrParameters {
                         E: serde::de::Error,
                     {
                         match value {
-                            "speed" => Ok(GeneratedField::Speed),
                             "speedMS" | "speed_m_s" => Ok(GeneratedField::SpeedMS),
                             "standoffDistanceM" | "standoff_distance_m" => Ok(GeneratedField::StandoffDistanceM),
-                            "standoffDistance" | "standoff_distance" => Ok(GeneratedField::StandoffDistance),
                             "standoffAngle" | "standoff_angle" => Ok(GeneratedField::StandoffAngle),
                             "expirationTimeMs" | "expiration_time_ms" => Ok(GeneratedField::ExpirationTimeMs),
                             _ => Err(serde::de::Error::unknown_field(value, FIELDS)),
@@ -1571,20 +1552,12 @@ impl<'de> serde::Deserialize<'de> for IsrParameters {
                 where
                     V: serde::de::MapAccess<'de>,
             {
-                let mut speed__ = None;
                 let mut speed_m_s__ = None;
                 let mut standoff_distance_m__ = None;
-                let mut standoff_distance__ = None;
                 let mut standoff_angle__ = None;
                 let mut expiration_time_ms__ = None;
                 while let Some(k) = map_.next_key()? {
                     match k {
-                        GeneratedField::Speed => {
-                            if speed__.is_some() {
-                                return Err(serde::de::Error::duplicate_field("speed"));
-                            }
-                            speed__ = map_.next_value()?;
-                        }
                         GeneratedField::SpeedMS => {
                             if speed_m_s__.is_some() {
                                 return Err(serde::de::Error::duplicate_field("speedMS"));
@@ -1596,12 +1569,6 @@ impl<'de> serde::Deserialize<'de> for IsrParameters {
                                 return Err(serde::de::Error::duplicate_field("standoffDistanceM"));
                             }
                             standoff_distance_m__ = map_.next_value()?;
-                        }
-                        GeneratedField::StandoffDistance => {
-                            if standoff_distance__.is_some() {
-                                return Err(serde::de::Error::duplicate_field("standoffDistance"));
-                            }
-                            standoff_distance__ = map_.next_value()?;
                         }
                         GeneratedField::StandoffAngle => {
                             if standoff_angle__.is_some() {
@@ -1618,10 +1585,8 @@ impl<'de> serde::Deserialize<'de> for IsrParameters {
                     }
                 }
                 Ok(IsrParameters {
-                    speed: speed__,
                     speed_m_s: speed_m_s__,
                     standoff_distance_m: standoff_distance_m__,
-                    standoff_distance: standoff_distance__,
                     standoff_angle: standoff_angle__,
                     expiration_time_ms: expiration_time_ms__,
                 })
