@@ -5,7 +5,7 @@ plugins: [
   [
     "@semantic-release/exec", {
       "prepareCmd": "cargo set-version ${nextRelease.version}",
-      "publishCmd": "cargo publish --token ${process.env.CARGO_API_TOKEN} --allow-dirty --dry-run"
+      "publishCmd": "cargo publish --token ${process.env.CARGO_API_TOKEN} --allow-dirty"
     },
   ]
 ]
