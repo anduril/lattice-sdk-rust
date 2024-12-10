@@ -2,7 +2,7 @@
 name = "anduril-lattice-sdk"
 description = "Anduril's Lattice SDK for interacting with Lattice APIs"
 homepage = "https://anduril.com"
-documentation = "docs.anduril.com"
+documentation = "https://docs.anduril.com"
 repository = "https://github.com/anduril/lattice-sdk-rust"
 version = "1.0.0"
 edition = "2021"
