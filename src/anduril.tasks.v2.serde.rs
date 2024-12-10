@@ -4617,15 +4617,9 @@ impl serde::Serialize for TaskDefinition {
         if !self.task_specification_url.is_empty() {
             len += 1;
         }
-        if !self.display_name.is_empty() {
-            len += 1;
-        }
         let mut struct_ser = serializer.serialize_struct("anduril.tasks.v2.TaskDefinition", len)?;
         if !self.task_specification_url.is_empty() {
             struct_ser.serialize_field("taskSpecificationUrl", &self.task_specification_url)?;
-        }
-        if !self.display_name.is_empty() {
-            struct_ser.serialize_field("displayName", &self.display_name)?;
         }
         struct_ser.end()
     }
@@ -4639,14 +4633,11 @@ impl<'de> serde::Deserialize<'de> for TaskDefinition {
         const FIELDS: &[&str] = &[
             "task_specification_url",
             "taskSpecificationUrl",
-            "display_name",
-            "displayName",
         ];
 
         #[allow(clippy::enum_variant_names)]
         enum GeneratedField {
             TaskSpecificationUrl,
-            DisplayName,
         }
         impl<'de> serde::Deserialize<'de> for GeneratedField {
             fn deserialize<D>(deserializer: D) -> std::result::Result<GeneratedField, D::Error>
@@ -4669,7 +4660,6 @@ impl<'de> serde::Deserialize<'de> for TaskDefinition {
                     {
                         match value {
                             "taskSpecificationUrl" | "task_specification_url" => Ok(GeneratedField::TaskSpecificationUrl),
-                            "displayName" | "display_name" => Ok(GeneratedField::DisplayName),
                             _ => Err(serde::de::Error::unknown_field(value, FIELDS)),
                         }
                     }
@@ -4690,7 +4680,6 @@ impl<'de> serde::Deserialize<'de> for TaskDefinition {
                     V: serde::de::MapAccess<'de>,
             {
                 let mut task_specification_url__ = None;
-                let mut display_name__ = None;
                 while let Some(k) = map_.next_key()? {
                     match k {
                         GeneratedField::TaskSpecificationUrl => {
@@ -4699,17 +4688,10 @@ impl<'de> serde::Deserialize<'de> for TaskDefinition {
                             }
                             task_specification_url__ = Some(map_.next_value()?);
                         }
-                        GeneratedField::DisplayName => {
-                            if display_name__.is_some() {
-                                return Err(serde::de::Error::duplicate_field("displayName"));
-                            }
-                            display_name__ = Some(map_.next_value()?);
-                        }
                     }
                 }
                 Ok(TaskDefinition {
                     task_specification_url: task_specification_url__.unwrap_or_default(),
-                    display_name: display_name__.unwrap_or_default(),
                 })
             }
         }
