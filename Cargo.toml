@@ -1,7 +1,7 @@
 [package]
 name = "anduril-lattice-sdk"
 description = "Anduril's Lattice SDK for interacting with Lattice APIs"
-homepage = "anduril.com"
+homepage = "https://anduril.com"
 documentation = "docs.anduril.com"
 repository = "https://github.com/anduril/lattice-sdk-rust"
 version = "1.0.0"
