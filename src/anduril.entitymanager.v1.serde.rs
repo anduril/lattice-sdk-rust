@@ -1,4 +1,75 @@
 // @generated
+impl serde::Serialize for ActiveTarget {
+    #[allow(deprecated)]
+    fn serialize<S>(&self, serializer: S) -> std::result::Result<S::Ok, S::Error>
+    where
+        S: serde::Serializer,
+    {
+        use serde::ser::SerializeStruct;
+        let len = 0;
+        let struct_ser = serializer.serialize_struct("anduril.entitymanager.v1.ActiveTarget", len)?;
+        struct_ser.end()
+    }
+}
+impl<'de> serde::Deserialize<'de> for ActiveTarget {
+    #[allow(deprecated)]
+    fn deserialize<D>(deserializer: D) -> std::result::Result<Self, D::Error>
+    where
+        D: serde::Deserializer<'de>,
+    {
+        const FIELDS: &[&str] = &[
+        ];
+
+        #[allow(clippy::enum_variant_names)]
+        enum GeneratedField {
+        }
+        impl<'de> serde::Deserialize<'de> for GeneratedField {
+            fn deserialize<D>(deserializer: D) -> std::result::Result<GeneratedField, D::Error>
+            where
+                D: serde::Deserializer<'de>,
+            {
+                struct GeneratedVisitor;
+
+                impl<'de> serde::de::Visitor<'de> for GeneratedVisitor {
+                    type Value = GeneratedField;
+
+                    fn expecting(&self, formatter: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
+                        write!(formatter, "expected one of: {:?}", &FIELDS)
+                    }
+
+                    #[allow(unused_variables)]
+                    fn visit_str<E>(self, value: &str) -> std::result::Result<GeneratedField, E>
+                    where
+                        E: serde::de::Error,
+                    {
+                            Err(serde::de::Error::unknown_field(value, FIELDS))
+                    }
+                }
+                deserializer.deserialize_identifier(GeneratedVisitor)
+            }
+        }
+        struct GeneratedVisitor;
+        impl<'de> serde::de::Visitor<'de> for GeneratedVisitor {
+            type Value = ActiveTarget;
+
+            fn expecting(&self, formatter: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
+                formatter.write_str("struct anduril.entitymanager.v1.ActiveTarget")
+            }
+
+            fn visit_map<V>(self, mut map_: V) -> std::result::Result<ActiveTarget, V::Error>
+                where
+                    V: serde::de::MapAccess<'de>,
+            {
+                while map_.next_key::<GeneratedField>()?.is_some() {
+                    let _ = map_.next_value::<serde::de::IgnoredAny>()?;
+                }
+                Ok(ActiveTarget {
+                })
+            }
+        }
+        deserializer.deserialize_struct("anduril.entitymanager.v1.ActiveTarget", FIELDS, GeneratedVisitor)
+    }
+}
 impl serde::Serialize for Alert {
     #[allow(deprecated)]
     fn serialize<S>(&self, serializer: S) -> std::result::Result<S::Ok, S::Error>
@@ -921,6 +992,104 @@ impl<'de> serde::Deserialize<'de> for AngleOfArrival {
             }
         }
         deserializer.deserialize_struct("anduril.entitymanager.v1.AngleOfArrival", FIELDS, GeneratedVisitor)
+    }
+}
+impl serde::Serialize for ArmyEchelon {
+    #[allow(deprecated)]
+    fn serialize<S>(&self, serializer: S) -> std::result::Result<S::Ok, S::Error>
+    where
+        S: serde::Serializer,
+    {
+        let variant = match self {
+            Self::Invalid => "ARMY_ECHELON_INVALID",
+            Self::FireTeam => "ARMY_ECHELON_FIRE_TEAM",
+            Self::Squad => "ARMY_ECHELON_SQUAD",
+            Self::Platoon => "ARMY_ECHELON_PLATOON",
+            Self::Company => "ARMY_ECHELON_COMPANY",
+            Self::Battalion => "ARMY_ECHELON_BATTALION",
+            Self::Regiment => "ARMY_ECHELON_REGIMENT",
+            Self::Brigade => "ARMY_ECHELON_BRIGADE",
+            Self::Division => "ARMY_ECHELON_DIVISION",
+            Self::Corps => "ARMY_ECHELON_CORPS",
+            Self::Army => "ARMY_ECHELON_ARMY",
+        };
+        serializer.serialize_str(variant)
+    }
+}
+impl<'de> serde::Deserialize<'de> for ArmyEchelon {
+    #[allow(deprecated)]
+    fn deserialize<D>(deserializer: D) -> std::result::Result<Self, D::Error>
+    where
+        D: serde::Deserializer<'de>,
+    {
+        const FIELDS: &[&str] = &[
+            "ARMY_ECHELON_INVALID",
+            "ARMY_ECHELON_FIRE_TEAM",
+            "ARMY_ECHELON_SQUAD",
+            "ARMY_ECHELON_PLATOON",
+            "ARMY_ECHELON_COMPANY",
+            "ARMY_ECHELON_BATTALION",
+            "ARMY_ECHELON_REGIMENT",
+            "ARMY_ECHELON_BRIGADE",
+            "ARMY_ECHELON_DIVISION",
+            "ARMY_ECHELON_CORPS",
+            "ARMY_ECHELON_ARMY",
+        ];
+
+        struct GeneratedVisitor;
+
+        impl<'de> serde::de::Visitor<'de> for GeneratedVisitor {
+            type Value = ArmyEchelon;
+
+            fn expecting(&self, formatter: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
+                write!(formatter, "expected one of: {:?}", &FIELDS)
+            }
+
+            fn visit_i64<E>(self, v: i64) -> std::result::Result<Self::Value, E>
+            where
+                E: serde::de::Error,
+            {
+                i32::try_from(v)
+                    .ok()
+                    .and_then(|x| x.try_into().ok())
+                    .ok_or_else(|| {
+                        serde::de::Error::invalid_value(serde::de::Unexpected::Signed(v), &self)
+                    })
+            }
+
+            fn visit_u64<E>(self, v: u64) -> std::result::Result<Self::Value, E>
+            where
+                E: serde::de::Error,
+            {
+                i32::try_from(v)
+                    .ok()
+                    .and_then(|x| x.try_into().ok())
+                    .ok_or_else(|| {
+                        serde::de::Error::invalid_value(serde::de::Unexpected::Unsigned(v), &self)
+                    })
+            }
+
+            fn visit_str<E>(self, value: &str) -> std::result::Result<Self::Value, E>
+            where
+                E: serde::de::Error,
+            {
+                match value {
+                    "ARMY_ECHELON_INVALID" => Ok(ArmyEchelon::Invalid),
+                    "ARMY_ECHELON_FIRE_TEAM" => Ok(ArmyEchelon::FireTeam),
+                    "ARMY_ECHELON_SQUAD" => Ok(ArmyEchelon::Squad),
+                    "ARMY_ECHELON_PLATOON" => Ok(ArmyEchelon::Platoon),
+                    "ARMY_ECHELON_COMPANY" => Ok(ArmyEchelon::Company),
+                    "ARMY_ECHELON_BATTALION" => Ok(ArmyEchelon::Battalion),
+                    "ARMY_ECHELON_REGIMENT" => Ok(ArmyEchelon::Regiment),
+                    "ARMY_ECHELON_BRIGADE" => Ok(ArmyEchelon::Brigade),
+                    "ARMY_ECHELON_DIVISION" => Ok(ArmyEchelon::Division),
+                    "ARMY_ECHELON_CORPS" => Ok(ArmyEchelon::Corps),
+                    "ARMY_ECHELON_ARMY" => Ok(ArmyEchelon::Army),
+                    _ => Err(serde::de::Error::unknown_variant(value, FIELDS)),
+                }
+            }
+        }
+        deserializer.deserialize_any(GeneratedVisitor)
     }
 }
 impl serde::Serialize for Bandwidth {
@@ -3758,6 +3927,104 @@ impl<'de> serde::Deserialize<'de> for DynamicStatement {
             }
         }
         deserializer.deserialize_struct("anduril.entitymanager.v1.DynamicStatement", FIELDS, GeneratedVisitor)
+    }
+}
+impl serde::Serialize for Echelon {
+    #[allow(deprecated)]
+    fn serialize<S>(&self, serializer: S) -> std::result::Result<S::Ok, S::Error>
+    where
+        S: serde::Serializer,
+    {
+        use serde::ser::SerializeStruct;
+        let mut len = 0;
+        if self.echelon_type.is_some() {
+            len += 1;
+        }
+        let mut struct_ser = serializer.serialize_struct("anduril.entitymanager.v1.Echelon", len)?;
+        if let Some(v) = self.echelon_type.as_ref() {
+            match v {
+                echelon::EchelonType::ArmyEchelon(v) => {
+                    let v = ArmyEchelon::try_from(*v)
+                        .map_err(|_| serde::ser::Error::custom(format!("Invalid variant {}", *v)))?;
+                    struct_ser.serialize_field("armyEchelon", &v)?;
+                }
+            }
+        }
+        struct_ser.end()
+    }
+}
+impl<'de> serde::Deserialize<'de> for Echelon {
+    #[allow(deprecated)]
+    fn deserialize<D>(deserializer: D) -> std::result::Result<Self, D::Error>
+    where
+        D: serde::Deserializer<'de>,
+    {
+        const FIELDS: &[&str] = &[
+            "army_echelon",
+            "armyEchelon",
+        ];
+
+        #[allow(clippy::enum_variant_names)]
+        enum GeneratedField {
+            ArmyEchelon,
+        }
+        impl<'de> serde::Deserialize<'de> for GeneratedField {
+            fn deserialize<D>(deserializer: D) -> std::result::Result<GeneratedField, D::Error>
+            where
+                D: serde::Deserializer<'de>,
+            {
+                struct GeneratedVisitor;
+
+                impl<'de> serde::de::Visitor<'de> for GeneratedVisitor {
+                    type Value = GeneratedField;
+
+                    fn expecting(&self, formatter: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
+                        write!(formatter, "expected one of: {:?}", &FIELDS)
+                    }
+
+                    #[allow(unused_variables)]
+                    fn visit_str<E>(self, value: &str) -> std::result::Result<GeneratedField, E>
+                    where
+                        E: serde::de::Error,
+                    {
+                        match value {
+                            "armyEchelon" | "army_echelon" => Ok(GeneratedField::ArmyEchelon),
+                            _ => Err(serde::de::Error::unknown_field(value, FIELDS)),
+                        }
+                    }
+                }
+                deserializer.deserialize_identifier(GeneratedVisitor)
+            }
+        }
+        struct GeneratedVisitor;
+        impl<'de> serde::de::Visitor<'de> for GeneratedVisitor {
+            type Value = Echelon;
+
+            fn expecting(&self, formatter: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
+                formatter.write_str("struct anduril.entitymanager.v1.Echelon")
+            }
+
+            fn visit_map<V>(self, mut map_: V) -> std::result::Result<Echelon, V::Error>
+                where
+                    V: serde::de::MapAccess<'de>,
+            {
+                let mut echelon_type__ = None;
+                while let Some(k) = map_.next_key()? {
+                    match k {
+                        GeneratedField::ArmyEchelon => {
+                            if echelon_type__.is_some() {
+                                return Err(serde::de::Error::duplicate_field("armyEchelon"));
+                            }
+                            echelon_type__ = map_.next_value::<::std::option::Option<ArmyEchelon>>()?.map(|x| echelon::EchelonType::ArmyEchelon(x as i32));
+                        }
+                    }
+                }
+                Ok(Echelon {
+                    echelon_type: echelon_type__,
+                })
+            }
+        }
+        deserializer.deserialize_struct("anduril.entitymanager.v1.Echelon", FIELDS, GeneratedVisitor)
     }
 }
 impl serde::Serialize for EmitterNotation {
@@ -7227,8 +7494,18 @@ impl serde::Serialize for GroupDetails {
         S: serde::Serializer,
     {
         use serde::ser::SerializeStruct;
-        let len = 0;
-        let struct_ser = serializer.serialize_struct("anduril.entitymanager.v1.GroupDetails", len)?;
+        let mut len = 0;
+        if self.group_type.is_some() {
+            len += 1;
+        }
+        let mut struct_ser = serializer.serialize_struct("anduril.entitymanager.v1.GroupDetails", len)?;
+        if let Some(v) = self.group_type.as_ref() {
+            match v {
+                group_details::GroupType::Echelon(v) => {
+                    struct_ser.serialize_field("echelon", v)?;
+                }
+            }
+        }
         struct_ser.end()
     }
 }
@@ -7239,10 +7516,12 @@ impl<'de> serde::Deserialize<'de> for GroupDetails {
         D: serde::Deserializer<'de>,
     {
         const FIELDS: &[&str] = &[
+            "echelon",
         ];
 
         #[allow(clippy::enum_variant_names)]
         enum GeneratedField {
+            Echelon,
         }
         impl<'de> serde::Deserialize<'de> for GeneratedField {
             fn deserialize<D>(deserializer: D) -> std::result::Result<GeneratedField, D::Error>
@@ -7263,7 +7542,10 @@ impl<'de> serde::Deserialize<'de> for GroupDetails {
                     where
                         E: serde::de::Error,
                     {
-                            Err(serde::de::Error::unknown_field(value, FIELDS))
+                        match value {
+                            "echelon" => Ok(GeneratedField::Echelon),
+                            _ => Err(serde::de::Error::unknown_field(value, FIELDS)),
+                        }
                     }
                 }
                 deserializer.deserialize_identifier(GeneratedVisitor)
@@ -7281,10 +7563,20 @@ impl<'de> serde::Deserialize<'de> for GroupDetails {
                 where
                     V: serde::de::MapAccess<'de>,
             {
-                while map_.next_key::<GeneratedField>()?.is_some() {
-                    let _ = map_.next_value::<serde::de::IgnoredAny>()?;
+                let mut group_type__ = None;
+                while let Some(k) = map_.next_key()? {
+                    match k {
+                        GeneratedField::Echelon => {
+                            if group_type__.is_some() {
+                                return Err(serde::de::Error::duplicate_field("echelon"));
+                            }
+                            group_type__ = map_.next_value::<::std::option::Option<_>>()?.map(group_details::GroupType::Echelon)
+;
+                        }
+                    }
                 }
                 Ok(GroupDetails {
+                    group_type: group_type__,
                 })
             }
         }
@@ -14779,6 +15071,9 @@ impl serde::Serialize for RelationshipType {
                 relationship_type::Type::MergedFrom(v) => {
                     struct_ser.serialize_field("mergedFrom", v)?;
                 }
+                relationship_type::Type::ActiveTarget(v) => {
+                    struct_ser.serialize_field("activeTarget", v)?;
+                }
             }
         }
         struct_ser.end()
@@ -14799,6 +15094,8 @@ impl<'de> serde::Deserialize<'de> for RelationshipType {
             "groupParent",
             "merged_from",
             "mergedFrom",
+            "active_target",
+            "activeTarget",
         ];
 
         #[allow(clippy::enum_variant_names)]
@@ -14807,6 +15104,7 @@ impl<'de> serde::Deserialize<'de> for RelationshipType {
             GroupChild,
             GroupParent,
             MergedFrom,
+            ActiveTarget,
         }
         impl<'de> serde::Deserialize<'de> for GeneratedField {
             fn deserialize<D>(deserializer: D) -> std::result::Result<GeneratedField, D::Error>
@@ -14832,6 +15130,7 @@ impl<'de> serde::Deserialize<'de> for RelationshipType {
                             "groupChild" | "group_child" => Ok(GeneratedField::GroupChild),
                             "groupParent" | "group_parent" => Ok(GeneratedField::GroupParent),
                             "mergedFrom" | "merged_from" => Ok(GeneratedField::MergedFrom),
+                            "activeTarget" | "active_target" => Ok(GeneratedField::ActiveTarget),
                             _ => Err(serde::de::Error::unknown_field(value, FIELDS)),
                         }
                     }
@@ -14880,6 +15179,13 @@ impl<'de> serde::Deserialize<'de> for RelationshipType {
                                 return Err(serde::de::Error::duplicate_field("mergedFrom"));
                             }
                             r#type__ = map_.next_value::<::std::option::Option<_>>()?.map(relationship_type::Type::MergedFrom)
+;
+                        }
+                        GeneratedField::ActiveTarget => {
+                            if r#type__.is_some() {
+                                return Err(serde::de::Error::duplicate_field("activeTarget"));
+                            }
+                            r#type__ = map_.next_value::<::std::option::Option<_>>()?.map(relationship_type::Type::ActiveTarget)
 ;
                         }
                     }
