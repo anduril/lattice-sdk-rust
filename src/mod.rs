@@ -45,6 +45,15 @@ pub mod anduril {
                 }
             }
         }
+        pub mod ads {
+            pub mod thirdparty {
+                // @@protoc_insertion_point(attribute:anduril.tasks.ads.thirdparty.v1)
+                pub mod v1 {
+                    include!("anduril.tasks.ads.thirdparty.v1.rs");
+                    // @@protoc_insertion_point(anduril.tasks.ads.thirdparty.v1)
+                }
+            }
+        }
         pub mod jadc2 {
             pub mod thirdparty {
                 // @@protoc_insertion_point(attribute:anduril.tasks.jadc2.thirdparty.v1)
