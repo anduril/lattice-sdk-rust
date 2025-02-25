@@ -6,7 +6,7 @@ The official [Anduril](https://www.anduril.com/) Lattice SDK for Rust.
 
 ## Documentation
 
-See the documentation for [Lattice Rust SDK](https://docs.anduril.com/sdks/rust).
+See the documentation for [Lattice Rust SDK](https://docs.anduril.com/guide/sdks/rust).
 
 ## Requirements
 
