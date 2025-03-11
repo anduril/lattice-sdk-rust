@@ -1,4 +1,187 @@
 // @generated
+impl serde::Serialize for AcmDetailType {
+    #[allow(deprecated)]
+    fn serialize<S>(&self, serializer: S) -> std::result::Result<S::Ok, S::Error>
+    where
+        S: serde::Serializer,
+    {
+        let variant = match self {
+            Self::Invalid => "ACM_DETAIL_TYPE_INVALID",
+            Self::LandingZone => "ACM_DETAIL_TYPE_LANDING_ZONE",
+        };
+        serializer.serialize_str(variant)
+    }
+}
+impl<'de> serde::Deserialize<'de> for AcmDetailType {
+    #[allow(deprecated)]
+    fn deserialize<D>(deserializer: D) -> std::result::Result<Self, D::Error>
+    where
+        D: serde::Deserializer<'de>,
+    {
+        const FIELDS: &[&str] = &[
+            "ACM_DETAIL_TYPE_INVALID",
+            "ACM_DETAIL_TYPE_LANDING_ZONE",
+        ];
+
+        struct GeneratedVisitor;
+
+        impl<'de> serde::de::Visitor<'de> for GeneratedVisitor {
+            type Value = AcmDetailType;
+
+            fn expecting(&self, formatter: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
+                write!(formatter, "expected one of: {:?}", &FIELDS)
+            }
+
+            fn visit_i64<E>(self, v: i64) -> std::result::Result<Self::Value, E>
+            where
+                E: serde::de::Error,
+            {
+                i32::try_from(v)
+                    .ok()
+                    .and_then(|x| x.try_into().ok())
+                    .ok_or_else(|| {
+                        serde::de::Error::invalid_value(serde::de::Unexpected::Signed(v), &self)
+                    })
+            }
+
+            fn visit_u64<E>(self, v: u64) -> std::result::Result<Self::Value, E>
+            where
+                E: serde::de::Error,
+            {
+                i32::try_from(v)
+                    .ok()
+                    .and_then(|x| x.try_into().ok())
+                    .ok_or_else(|| {
+                        serde::de::Error::invalid_value(serde::de::Unexpected::Unsigned(v), &self)
+                    })
+            }
+
+            fn visit_str<E>(self, value: &str) -> std::result::Result<Self::Value, E>
+            where
+                E: serde::de::Error,
+            {
+                match value {
+                    "ACM_DETAIL_TYPE_INVALID" => Ok(AcmDetailType::Invalid),
+                    "ACM_DETAIL_TYPE_LANDING_ZONE" => Ok(AcmDetailType::LandingZone),
+                    _ => Err(serde::de::Error::unknown_variant(value, FIELDS)),
+                }
+            }
+        }
+        deserializer.deserialize_any(GeneratedVisitor)
+    }
+}
+impl serde::Serialize for AcmDetails {
+    #[allow(deprecated)]
+    fn serialize<S>(&self, serializer: S) -> std::result::Result<S::Ok, S::Error>
+    where
+        S: serde::Serializer,
+    {
+        use serde::ser::SerializeStruct;
+        let mut len = 0;
+        if self.acm_type != 0 {
+            len += 1;
+        }
+        if !self.acm_description.is_empty() {
+            len += 1;
+        }
+        let mut struct_ser = serializer.serialize_struct("anduril.entitymanager.v1.ACMDetails", len)?;
+        if self.acm_type != 0 {
+            let v = AcmDetailType::try_from(self.acm_type)
+                .map_err(|_| serde::ser::Error::custom(format!("Invalid variant {}", self.acm_type)))?;
+            struct_ser.serialize_field("acmType", &v)?;
+        }
+        if !self.acm_description.is_empty() {
+            struct_ser.serialize_field("acmDescription", &self.acm_description)?;
+        }
+        struct_ser.end()
+    }
+}
+impl<'de> serde::Deserialize<'de> for AcmDetails {
+    #[allow(deprecated)]
+    fn deserialize<D>(deserializer: D) -> std::result::Result<Self, D::Error>
+    where
+        D: serde::Deserializer<'de>,
+    {
+        const FIELDS: &[&str] = &[
+            "acm_type",
+            "acmType",
+            "acm_description",
+            "acmDescription",
+        ];
+
+        #[allow(clippy::enum_variant_names)]
+        enum GeneratedField {
+            AcmType,
+            AcmDescription,
+        }
+        impl<'de> serde::Deserialize<'de> for GeneratedField {
+            fn deserialize<D>(deserializer: D) -> std::result::Result<GeneratedField, D::Error>
+            where
+                D: serde::Deserializer<'de>,
+            {
+                struct GeneratedVisitor;
+
+                impl<'de> serde::de::Visitor<'de> for GeneratedVisitor {
+                    type Value = GeneratedField;
+
+                    fn expecting(&self, formatter: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
+                        write!(formatter, "expected one of: {:?}", &FIELDS)
+                    }
+
+                    #[allow(unused_variables)]
+                    fn visit_str<E>(self, value: &str) -> std::result::Result<GeneratedField, E>
+                    where
+                        E: serde::de::Error,
+                    {
+                        match value {
+                            "acmType" | "acm_type" => Ok(GeneratedField::AcmType),
+                            "acmDescription" | "acm_description" => Ok(GeneratedField::AcmDescription),
+                            _ => Err(serde::de::Error::unknown_field(value, FIELDS)),
+                        }
+                    }
+                }
+                deserializer.deserialize_identifier(GeneratedVisitor)
+            }
+        }
+        struct GeneratedVisitor;
+        impl<'de> serde::de::Visitor<'de> for GeneratedVisitor {
+            type Value = AcmDetails;
+
+            fn expecting(&self, formatter: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
+                formatter.write_str("struct anduril.entitymanager.v1.ACMDetails")
+            }
+
+            fn visit_map<V>(self, mut map_: V) -> std::result::Result<AcmDetails, V::Error>
+                where
+                    V: serde::de::MapAccess<'de>,
+            {
+                let mut acm_type__ = None;
+                let mut acm_description__ = None;
+                while let Some(k) = map_.next_key()? {
+                    match k {
+                        GeneratedField::AcmType => {
+                            if acm_type__.is_some() {
+                                return Err(serde::de::Error::duplicate_field("acmType"));
+                            }
+                            acm_type__ = Some(map_.next_value::<AcmDetailType>()? as i32);
+                        }
+                        GeneratedField::AcmDescription => {
+                            if acm_description__.is_some() {
+                                return Err(serde::de::Error::duplicate_field("acmDescription"));
+                            }
+                            acm_description__ = Some(map_.next_value()?);
+                        }
+                    }
+                }
+                Ok(AcmDetails {
+                    acm_type: acm_type__.unwrap_or_default(),
+                    acm_description: acm_description__.unwrap_or_default(),
+                })
+            }
+        }
+        deserializer.deserialize_struct("anduril.entitymanager.v1.ACMDetails", FIELDS, GeneratedVisitor)
+    }
+}
 impl serde::Serialize for ActiveTarget {
     #[allow(deprecated)]
     fn serialize<S>(&self, serializer: S) -> std::result::Result<S::Ok, S::Error>
@@ -2323,6 +2506,179 @@ impl<'de> serde::Deserialize<'de> for ContactDetails {
             }
         }
         deserializer.deserialize_struct("anduril.entitymanager.v1.ContactDetails", FIELDS, GeneratedVisitor)
+    }
+}
+impl serde::Serialize for ControlAreaDetails {
+    #[allow(deprecated)]
+    fn serialize<S>(&self, serializer: S) -> std::result::Result<S::Ok, S::Error>
+    where
+        S: serde::Serializer,
+    {
+        use serde::ser::SerializeStruct;
+        let mut len = 0;
+        if self.r#type != 0 {
+            len += 1;
+        }
+        let mut struct_ser = serializer.serialize_struct("anduril.entitymanager.v1.ControlAreaDetails", len)?;
+        if self.r#type != 0 {
+            let v = ControlAreaType::try_from(self.r#type)
+                .map_err(|_| serde::ser::Error::custom(format!("Invalid variant {}", self.r#type)))?;
+            struct_ser.serialize_field("type", &v)?;
+        }
+        struct_ser.end()
+    }
+}
+impl<'de> serde::Deserialize<'de> for ControlAreaDetails {
+    #[allow(deprecated)]
+    fn deserialize<D>(deserializer: D) -> std::result::Result<Self, D::Error>
+    where
+        D: serde::Deserializer<'de>,
+    {
+        const FIELDS: &[&str] = &[
+            "type",
+        ];
+
+        #[allow(clippy::enum_variant_names)]
+        enum GeneratedField {
+            Type,
+        }
+        impl<'de> serde::Deserialize<'de> for GeneratedField {
+            fn deserialize<D>(deserializer: D) -> std::result::Result<GeneratedField, D::Error>
+            where
+                D: serde::Deserializer<'de>,
+            {
+                struct GeneratedVisitor;
+
+                impl<'de> serde::de::Visitor<'de> for GeneratedVisitor {
+                    type Value = GeneratedField;
+
+                    fn expecting(&self, formatter: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
+                        write!(formatter, "expected one of: {:?}", &FIELDS)
+                    }
+
+                    #[allow(unused_variables)]
+                    fn visit_str<E>(self, value: &str) -> std::result::Result<GeneratedField, E>
+                    where
+                        E: serde::de::Error,
+                    {
+                        match value {
+                            "type" => Ok(GeneratedField::Type),
+                            _ => Err(serde::de::Error::unknown_field(value, FIELDS)),
+                        }
+                    }
+                }
+                deserializer.deserialize_identifier(GeneratedVisitor)
+            }
+        }
+        struct GeneratedVisitor;
+        impl<'de> serde::de::Visitor<'de> for GeneratedVisitor {
+            type Value = ControlAreaDetails;
+
+            fn expecting(&self, formatter: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
+                formatter.write_str("struct anduril.entitymanager.v1.ControlAreaDetails")
+            }
+
+            fn visit_map<V>(self, mut map_: V) -> std::result::Result<ControlAreaDetails, V::Error>
+                where
+                    V: serde::de::MapAccess<'de>,
+            {
+                let mut r#type__ = None;
+                while let Some(k) = map_.next_key()? {
+                    match k {
+                        GeneratedField::Type => {
+                            if r#type__.is_some() {
+                                return Err(serde::de::Error::duplicate_field("type"));
+                            }
+                            r#type__ = Some(map_.next_value::<ControlAreaType>()? as i32);
+                        }
+                    }
+                }
+                Ok(ControlAreaDetails {
+                    r#type: r#type__.unwrap_or_default(),
+                })
+            }
+        }
+        deserializer.deserialize_struct("anduril.entitymanager.v1.ControlAreaDetails", FIELDS, GeneratedVisitor)
+    }
+}
+impl serde::Serialize for ControlAreaType {
+    #[allow(deprecated)]
+    fn serialize<S>(&self, serializer: S) -> std::result::Result<S::Ok, S::Error>
+    where
+        S: serde::Serializer,
+    {
+        let variant = match self {
+            Self::Invalid => "CONTROL_AREA_TYPE_INVALID",
+            Self::KeepInZone => "CONTROL_AREA_TYPE_KEEP_IN_ZONE",
+            Self::KeepOutZone => "CONTROL_AREA_TYPE_KEEP_OUT_ZONE",
+            Self::DitchZone => "CONTROL_AREA_TYPE_DITCH_ZONE",
+            Self::LoiterZone => "CONTROL_AREA_TYPE_LOITER_ZONE",
+        };
+        serializer.serialize_str(variant)
+    }
+}
+impl<'de> serde::Deserialize<'de> for ControlAreaType {
+    #[allow(deprecated)]
+    fn deserialize<D>(deserializer: D) -> std::result::Result<Self, D::Error>
+    where
+        D: serde::Deserializer<'de>,
+    {
+        const FIELDS: &[&str] = &[
+            "CONTROL_AREA_TYPE_INVALID",
+            "CONTROL_AREA_TYPE_KEEP_IN_ZONE",
+            "CONTROL_AREA_TYPE_KEEP_OUT_ZONE",
+            "CONTROL_AREA_TYPE_DITCH_ZONE",
+            "CONTROL_AREA_TYPE_LOITER_ZONE",
+        ];
+
+        struct GeneratedVisitor;
+
+        impl<'de> serde::de::Visitor<'de> for GeneratedVisitor {
+            type Value = ControlAreaType;
+
+            fn expecting(&self, formatter: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
+                write!(formatter, "expected one of: {:?}", &FIELDS)
+            }
+
+            fn visit_i64<E>(self, v: i64) -> std::result::Result<Self::Value, E>
+            where
+                E: serde::de::Error,
+            {
+                i32::try_from(v)
+                    .ok()
+                    .and_then(|x| x.try_into().ok())
+                    .ok_or_else(|| {
+                        serde::de::Error::invalid_value(serde::de::Unexpected::Signed(v), &self)
+                    })
+            }
+
+            fn visit_u64<E>(self, v: u64) -> std::result::Result<Self::Value, E>
+            where
+                E: serde::de::Error,
+            {
+                i32::try_from(v)
+                    .ok()
+                    .and_then(|x| x.try_into().ok())
+                    .ok_or_else(|| {
+                        serde::de::Error::invalid_value(serde::de::Unexpected::Unsigned(v), &self)
+                    })
+            }
+
+            fn visit_str<E>(self, value: &str) -> std::result::Result<Self::Value, E>
+            where
+                E: serde::de::Error,
+            {
+                match value {
+                    "CONTROL_AREA_TYPE_INVALID" => Ok(ControlAreaType::Invalid),
+                    "CONTROL_AREA_TYPE_KEEP_IN_ZONE" => Ok(ControlAreaType::KeepInZone),
+                    "CONTROL_AREA_TYPE_KEEP_OUT_ZONE" => Ok(ControlAreaType::KeepOutZone),
+                    "CONTROL_AREA_TYPE_DITCH_ZONE" => Ok(ControlAreaType::DitchZone),
+                    "CONTROL_AREA_TYPE_LOITER_ZONE" => Ok(ControlAreaType::LoiterZone),
+                    _ => Err(serde::de::Error::unknown_variant(value, FIELDS)),
+                }
+            }
+        }
+        deserializer.deserialize_any(GeneratedVisitor)
     }
 }
 impl serde::Serialize for Correlated {
@@ -6243,11 +6599,24 @@ impl serde::Serialize for GeoDetails {
         if self.r#type != 0 {
             len += 1;
         }
+        if self.type_details.is_some() {
+            len += 1;
+        }
         let mut struct_ser = serializer.serialize_struct("anduril.entitymanager.v1.GeoDetails", len)?;
         if self.r#type != 0 {
             let v = GeoType::try_from(self.r#type)
                 .map_err(|_| serde::ser::Error::custom(format!("Invalid variant {}", self.r#type)))?;
             struct_ser.serialize_field("type", &v)?;
+        }
+        if let Some(v) = self.type_details.as_ref() {
+            match v {
+                geo_details::TypeDetails::ControlArea(v) => {
+                    struct_ser.serialize_field("controlArea", v)?;
+                }
+                geo_details::TypeDetails::Acm(v) => {
+                    struct_ser.serialize_field("acm", v)?;
+                }
+            }
         }
         struct_ser.end()
     }
@@ -6260,11 +6629,16 @@ impl<'de> serde::Deserialize<'de> for GeoDetails {
     {
         const FIELDS: &[&str] = &[
             "type",
+            "control_area",
+            "controlArea",
+            "acm",
         ];
 
         #[allow(clippy::enum_variant_names)]
         enum GeneratedField {
             Type,
+            ControlArea,
+            Acm,
         }
         impl<'de> serde::Deserialize<'de> for GeneratedField {
             fn deserialize<D>(deserializer: D) -> std::result::Result<GeneratedField, D::Error>
@@ -6287,6 +6661,8 @@ impl<'de> serde::Deserialize<'de> for GeoDetails {
                     {
                         match value {
                             "type" => Ok(GeneratedField::Type),
+                            "controlArea" | "control_area" => Ok(GeneratedField::ControlArea),
+                            "acm" => Ok(GeneratedField::Acm),
                             _ => Err(serde::de::Error::unknown_field(value, FIELDS)),
                         }
                     }
@@ -6307,6 +6683,7 @@ impl<'de> serde::Deserialize<'de> for GeoDetails {
                     V: serde::de::MapAccess<'de>,
             {
                 let mut r#type__ = None;
+                let mut type_details__ = None;
                 while let Some(k) = map_.next_key()? {
                     match k {
                         GeneratedField::Type => {
@@ -6315,10 +6692,25 @@ impl<'de> serde::Deserialize<'de> for GeoDetails {
                             }
                             r#type__ = Some(map_.next_value::<GeoType>()? as i32);
                         }
+                        GeneratedField::ControlArea => {
+                            if type_details__.is_some() {
+                                return Err(serde::de::Error::duplicate_field("controlArea"));
+                            }
+                            type_details__ = map_.next_value::<::std::option::Option<_>>()?.map(geo_details::TypeDetails::ControlArea)
+;
+                        }
+                        GeneratedField::Acm => {
+                            if type_details__.is_some() {
+                                return Err(serde::de::Error::duplicate_field("acm"));
+                            }
+                            type_details__ = map_.next_value::<::std::option::Option<_>>()?.map(geo_details::TypeDetails::Acm)
+;
+                        }
                     }
                 }
                 Ok(GeoDetails {
                     r#type: r#type__.unwrap_or_default(),
+                    type_details: type_details__,
                 })
             }
         }
@@ -7161,6 +7553,7 @@ impl serde::Serialize for GeoType {
             Self::EngagementZone => "GEO_TYPE_ENGAGEMENT_ZONE",
             Self::ControlArea => "GEO_TYPE_CONTROL_AREA",
             Self::Bullseye => "GEO_TYPE_BULLSEYE",
+            Self::Acm => "GEO_TYPE_ACM",
         };
         serializer.serialize_str(variant)
     }
@@ -7179,6 +7572,7 @@ impl<'de> serde::Deserialize<'de> for GeoType {
             "GEO_TYPE_ENGAGEMENT_ZONE",
             "GEO_TYPE_CONTROL_AREA",
             "GEO_TYPE_BULLSEYE",
+            "GEO_TYPE_ACM",
         ];
 
         struct GeneratedVisitor;
@@ -7226,6 +7620,7 @@ impl<'de> serde::Deserialize<'de> for GeoType {
                     "GEO_TYPE_ENGAGEMENT_ZONE" => Ok(GeoType::EngagementZone),
                     "GEO_TYPE_CONTROL_AREA" => Ok(GeoType::ControlArea),
                     "GEO_TYPE_BULLSEYE" => Ok(GeoType::Bullseye),
+                    "GEO_TYPE_ACM" => Ok(GeoType::Acm),
                     _ => Err(serde::de::Error::unknown_variant(value, FIELDS)),
                 }
             }
