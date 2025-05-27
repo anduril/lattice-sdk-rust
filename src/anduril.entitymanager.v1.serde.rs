@@ -4578,6 +4578,9 @@ impl serde::Serialize for Entity {
         if self.task_catalog.is_some() {
             len += 1;
         }
+        if self.media.is_some() {
+            len += 1;
+        }
         if self.relationships.is_some() {
             len += 1;
         }
@@ -4684,6 +4687,9 @@ impl serde::Serialize for Entity {
         if let Some(v) = self.task_catalog.as_ref() {
             struct_ser.serialize_field("taskCatalog", v)?;
         }
+        if let Some(v) = self.media.as_ref() {
+            struct_ser.serialize_field("media", v)?;
+        }
         if let Some(v) = self.relationships.as_ref() {
             struct_ser.serialize_field("relationships", v)?;
         }
@@ -4760,6 +4766,7 @@ impl<'de> serde::Deserialize<'de> for Entity {
             "dataClassification",
             "task_catalog",
             "taskCatalog",
+            "media",
             "relationships",
             "visual_details",
             "visualDetails",
@@ -4802,6 +4809,7 @@ impl<'de> serde::Deserialize<'de> for Entity {
             TransponderCodes,
             DataClassification,
             TaskCatalog,
+            Media,
             Relationships,
             VisualDetails,
             Dimensions,
@@ -4858,6 +4866,7 @@ impl<'de> serde::Deserialize<'de> for Entity {
                             "transponderCodes" | "transponder_codes" => Ok(GeneratedField::TransponderCodes),
                             "dataClassification" | "data_classification" => Ok(GeneratedField::DataClassification),
                             "taskCatalog" | "task_catalog" => Ok(GeneratedField::TaskCatalog),
+                            "media" => Ok(GeneratedField::Media),
                             "relationships" => Ok(GeneratedField::Relationships),
                             "visualDetails" | "visual_details" => Ok(GeneratedField::VisualDetails),
                             "dimensions" => Ok(GeneratedField::Dimensions),
@@ -4912,6 +4921,7 @@ impl<'de> serde::Deserialize<'de> for Entity {
                 let mut transponder_codes__ = None;
                 let mut data_classification__ = None;
                 let mut task_catalog__ = None;
+                let mut media__ = None;
                 let mut relationships__ = None;
                 let mut visual_details__ = None;
                 let mut dimensions__ = None;
@@ -5079,6 +5089,12 @@ impl<'de> serde::Deserialize<'de> for Entity {
                             }
                             task_catalog__ = map_.next_value()?;
                         }
+                        GeneratedField::Media => {
+                            if media__.is_some() {
+                                return Err(serde::de::Error::duplicate_field("media"));
+                            }
+                            media__ = map_.next_value()?;
+                        }
                         GeneratedField::Relationships => {
                             if relationships__.is_some() {
                                 return Err(serde::de::Error::duplicate_field("relationships"));
@@ -5162,6 +5178,7 @@ impl<'de> serde::Deserialize<'de> for Entity {
                     transponder_codes: transponder_codes__,
                     data_classification: data_classification__,
                     task_catalog: task_catalog__,
+                    media: media__,
                     relationships: relationships__,
                     visual_details: visual_details__,
                     dimensions: dimensions__,
@@ -10112,9 +10129,6 @@ impl serde::Serialize for MediaItem {
     {
         use serde::ser::SerializeStruct;
         let mut len = 0;
-        if !self.url.is_empty() {
-            len += 1;
-        }
         if self.r#type != 0 {
             len += 1;
         }
@@ -10122,9 +10136,6 @@ impl serde::Serialize for MediaItem {
             len += 1;
         }
         let mut struct_ser = serializer.serialize_struct("anduril.entitymanager.v1.MediaItem", len)?;
-        if !self.url.is_empty() {
-            struct_ser.serialize_field("url", &self.url)?;
-        }
         if self.r#type != 0 {
             let v = MediaType::try_from(self.r#type)
                 .map_err(|_| serde::ser::Error::custom(format!("Invalid variant {}", self.r#type)))?;
@@ -10143,7 +10154,6 @@ impl<'de> serde::Deserialize<'de> for MediaItem {
         D: serde::Deserializer<'de>,
     {
         const FIELDS: &[&str] = &[
-            "url",
             "type",
             "relative_path",
             "relativePath",
@@ -10151,7 +10161,6 @@ impl<'de> serde::Deserialize<'de> for MediaItem {
 
         #[allow(clippy::enum_variant_names)]
         enum GeneratedField {
-            Url,
             Type,
             RelativePath,
         }
@@ -10175,7 +10184,6 @@ impl<'de> serde::Deserialize<'de> for MediaItem {
                         E: serde::de::Error,
                     {
                         match value {
-                            "url" => Ok(GeneratedField::Url),
                             "type" => Ok(GeneratedField::Type),
                             "relativePath" | "relative_path" => Ok(GeneratedField::RelativePath),
                             _ => Err(serde::de::Error::unknown_field(value, FIELDS)),
@@ -10197,17 +10205,10 @@ impl<'de> serde::Deserialize<'de> for MediaItem {
                 where
                     V: serde::de::MapAccess<'de>,
             {
-                let mut url__ = None;
                 let mut r#type__ = None;
                 let mut relative_path__ = None;
                 while let Some(k) = map_.next_key()? {
                     match k {
-                        GeneratedField::Url => {
-                            if url__.is_some() {
-                                return Err(serde::de::Error::duplicate_field("url"));
-                            }
-                            url__ = Some(map_.next_value()?);
-                        }
                         GeneratedField::Type => {
                             if r#type__.is_some() {
                                 return Err(serde::de::Error::duplicate_field("type"));
@@ -10223,7 +10224,6 @@ impl<'de> serde::Deserialize<'de> for MediaItem {
                     }
                 }
                 Ok(MediaItem {
-                    url: url__.unwrap_or_default(),
                     r#type: r#type__.unwrap_or_default(),
                     relative_path: relative_path__.unwrap_or_default(),
                 })
@@ -10240,10 +10240,8 @@ impl serde::Serialize for MediaType {
     {
         let variant = match self {
             Self::Invalid => "MEDIA_TYPE_INVALID",
-            Self::Thumbnail => "MEDIA_TYPE_THUMBNAIL",
             Self::Image => "MEDIA_TYPE_IMAGE",
             Self::Video => "MEDIA_TYPE_VIDEO",
-            Self::SlippyTiles => "MEDIA_TYPE_SLIPPY_TILES",
         };
         serializer.serialize_str(variant)
     }
@@ -10256,10 +10254,8 @@ impl<'de> serde::Deserialize<'de> for MediaType {
     {
         const FIELDS: &[&str] = &[
             "MEDIA_TYPE_INVALID",
-            "MEDIA_TYPE_THUMBNAIL",
             "MEDIA_TYPE_IMAGE",
             "MEDIA_TYPE_VIDEO",
-            "MEDIA_TYPE_SLIPPY_TILES",
         ];
 
         struct GeneratedVisitor;
@@ -10301,10 +10297,8 @@ impl<'de> serde::Deserialize<'de> for MediaType {
             {
                 match value {
                     "MEDIA_TYPE_INVALID" => Ok(MediaType::Invalid),
-                    "MEDIA_TYPE_THUMBNAIL" => Ok(MediaType::Thumbnail),
                     "MEDIA_TYPE_IMAGE" => Ok(MediaType::Image),
                     "MEDIA_TYPE_VIDEO" => Ok(MediaType::Video),
-                    "MEDIA_TYPE_SLIPPY_TILES" => Ok(MediaType::SlippyTiles),
                     _ => Err(serde::de::Error::unknown_variant(value, FIELDS)),
                 }
             }
