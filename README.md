@@ -1,27 +1,4 @@
 # Lattice SDK Rust
 
-[![Version](https://img.shields.io/crates/v/anduril-lattice-sdk.svg)](https://crates.io/crates/anduril-lattice-sdk)
-
-The official [Anduril](https://www.anduril.com/) Lattice SDK for Rust.
-
-## Documentation
-
-See the documentation for [Lattice Rust SDK](https://docs.anduril.com/guide/sdks/rust).
-
-## Requirements
-
-To use the SDK please ensure you have the following installed:
-
-* [Rust](https://www.rust-lang.org/tools/install)
-
-## Installation
-
-Install the Lattice SDK package with:
-
-```
-cargo add anduril-lattice-sdk
-```
-
-## Support
-
-For support with this library please reach out to your Anduril representative.
+> [!IMPORTANT] 
+> As of 07/24/2025, this repository has been archived and will no longer receive any updates. The Protobuf files used to generate the files here are now available via the [Buf Schema Registry](https://buf.build/anduril/lattice-sdk). The specific plugin used to generate this repository is [neostein/tonic@0.4.0](https://buf.build/anduril/lattice-sdk/sdks/main:community/neoeinstein-tonic?version=v0.4.0). For any additional support please reach out to your Anduril representative. 
