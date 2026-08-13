@@ -1,0 +1,14 @@
+{
+  "cliVersion": "5.95.0",
+  "generatorName": "fernapi/fern-rust-sdk",
+  "generatorVersion": "0.44.4",
+  "generatorConfig": {
+    "clientClassName": "Lattice",
+    "crateName": "anduril"
+  },
+  "originGitCommit": "2368aa84ebb88cedb850b8d10ee161977268de57",
+  "originGitCommitIsDirty": true,
+  "invokedBy": "manual",
+  "requestedVersion": "2.0.0",
+  "sdkVersion": "2.0.0"
+}
