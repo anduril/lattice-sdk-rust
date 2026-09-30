@@ -1,0 +1,16 @@
+{
+  "cliVersion": "5.143.0",
+  "generatorName": "fernapi/fern-rust-sdk",
+  "generatorVersion": "0.49.1",
+  "generatorConfig": {
+    "clientClassName": "Lattice",
+    "crateName": "anduril-lattice-sdk",
+    "packageDescription": "HTTP clients for the Anduril Lattice SDK",
+    "packageRepository": "https://github.com/anduril/lattice-sdk-rust"
+  },
+  "originGitCommit": "f4a5bae5ed080c27cdcfc6e0aed49fee747e25b4",
+  "originGitCommitIsDirty": true,
+  "invokedBy": "manual",
+  "requestedVersion": "2.0.0",
+  "sdkVersion": "2.0.0"
+}
