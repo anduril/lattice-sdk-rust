@@ -1,11 +1,11 @@
 [package]
-name = "anduril_lattice_sdk"
-version = "2.0.0"
+name = "anduril-lattice-sdk"
+version = "2.2.0"
 edition = "2021"
 description = "HTTP clients for the Anduril Lattice SDK"
 license-file = "LICENSE"
 repository = "https://github.com/anduril/lattice-sdk-rust"
-documentation = "https://docs.rs/anduril_lattice_sdk"
+documentation = "https://docs.rs/anduril-lattice-sdk"
 
 [lib]
 doctest = false
