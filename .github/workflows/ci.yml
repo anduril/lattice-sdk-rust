@@ -57,6 +57,14 @@ jobs:
       - name: Set up Rust
         uses: actions-rust-lang/setup-rust-toolchain@v1
 
+      # Fern's rust generator always writes the underscored crate name in Cargo.toml,
+      # but crates.io locked our canonical name to the hyphenated spelling before Fern
+      # took over generation. Restore it here so publish targets the right crate.
+      - name: Restore published crate name
+        run: |
+          sed -i 's/^name = "anduril_lattice_sdk"$/name = "anduril-lattice-sdk"/' Cargo.toml
+          sed -i 's#^documentation = "https://docs.rs/anduril_lattice_sdk"$#documentation = "https://docs.rs/anduril-lattice-sdk"#' Cargo.toml
+
       - name: Publish
         env:
           CARGO_REGISTRY_TOKEN: ${{ secrets.CARGO_REGISTRY_TOKEN }}
