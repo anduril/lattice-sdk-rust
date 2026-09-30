@@ -2,7 +2,7 @@
 
 ![](https://www.anduril.com/lattice-sdk/)
 
-[![crates.io shield](https://img.shields.io/crates/v/anduril_lattice_sdk)](https://crates.io/crates/anduril_lattice_sdk)
+[![crates.io shield](https://img.shields.io/crates/v/anduril-lattice-sdk)](https://crates.io/crates/anduril-lattice-sdk)
 
 The Lattice SDK Rust library provides convenient access to the Lattice SDK APIs from Rust.
 
@@ -32,13 +32,13 @@ Add this to your `Cargo.toml`:
 
 ```toml
 [dependencies]
-anduril_lattice_sdk = "2.0.0"
+anduril-lattice-sdk = "2.2.0"
 ```
 
 Or install via cargo:
 
 ```sh
-cargo add anduril_lattice_sdk
+cargo add anduril-lattice-sdk
 ```
 
 ## Reference
