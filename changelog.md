@@ -1,5 +1,10 @@
 # Changelog
 
+## [2.4.0] - 2026-10-23
+### Added
+- **`RequestOptions::additional_body_param`** adds arbitrary properties to JSON and form request bodies, for example undocumented or beta fields, overriding generated fields with the same key.
+- **`TaskStatus.last_update_time`** and **`TaskStatus.end_time`** are new optional timestamps, with matching `TaskStatusBuilder` methods, for tracking the last status change and task completion time.
+
 ## [2.3.0] - 2026-10-03
 
 ## [2.2.0] - 2026-09-30
