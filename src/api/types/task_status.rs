@@ -33,6 +33,19 @@ pub struct TaskStatus {
     /// Any allocated agents of the task.
     #[serde(skip_serializing_if = "Option::is_none")]
     pub allocation: Option<Allocation>,
+    /// Last time the task status changed.
+    /// Used to guard against out of order updates.
+    #[serde(rename = "lastUpdateTime")]
+    #[serde(skip_serializing_if = "Option::is_none")]
+    #[serde(default)]
+    #[serde(with = "crate::core::flexible_datetime::offset::option")]
+    pub last_update_time: Option<DateTime<FixedOffset>>,
+    /// Time the Task finished execution.
+    #[serde(rename = "endTime")]
+    #[serde(skip_serializing_if = "Option::is_none")]
+    #[serde(default)]
+    #[serde(with = "crate::core::flexible_datetime::offset::option")]
+    pub end_time: Option<DateTime<FixedOffset>>,
 }
 
 impl TaskStatus {
@@ -51,6 +64,8 @@ pub struct TaskStatusBuilder {
     start_time: Option<DateTime<FixedOffset>>,
     estimate: Option<GoogleProtobufAny>,
     allocation: Option<Allocation>,
+    last_update_time: Option<DateTime<FixedOffset>>,
+    end_time: Option<DateTime<FixedOffset>>,
 }
 
 impl TaskStatusBuilder {
@@ -89,6 +104,16 @@ impl TaskStatusBuilder {
         self
     }
 
+    pub fn last_update_time(mut self, value: DateTime<FixedOffset>) -> Self {
+        self.last_update_time = Some(value);
+        self
+    }
+
+    pub fn end_time(mut self, value: DateTime<FixedOffset>) -> Self {
+        self.end_time = Some(value);
+        self
+    }
+
     /// Consumes the builder and constructs a [`TaskStatus`].
     pub fn build(self) -> Result<TaskStatus, BuildError> {
         Ok(TaskStatus {
@@ -99,6 +124,8 @@ impl TaskStatusBuilder {
             start_time: self.start_time,
             estimate: self.estimate,
             allocation: self.allocation,
+            last_update_time: self.last_update_time,
+            end_time: self.end_time,
         })
     }
 }
