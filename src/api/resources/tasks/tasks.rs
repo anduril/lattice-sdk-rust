@@ -543,4 +543,66 @@ impl TasksClient {
             )
             .await
     }
+
+    /// Sends a single manual control frame, for example, joystick input, for a manual control task.
+    ///
+    /// Call this endpoint repeatedly to control the asset executing the task. Lattice forwards each
+    /// frame to the executing agent, which receives it using the stream manual control frames endpoint.
+    /// The task must be in `STATUS_EXECUTING`.
+    ///
+    /// The client manages the control session. When it begins controlling, it generates a
+    /// `sessionEpochMicros` and includes it in every request, along with a `sequence` that increases
+    /// with each frame. A higher epoch replaces the current session, which allows another operator to
+    /// take over control. A lower epoch is rejected as stale.
+    ///
+    /// # Arguments
+    ///
+    /// * `task_id` - The ID of the manual control task to send the frame for.
+    /// * `options` - Additional request options such as headers, timeout, etc.
+    ///
+    /// # Returns
+    ///
+    /// JSON response from the API
+    ///
+    /// # Examples
+    ///
+    /// ```no_run
+    /// use anduril_lattice_sdk::prelude::*;
+    ///
+    /// #[tokio::main]
+    /// async fn main() {
+    ///     let config = ClientConfig {
+    ///         ..Default::default()
+    ///     };
+    ///     let client = Lattice::new(config).expect("Failed to build client");
+    ///     client
+    ///         .tasks
+    ///         .send_manual_control_frame(
+    ///             &"taskId".to_string(),
+    ///             &ManualControlFrameRequest {
+    ///                 session_epoch_micros: "sessionEpochMicros".to_string(),
+    ///                 sequence: None,
+    ///                 specification: None,
+    ///             },
+    ///             None,
+    ///         )
+    ///         .await;
+    /// }
+    /// ```
+    pub async fn send_manual_control_frame(
+        &self,
+        task_id: &str,
+        request: &ManualControlFrameRequest,
+        options: Option<RequestOptions>,
+    ) -> Result<ManualControlFrameResponse, ApiError> {
+        self.http_client
+            .execute_request(
+                Method::POST,
+                &format!("api/v1/tasks/{}/manual-control/frames", task_id),
+                Some(serde_json::to_value(request).map_err(ApiError::Serialization)?),
+                None,
+                options,
+            )
+            .await
+    }
 }

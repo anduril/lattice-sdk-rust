@@ -1,5 +1,11 @@
 # Changelog
 
+## [2.5.0] - 2026-10-30
+### Added
+- **`TasksClient::send_manual_control_frame`** — sends a single manual control frame (for example, joystick input) for an executing manual control task, which Lattice forwards to the executing agent.
+- **`ManualControlFrameRequest`** and **`ManualControlFrameRequestBuilder`** — the request payload carries a required `session_epoch_micros`, where a higher epoch takes over the session and a lower one is rejected as stale, plus an optional `sequence` and a task-specific `specification`.
+- **`ManualControlFrameResponse`** — new response type returned by the send manual control frame endpoint.
+
 ## [2.4.0] - 2026-10-27
 ### Added
 - **`RequestOptions::additional_body_param`** — merges extra top-level properties into JSON and form-encoded request bodies, overriding generated fields with the same key, which lets callers send undocumented or beta fields.

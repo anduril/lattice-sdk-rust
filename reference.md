@@ -1473,6 +1473,124 @@ async fn main() {
 </dl>
 </details>
 
+<details><summary><code>client.tasks.<a href="/src/api/resources/tasks/client.rs">send_manual_control_frame</a>(task_id: String, request: ManualControlFrameRequest) -> Result&lt;ManualControlFrameResponse, ApiError&gt;</code></summary>
+<dl>
+<dd>
+
+#### 📝 Description
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+Sends a single manual control frame, for example, joystick input, for a manual control task.
+
+Call this endpoint repeatedly to control the asset executing the task. Lattice forwards each
+frame to the executing agent, which receives it using the stream manual control frames endpoint.
+The task must be in `STATUS_EXECUTING`.
+
+The client manages the control session. When it begins controlling, it generates a
+`sessionEpochMicros` and includes it in every request, along with a `sequence` that increases
+with each frame. A higher epoch replaces the current session, which allows another operator to
+take over control. A lower epoch is rejected as stale.
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### 🔌 Usage
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+```rust
+use anduril_lattice_sdk::prelude::*;
+
+#[tokio::main]
+async fn main() {
+    let config = ClientConfig {
+        ..Default::default()
+    };
+    let client = Lattice::new(config).expect("Failed to build client");
+    client
+        .tasks
+        .send_manual_control_frame(
+            &"taskId".to_string(),
+            &ManualControlFrameRequest {
+                session_epoch_micros: "sessionEpochMicros".to_string(),
+                sequence: None,
+                specification: None,
+            },
+            None,
+        )
+        .await;
+}
+```
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### ⚙️ Parameters
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+**task_id:** `String` — The ID of the manual control task to send the frame for.
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**session_epoch_micros:** `String` 
+
+Unix timestamp in microseconds identifying the control session. The client generates this
+value when it begins a control session, and includes the same value in every request for
+that session. Higher values replace previous sessions. Lower values are rejected as stale.
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**sequence:** `Option<String>` 
+
+The sequence number of this frame within the current session. The client must increase it
+with each frame so that agents can detect out-of-order delivery. Reset it to 1 when starting a
+new session.
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**specification:** `Option<GoogleProtobufAny>` 
+
+The control instructions for this frame. The format is specific to the task, and is passed
+through to the agent without being inspected by Lattice.
+    
+</dd>
+</dl>
+</dd>
+</dl>
+
+
+</dd>
+</dl>
+</details>
+
 ## Objects
 <details><summary><code>client.objects.<a href="/src/api/resources/objects/client.rs">list_objects</a>(prefix: Option&lt;Option&lt;String&gt;&gt;, since_timestamp: Option&lt;Option&lt;String&gt;&gt;, page_token: Option&lt;Option&lt;String&gt;&gt;, all_objects_in_mesh: Option&lt;Option&lt;bool&gt;&gt;, max_page_size: Option&lt;Option&lt;i64&gt;&gt;) -> Result&lt;ListResponse, ApiError&gt;</code></summary>
 <dl>
