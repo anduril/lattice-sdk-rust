@@ -33,7 +33,7 @@ Add this to your `Cargo.toml`:
 
 ```toml
 [dependencies]
-anduril-lattice-sdk = "2.4.0"
+anduril-lattice-sdk = "2.5.0"
 ```
 
 Or install via cargo:

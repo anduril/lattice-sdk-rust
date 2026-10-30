@@ -3,7 +3,7 @@ pub use crate::prelude::*;
 /// A single frame of manual control input forwarded by Lattice to an agent.
 ///
 /// When an operator sends manual control input, for example, joystick movements using
-/// `SendManualControlFrames`, Lattice packages each input into a `ManualControlFrame`
+/// `SendManualControlFrame`, Lattice packages each input into a `ManualControlFrame`
 /// and forwards it to the executing agent via the `ListenForManualControlFrames`
 /// streaming RPC.
 ///
@@ -16,13 +16,13 @@ pub struct ManualControlFrame {
     #[serde(skip_serializing_if = "Option::is_none")]
     pub task_id: Option<String>,
     /// Unix timestamp in microseconds identifying the control session.
-    /// Increments each time a client opens a new stream for this task.
-    /// Agents should ignore frames with a lower epoch to handle stale streams
+    /// Increases each time a client starts a new control session for this task.
+    /// Agents should ignore frames with a lower epoch to handle stale sessions
     /// or operator handoffs.
     #[serde(rename = "epochMicros")]
     #[serde(skip_serializing_if = "Option::is_none")]
     pub epoch_micros: Option<String>,
-    /// The sequence number for a stream, incremented for each frame.
+    /// The sequence number of this frame within a control session, incremented for each frame.
     /// Agents can use this to detect out-of-order delivery within the same epoch.
     #[serde(skip_serializing_if = "Option::is_none")]
     pub sequence: Option<String>,

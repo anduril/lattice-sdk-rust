@@ -1,5 +1,5 @@
 {
-  "cliVersion": "5.175.0",
+  "cliVersion": "5.186.0",
   "generatorName": "fernapi/fern-rust-sdk",
   "generatorVersion": "0.53.3",
   "generatorConfig": {
@@ -22,10 +22,10 @@
       "rustls-tls"
     ]
   },
-  "originGitCommit": "a58af03e26f92e752bb03858d8dc73019866a5eb",
+  "originGitCommit": "ed40f72a7fa266532a565e043adfa01f1698c55b",
   "originGitCommitIsDirty": false,
   "invokedBy": "ci",
   "requestedVersion": "AUTO",
   "ciProvider": "circleci",
-  "sdkVersion": "2.4.0"
+  "sdkVersion": "2.5.0"
 }
