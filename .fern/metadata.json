@@ -1,7 +1,7 @@
 {
-  "cliVersion": "5.186.0",
+  "cliVersion": "5.197.0",
   "generatorName": "fernapi/fern-rust-sdk",
-  "generatorVersion": "0.53.3",
+  "generatorVersion": "0.53.6",
   "generatorConfig": {
     "clientClassName": "Lattice",
     "crateName": "anduril-lattice-sdk",
@@ -22,10 +22,10 @@
       "rustls-tls"
     ]
   },
-  "originGitCommit": "ed40f72a7fa266532a565e043adfa01f1698c55b",
+  "originGitCommit": "df58dad73baeecf1a2af10fc7bc10a02df58691f",
   "originGitCommitIsDirty": false,
   "invokedBy": "ci",
   "requestedVersion": "AUTO",
   "ciProvider": "circleci",
-  "sdkVersion": "2.5.0"
+  "sdkVersion": "2.6.0"
 }
