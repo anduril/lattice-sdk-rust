@@ -1,5 +1,12 @@
 # Changelog
 
+## [2.6.0] - 2026-11-06
+### Added
+- **`VideoClient::query_ingress_streams`** — returns ingress streams matching a filter, newest first, with API-created streams listed before mesh-discovered ones and paginated via `page_size` and `page_token`.
+- **`QueryIngressStreamsRequest`** and **`QueryIngressStreamsResponse`** — new request and response types (with builders) for the query endpoint, including `next_page_token` for fetching subsequent pages.
+- **`IngressStreamFilter`**, **`CreatorFilter`**, **`StringFilter`**, and **`IngressStreamFilterStatusesItem`** — new filter types that match streams by creator ownership, ingress ID, title (exact, prefix, or contains), and status.
+- **`Sensor.camera_configuration`** — new optional field carrying a `CameraConfiguration` with the camera's `zoom_percentage` (0-100), plus a matching `SensorBuilder` setter.
+
 ## [2.5.0] - 2026-10-30
 ### Added
 - **`TasksClient::send_manual_control_frame`** — sends a single manual control frame (for example, joystick input) for an executing manual control task, which Lattice forwards to the executing agent.

@@ -2524,10 +2524,10 @@ Caller-supplied identifier for the new stream. If omitted, the service generates
  `teamalpha.drone1`.
 
  When supplied, an ingressId must be between 4 and 36 characters long and use only
- printable ASCII characters with no spaces; the 36-character ceiling leaves room for a
- full GUID. A value outside that length range, or one containing spaces, control
- characters, or non-ASCII characters, is rejected, as is an ingressId that another
- ingress stream is already using.
+ letters, digits, and the characters `.`, `_`, `-`, and `/`. The 36-character ceiling
+ leaves room for a full GUID. A value outside that length range, or one containing
+ any other character, is rejected, as is an ingressId that another ingress stream is
+ already using.
     
 </dd>
 </dl>
@@ -2577,6 +2577,104 @@ Receive an MPEG-TS push from the producer. The service allocates a UDP port and
 
 Receive an SRT push from the producer. The service returns a URL and sessionId
  in CreateIngressStreamResponse.
+    
+</dd>
+</dl>
+</dd>
+</dl>
+
+
+</dd>
+</dl>
+</details>
+
+<details><summary><code>client.video.<a href="/src/api/resources/video/client.rs">query_ingress_streams</a>(request: QueryIngressStreamsRequest) -> Result&lt;QueryIngressStreamsResponse, ApiError&gt;</code></summary>
+<dl>
+<dd>
+
+#### 📝 Description
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+Returns the ingress streams that match the filter, newest first. Streams
+ created through this API come first, then streams discovered on the mesh, and
+ each group starts with its newest stream. For a discovered stream, "created"
+ means when Video Manager first saw it.
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### 🔌 Usage
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+```rust
+use anduril_lattice_sdk::prelude::*;
+
+#[tokio::main]
+async fn main() {
+    let config = ClientConfig {
+        ..Default::default()
+    };
+    let client = Lattice::new(config).expect("Failed to build client");
+    client
+        .video
+        .query_ingress_streams(
+            &QueryIngressStreamsRequest {
+                ..Default::default()
+            },
+            None,
+        )
+        .await;
+}
+```
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### ⚙️ Parameters
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+**page_size:** `Option<i64>` 
+
+How many streams to return per page. Defaults to 50, and values above 100
+ count as 100. A page can contain fewer streams than you asked for.
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**page_token:** `Option<String>` 
+
+To get the next page, pass the `nextPageToken` from the previous response.
+ Leave it empty for the first page. Send the same filter on every page: the
+ server rejects a token if the filter changed, or if the token came from
+ ListIngressStreams.
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**filter:** `Option<IngressStreamFilter>` — Which streams to return. Leave it out to return every stream you can see.
     
 </dd>
 </dl>
