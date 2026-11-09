@@ -1,5 +1,10 @@
 # Changelog
 
+## [2.6.0] - 2026-11-09
+### Added
+- **`CameraConfiguration`** and **`CameraConfigurationBuilder`** — a new type that reports a camera sensor's zoom state through an optional `zoom_percentage`, where 0 is fully zoomed out and 100 is fully zoomed in.
+- **`Sensor.camera_configuration`** — a new optional field that carries the camera zoom state for camera sensors, with a matching `SensorBuilder::camera_configuration` setter.
+
 ## [2.5.0] - 2026-10-30
 ### Added
 - **`TasksClient::send_manual_control_frame`** — sends a single manual control frame (for example, joystick input) for an executing manual control task, which Lattice forwards to the executing agent.

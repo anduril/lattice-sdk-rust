@@ -32,6 +32,10 @@ pub struct Sensor {
     #[serde(rename = "fieldsOfView")]
     #[serde(skip_serializing_if = "Option::is_none")]
     pub fields_of_view: Option<Vec<FieldOfView>>,
+    /// Camera zoom state, for camera sensors.
+    #[serde(rename = "cameraConfiguration")]
+    #[serde(skip_serializing_if = "Option::is_none")]
+    pub camera_configuration: Option<CameraConfiguration>,
 }
 
 impl Sensor {
@@ -50,6 +54,7 @@ pub struct SensorBuilder {
     rf_configuraton: Option<RfConfiguration>,
     last_detection_timestamp: Option<DateTime<FixedOffset>>,
     fields_of_view: Option<Vec<FieldOfView>>,
+    camera_configuration: Option<CameraConfiguration>,
 }
 
 impl SensorBuilder {
@@ -88,6 +93,11 @@ impl SensorBuilder {
         self
     }
 
+    pub fn camera_configuration(mut self, value: CameraConfiguration) -> Self {
+        self.camera_configuration = Some(value);
+        self
+    }
+
     /// Consumes the builder and constructs a [`Sensor`].
     pub fn build(self) -> Result<Sensor, BuildError> {
         Ok(Sensor {
@@ -98,6 +108,7 @@ impl SensorBuilder {
             rf_configuraton: self.rf_configuraton,
             last_detection_timestamp: self.last_detection_timestamp,
             fields_of_view: self.fields_of_view,
+            camera_configuration: self.camera_configuration,
         })
     }
 }
