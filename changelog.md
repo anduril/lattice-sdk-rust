@@ -1,5 +1,11 @@
 # Changelog
 
+## [2.7.0] - 2026-11-12
+### Added
+- **`VideoClient::query_ingress_streams`** — returns the ingress streams that match a filter, newest first, with API-created streams listed before streams discovered on the mesh.
+- **`QueryIngressStreamsRequest`** and **`QueryIngressStreamsResponse`** — paginated request and response types with `page_size`, `page_token`, an optional `filter`, and a `next_page_token` for fetching later pages, plus matching builders.
+- **`IngressStreamFilter`** — narrows results by `creator`, `ingress_id`, `title`, and `statuses`, using the new **`CreatorFilter`** (owned or not owned), **`StringFilter`** (exact, prefix, or contains match), and **`IngressStreamFilterStatusesItem`** enum.
+
 ## [2.6.0] - 2026-11-09
 ### Added
 - **`CameraConfiguration`** and **`CameraConfigurationBuilder`** — a new type that reports a camera sensor's zoom state through an optional `zoom_percentage`, where 0 is fully zoomed out and 100 is fully zoomed in.
