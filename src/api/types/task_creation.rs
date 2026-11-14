@@ -46,6 +46,13 @@ pub struct TaskCreation {
     #[serde(rename = "executionConstraints")]
     #[serde(skip_serializing_if = "Option::is_none")]
     pub execution_constraints: Option<ExecutionConstraints>,
+    /// If set, then the service will not deliver this request. Useful for reporting a task
+    /// that the assignee already holds. Requires an assignee, and cannot be combined with
+    /// isExecutedElsewhere. The task is stored with STATUS_SENT. A later cancel is delivered
+    /// as expected.
+    #[serde(rename = "suppressDelivery")]
+    #[serde(skip_serializing_if = "Option::is_none")]
+    pub suppress_delivery: Option<bool>,
 }
 
 impl TaskCreation {
@@ -68,6 +75,7 @@ pub struct TaskCreationBuilder {
     retry_strategy: Option<RetryStrategy>,
     delivery_constraints: Option<DeliveryConstraints>,
     execution_constraints: Option<ExecutionConstraints>,
+    suppress_delivery: Option<bool>,
 }
 
 impl TaskCreationBuilder {
@@ -126,6 +134,11 @@ impl TaskCreationBuilder {
         self
     }
 
+    pub fn suppress_delivery(mut self, value: bool) -> Self {
+        self.suppress_delivery = Some(value);
+        self
+    }
+
     /// Consumes the builder and constructs a [`TaskCreation`].
     pub fn build(self) -> Result<TaskCreation, BuildError> {
         Ok(TaskCreation {
@@ -140,6 +153,7 @@ impl TaskCreationBuilder {
             retry_strategy: self.retry_strategy,
             delivery_constraints: self.delivery_constraints,
             execution_constraints: self.execution_constraints,
+            suppress_delivery: self.suppress_delivery,
         })
     }
 }

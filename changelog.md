@@ -1,5 +1,12 @@
 # Changelog
 
+## [2.7.0] - 2026-11-14
+### Added
+- **`VideoClient::query_ingress_streams`** — returns the ingress streams that match a filter, newest first, with API-created streams listed before streams discovered on the mesh, and pages through results with `page_size` and `next_page_token`.
+- **`QueryIngressStreamsRequest`** and **`QueryIngressStreamsResponse`** — new request and response types for the query endpoint, with matching builders; the page size defaults to 50, and values above 100 count as 100.
+- **`IngressStreamFilter`**, **`CreatorFilter`**, **`StringFilter`**, and **`IngressStreamFilterStatusesItem`** — new filter types that match streams by who created them (`owned`), by ingress ID or title (`exact`, `prefix`, or `contains`), and by stream status.
+- **`TaskCreation.suppress_delivery`** — a new optional flag, with a matching `TaskCreationBuilder::suppress_delivery` setter, that stores a task with `STATUS_SENT` without delivering it, which is useful for reporting a task the assignee already holds.
+
 ## [2.6.0] - 2026-11-09
 ### Added
 - **`CameraConfiguration`** and **`CameraConfigurationBuilder`** — a new type that reports a camera sensor's zoom state through an optional `zoom_percentage`, where 0 is fully zoomed out and 100 is fully zoomed in.
