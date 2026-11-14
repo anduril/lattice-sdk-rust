@@ -2588,6 +2588,104 @@ Receive an SRT push from the producer. The service returns a URL and sessionId
 </dl>
 </details>
 
+<details><summary><code>client.video.<a href="/src/api/resources/video/client.rs">query_ingress_streams</a>(request: QueryIngressStreamsRequest) -> Result&lt;QueryIngressStreamsResponse, ApiError&gt;</code></summary>
+<dl>
+<dd>
+
+#### 📝 Description
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+Returns the ingress streams that match the filter, newest first. Streams
+ created through this API come first, then streams discovered on the mesh, and
+ each group starts with its newest stream. For a discovered stream, "created"
+ means when Video Manager first saw it.
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### 🔌 Usage
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+```rust
+use anduril_lattice_sdk::prelude::*;
+
+#[tokio::main]
+async fn main() {
+    let config = ClientConfig {
+        ..Default::default()
+    };
+    let client = Lattice::new(config).expect("Failed to build client");
+    client
+        .video
+        .query_ingress_streams(
+            &QueryIngressStreamsRequest {
+                ..Default::default()
+            },
+            None,
+        )
+        .await;
+}
+```
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### ⚙️ Parameters
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+**page_size:** `Option<i64>` 
+
+How many streams to return per page. Defaults to 50, and values above 100
+ count as 100. A page can contain fewer streams than you asked for.
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**page_token:** `Option<String>` 
+
+To get the next page, pass the `nextPageToken` from the previous response.
+ Leave it empty for the first page. Send the same filter on every page: the
+ server rejects a token if the filter changed, or if the token came from
+ ListIngressStreams.
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**filter:** `Option<IngressStreamFilter>` — Which streams to return. Leave it out to return every stream you can see.
+    
+</dd>
+</dl>
+</dd>
+</dl>
+
+
+</dd>
+</dl>
+</details>
+
 <details><summary><code>client.video.<a href="/src/api/resources/video/client.rs">get_ingress_stream</a>(ingress_id: String) -> Result&lt;GetIngressStreamResponse, ApiError&gt;</code></summary>
 <dl>
 <dd>
