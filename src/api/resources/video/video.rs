@@ -320,6 +320,57 @@ impl VideoClient {
             .await
     }
 
+    /// Returns the ingress streams that match the filter, newest first. Streams
+    /// created through this API come first, then streams discovered on the mesh, and
+    /// each group starts with its newest stream. For a discovered stream, "created"
+    /// means when Video Manager first saw it.
+    ///
+    /// # Arguments
+    ///
+    /// * `options` - Additional request options such as headers, timeout, etc.
+    ///
+    /// # Returns
+    ///
+    /// JSON response from the API
+    ///
+    /// # Examples
+    ///
+    /// ```no_run
+    /// use anduril_lattice_sdk::prelude::*;
+    ///
+    /// #[tokio::main]
+    /// async fn main() {
+    ///     let config = ClientConfig {
+    ///         ..Default::default()
+    ///     };
+    ///     let client = Lattice::new(config).expect("Failed to build client");
+    ///     client
+    ///         .video
+    ///         .query_ingress_streams(
+    ///             &QueryIngressStreamsRequest {
+    ///                 ..Default::default()
+    ///             },
+    ///             None,
+    ///         )
+    ///         .await;
+    /// }
+    /// ```
+    pub async fn query_ingress_streams(
+        &self,
+        request: &QueryIngressStreamsRequest,
+        options: Option<RequestOptions>,
+    ) -> Result<QueryIngressStreamsResponse, ApiError> {
+        self.http_client
+            .execute_request(
+                Method::POST,
+                "api/v1/video/ingress_streams/query",
+                Some(serde_json::to_value(request).map_err(ApiError::Serialization)?),
+                None,
+                options,
+            )
+            .await
+    }
+
     /// Retrieves a top level ingress stream object and its associated metadata. This includes
     /// ingress streams and internal Anduril streams.
     ///

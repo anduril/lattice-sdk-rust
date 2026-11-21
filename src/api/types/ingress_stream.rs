@@ -21,7 +21,9 @@ pub struct IngressStream {
     pub rtsp: Option<RtspIngress>,
     #[serde(skip_serializing_if = "Option::is_none")]
     pub srt: Option<SrtIngress>,
-    /// Wall-clock time the stream was created.
+    /// When the stream was created. For a stream discovered on the mesh rather than
+    /// created through this API, this is when Video Manager first saw it, which can
+    /// reset if Video Manager restarts.
     #[serde(rename = "createdAt")]
     #[serde(skip_serializing_if = "Option::is_none")]
     #[serde(default)]
