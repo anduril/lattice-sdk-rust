@@ -1,5 +1,9 @@
 # Changelog
 
+## [2.7.0] - 2026-11-26
+### Added
+- **`TaskCreation.suppress_delivery`** — a new optional flag that stores a task without delivering it, useful for reporting a task the assignee already holds; it requires an assignee, cannot be combined with `isExecutedElsewhere`, stores the task with `STATUS_SENT`, and still delivers a later cancel, with a matching `TaskCreationBuilder::suppress_delivery` setter.
+
 ## [2.6.0] - 2026-11-09
 ### Added
 - **`CameraConfiguration`** and **`CameraConfigurationBuilder`** — a new type that reports a camera sensor's zoom state through an optional `zoom_percentage`, where 0 is fully zoomed out and 100 is fully zoomed in.

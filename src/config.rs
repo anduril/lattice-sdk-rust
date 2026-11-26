@@ -55,10 +55,10 @@ impl Default for ClientConfig {
                 ),
                 (
                     "X-Fern-SDK-Version".to_string(),
-                    "2.6.0".to_string(),
+                    "2.7.0".to_string(),
                 ),
             ]),
-            user_agent: "anduril-lattice-sdk/2.6.0".to_string(),
+            user_agent: "anduril-lattice-sdk/2.7.0".to_string(),
             reqwest_client: None,
         }
     }
